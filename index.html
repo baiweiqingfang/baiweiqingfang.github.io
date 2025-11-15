@@ -1,46 +1,507 @@
-//- <h1>if you see this, you may not installed hexo-renderer-pug.  pls run npm i hexo-renderer-pug --save to install.</h1>
-extends includes/layout.pug
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>白尾青芳的小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="白尾青芳的小屋">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="白尾青芳的小屋">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="白尾青芳">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="白尾青芳的小屋" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-block content
-  include ./includes/mixins/post-ui.pug
-  #recent-posts.recent-posts
-    if theme.hometop.enable
-      if theme.hometop.creativities.enable
-        .hometoptext3
-          i.fas.fa-hand.shake-hand-icon
-          .text #[=config.subtitle]
-          a.randompostbtn(onclick='toRandomPost()',title='随机文章') 
-            i.fas.fa-shuffle 
-            | 随机文章
-          .skills-style-group
-            .tags-group-all
-              .tags-group-wrapper
-                each i in site.data.creativity
-                  - const evenNum = i.creativity_list.filter((x, index) => index % 2 === 0);
-                  - const oddNum = i.creativity_list.filter((x, index) => index % 2 === 1);
-                  each item, index in i.creativity_list
-                    if ((index+1 <= evenNum.length) && (index+1 <= oddNum.length))
-                      .tags-group-icon-pair
-                        .tags-group-icon(style=`background: ${evenNum[index].color}`)
-                          img.no-lightbox(title=evenNum[index].name, src=evenNum[index].icon)
-                        .tags-group-icon(style=`background: ${oddNum[index].color}`)
-                          img.no-lightbox(title=oddNum[index].name, src=oddNum[index].icon)
-      if theme.hometop.featured_article.enable
-        .hometoptext
-          .text 
-            i.fas.fa-star.icon
-            | 站长推荐
-          include includes/hometop.pug
-      if theme.hometop.show_tag_categroy.enable
-        .hometoptext
-          .text 
-            i.fas.fa-tags.icon
-            | 分类标签
-          include includes/tagsBar.pug
-          include includes/linksBar.pug
-    .hometoptext2
-      .text 
-        i.fas.fa-book.icon
-        | 全部文章
-    +postUI
-    include includes/pagination.pug
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">白尾青芳的小屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-SQL-injection-SQL注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T12:58:06.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/">SQL injection SQL注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>注入原理：通过用户可控参数注入SQL语法，破坏原有SQL结构。</p>
+<p>产生原因：</p>
+<p>1.程序员在处理程序和数据库交互时，使用字符串拼接的方式构造SQL语句</p>
+<p>2.未对用户可控参数进行足够的过滤，便将参数内容拼接到SQL语句中</p>
+<h2 id="万能账号密码"><a href="#万能账号密码" class="headerlink" title="万能账号密码"></a>万能账号密码</h2><p>数字型万能账号：</p>
+<p>&lt;a&gt; or &lt;true&gt; #  </p>
+<p>&lt;a&gt; or &lt;true&gt; – a</p>
+<p>单引号字符型万能账号：</p>
+<p>&lt;a&gt;’ or &lt;true&gt; #</p>
+<p>&lt;a&gt;’ or &lt;true&gt; – a</p>
+<p>双引号字符型万能账号:</p>
+<p>&lt;a&gt;” or &lt;true&gt; #</p>
+<p>&lt;a&gt;” or &lt;true&gt; – a</p>
+<p>数字型万能密码：</p>
+<p>admin #</p>
+<p>admin – a</p>
+<p>单引号字符型万能密码：</p>
+<p>admin’ #</p>
+<p>admin’ – a</p>
+<p>双引号字符型万能密码：</p>
+<p>admin” #</p>
+<p>admin” – a</p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><h3 id="数字型"><a href="#数字型" class="headerlink" title="数字型"></a>数字型</h3><p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;1<br>页面显示正常，继续下一步</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span>x <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>；</span><br></pre></td></tr></table></figure>
+
+<p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;2<br>页面错误，这说明存在数字型注入</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span>x <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h3><p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’1<br>页面正常，继续下一步</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’2<br>页面报错，则说明存在字符型注入</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="基本手法"><a href="#基本手法" class="headerlink" title="基本手法"></a>基本手法</h2><h4 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h4><p>适用于数据库中内容会回显到页面中的情况。利用union select语句，执行两条select语句，实现跨库，跨表查询</p>
+<p>必要条件：</p>
+<p>两条select语句查询结果具有相同的列数；</p>
+<p>对应的列数据类型相同</p>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><h4 id="延时注入"><a href="#延时注入" class="headerlink" title="延时注入"></a>延时注入</h4><h4 id="堆叠查询"><a href="#堆叠查询" class="headerlink" title="堆叠查询"></a>堆叠查询</h4><h2 id="sqlmap常用参数"><a href="#sqlmap常用参数" class="headerlink" title="sqlmap常用参数"></a>sqlmap常用参数</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-u</td>
+<td>检测注入点</td>
+</tr>
+<tr>
+<td>-dbs</td>
+<td>列出所有的库名</td>
+</tr>
+<tr>
+<td>-current-user</td>
+<td>当前连接数据库用户</td>
+</tr>
+<tr>
+<td>-current-db</td>
+<td>当前数据库</td>
+</tr>
+<tr>
+<td>-D “cms”</td>
+<td>指定目标数据库</td>
+</tr>
+<tr>
+<td>-tables</td>
+<td>列出数据库中所有的表名</td>
+</tr>
+<tr>
+<td>-T “cms_users”</td>
+<td>指定目标表名为 cms_users</td>
+</tr>
+<tr>
+<td>-columns</td>
+<td>列出所有的字段名</td>
+</tr>
+<tr>
+<td>-c “username,password”</td>
+<td>指定目标字段</td>
+</tr>
+<tr>
+<td>–dump</td>
+<td>列出字段内容</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>从文件中读取 HTTP 请求</td>
+</tr>
+<tr>
+<td>-os-shell</td>
+<td>在特定情况下，可以直接获得目标系统 Shell</td>
+</tr>
+<tr>
+<td>-level 3</td>
+<td>设置 sqlmap 检测等级为 3</td>
+</tr>
+<tr>
+<td>-cookie&#x3D;”username&#x3D;admin”</td>
+<td>携带 Cookie 信息进行注入</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>利用 Google 搜索引擎自动搜索注入点</td>
+</tr>
+<tr>
+<td>–batch</td>
+<td>使用默认选项</td>
+</tr>
+<tr>
+<td>-random-agent</td>
+<td>使用随机 User-Agent 信息</td>
+</tr>
+<tr>
+<td>-v 3</td>
+<td>显示 payload</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>两大基本类型</strong></th>
+<th><strong>五大基本手法</strong></th>
+<th><strong>提交参数方式</strong></th>
+<th><strong>注入点位置</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数字型  字符型</td>
+<td>联合查讯  报错注入  布尔盲注  延时注入  堆叠查询</td>
+<td>GET注入  POST注入  Cookie注入 HTTP头部注入</td>
+<td>URL注入  搜索框注入  留言板注入  登录框注入</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/" data-id="cuidc_lFPOv1y9wG5bqI6SPmr" data-title="SQL injection SQL注入" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-File-Upload-任意文件上传" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T12:43:20.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">File Upload 任意文件上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd  PowerShell</td>
+<td>bash  sh  zsh</td>
+</tr>
+</tbody></table>
+<h2 id="WebShell"><a href="#WebShell" class="headerlink" title="WebShell"></a>WebShell</h2><p>WebShell 是一个网站的后门,也是一个命令解释器。通过web 方式,使用HTTP&#x2F;HTTPS 协议传递命令消息到服务器,并且继承了web 用户</p>
+<p>的权限,在服务器上远程执行命令。WebShell 从本质上讲,就是服务器端可运行的脚本文件,后缀名通常为:</p>
+<p>.php</p>
+<p>.asp</p>
+<p>.aspx</p>
+<p>.jsp</p>
+<p>WebShell 接收来自于Web 用户的命令,然后在服务器端执行,也称为网站木马、木马后门、网马等。</p>
+<table>
+<thead>
+<tr>
+<th>Web 容器</th>
+<th>支持的脚本语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apache HTTPD</td>
+<td>PHP</td>
+</tr>
+<tr>
+<td>IIS</td>
+<td>ASP、ASPX、PHP</td>
+</tr>
+<tr>
+<td>Tomcat</td>
+<td>JSP、JSPX</td>
+</tr>
+</tbody></table>
+<h3 id="大马"><a href="#大马" class="headerlink" title="大马"></a>大马</h3><p>代码量较大</p>
+<h3 id="小马"><a href="#小马" class="headerlink" title="小马"></a>小马</h3><p>一句话木马，需要与蚁剑连接</p>
+<p>特点：短小精悍，功能强大</p>
+<p>三大基本功能：文件管理，虚拟终端，数据库管理</p>
+<h1 id="漏洞总结"><a href="#漏洞总结" class="headerlink" title="漏洞总结"></a>漏洞总结</h1><h2 id="漏洞场景"><a href="#漏洞场景" class="headerlink" title="漏洞场景"></a>漏洞场景</h2><p>Web 应用开放了文件上传功能。</p>
+<p>用户可以利用文件上传功能向服务器上传文件。</p>
+<h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>攻击者可以利用文件上传功能，上传恶意文件，对服务器造成危害</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>Web 开放了文件上传功能。</p>
+<p>对文件上传功能没有做限制或限制不足。</p>
+<p>任意文件上传。</p>
+<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><ul>
+<li>获取WebShell。</li>
+<li>任意文件读取。</li>
+<li>任意命令执行。</li>
+<li>控制网站。</li>
+<li>控制服务器。</li>
+</ul>
+<h2 id="漏洞评级"><a href="#漏洞评级" class="headerlink" title="漏洞评级"></a>漏洞评级</h2><p>高危</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>文件上传漏洞完美利用,受到以下条件限制:</p>
+<p>· Web 服务器开启文件上传功能,Web 用户可以使用该功能。</p>
+<p>· Web 用户({www|www-data|apache})对目标目录具有可写权限,甚至具有执行权限。一般情况下,Web 目录都有执行权限。<br>· 完美利用意味着文件可以执行,也就是说代码可以被服务器解析。<br>· 服务器开启了PUT 方法。</p>
+<h2 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h2><p>代码角度：</p>
+<ul>
+<li>采用白名单策略，严格限制上传文件的后缀名；</li>
+<li>上传文件重命名，尽量少的从客户端获取信息，包括文件名、文件类型、文件内容等；</li>
+<li>文件内容检测；</li>
+<li>进行二次渲染，过滤掉图片马中的恶意代码；</li>
+<li>避免文件包含漏洞；</li>
+<li>严格处理文件路径，防御00 截断漏洞；</li>
+<li>检测Token 值，防止数据包重放。</li>
+</ul>
+<p>业务角度：</p>
+<p>强口令策略，避免恶意攻击者登录网站后台；</p>
+<p>尽量避免Web 用户修改上传白名单。</p>
+<p>Web 容器角度：</p>
+<ul>
+<li>及时更新Web 容器，防止<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E&zhida_source=entity">解析漏洞</a>产生。</li>
+<li>禁用Web 容器PUT 方法。</li>
+</ul>
+<p>系统角度：</p>
+<ul>
+<li>避开空格、点<code>.</code>、<code>::$DATA</code> 等windows 系统特性。</li>
+</ul>
+<p>服务器部署：</p>
+<ul>
+<li>严格控制权限，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90&zhida_source=entity">执行权限</a>与写权限分离。</li>
+<li>建立单独的文件存储服务器，类似于<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E7%AB%99%E5%BA%93%E5%88%86%E7%A6%BB&zhida_source=entity">站库分离</a>。</li>
+</ul>
+<h2 id="漏洞案例"><a href="#漏洞案例" class="headerlink" title="漏洞案例"></a>漏洞案例</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="cuidZ7MmMO3BBl7kpFdFkKkgy" data-title="File Upload 任意文件上传" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Hello-World" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/Hello-World/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T09:42:58.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/Hello-World/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/Hello-World/" data-id="cuidfJhlSY5FYvtT8f3wUqPnG" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/">SQL injection SQL注入</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">File Upload 任意文件上传</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/15/Hello-World/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 白尾青芳<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

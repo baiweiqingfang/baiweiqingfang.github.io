@@ -1,1 +1,0 @@
-var posts=["2025/11/15/SQL-injection-SQL注入/","2025/11/15/File-Upload-任意文件上传/","2025/11/15/Hello-World/"];function toRandomPost(){window.open('/'+posts[Math.floor(Math.random() * posts.length)],"_self");};
