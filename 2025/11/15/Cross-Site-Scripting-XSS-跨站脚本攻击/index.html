@@ -20,16 +20,16 @@
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta name="description" content="跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。 注意：等待受害者访问被注入恶意代码的网站，很被动，称为盲打XSS攻击目标是客户端浏览器用户，由于浏览器种类不同，攻击效果不同，对于同一款浏览器，攻击效果也会不同 用一段简单的代">
+  <meta name="description" content="跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。 注意：等待受害者访问被注入恶意代码的网站，很被动，称为盲打XSS攻击目标是客户端浏览器用户，由于浏览器种类不同，攻击效果不同，对于同一款浏览器，攻击效果也会不同 用一段简单">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Cross Site Scripting XSS 跨站脚本攻击">
 <meta property="og:url" content="http://example.com/2025/11/15/Cross-Site-Scripting-XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="白尾青芳の小窝">
-<meta property="og:description" content="跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。 注意：等待受害者访问被注入恶意代码的网站，很被动，称为盲打XSS攻击目标是客户端浏览器用户，由于浏览器种类不同，攻击效果不同，对于同一款浏览器，攻击效果也会不同 用一段简单的代">
+<meta property="og:description" content="跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。 注意：等待受害者访问被注入恶意代码的网站，很被动，称为盲打XSS攻击目标是客户端浏览器用户，由于浏览器种类不同，攻击效果不同，对于同一款浏览器，攻击效果也会不同 用一段简单">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114221107328.png">
 <meta property="article:published_time" content="2025-11-15T14:14:09.000Z">
-<meta property="article:modified_time" content="2025-11-15T14:15:50.401Z">
+<meta property="article:modified_time" content="2026-01-01T13:01:50.047Z">
 <meta property="article:author" content="白尾青芳">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="c:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114221107328.png">
@@ -206,7 +206,9 @@
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          <p>跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。</p>
+          <span id="more"></span>
+
+<p>跨站点脚本(Cross Site Scripting, XSS)是指客户端代码注入攻击，攻击者可以在一些网站或Web应用程序中执行恶意脚本，当Web应用程序在其生成的输出中使用未经验证或未编码的用户输入时，就会发生XSS。</p>
 <p>注意：<br>等待受害者访问被注入恶意代码的网站，很被动，称为盲打<br>XSS攻击目标是客户端浏览器用户，由于浏览器种类不同，攻击效果不同，对于同一款浏览器，攻击效果也会不同</p>
 <p>用一段简单的代码，用以验证和检测漏洞的存在，这样的代码叫做POC(Proof of Concept)。验证XSS漏洞的代码有：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;<span class="title function_">alert</span>(<span class="regexp">/xss/</span>);&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">confirm</span>(<span class="regexp">/xss/</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">confirm</span>(<span class="string">&#x27;xss&#x27;</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">prompt</span>(<span class="regexp">/xss/</span>);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
