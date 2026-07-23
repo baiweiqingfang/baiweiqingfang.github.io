@@ -1,6 +1,7 @@
 const body = document.body;
 const menuToggle = document.querySelector('#menuToggle');
 const sidebar = document.querySelector('#sidebar');
+const themeToggle = document.querySelector('#themeToggle');
 const searchToggle = document.querySelector('#searchToggle');
 const searchPanel = document.querySelector('#searchPanel');
 const searchInput = document.querySelector('#searchInput');
@@ -28,6 +29,10 @@ menuToggle?.addEventListener('click', () => {
   menuToggle.setAttribute('aria-expanded', String(isOpen));
 });
 
+themeToggle?.addEventListener('click', () => {
+  body.classList.toggle('light');
+  localStorage.setItem('blog-theme', body.classList.contains('light') ? 'light' : 'dark');
+});
 
 searchToggle?.addEventListener('click', () => {
   searchPanel.hidden = false;
@@ -47,5 +52,5 @@ window.addEventListener('scroll', () => {
   backToTop?.classList.toggle('visible', window.scrollY > 420);
 });
 
+if (localStorage.getItem('blog-theme') === 'light') body.classList.add('light');
 if (window.lucide) window.lucide.createIcons();
-
