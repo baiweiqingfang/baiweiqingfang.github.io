@@ -56,186 +56,111 @@
     </div>
   </header>
   <div class="article-content">
-    
-# 黑盒测试信息收集
-
-## 只有一个 URL
-
-通常是一个特定的 Web 业务系统
-
-### 1. whois信息
-
-使用whois工具跟网站获取
-
-域名信息：
-
-注册商，注册时间，过期时间，域名年龄，NS 记录，状态，安全认证 
-
-注册人信息：
-
-注册人，联系邮箱
-
-网站信息：
-
-IP地址，HTTP状态码，网站速度，网站检测
-
-### whois反查
-
-邮箱反查，注册人反查，电话反查，IP反查
-
-### 2.子域名收集
-
-#### 被动收集
-
-##### 网络资产搜索引擎
-
-使用API 查询：
-
+    <h1 id="黑盒测试信息收集"><a href="#黑盒测试信息收集" class="headerlink" title="黑盒测试信息收集"></a>黑盒测试信息收集</h1><h2 id="只有一个-URL"><a href="#只有一个-URL" class="headerlink" title="只有一个 URL"></a>只有一个 URL</h2><p>通常是一个特定的 Web 业务系统</p>
+<h3 id="1-whois信息"><a href="#1-whois信息" class="headerlink" title="1. whois信息"></a>1. whois信息</h3><p>使用whois工具跟网站获取</p>
+<p>域名信息：</p>
+<p>注册商，注册时间，过期时间，域名年龄，NS 记录，状态，安全认证 </p>
+<p>注册人信息：</p>
+<p>注册人，联系邮箱</p>
+<p>网站信息：</p>
+<p>IP地址，HTTP状态码，网站速度，网站检测</p>
+<h3 id="whois反查"><a href="#whois反查" class="headerlink" title="whois反查"></a>whois反查</h3><p>邮箱反查，注册人反查，电话反查，IP反查</p>
+<h3 id="2-子域名收集"><a href="#2-子域名收集" class="headerlink" title="2.子域名收集"></a>2.子域名收集</h3><h4 id="被动收集"><a href="#被动收集" class="headerlink" title="被动收集"></a>被动收集</h4><h5 id="网络资产搜索引擎"><a href="#网络资产搜索引擎" class="headerlink" title="网络资产搜索引擎"></a>网络资产搜索引擎</h5><p>使用API 查询：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;domain=&quot;baidu.com&quot;&#x27;</span> | <span class="built_in">base64</span> - | xargs -I&#123;&#125; curl <span class="string">&quot;https://fofa.info/api/v1/search/all?email=<span class="variable">$&#123;Your_Mail&#125;</span>&amp;key=<span class="variable">$&#123;Your_Key&#125;</span>&amp;page=1&amp;qbase64=&#123;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
 
-##### 第三方DNS服务
-
-[VirusTotal](https://www.virustotal.com/gui/home/search)
-
-https://decoder.link/
-
-https://searchdns.netcraft.com/
-
-https://dnsdumpster.com/
-
-https://pentest-tools.com/information-gathering/find-subdomains-of-domain
-
-https://www.pkey.in/tools-i/search-subdomains
-
-https://hackertarget.com/find-dns-host-records/
-
-https://findsubdomains.com/
-
-https://spyse.com/
-
-##### 证书透明度
-
-常用证书透明度查询网站
-
+<h5 id="第三方DNS服务"><a href="#第三方DNS服务" class="headerlink" title="第三方DNS服务"></a>第三方DNS服务</h5><p><a target="_blank" rel="noopener" href="https://www.virustotal.com/gui/home/search">VirusTotal</a></p>
+<p><a target="_blank" rel="noopener" href="https://decoder.link/">https://decoder.link/</a></p>
+<p><a target="_blank" rel="noopener" href="https://searchdns.netcraft.com/">https://searchdns.netcraft.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://dnsdumpster.com/">https://dnsdumpster.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://pentest-tools.com/information-gathering/find-subdomains-of-domain">https://pentest-tools.com/information-gathering/find-subdomains-of-domain</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.pkey.in/tools-i/search-subdomains">https://www.pkey.in/tools-i/search-subdomains</a></p>
+<p><a target="_blank" rel="noopener" href="https://hackertarget.com/find-dns-host-records/">https://hackertarget.com/find-dns-host-records/</a></p>
+<p><a target="_blank" rel="noopener" href="https://findsubdomains.com/">https://findsubdomains.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://spyse.com/">https://spyse.com/</a></p>
+<h5 id="证书透明度"><a href="#证书透明度" class="headerlink" title="证书透明度"></a>证书透明度</h5><p>常用证书透明度查询网站</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">censys：https://censys.io/certificates</span><br><span class="line">crtsh：https://crt.sh/</span><br><span class="line">spyse：https://spyse.com/search/certificate</span><br><span class="line">certspotter：https://sslmate.com/certspotter/api/</span><br><span class="line">entrust：https://www.entrust.com/ct-search/</span><br><span class="line">facebook：https://developers.facebook.com/tools/ct</span><br><span class="line">google：https://developers.facebook.com/tools/ct</span><br></pre></td></tr></table></figure>
 
-#### 主动收集
-
-使用工具对子域名进行爆破
-
-常用工具：
-
+<h4 id="主动收集"><a href="#主动收集" class="headerlink" title="主动收集"></a>主动收集</h4><p>使用工具对子域名进行爆破</p>
+<p>常用工具：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ksubdomain</span><br></pre></td></tr></table></figure>
 
-### 2. 绕过 CDN与c段旁站查询
-
-判断是否有 CDN：
-
-1.使用各种多地 ping 的服务
-
-查看对应 IP 地址是否唯一，如果不唯一可能是使用了CDN
-
-多地 Ping 网站：
-
-http://ping.chinaz.com/
-
-http://ping.aizhan.com/
-
-http://ce.cloud.360.cn/
-
-2.使用 nslookup 进行检测
-
-原理同上
-
-绕过CDN：
-
-1.查询历史 DNS 解析记录（DNSDB、ViewDNS）；
-
-2.利用全网空间测绘工具（Shodan、FOFA、ZoomEye）搜索该网站独有的特征（如 SSL 证书序号、Icon 的 MurmurHash 值）；
-
-3.寻找该域名发出的邮件（如注册激活邮件），查看邮件头中的原站 IP
-
-### 3. Web 指纹（Fingerprinting）识别与技术栈识别
-
-1.识别 CMS 与框架
-
-方法：
-
-浏览器插件 Wappalyzer
-
-工具 WhatWeb、EHole、TideFinger
-
-中间件与数据库推断：观察 HTTP 响应头（Response Header）中的 Server、X-Powered-By、Set-Cookie
-
-### 4. 目录与敏感文件探测
-
-1.敏感文件与后台：爆破网站的目录结构，寻找备份文件、源码泄露、未授权后台。
-
-方法：
-
-使用 dirsearch、Gobuster、ffuf，加载高质量字典
-
-重点关注：* `.git` / `.svn` 泄露、`WEB-INF/web.xml`、`config.php`、`phpinfo.php`、`/robots.txt`、`/swagger-ui.html`（API 接口文档）。
-
-### 5. Google Hacking（公开情报搜集）
-
-- 利用搜索引擎的语法，白嫖搜索引擎对该站点的爬取记录。
-  - `site:example.com inurl:login` (寻找登录后台)
-  - `site:example.com filetype:sql 或 filetype:conf` (寻找敏感配置文件)
-  - `site:example.com intext:密码 或 内部` (寻找敏感信息)
-
-## 场景二：如果只有一个 IP，怎么做信息收集？
-
-意味着你面对的是一台主机资产（可能承载着多个服务或网站）
-
-拿到 IP（例如 `202.x.x.x`），核心思路是“横向摸排，服务攻坚”**，主要围绕**网络端口、操作系统、以及该 IP 承载的潜在 Web 站点展开。
-
-### 1. 端口扫描与服务识别（最核心一步）
-
-- IP 只是个地址，真正干活的是里面的端口和服务。
-  - *方法：* 使用 `Nmap` 或 `fscan` 进行全端口（1-65535）扫描。
-  - *命令示例：* `nmap -sS -sV -p- -T4 202.x.x.x` (SYN 半开放扫描，探测服务版本)
-  - *重点寻找高危端口：*
-    - **21/22/23/3389：** FTP/SSH/Telnet/RDP（爆破、未授权、RCE 风险）。
-    - **445/139：** SMB 协议（内网或老旧 Windows 系统的永恒之蓝等）。
-    - **1433/3306/5432/6379/9200：** 数据库与缓存服务（MSSQL、MySQL、PostgreSQL、Redis 未授权、Elasticsearch，极易直接拿权限）。
-    - **80/443/8080/7001/9000：** Web 服务与常见中间件（Weblogic、Fastjson 等）。
-
-### 2. 操作系统与硬件识别
-
-- 判断目标是 Windows 还是 Linux，这对后续制作 Payload（如木马、反弹 Shell 的命令）至关重要。
-  - *方法：* Nmap 的 `-O` 参数进行系统指纹探测。
-  - *简单推断：* 通过 Ping 值的 TTL（生存时间）粗略判断（Linux 默认通常为 64 左右，Windows 默认通常为 128 左右，受网络跳数影响会有所减少）。
-
-### 3. IP 反查域名（寻找 Web 入口）
-
-- 有时候直接访问 `http://IP` 可能会显示 403 或 404，因为服务器配置了虚拟主机（Virtual Host），必须带域名访问。
-  - *方法：* 通过微步在线（ThreatBook）、Dnsdb、FOFA 输入 IP，查询该 IP 历史上解析过哪些域名。
-  - *绑定 Host：* 如果查到了域名，可以在本地修改 `hosts` 文件，将域名强制指向该 IP 再进行 Web 访问。
-
-### 4. 旁站与 C 段资产探测（曲线救国）
-
-- **旁站（同 IP 站点）：** 这台服务器上是不是同时跑着好几个网站？打不动主站，可以打同台机器上的另一个小网站，进而提权拿到整台服务器控制权。
-- **C 段（同网段 IP）：** 检查目标 IP 附近（如 `202.x.x.1` 到 `202.x.x.254`）有哪些机器。在红队演练或授权允许的情况下，如果目标 IP 密不透风，可以尝试攻破同网段内防御薄弱的兄弟机器，再通过内网横向移动（如 ARP 欺骗、内网扫描）打回目标机器。
-
-### 5. 空间测绘历史缓存
-
-- 直接在 FOFA/Shodan 输入 `ip="202.x.x.x"`。
-  - *好处：* 空间测绘平台可能在几天前刚帮你扫过这个 IP，你可以直接看到它曾经开放过什么端口、网页长什么样，**完全不需要直接给目标 IP 发包**，实现完美的被动隐蔽收集。
-
-## 🛠️ 总结与工具卡片
-
-为了让你在脑子里更有画面感，我们可以把这两套流程提炼为两组核心工具链：
-
-- **URL 收集链：** Subfinder (子域名) $\rightarrow$ Wappalyzer (指纹) $\rightarrow$ Dirsearch (目录) $\rightarrow$ Google Hacking
-- **IP 收集链：** Nmap/fscan (端口/服务) $\rightarrow$ 微步反查 (域名) $\rightarrow$ FOFA/Shodan (历史暴露面)
-
-无论哪种场景，信息收集的终极目标都是**扩大资产接触面，直到发现那个最薄弱的服务或代码缺陷**。
-
-你目前在练习靶场时，是在哪个环节（比如扫描出的端口利用，或者 Web 目录爆破）遇到卡点了吗？
-
-
-
+<h3 id="2-绕过-CDN与c段旁站查询"><a href="#2-绕过-CDN与c段旁站查询" class="headerlink" title="2. 绕过 CDN与c段旁站查询"></a>2. 绕过 CDN与c段旁站查询</h3><p>判断是否有 CDN：</p>
+<p>1.使用各种多地 ping 的服务</p>
+<p>查看对应 IP 地址是否唯一，如果不唯一可能是使用了CDN</p>
+<p>多地 Ping 网站：</p>
+<p><a target="_blank" rel="noopener" href="http://ping.chinaz.com/">http://ping.chinaz.com/</a></p>
+<p><a target="_blank" rel="noopener" href="http://ping.aizhan.com/">http://ping.aizhan.com/</a></p>
+<p><a target="_blank" rel="noopener" href="http://ce.cloud.360.cn/">http://ce.cloud.360.cn/</a></p>
+<p>2.使用 nslookup 进行检测</p>
+<p>原理同上</p>
+<p>绕过CDN：</p>
+<p>1.查询历史 DNS 解析记录（DNSDB、ViewDNS）；</p>
+<p>2.利用全网空间测绘工具（Shodan、FOFA、ZoomEye）搜索该网站独有的特征（如 SSL 证书序号、Icon 的 MurmurHash 值）；</p>
+<p>3.寻找该域名发出的邮件（如注册激活邮件），查看邮件头中的原站 IP</p>
+<h3 id="3-Web-指纹（Fingerprinting）识别与技术栈识别"><a href="#3-Web-指纹（Fingerprinting）识别与技术栈识别" class="headerlink" title="3. Web 指纹（Fingerprinting）识别与技术栈识别"></a>3. Web 指纹（Fingerprinting）识别与技术栈识别</h3><p>1.识别 CMS 与框架</p>
+<p>方法：</p>
+<p>浏览器插件 Wappalyzer</p>
+<p>工具 WhatWeb、EHole、TideFinger</p>
+<p>中间件与数据库推断：观察 HTTP 响应头（Response Header）中的 Server、X-Powered-By、Set-Cookie</p>
+<h3 id="4-目录与敏感文件探测"><a href="#4-目录与敏感文件探测" class="headerlink" title="4. 目录与敏感文件探测"></a>4. 目录与敏感文件探测</h3><p>1.敏感文件与后台：爆破网站的目录结构，寻找备份文件、源码泄露、未授权后台。</p>
+<p>方法：</p>
+<p>使用 dirsearch、Gobuster、ffuf，加载高质量字典</p>
+<p>重点关注：* <code>.git</code> &#x2F; <code>.svn</code> 泄露、<code>WEB-INF/web.xml</code>、<code>config.php</code>、<code>phpinfo.php</code>、<code>/robots.txt</code>、<code>/swagger-ui.html</code>（API 接口文档）。</p>
+<h3 id="5-Google-Hacking（公开情报搜集）"><a href="#5-Google-Hacking（公开情报搜集）" class="headerlink" title="5. Google Hacking（公开情报搜集）"></a>5. Google Hacking（公开情报搜集）</h3><ul>
+<li>利用搜索引擎的语法，白嫖搜索引擎对该站点的爬取记录。<ul>
+<li><code>site:example.com inurl:login</code> (寻找登录后台)</li>
+<li><code>site:example.com filetype:sql 或 filetype:conf</code> (寻找敏感配置文件)</li>
+<li><code>site:example.com intext:密码 或 内部</code> (寻找敏感信息)</li>
+</ul>
+</li>
+</ul>
+<h2 id="场景二：如果只有一个-IP，怎么做信息收集？"><a href="#场景二：如果只有一个-IP，怎么做信息收集？" class="headerlink" title="场景二：如果只有一个 IP，怎么做信息收集？"></a>场景二：如果只有一个 IP，怎么做信息收集？</h2><p>意味着你面对的是一台主机资产（可能承载着多个服务或网站）</p>
+<p>拿到 IP（例如 <code>202.x.x.x</code>），核心思路是“横向摸排，服务攻坚”<strong>，主要围绕</strong>网络端口、操作系统、以及该 IP 承载的潜在 Web 站点展开。</p>
+<h3 id="1-端口扫描与服务识别（最核心一步）"><a href="#1-端口扫描与服务识别（最核心一步）" class="headerlink" title="1. 端口扫描与服务识别（最核心一步）"></a>1. 端口扫描与服务识别（最核心一步）</h3><ul>
+<li>IP 只是个地址，真正干活的是里面的端口和服务。<ul>
+<li><em>方法：</em> 使用 <code>Nmap</code> 或 <code>fscan</code> 进行全端口（1-65535）扫描。</li>
+<li><em>命令示例：</em> <code>nmap -sS -sV -p- -T4 202.x.x.x</code> (SYN 半开放扫描，探测服务版本)</li>
+<li><em>重点寻找高危端口：</em><ul>
+<li><strong>21&#x2F;22&#x2F;23&#x2F;3389：</strong> FTP&#x2F;SSH&#x2F;Telnet&#x2F;RDP（爆破、未授权、RCE 风险）。</li>
+<li><strong>445&#x2F;139：</strong> SMB 协议（内网或老旧 Windows 系统的永恒之蓝等）。</li>
+<li><strong>1433&#x2F;3306&#x2F;5432&#x2F;6379&#x2F;9200：</strong> 数据库与缓存服务（MSSQL、MySQL、PostgreSQL、Redis 未授权、Elasticsearch，极易直接拿权限）。</li>
+<li><strong>80&#x2F;443&#x2F;8080&#x2F;7001&#x2F;9000：</strong> Web 服务与常见中间件（Weblogic、Fastjson 等）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-操作系统与硬件识别"><a href="#2-操作系统与硬件识别" class="headerlink" title="2. 操作系统与硬件识别"></a>2. 操作系统与硬件识别</h3><ul>
+<li>判断目标是 Windows 还是 Linux，这对后续制作 Payload（如木马、反弹 Shell 的命令）至关重要。<ul>
+<li><em>方法：</em> Nmap 的 <code>-O</code> 参数进行系统指纹探测。</li>
+<li><em>简单推断：</em> 通过 Ping 值的 TTL（生存时间）粗略判断（Linux 默认通常为 64 左右，Windows 默认通常为 128 左右，受网络跳数影响会有所减少）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-IP-反查域名（寻找-Web-入口）"><a href="#3-IP-反查域名（寻找-Web-入口）" class="headerlink" title="3. IP 反查域名（寻找 Web 入口）"></a>3. IP 反查域名（寻找 Web 入口）</h3><ul>
+<li>有时候直接访问 <code>http://IP</code> 可能会显示 403 或 404，因为服务器配置了虚拟主机（Virtual Host），必须带域名访问。<ul>
+<li><em>方法：</em> 通过微步在线（ThreatBook）、Dnsdb、FOFA 输入 IP，查询该 IP 历史上解析过哪些域名。</li>
+<li><em>绑定 Host：</em> 如果查到了域名，可以在本地修改 <code>hosts</code> 文件，将域名强制指向该 IP 再进行 Web 访问。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-旁站与-C-段资产探测（曲线救国）"><a href="#4-旁站与-C-段资产探测（曲线救国）" class="headerlink" title="4. 旁站与 C 段资产探测（曲线救国）"></a>4. 旁站与 C 段资产探测（曲线救国）</h3><ul>
+<li><strong>旁站（同 IP 站点）：</strong> 这台服务器上是不是同时跑着好几个网站？打不动主站，可以打同台机器上的另一个小网站，进而提权拿到整台服务器控制权。</li>
+<li><strong>C 段（同网段 IP）：</strong> 检查目标 IP 附近（如 <code>202.x.x.1</code> 到 <code>202.x.x.254</code>）有哪些机器。在红队演练或授权允许的情况下，如果目标 IP 密不透风，可以尝试攻破同网段内防御薄弱的兄弟机器，再通过内网横向移动（如 ARP 欺骗、内网扫描）打回目标机器。</li>
+</ul>
+<h3 id="5-空间测绘历史缓存"><a href="#5-空间测绘历史缓存" class="headerlink" title="5. 空间测绘历史缓存"></a>5. 空间测绘历史缓存</h3><ul>
+<li>直接在 FOFA&#x2F;Shodan 输入 <code>ip=&quot;202.x.x.x&quot;</code>。<ul>
+<li><em>好处：</em> 空间测绘平台可能在几天前刚帮你扫过这个 IP，你可以直接看到它曾经开放过什么端口、网页长什么样，<strong>完全不需要直接给目标 IP 发包</strong>，实现完美的被动隐蔽收集。</li>
+</ul>
+</li>
+</ul>
+<h2 id="🛠️-总结与工具卡片"><a href="#🛠️-总结与工具卡片" class="headerlink" title="🛠️ 总结与工具卡片"></a>🛠️ 总结与工具卡片</h2><p>为了让你在脑子里更有画面感，我们可以把这两套流程提炼为两组核心工具链：</p>
+<ul>
+<li><strong>URL 收集链：</strong> Subfinder (子域名) $\rightarrow$ Wappalyzer (指纹) $\rightarrow$ Dirsearch (目录) $\rightarrow$ Google Hacking</li>
+<li><strong>IP 收集链：</strong> Nmap&#x2F;fscan (端口&#x2F;服务) $\rightarrow$ 微步反查 (域名) $\rightarrow$ FOFA&#x2F;Shodan (历史暴露面)</li>
+</ul>
+<p>无论哪种场景，信息收集的终极目标都是<strong>扩大资产接触面，直到发现那个最薄弱的服务或代码缺陷</strong>。</p>
+<p>你目前在练习靶场时，是在哪个环节（比如扫描出的端口利用，或者 Web 目录爆破）遇到卡点了吗？</p>
 
   </div>
 </article>

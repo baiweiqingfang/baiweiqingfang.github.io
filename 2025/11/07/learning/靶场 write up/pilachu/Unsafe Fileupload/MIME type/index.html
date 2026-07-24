@@ -56,54 +56,85 @@
     </div>
   </header>
   <div class="article-content">
-    
-# MIME type
-
-1.直接上传.php文件失败
-
-2.bp抓包分析，得到拦截的包，有如下文本：
-
-ntent-Disposition: form-data; name="uploadfile"; filename="yjh.php"
-Content-Type: application/octet-stream
-
-3.将第二行改为Content-Type: image/jpg  #白名单中任意一中类型即可
-
-4.放行，得到文件上传位置
-
-5.拼接URL,用蚁剑进行连接
-
-# 注：
-
-1.MIME(Multipurpose Internet Mail Extensions,多用途互联网邮件扩展，又称 Media Type)，content-type的值，常见MIME类型：
-
-| 文件类型     | MIME类型                | 典型扩展名     |
-| ------------ | ----------------------- | -------------- |
-| 文本文件     | text/plain              | .txt           |
-| HTML文件     | text/html               | .html          |
-| Markdown文本 | text/markdown           | .md, .markdown |
-| JPEG图片     | image/jpeg              | .jpg, .jpeg    |
-| PNG图片      | image/png               | .png           |
-| GIF图片      | image/gif               | .gif           |
-| PDF文档      | application/pdf         | .pdf           |
-| JavaScript   | application/javascript  | .js            |
-| JSON数据     | application/json        | .json          |
-| ZIP压缩文件  | application/zip         | .zip           |
-| PHP脚本      | application/x-httpd-php | .php           |
-
-2.内容类型（Content-Type），这个标头区域用于指定信息的类型，不仅出现在响应，在上传请求的正文里每一块文件数据前也会出现。
-
-3.服务器接收POST请求后，会验证MIME是否符合白名单,只允许白名单上的文件类型上传
-
-4.源代码：
-
-文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\unsafeupload\servercheck.php
-
+    <h1 id="MIME-type"><a href="#MIME-type" class="headerlink" title="MIME type"></a>MIME type</h1><p>1.直接上传.php文件失败</p>
+<p>2.bp抓包分析，得到拦截的包，有如下文本：</p>
+<p>ntent-Disposition: form-data; name&#x3D;”uploadfile”; filename&#x3D;”yjh.php”<br>Content-Type: application&#x2F;octet-stream</p>
+<p>3.将第二行改为Content-Type: image&#x2F;jpg  #白名单中任意一中类型即可</p>
+<p>4.放行，得到文件上传位置</p>
+<p>5.拼接URL,用蚁剑进行连接</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.MIME(Multipurpose Internet Mail Extensions,多用途互联网邮件扩展，又称 Media Type)，content-type的值，常见MIME类型：</p>
+<table>
+<thead>
+<tr>
+<th>文件类型</th>
+<th>MIME类型</th>
+<th>典型扩展名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文本文件</td>
+<td>text&#x2F;plain</td>
+<td>.txt</td>
+</tr>
+<tr>
+<td>HTML文件</td>
+<td>text&#x2F;html</td>
+<td>.html</td>
+</tr>
+<tr>
+<td>Markdown文本</td>
+<td>text&#x2F;markdown</td>
+<td>.md, .markdown</td>
+</tr>
+<tr>
+<td>JPEG图片</td>
+<td>image&#x2F;jpeg</td>
+<td>.jpg, .jpeg</td>
+</tr>
+<tr>
+<td>PNG图片</td>
+<td>image&#x2F;png</td>
+<td>.png</td>
+</tr>
+<tr>
+<td>GIF图片</td>
+<td>image&#x2F;gif</td>
+<td>.gif</td>
+</tr>
+<tr>
+<td>PDF文档</td>
+<td>application&#x2F;pdf</td>
+<td>.pdf</td>
+</tr>
+<tr>
+<td>JavaScript</td>
+<td>application&#x2F;javascript</td>
+<td>.js</td>
+</tr>
+<tr>
+<td>JSON数据</td>
+<td>application&#x2F;json</td>
+<td>.json</td>
+</tr>
+<tr>
+<td>ZIP压缩文件</td>
+<td>application&#x2F;zip</td>
+<td>.zip</td>
+</tr>
+<tr>
+<td>PHP脚本</td>
+<td>application&#x2F;x-httpd-php</td>
+<td>.php</td>
+</tr>
+</tbody></table>
+<p>2.内容类型（Content-Type），这个标头区域用于指定信息的类型，不仅出现在响应，在上传请求的正文里每一块文件数据前也会出现。</p>
+<p>3.服务器接收POST请求后，会验证MIME是否符合白名单,只允许白名单上的文件类型上传</p>
+<p>4.源代码：</p>
+<p>文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\unsafeupload\servercheck.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line"><span class="comment">//     var_dump($_FILES);</span></span><br><span class="line">    <span class="variable">$mime</span>=<span class="keyword">array</span>(<span class="string">&#x27;image/jpg&#x27;</span>,<span class="string">&#x27;image/jpeg&#x27;</span>,<span class="string">&#x27;image/png&#x27;</span>);<span class="comment">//指定MIME类型,这里只是对MIME类型做了判断。</span></span><br><span class="line">    <span class="variable">$save_path</span>=<span class="string">&#x27;uploads&#x27;</span>;<span class="comment">//指定在当前目录建立一个目录</span></span><br><span class="line">    <span class="variable">$upload</span>=<span class="title function_ invoke__">upload_sick</span>(<span class="string">&#x27;uploadfile&#x27;</span>,<span class="variable">$mime</span>,<span class="variable">$save_path</span>);<span class="comment">//调用函数</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$upload</span>[<span class="string">&#x27;return&#x27;</span>])&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p class=&#x27;notice&#x27;&gt;文件上传成功&lt;/p&gt;&lt;p class=&#x27;notice&#x27;&gt;文件保存的路径为：<span class="subst">&#123;$upload[&#x27;new_path&#x27;]&#125;</span>&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p class=notice&gt;<span class="subst">&#123;$upload[&#x27;error&#x27;]&#125;</span>&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-upload_sick()函数：
-
-文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\inc\uploadfunction.php
-
+<p>upload_sick()函数：</p>
+<p>文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\inc\uploadfunction.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许的MIME类型白名单</span></span><br><span class="line"><span class="variable">$mime</span>=<span class="keyword">array</span>(<span class="string">&#x27;image/jpg&#x27;</span>,<span class="string">&#x27;image/jpeg&#x27;</span>,<span class="string">&#x27;image/png&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 核心验证逻辑：仅检查MIME类型</span></span><br><span class="line"><span class="keyword">if</span>(!<span class="title function_ invoke__">in_array</span>(<span class="variable">$_FILES</span>[<span class="variable">$key</span>][<span class="string">&#x27;type&#x27;</span>], <span class="variable">$mime</span>))&#123;</span><br><span class="line">    <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;上传的图片只能是jpg,jpeg,png格式的！&#x27;</span>;</span><br><span class="line">    <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 

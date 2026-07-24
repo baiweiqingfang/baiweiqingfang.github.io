@@ -56,21 +56,10 @@
     </div>
   </header>
   <div class="article-content">
-    
-# xss之盲打
-
-1.在留言板输入<script>alert(/xss/);</script>，你的大名随便输入
-
-2.点击提示可知管理员界面/xssblind/admin_login.php
-
-3.登录后触发弹窗，说明xss攻击成功
-
-# 注：
-
-1.xss盲打是指在攻击者对数据提交后展现的后台未知的情况下，站点採用了攻击者插入了带真实攻击功能的xss攻击代码（一般是使用script标签引入远程的js）的数据。当未知后台在展现时没有对这些提交的数据进行过滤，那么后台管理人员在操作时就会触发xss来实现攻击者预定好的真实攻击功能。
-
-
-
+    <h1 id="xss之盲打"><a href="#xss之盲打" class="headerlink" title="xss之盲打"></a>xss之盲打</h1><p>1.在留言板输入<script>alert(/xss/);</script>，你的大名随便输入</p>
+<p>2.点击提示可知管理员界面&#x2F;xssblind&#x2F;admin_login.php</p>
+<p>3.登录后触发弹窗，说明xss攻击成功</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.xss盲打是指在攻击者对数据提交后展现的后台未知的情况下，站点採用了攻击者插入了带真实攻击功能的xss攻击代码（一般是使用script标签引入远程的js）的数据。当未知后台在展现时没有对这些提交的数据进行过滤，那么后台管理人员在操作时就会触发xss来实现攻击者预定好的真实攻击功能。</p>
 
   </div>
 </article>

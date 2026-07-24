@@ -52,37 +52,21 @@
     <h1>Pass-02</h1>
     <div class="post-meta">
       <time datetime="2026-03-15T07:38:56.000Z">2026.03.15</time>
-      <span>2 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Pass-02
-
-![image-20260315153222145](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153222145.png)
-
-1.查看源码
-
-![image-20260315153250369](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153250369.png)
-
-代码审计得出采用服务端$_FILE['xxx'['type']]来获取content-type进行校验
-
-2.上传info.php,burp suite抓包发送到重放器
-
-![image-20260315153519112](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153519112.png)
-
-3.将content-type类型改为白名单策略中的任意一个，点击发送
-
-![image-20260315153753557](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153753557.png)
-
-4.访问文件地址
-
-![image-20260315153853270](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153853270.png)
-
-木马上传成功
-
-
-
+    <h1 id="Pass-02"><a href="#Pass-02" class="headerlink" title="Pass-02"></a>Pass-02</h1><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153222145.png" alt="image-20260315153222145"></p>
+<p>1.查看源码</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153250369.png" alt="image-20260315153250369"></p>
+<p>代码审计得出采用服务端$_FILE[‘xxx’[‘type’]]来获取content-type进行校验</p>
+<p>2.上传info.php,burp suite抓包发送到重放器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153519112.png" alt="image-20260315153519112"></p>
+<p>3.将content-type类型改为白名单策略中的任意一个，点击发送</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153753557.png" alt="image-20260315153753557"></p>
+<p>4.访问文件地址</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315153853270.png" alt="image-20260315153853270"></p>
+<p>木马上传成功</p>
 
   </div>
 </article>

@@ -52,641 +52,239 @@
     <h1>数据库安全配置</h1>
     <div class="post-meta">
       <time datetime="2026-06-28T15:54:24.000Z">2026.06.28</time>
-      <span>14 分钟阅读</span>
+      <span>12 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# 数据库安全配置
-
-## 1.基本概念
-
-信息存储的仓库，可以把数据存储在数据库中
-
-## 2.数据库分类
-
-### 2.1关系型数据库
-
-类似与Excel表格
-
-特点：数据不能重复，不是指数据完全不一样，而是指能够通过某个字段区分出表中的不同记录，这个字段就叫主键
-
-#### 2.1.1MySQL
-
-MySQL是由瑞典MySQLAB公司开发,属于Oracle旗下产品。MySQL是最流行的关系型数据库管理系统之一
-
-客户端与MySQL服务端进行通信时采用MySQL二进制协议（Binary Protocol）
-
-#### 2.1.2MariaDB
-
-#### 2.1.3SQL server
-
-#### 2.1.4Oracle
-
-### 2.2非关系型数据库
-
-键值对（key-value）的方式存储数据
-
-#### 2.2.1Redis
-
-## 3.数据库组成
-
-##  4.MySQL命令行
-
-使用命令来操作数据库
-
-D:\PHPstudy\phpstudy_pro\Extensions\MySQL5.7.26\bin>
-
-登录连接：mysql -h ip -p 3306 -u root -proot
-
-## 5.数据库语句
-
-### 5.1DDL语句
-
-数据定义语句（Data Definition Language），对数据库，表，列等进行创建，删除，更改
-
-#### 5.1.1数据库操作
-
-Show databases：查看当前MySQL服务器中有哪些数据库
-
-Create databases 数据库名：创建新的数据库
-
-Use 数据库名：切换数据库
-
-Select database（）：查看当前正在使用的数据库
-
-Drop database 数据库名：删除数据库
-
-#### 5.1.2表操作
-
-Show tables：查看当前数据库有哪些表
-
-Desc 表名：查询表结构
-
-Join：用来把多个表横向连接起来
-
-select * from user join flag on user.id=flag.id
-
-根据表中字段连接
-
-Using和on是一样的，using是简化版的on
-
-Using(id)会将id列合并
-
-### 5.2DML语句
-
-数据操纵语句（Data Manipulation Language），用于添加（增），删除（删），更新（改），查询（查）数据库
-
-#### 5.2.1Select查询语句
-
-基本格式：
-
-Select 列名 from 表名
-
-查询多个列：
-
-Select 列名1，列名2，...，from 表名
-
-查询所有列：
-
-Select * from 表名
-
-使用where语句进行查询：
-
-Select 列名 from 表明 where 列名=xx
-
-Like主要用于where语句中搜索指定的匹配模式
-
-select column_name from table_name where column_name like 'x%'
-
-##### 5.2.1.1Union联合查询
-
-主要用于把两个查询结果连接起来，放到一个结果集，结果集的列名由第一个select后面的列名决定
-
-条件：
-
-前后两个查询的列名可以不一样，但是列的数量必须一致
-
-基本格式：
-
-Select 列 from 表 [where 条件] union 其他查询语句
-
-##### 5.2.1.2排序
-
-功能：
-
-根据列名来排序，默认按照升序对结果集进行排序，可以使用desx关键字对结果集进行降序排序
-
-格式：
-
-Select 列名 from 表名 [where 条件] order by 列名
-
-##### 5.2.1.3Group by
-
-分组查询，把相同的列放在一起
-
-格式：
-
-group by column_name
-
-##### 5.2.1.4子查询
-
-也叫内查询，嵌套查询
-
-是一种嵌套在其他SQL语句中进行的查询
-
-规则：
-
-1.必须在括号内
-
-2.子查询的select语句中，只能由一个列，除非子查询有多个列
-
-select * from ((select 1)A,(select 2)B);
-
-派生表:
-
-MySQL在进行子查询时,就会产生一个派生表,他是select语句产生的一个虚拟表,与外部没有关系,产生的结果传给外部select查询
-
-派生表必须定义一个别名，如A，B
-
-使用（）或as定义别名
-
-#### 5.2.2Insert插入语句
-
-插入数据有三种形式：
-
-insert into 表名 （列名1，列名2，列名3） values（值1，值2，值3）
-
-省略列名形式：
-
-insert into 表名 values（值1，值2，值3）
-
-使用set关键字插入数据
-
-insert into 表名 set 列名1=值1，列名2=值2，列名3=值3
-
-#### 5.2.3Update更新操作
-
-基本格式：
-
-Update 表名 set 列名=新值 where 列名=值
-
-更新多个列：
-
-Update user set username = ‘tests’ ， password = ‘123’ where id = 3
-
-省略条件，更新表中的一列数据：
-
-Update 表名 set 列名=新值
-
-#### 5.2.4Delete删除操作
-
-删除表中的一行数据：
-
-Delete from 表明 where 列名=值
-
-使用in关键字删除表中的多行数据
-
-Delete from 表名 where 列名 in （需要删除的行）
-
-删除表中的所有数据
-
-Delete from user
-
-### 5.3DCL语句
-
-#### 5.3.1show
-
-show variables
-
-查看系统变量
-
-配合MySQL通配符：
-
-show variables "sec%"
-
-### 5.4注释符
-
-#### 5.4.1分类
-
-单行注释
-
-#
-
-仅支持MySQL数据库
-
--- +
-
-支持所有数据库
-
-空格不能少，最后一个+可以换成任意字符，为了表示前面有空格
-
-多行注释
-
-/**/
-
-### 5.5系统控制语句
-
-#### set
-
-SET [作用域] 变量名 = 值
-
-1.修改系统变量
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 6.数据库管理工具
-
-### 6.1PhpMyAdmin
-
-PhpMyAdmin是一个以PHP为基础,以Web-Base
-方式架构在网站主机上的MySQL的数据库管理工具,
-让管理者可用Web接口管理MySQL数据库。
-
-#### 6.1.1支持大多数MySQL功能
-
-
-浏览和删除数据库,表,视图,字段和索引
-
-创建,复制,删除,重命名和更改数据库,表,字段和索引
-
-维护服务器,数据库和表,以及有关服务器配置的建议
-
-执行,编辑和标记任何SQL语句,甚至是批处理查询
-。
-
-管理MySQL用户帐户和特权
-
-管理存储过程和触发器
-
-#### 6.1.2从CSV和SQL导入数据
-
-## 7.运算符
-
-### And运算
-
-格式：
-
-条件1 and 条件2
-
-两个都为真时，返回为真，否则为假
-
-### Or运算
-
-格式：
-
-条件1 or 条件2
-
-只要有一个条件为真，那么返回为真，两个条件都为假时，返回为假
-
-## 8.元数据数据库
-
-元数据是指关于数据的数据，用于描述数据的特征和属性
-
-### 8.1Information_schema数据库
-
-Information_schema数据库是MySQL服务器自带的一个数据库，自MySQL 5.0起成为默认系统数据库，提供了访问MySQL数据库元信息的方式，记录了MySQL服务器中所有的数据库信息
-
-表结构：
-
-#### 8.1.1Schemata表：
-
-记录数据库名的表
-
-##### 8.1.1.1 Schema_name列：
-
-记录数据库名的列
-
-#### 8.1.2Tables表：
-
-记录表名的表
-
-##### 8.1.2.1 Table_schema列：
-
-记录数据库名的列
-
-##### 8.1.2.2Table_name列：
-
-记录着表名的列
-
-#### 8.1.3Columns表：
-
-记录列名的表
-
-##### 8.1.3.1 Column_name列：
-
-记录列名的列
-
-##### 8.1.3.2 Table_name列：
-
-记录表名的列
-
-##### 8.1.2.3 Table_Schema列：
-
-记录数据库名的列
-
-## 9.数据库函数
-
-### 9.1MySQL
-
-#### 9.1Extractvalue
-
-提权XML数据
-
-Extractvalue（XML_document, Xpath_str）
-
-XML_document：
-
-XML对象可以是XML文件或字符串
-
- Xpath_str：
-
-Xpath格式的字符串
-
-9.2updatexml
-
-替换数据
-
-Updatexml(XML_document, Xpath_string, new_value)
-
-XML_document：
-
-XML对象可以是XML文件或者是字符串
-
-Xpath_string：
-
-Xpath格式的字符串
-
-new_value：
-
-替换查询找到的数据
-
-#### 9.3concat
-
-连接字符串
-
-concat（字符串1， 字符串2）
-
-#### 9.4group_concat
-
-连接一组字符串，使用逗号隔开
-
-#### 9.5Floor
-
-取整，去掉小数位
-
-#### 9.6Count
-
-返回匹配指定条件的行数
-
-Count(column_name)
-
-#### 9.7Rand
-
-产生一个0-1随机数
-
-Select rand()
-
-确定种子，产生随机数，每次产生的数相同
-
-Select rand(0)
-
-9.8limit
-
-限制sql语句的返回行数
-
-Limit start,row
-
-start:从哪里返回
-
-row:返回几行数据
-
-#### 9.9Name_const()
-
-给变量赋值
-
-select name_const('name', 'test')
-
-#### 9.10Substr
-
-截取字符串
-
-1.substr(str,pos.len)
-
-2.substr(str,pos)
-
-pos从1开始
-
-#### 9.11If
-
-进行条件判断
-
-if(exp1, exp2,exp3)
-
-exp1为判断条件，exp2为条件正确时返回的结果，exp3为条件错误时返回的结果
-
-#### 9.12Ascii
-
-返回参数最左侧字符的ASCII码值,返回值在0-255之间
-
-Ascii(str)
-
-#### 9.13Length
-
-返回参数的长度
-
-Length(database())
-
-9.14Sleep
-
-让程序在当前位置停顿多长时间，停顿时间的长短有sleep()函数参数决定
-
-select sleep(5)
-
-也可以放在and语句里
-
-select * from user where id = 1 and sleep(5)
-
-#### 9.15benchmark
-
-执行表达式多少次
-
-Benchmark(x,expr)执行表达式expr x次
-
-利用benchmark函数产生延迟
-
-执行一次的时间非常少，执行多次，时间就可以变长
-
-#### 9.16exp
-
-返回e的X次方值
-
-Exp(X)
-
-#### 9.17Strcmp
-
-比较两个字符串大小
-
-Strcmp(str1,str2)
-
-当两个字符串相等时，返回0
-
-当第一个字符串大于第二个时，返回1
-
-当第一个字符串小于第二个时，返回-1
-
-#### version
-
-以字符串的形式返回当前 MySQL 数据库的版本
-
-### SQL Server
-
-#### WAITFOR DELAY '0:0:5'
-
-
-
-## 10.数据类型
-
-### 10.1数值数据类型
-
-#### 10.1.1整数类型
-
-![image-20260318144837204](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260318144837204.png)
-
-在MySQL5.5版本之前，超过最大整数不会报错，在5.5版本之后才会
-
-#### 10.1.2float类型
-
-## 变量
-
-### 系统变量
-
-#### 全局变量
-
-@@version
-
-#### 会话变量
-
-### 自定义变量
-
-#### 用户变量
-
-#### 局部变量
-
-## 11.通配符
-
-在MySQL中搜索数据时，可以用通配符代替多字符串
-
-通配符必须和like一起使用
-
-![image-20260319151528420](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260319151528420.png)
-
-## 12.文件操作
-
-secure_file_prib系统变量用来对读取文件进行限制
-
-secure-file-priv参数是用来限制LOAD DATA,SELECT ... OUTFILE,and LOAD_FILE()传到哪个指定目录的。
-
-当secure-file-priv的值为NULL时,表示MySQL不允许导入导出。
-
-当secure-file-priv=/tmp时,表示MySQL只允许在/tmp目录内,导入导出
-
-当secure-file-priv没有值时,表示MySQL对导入导出,没有限制
-
-使用show variabales来查看secure-file-priv参数的值
-
-Show variables like "sec%" ;
-
-解决方法：
-
-在windows下,可以修改mysql.ini配置文件,把secure_file_priv设为没有值
-
-加入一行secure_file_priv =
-
-在Linux下,可以修改my.cnf配置文件加入一行secure_file_priv =
-
-### 12.1文件操作函数
-
-load_file()
-
-读取文件内容,返回一个字符串,文件必须位于服务器上,必须使用绝对路径,并且对文件要有操作权限,文件内容必须小于
-max_allowed_packet
-
-select load_file();
-
-查看D盘下的flag.txt文件
-
-select load_file('D:/phpStudy2018/PHPTutorial/WWW/flag.txt' );
-
-注意:
-目录之间的区分要使用/不能用\
-
-load data 
-
-主要用于把文件中的数据导入表中
-
-select .... into outfile
-
-
-用于把数据库中的数据,导出到文件内，若文件不存在，则会创建
-
-select [column_name] from [table_name] into outfile [path];
-
-限制条件：
-
-1.和load_file一样，受到系统变量securr_file_priv的限制
-
-2.path要使用绝对路径
-
-## 13.数据库特性
-
-#### 13.1MySQL
-
-弱类型
-
-有子查询
-
-当字符型参数和整型进行比较时，MySQL会把字符型转成整型
-
-转换规则：
-
-取左边的数字，遇到非数字，返回0
-
-## 14.数据库日志
-
-### 14.1MySQL/MariaDB
-
-通用查询日志（General Query Log）
-
-用于记录客户端连接到数据库后执行的每一条 SQL 语句，无论这条语句是成功还是失败。
-
-相关配置：
-
-| 变量名           | 当前值                          | 含义                                                         |
-| ---------------- | ------------------------------- | ------------------------------------------------------------ |
-| general_log      | OFF                             | 日志功能已关闭。MySQL 当前不会记录任何 SQL 语句。            |
-| general_log_file | C:\phpStudy\MySQL\data\stu1.log | 预设的日志文件路径。如果把日志打开，所有 SQL 记录都会写入这个文件。 |
-
-
-
+    <h1 id="数据库安全配置"><a href="#数据库安全配置" class="headerlink" title="数据库安全配置"></a>数据库安全配置</h1><h2 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h2><p>信息存储的仓库，可以把数据存储在数据库中</p>
+<h2 id="2-数据库分类"><a href="#2-数据库分类" class="headerlink" title="2.数据库分类"></a>2.数据库分类</h2><h3 id="2-1关系型数据库"><a href="#2-1关系型数据库" class="headerlink" title="2.1关系型数据库"></a>2.1关系型数据库</h3><p>类似与Excel表格</p>
+<p>特点：数据不能重复，不是指数据完全不一样，而是指能够通过某个字段区分出表中的不同记录，这个字段就叫主键</p>
+<h4 id="2-1-1MySQL"><a href="#2-1-1MySQL" class="headerlink" title="2.1.1MySQL"></a>2.1.1MySQL</h4><p>MySQL是由瑞典MySQLAB公司开发,属于Oracle旗下产品。MySQL是最流行的关系型数据库管理系统之一</p>
+<p>客户端与MySQL服务端进行通信时采用MySQL二进制协议（Binary Protocol）</p>
+<h4 id="2-1-2MariaDB"><a href="#2-1-2MariaDB" class="headerlink" title="2.1.2MariaDB"></a>2.1.2MariaDB</h4><h4 id="2-1-3SQL-server"><a href="#2-1-3SQL-server" class="headerlink" title="2.1.3SQL server"></a>2.1.3SQL server</h4><h4 id="2-1-4Oracle"><a href="#2-1-4Oracle" class="headerlink" title="2.1.4Oracle"></a>2.1.4Oracle</h4><h3 id="2-2非关系型数据库"><a href="#2-2非关系型数据库" class="headerlink" title="2.2非关系型数据库"></a>2.2非关系型数据库</h3><p>键值对（key-value）的方式存储数据</p>
+<h4 id="2-2-1Redis"><a href="#2-2-1Redis" class="headerlink" title="2.2.1Redis"></a>2.2.1Redis</h4><h2 id="3-数据库组成"><a href="#3-数据库组成" class="headerlink" title="3.数据库组成"></a>3.数据库组成</h2><h2 id="4-MySQL命令行"><a href="#4-MySQL命令行" class="headerlink" title="4.MySQL命令行"></a>4.MySQL命令行</h2><p>使用命令来操作数据库</p>
+<p>D:\PHPstudy\phpstudy_pro\Extensions\MySQL5.7.26\bin&gt;</p>
+<p>登录连接：mysql -h ip -p 3306 -u root -proot</p>
+<h2 id="5-数据库语句"><a href="#5-数据库语句" class="headerlink" title="5.数据库语句"></a>5.数据库语句</h2><h3 id="5-1DDL语句"><a href="#5-1DDL语句" class="headerlink" title="5.1DDL语句"></a>5.1DDL语句</h3><p>数据定义语句（Data Definition Language），对数据库，表，列等进行创建，删除，更改</p>
+<h4 id="5-1-1数据库操作"><a href="#5-1-1数据库操作" class="headerlink" title="5.1.1数据库操作"></a>5.1.1数据库操作</h4><p>Show databases：查看当前MySQL服务器中有哪些数据库</p>
+<p>Create databases 数据库名：创建新的数据库</p>
+<p>Use 数据库名：切换数据库</p>
+<p>Select database（）：查看当前正在使用的数据库</p>
+<p>Drop database 数据库名：删除数据库</p>
+<h4 id="5-1-2表操作"><a href="#5-1-2表操作" class="headerlink" title="5.1.2表操作"></a>5.1.2表操作</h4><p>Show tables：查看当前数据库有哪些表</p>
+<p>Desc 表名：查询表结构</p>
+<p>Join：用来把多个表横向连接起来</p>
+<p>select * from user join flag on user.id&#x3D;flag.id</p>
+<p>根据表中字段连接</p>
+<p>Using和on是一样的，using是简化版的on</p>
+<p>Using(id)会将id列合并</p>
+<h3 id="5-2DML语句"><a href="#5-2DML语句" class="headerlink" title="5.2DML语句"></a>5.2DML语句</h3><p>数据操纵语句（Data Manipulation Language），用于添加（增），删除（删），更新（改），查询（查）数据库</p>
+<h4 id="5-2-1Select查询语句"><a href="#5-2-1Select查询语句" class="headerlink" title="5.2.1Select查询语句"></a>5.2.1Select查询语句</h4><p>基本格式：</p>
+<p>Select 列名 from 表名</p>
+<p>查询多个列：</p>
+<p>Select 列名1，列名2，…，from 表名</p>
+<p>查询所有列：</p>
+<p>Select * from 表名</p>
+<p>使用where语句进行查询：</p>
+<p>Select 列名 from 表明 where 列名&#x3D;xx</p>
+<p>Like主要用于where语句中搜索指定的匹配模式</p>
+<p>select column_name from table_name where column_name like ‘x%’</p>
+<h5 id="5-2-1-1Union联合查询"><a href="#5-2-1-1Union联合查询" class="headerlink" title="5.2.1.1Union联合查询"></a>5.2.1.1Union联合查询</h5><p>主要用于把两个查询结果连接起来，放到一个结果集，结果集的列名由第一个select后面的列名决定</p>
+<p>条件：</p>
+<p>前后两个查询的列名可以不一样，但是列的数量必须一致</p>
+<p>基本格式：</p>
+<p>Select 列 from 表 [where 条件] union 其他查询语句</p>
+<h5 id="5-2-1-2排序"><a href="#5-2-1-2排序" class="headerlink" title="5.2.1.2排序"></a>5.2.1.2排序</h5><p>功能：</p>
+<p>根据列名来排序，默认按照升序对结果集进行排序，可以使用desx关键字对结果集进行降序排序</p>
+<p>格式：</p>
+<p>Select 列名 from 表名 [where 条件] order by 列名</p>
+<h5 id="5-2-1-3Group-by"><a href="#5-2-1-3Group-by" class="headerlink" title="5.2.1.3Group by"></a>5.2.1.3Group by</h5><p>分组查询，把相同的列放在一起</p>
+<p>格式：</p>
+<p>group by column_name</p>
+<h5 id="5-2-1-4子查询"><a href="#5-2-1-4子查询" class="headerlink" title="5.2.1.4子查询"></a>5.2.1.4子查询</h5><p>也叫内查询，嵌套查询</p>
+<p>是一种嵌套在其他SQL语句中进行的查询</p>
+<p>规则：</p>
+<p>1.必须在括号内</p>
+<p>2.子查询的select语句中，只能由一个列，除非子查询有多个列</p>
+<p>select * from ((select 1)A,(select 2)B);</p>
+<p>派生表:</p>
+<p>MySQL在进行子查询时,就会产生一个派生表,他是select语句产生的一个虚拟表,与外部没有关系,产生的结果传给外部select查询</p>
+<p>派生表必须定义一个别名，如A，B</p>
+<p>使用（）或as定义别名</p>
+<h4 id="5-2-2Insert插入语句"><a href="#5-2-2Insert插入语句" class="headerlink" title="5.2.2Insert插入语句"></a>5.2.2Insert插入语句</h4><p>插入数据有三种形式：</p>
+<p>insert into 表名 （列名1，列名2，列名3） values（值1，值2，值3）</p>
+<p>省略列名形式：</p>
+<p>insert into 表名 values（值1，值2，值3）</p>
+<p>使用set关键字插入数据</p>
+<p>insert into 表名 set 列名1&#x3D;值1，列名2&#x3D;值2，列名3&#x3D;值3</p>
+<h4 id="5-2-3Update更新操作"><a href="#5-2-3Update更新操作" class="headerlink" title="5.2.3Update更新操作"></a>5.2.3Update更新操作</h4><p>基本格式：</p>
+<p>Update 表名 set 列名&#x3D;新值 where 列名&#x3D;值</p>
+<p>更新多个列：</p>
+<p>Update user set username &#x3D; ‘tests’ ， password &#x3D; ‘123’ where id &#x3D; 3</p>
+<p>省略条件，更新表中的一列数据：</p>
+<p>Update 表名 set 列名&#x3D;新值</p>
+<h4 id="5-2-4Delete删除操作"><a href="#5-2-4Delete删除操作" class="headerlink" title="5.2.4Delete删除操作"></a>5.2.4Delete删除操作</h4><p>删除表中的一行数据：</p>
+<p>Delete from 表明 where 列名&#x3D;值</p>
+<p>使用in关键字删除表中的多行数据</p>
+<p>Delete from 表名 where 列名 in （需要删除的行）</p>
+<p>删除表中的所有数据</p>
+<p>Delete from user</p>
+<h3 id="5-3DCL语句"><a href="#5-3DCL语句" class="headerlink" title="5.3DCL语句"></a>5.3DCL语句</h3><h4 id="5-3-1show"><a href="#5-3-1show" class="headerlink" title="5.3.1show"></a>5.3.1show</h4><p>show variables</p>
+<p>查看系统变量</p>
+<p>配合MySQL通配符：</p>
+<p>show variables “sec%”</p>
+<h3 id="5-4注释符"><a href="#5-4注释符" class="headerlink" title="5.4注释符"></a>5.4注释符</h3><h4 id="5-4-1分类"><a href="#5-4-1分类" class="headerlink" title="5.4.1分类"></a>5.4.1分类</h4><p>单行注释</p>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>仅支持MySQL数据库</p>
+<p>– +</p>
+<p>支持所有数据库</p>
+<p>空格不能少，最后一个+可以换成任意字符，为了表示前面有空格</p>
+<p>多行注释</p>
+<p>&#x2F;**&#x2F;</p>
+<h3 id="5-5系统控制语句"><a href="#5-5系统控制语句" class="headerlink" title="5.5系统控制语句"></a>5.5系统控制语句</h3><h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4><p>SET [作用域] 变量名 &#x3D; 值</p>
+<p>1.修改系统变量</p>
+<h2 id="6-数据库管理工具"><a href="#6-数据库管理工具" class="headerlink" title="6.数据库管理工具"></a>6.数据库管理工具</h2><h3 id="6-1PhpMyAdmin"><a href="#6-1PhpMyAdmin" class="headerlink" title="6.1PhpMyAdmin"></a>6.1PhpMyAdmin</h3><p>PhpMyAdmin是一个以PHP为基础,以Web-Base<br>方式架构在网站主机上的MySQL的数据库管理工具,<br>让管理者可用Web接口管理MySQL数据库。</p>
+<h4 id="6-1-1支持大多数MySQL功能"><a href="#6-1-1支持大多数MySQL功能" class="headerlink" title="6.1.1支持大多数MySQL功能"></a>6.1.1支持大多数MySQL功能</h4><p>浏览和删除数据库,表,视图,字段和索引</p>
+<p>创建,复制,删除,重命名和更改数据库,表,字段和索引</p>
+<p>维护服务器,数据库和表,以及有关服务器配置的建议</p>
+<p>执行,编辑和标记任何SQL语句,甚至是批处理查询<br>。</p>
+<p>管理MySQL用户帐户和特权</p>
+<p>管理存储过程和触发器</p>
+<h4 id="6-1-2从CSV和SQL导入数据"><a href="#6-1-2从CSV和SQL导入数据" class="headerlink" title="6.1.2从CSV和SQL导入数据"></a>6.1.2从CSV和SQL导入数据</h4><h2 id="7-运算符"><a href="#7-运算符" class="headerlink" title="7.运算符"></a>7.运算符</h2><h3 id="And运算"><a href="#And运算" class="headerlink" title="And运算"></a>And运算</h3><p>格式：</p>
+<p>条件1 and 条件2</p>
+<p>两个都为真时，返回为真，否则为假</p>
+<h3 id="Or运算"><a href="#Or运算" class="headerlink" title="Or运算"></a>Or运算</h3><p>格式：</p>
+<p>条件1 or 条件2</p>
+<p>只要有一个条件为真，那么返回为真，两个条件都为假时，返回为假</p>
+<h2 id="8-元数据数据库"><a href="#8-元数据数据库" class="headerlink" title="8.元数据数据库"></a>8.元数据数据库</h2><p>元数据是指关于数据的数据，用于描述数据的特征和属性</p>
+<h3 id="8-1Information-schema数据库"><a href="#8-1Information-schema数据库" class="headerlink" title="8.1Information_schema数据库"></a>8.1Information_schema数据库</h3><p>Information_schema数据库是MySQL服务器自带的一个数据库，自MySQL 5.0起成为默认系统数据库，提供了访问MySQL数据库元信息的方式，记录了MySQL服务器中所有的数据库信息</p>
+<p>表结构：</p>
+<h4 id="8-1-1Schemata表："><a href="#8-1-1Schemata表：" class="headerlink" title="8.1.1Schemata表："></a>8.1.1Schemata表：</h4><p>记录数据库名的表</p>
+<h5 id="8-1-1-1-Schema-name列："><a href="#8-1-1-1-Schema-name列：" class="headerlink" title="8.1.1.1 Schema_name列："></a>8.1.1.1 Schema_name列：</h5><p>记录数据库名的列</p>
+<h4 id="8-1-2Tables表："><a href="#8-1-2Tables表：" class="headerlink" title="8.1.2Tables表："></a>8.1.2Tables表：</h4><p>记录表名的表</p>
+<h5 id="8-1-2-1-Table-schema列："><a href="#8-1-2-1-Table-schema列：" class="headerlink" title="8.1.2.1 Table_schema列："></a>8.1.2.1 Table_schema列：</h5><p>记录数据库名的列</p>
+<h5 id="8-1-2-2Table-name列："><a href="#8-1-2-2Table-name列：" class="headerlink" title="8.1.2.2Table_name列："></a>8.1.2.2Table_name列：</h5><p>记录着表名的列</p>
+<h4 id="8-1-3Columns表："><a href="#8-1-3Columns表：" class="headerlink" title="8.1.3Columns表："></a>8.1.3Columns表：</h4><p>记录列名的表</p>
+<h5 id="8-1-3-1-Column-name列："><a href="#8-1-3-1-Column-name列：" class="headerlink" title="8.1.3.1 Column_name列："></a>8.1.3.1 Column_name列：</h5><p>记录列名的列</p>
+<h5 id="8-1-3-2-Table-name列："><a href="#8-1-3-2-Table-name列：" class="headerlink" title="8.1.3.2 Table_name列："></a>8.1.3.2 Table_name列：</h5><p>记录表名的列</p>
+<h5 id="8-1-2-3-Table-Schema列："><a href="#8-1-2-3-Table-Schema列：" class="headerlink" title="8.1.2.3 Table_Schema列："></a>8.1.2.3 Table_Schema列：</h5><p>记录数据库名的列</p>
+<h2 id="9-数据库函数"><a href="#9-数据库函数" class="headerlink" title="9.数据库函数"></a>9.数据库函数</h2><h3 id="9-1MySQL"><a href="#9-1MySQL" class="headerlink" title="9.1MySQL"></a>9.1MySQL</h3><h4 id="9-1Extractvalue"><a href="#9-1Extractvalue" class="headerlink" title="9.1Extractvalue"></a>9.1Extractvalue</h4><p>提权XML数据</p>
+<p>Extractvalue（XML_document, Xpath_str）</p>
+<p>XML_document：</p>
+<p>XML对象可以是XML文件或字符串</p>
+<p> Xpath_str：</p>
+<p>Xpath格式的字符串</p>
+<p>9.2updatexml</p>
+<p>替换数据</p>
+<p>Updatexml(XML_document, Xpath_string, new_value)</p>
+<p>XML_document：</p>
+<p>XML对象可以是XML文件或者是字符串</p>
+<p>Xpath_string：</p>
+<p>Xpath格式的字符串</p>
+<p>new_value：</p>
+<p>替换查询找到的数据</p>
+<h4 id="9-3concat"><a href="#9-3concat" class="headerlink" title="9.3concat"></a>9.3concat</h4><p>连接字符串</p>
+<p>concat（字符串1， 字符串2）</p>
+<h4 id="9-4group-concat"><a href="#9-4group-concat" class="headerlink" title="9.4group_concat"></a>9.4group_concat</h4><p>连接一组字符串，使用逗号隔开</p>
+<h4 id="9-5Floor"><a href="#9-5Floor" class="headerlink" title="9.5Floor"></a>9.5Floor</h4><p>取整，去掉小数位</p>
+<h4 id="9-6Count"><a href="#9-6Count" class="headerlink" title="9.6Count"></a>9.6Count</h4><p>返回匹配指定条件的行数</p>
+<p>Count(column_name)</p>
+<h4 id="9-7Rand"><a href="#9-7Rand" class="headerlink" title="9.7Rand"></a>9.7Rand</h4><p>产生一个0-1随机数</p>
+<p>Select rand()</p>
+<p>确定种子，产生随机数，每次产生的数相同</p>
+<p>Select rand(0)</p>
+<p>9.8limit</p>
+<p>限制sql语句的返回行数</p>
+<p>Limit start,row</p>
+<p>start:从哪里返回</p>
+<p>row:返回几行数据</p>
+<h4 id="9-9Name-const"><a href="#9-9Name-const" class="headerlink" title="9.9Name_const()"></a>9.9Name_const()</h4><p>给变量赋值</p>
+<p>select name_const(‘name’, ‘test’)</p>
+<h4 id="9-10Substr"><a href="#9-10Substr" class="headerlink" title="9.10Substr"></a>9.10Substr</h4><p>截取字符串</p>
+<p>1.substr(str,pos.len)</p>
+<p>2.substr(str,pos)</p>
+<p>pos从1开始</p>
+<h4 id="9-11If"><a href="#9-11If" class="headerlink" title="9.11If"></a>9.11If</h4><p>进行条件判断</p>
+<p>if(exp1, exp2,exp3)</p>
+<p>exp1为判断条件，exp2为条件正确时返回的结果，exp3为条件错误时返回的结果</p>
+<h4 id="9-12Ascii"><a href="#9-12Ascii" class="headerlink" title="9.12Ascii"></a>9.12Ascii</h4><p>返回参数最左侧字符的ASCII码值,返回值在0-255之间</p>
+<p>Ascii(str)</p>
+<h4 id="9-13Length"><a href="#9-13Length" class="headerlink" title="9.13Length"></a>9.13Length</h4><p>返回参数的长度</p>
+<p>Length(database())</p>
+<p>9.14Sleep</p>
+<p>让程序在当前位置停顿多长时间，停顿时间的长短有sleep()函数参数决定</p>
+<p>select sleep(5)</p>
+<p>也可以放在and语句里</p>
+<p>select * from user where id &#x3D; 1 and sleep(5)</p>
+<h4 id="9-15benchmark"><a href="#9-15benchmark" class="headerlink" title="9.15benchmark"></a>9.15benchmark</h4><p>执行表达式多少次</p>
+<p>Benchmark(x,expr)执行表达式expr x次</p>
+<p>利用benchmark函数产生延迟</p>
+<p>执行一次的时间非常少，执行多次，时间就可以变长</p>
+<h4 id="9-16exp"><a href="#9-16exp" class="headerlink" title="9.16exp"></a>9.16exp</h4><p>返回e的X次方值</p>
+<p>Exp(X)</p>
+<h4 id="9-17Strcmp"><a href="#9-17Strcmp" class="headerlink" title="9.17Strcmp"></a>9.17Strcmp</h4><p>比较两个字符串大小</p>
+<p>Strcmp(str1,str2)</p>
+<p>当两个字符串相等时，返回0</p>
+<p>当第一个字符串大于第二个时，返回1</p>
+<p>当第一个字符串小于第二个时，返回-1</p>
+<h4 id="version"><a href="#version" class="headerlink" title="version"></a>version</h4><p>以字符串的形式返回当前 MySQL 数据库的版本</p>
+<h3 id="SQL-Server"><a href="#SQL-Server" class="headerlink" title="SQL Server"></a>SQL Server</h3><h4 id="WAITFOR-DELAY-‘0-0-5’"><a href="#WAITFOR-DELAY-‘0-0-5’" class="headerlink" title="WAITFOR DELAY ‘0:0:5’"></a>WAITFOR DELAY ‘0:0:5’</h4><h2 id="10-数据类型"><a href="#10-数据类型" class="headerlink" title="10.数据类型"></a>10.数据类型</h2><h3 id="10-1数值数据类型"><a href="#10-1数值数据类型" class="headerlink" title="10.1数值数据类型"></a>10.1数值数据类型</h3><h4 id="10-1-1整数类型"><a href="#10-1-1整数类型" class="headerlink" title="10.1.1整数类型"></a>10.1.1整数类型</h4><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260318144837204.png" alt="image-20260318144837204"></p>
+<p>在MySQL5.5版本之前，超过最大整数不会报错，在5.5版本之后才会</p>
+<h4 id="10-1-2float类型"><a href="#10-1-2float类型" class="headerlink" title="10.1.2float类型"></a>10.1.2float类型</h4><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h3><h4 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h4><p>@@version</p>
+<h4 id="会话变量"><a href="#会话变量" class="headerlink" title="会话变量"></a>会话变量</h4><h3 id="自定义变量"><a href="#自定义变量" class="headerlink" title="自定义变量"></a>自定义变量</h3><h4 id="用户变量"><a href="#用户变量" class="headerlink" title="用户变量"></a>用户变量</h4><h4 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h4><h2 id="11-通配符"><a href="#11-通配符" class="headerlink" title="11.通配符"></a>11.通配符</h2><p>在MySQL中搜索数据时，可以用通配符代替多字符串</p>
+<p>通配符必须和like一起使用</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260319151528420.png" alt="image-20260319151528420"></p>
+<h2 id="12-文件操作"><a href="#12-文件操作" class="headerlink" title="12.文件操作"></a>12.文件操作</h2><p>secure_file_prib系统变量用来对读取文件进行限制</p>
+<p>secure-file-priv参数是用来限制LOAD DATA,SELECT … OUTFILE,and LOAD_FILE()传到哪个指定目录的。</p>
+<p>当secure-file-priv的值为NULL时,表示MySQL不允许导入导出。</p>
+<p>当secure-file-priv&#x3D;&#x2F;tmp时,表示MySQL只允许在&#x2F;tmp目录内,导入导出</p>
+<p>当secure-file-priv没有值时,表示MySQL对导入导出,没有限制</p>
+<p>使用show variabales来查看secure-file-priv参数的值</p>
+<p>Show variables like “sec%” ;</p>
+<p>解决方法：</p>
+<p>在windows下,可以修改mysql.ini配置文件,把secure_file_priv设为没有值</p>
+<p>加入一行secure_file_priv &#x3D;</p>
+<p>在Linux下,可以修改my.cnf配置文件加入一行secure_file_priv &#x3D;</p>
+<h3 id="12-1文件操作函数"><a href="#12-1文件操作函数" class="headerlink" title="12.1文件操作函数"></a>12.1文件操作函数</h3><p>load_file()</p>
+<p>读取文件内容,返回一个字符串,文件必须位于服务器上,必须使用绝对路径,并且对文件要有操作权限,文件内容必须小于<br>max_allowed_packet</p>
+<p>select load_file();</p>
+<p>查看D盘下的flag.txt文件</p>
+<p>select load_file(‘D:&#x2F;phpStudy2018&#x2F;PHPTutorial&#x2F;WWW&#x2F;flag.txt’ );</p>
+<p>注意:<br>目录之间的区分要使用&#x2F;不能用\</p>
+<p>load data </p>
+<p>主要用于把文件中的数据导入表中</p>
+<p>select …. into outfile</p>
+<p>用于把数据库中的数据,导出到文件内，若文件不存在，则会创建</p>
+<p>select [column_name] from [table_name] into outfile [path];</p>
+<p>限制条件：</p>
+<p>1.和load_file一样，受到系统变量securr_file_priv的限制</p>
+<p>2.path要使用绝对路径</p>
+<h2 id="13-数据库特性"><a href="#13-数据库特性" class="headerlink" title="13.数据库特性"></a>13.数据库特性</h2><h4 id="13-1MySQL"><a href="#13-1MySQL" class="headerlink" title="13.1MySQL"></a>13.1MySQL</h4><p>弱类型</p>
+<p>有子查询</p>
+<p>当字符型参数和整型进行比较时，MySQL会把字符型转成整型</p>
+<p>转换规则：</p>
+<p>取左边的数字，遇到非数字，返回0</p>
+<h2 id="14-数据库日志"><a href="#14-数据库日志" class="headerlink" title="14.数据库日志"></a>14.数据库日志</h2><h3 id="14-1MySQL-MariaDB"><a href="#14-1MySQL-MariaDB" class="headerlink" title="14.1MySQL&#x2F;MariaDB"></a>14.1MySQL&#x2F;MariaDB</h3><p>通用查询日志（General Query Log）</p>
+<p>用于记录客户端连接到数据库后执行的每一条 SQL 语句，无论这条语句是成功还是失败。</p>
+<p>相关配置：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>当前值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>general_log</td>
+<td>OFF</td>
+<td>日志功能已关闭。MySQL 当前不会记录任何 SQL 语句。</td>
+</tr>
+<tr>
+<td>general_log_file</td>
+<td>C:\phpStudy\MySQL\data\stu1.log</td>
+<td>预设的日志文件路径。如果把日志打开，所有 SQL 记录都会写入这个文件。</td>
+</tr>
+</tbody></table>
 
   </div>
 </article>

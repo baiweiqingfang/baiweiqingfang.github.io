@@ -52,37 +52,21 @@
     <h1>Pass-01</h1>
     <div class="post-meta">
       <time datetime="2026-03-15T07:17:14.000Z">2026.03.15</time>
-      <span>2 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Pass-01
-
-![image-20260315145758791](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315145758791.png)
-
-1.查看源码
-
-![image-20260315145829459](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315145829459.png)
-
-代码审计得出采用前端校验，利用修改文件后缀名绕过
-
-2.上传后缀名为.jpg的PHP文件，burp suite抓包，发送到重放器中
-
-![image-20260315150813762](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315150813762.png)
-
-3.将filename的后缀名改为.php，点击发送
-
-![image-20260315151609750](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315151609750.png)
-
-在响应中找到文件上传地址
-
-4.访问php文件，木马执行成功
-
-![image-20260315151701358](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315151701358.png)
-
-
-
+    <h1 id="Pass-01"><a href="#Pass-01" class="headerlink" title="Pass-01"></a>Pass-01</h1><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315145758791.png" alt="image-20260315145758791"></p>
+<p>1.查看源码</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315145829459.png" alt="image-20260315145829459"></p>
+<p>代码审计得出采用前端校验，利用修改文件后缀名绕过</p>
+<p>2.上传后缀名为.jpg的PHP文件，burp suite抓包，发送到重放器中</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315150813762.png" alt="image-20260315150813762"></p>
+<p>3.将filename的后缀名改为.php，点击发送</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315151609750.png" alt="image-20260315151609750"></p>
+<p>在响应中找到文件上传地址</p>
+<p>4.访问php文件，木马执行成功</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315151701358.png" alt="image-20260315151701358"></p>
 
   </div>
 </article>

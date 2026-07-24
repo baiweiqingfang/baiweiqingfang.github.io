@@ -52,38 +52,23 @@
     <h1>Pass-04</h1>
     <div class="post-meta">
       <time datetime="2026-03-31T04:05:33.000Z">2026.03.31</time>
-      <span>2 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Pass-04
-
-![image-20260315203923094](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315203923094.png)
-
-1.上传1.hatccess，由于Windows无法设置.hatccess文件类型，所以burp suite中更改
-
-payload：
-
-<FilesMatch> ".+\.aaa$>
-	
-
-​	Sethandler application/x-httpd-php
-
+    <h1 id="Pass-04"><a href="#Pass-04" class="headerlink" title="Pass-04"></a>Pass-04</h1><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315203923094.png" alt="image-20260315203923094"></p>
+<p>1.上传1.hatccess，由于Windows无法设置.hatccess文件类型，所以burp suite中更改</p>
+<p>payload：</p>
+<p><FilesMatch> “.+.aaa$&gt;
+	</p>
+<p>​	Sethandler application&#x2F;x-httpd-php</p>
 </FilesMatch>
 
-![image-20260315204023955](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315204023955.png)
-
-2.将文件名改为.hatccess,放行
-
-![image-20260315204142615](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315204142615.png)
-
-3.上传一个后缀名为.aaa的php脚本，apache会作为php代码执行
-
-![image-20260315204300689](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315204300689.png)
-
-
-
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315204023955.png" alt="image-20260315204023955"></p>
+<p>2.将文件名改为.hatccess,放行</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315204142615.png" alt="image-20260315204142615"></p>
+<p>3.上传一个后缀名为.aaa的php脚本，apache会作为php代码执行</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315204300689.png" alt="image-20260315204300689"></p>
 
   </div>
 </article>

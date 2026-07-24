@@ -52,31 +52,18 @@
     <h1>WeblogicScan</h1>
     <div class="post-meta">
       <time datetime="2026-04-20T11:46:05.000Z">2026.04.20</time>
-      <span>2 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# WeblogicScan
-
-![image-20260420194403197](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420194403197.png)
-
-![image-20260420194422284](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420194422284.png)
-
-![image-20260420194435132](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420194435132.png)
-
-同一个脚本扫三遍，结果不一样的原因：
-
-主要受探测机制和环境状态两个因素影响。
-
-1.WebLogic 扫描通常涉及 T3 或 XML 数据的交互。如果脚本设置的 Timeout（超时时间）太短，而目标 JVM 正在处理之前的请求，就会导致漏报。
-
-2.连续扫描会触发 WebLogic 的反序列化处理逻辑，消耗大量 CPU 和内存。第三次扫描结果变少，说明目标中间件已处于高负荷或半僵死状态，无法及时处理探测包。
-
-3.在实战中尽量多次扫描并结合版本指纹进行手动 PoC 验证，确保不遗漏关键入口点。
-
-
-
+    <h1 id="WeblogicScan"><a href="#WeblogicScan" class="headerlink" title="WeblogicScan"></a>WeblogicScan</h1><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420194403197.png" alt="image-20260420194403197"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420194422284.png" alt="image-20260420194422284"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260420194435132.png" alt="image-20260420194435132"></p>
+<p>同一个脚本扫三遍，结果不一样的原因：</p>
+<p>主要受探测机制和环境状态两个因素影响。</p>
+<p>1.WebLogic 扫描通常涉及 T3 或 XML 数据的交互。如果脚本设置的 Timeout（超时时间）太短，而目标 JVM 正在处理之前的请求，就会导致漏报。</p>
+<p>2.连续扫描会触发 WebLogic 的反序列化处理逻辑，消耗大量 CPU 和内存。第三次扫描结果变少，说明目标中间件已处于高负荷或半僵死状态，无法及时处理探测包。</p>
+<p>3.在实战中尽量多次扫描并结合版本指纹进行手动 PoC 验证，确保不遗漏关键入口点。</p>
 
   </div>
 </article>

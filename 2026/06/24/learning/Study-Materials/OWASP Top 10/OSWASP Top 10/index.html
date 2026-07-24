@@ -56,145 +56,87 @@
     </div>
   </header>
   <div class="article-content">
-    
-# OSWASP Top 10
-
-## A01: 破坏性注入（Injection Attacks）
-
-漏洞描述：注入漏洞发生在应用程序将不可信的数据发送到解释器时，攻击者可通过注入恶意代码来操纵目标系统。常见的注入 类 型包括：
-
-    SQL注入（SQLi）
-    命令注入（Command Injection）
-    NoSQL注入
-    LDAP注入
-
-攻击方式：
-
-以SQL注入为例，当用户输入未经过滤直接拼接到数据库查询中时，攻击者可注入例如：
-
-' OR '1'='1
-
-案例：
-
-2019年，Capital One 数据泄露事件（涉及逾1亿用户），部分攻击行为利用了 Web应用 的服务端元数据注入漏洞（SSRFi + 权限配置不当），导致敏感数据被下载。
-
-防御方法：
-
-    使用参数化查询避免SQL注入。
-    对输入进行严格的验证和清洗，防止不安全的代码执行。
-
-## A02: 身份验证和会话管理不当（Broken Authentication and Session Management）
-
-漏洞描述：应用程序未正确限制用户访问其权限范围外的数据和功能，导致恶意用户获取敏感信息。常见类型包括：
-
-    弱密码策略
-    会话ID可预测
-    会话固定（Session Fixation）
-    缺少登录限制或MFA（二次认证）
-
-攻击方式：
-
-    暴力破解：尝试大量用户名/密码组合
-    凭证填充攻击（Credential Stuffing）：利用数据泄漏中获取的账号密码批量登录
-    会话劫持（Session Hijacking）：通过XSS或窃取cookies获取有效session
-
-案例：
-
-2021年，Facebook业务账户劫持事件，攻击者通过社工手段骗取登录凭证，再结合弱会话失效机制导致大量账户被控制。
-
-防御方法：
-
-    实施多因素认证（MFA）
-    会话ID在登录后重新生成，防止Session Fixation
-    Session应设置合理的过期时间
-    实施IP/设备绑定与异常行为监测
-    使用业界认证框架（如OAuth 2.0、OpenID Connect）
-
-## A03：失效的访问控制（Broken Access Control）
-
-漏洞简介:
-
-访问控制失败意味着攻击者能够访问其权限之外的数据或操作。例如：
-
-    用户查看/修改其他用户的数据（水平越权）
-    普通用户访问管理接口（垂直越权）
-
-OWASP 2025报告指出，94% 的Web应用漏洞与访问控制有关。
-攻击方式
-
-    URL篡改：例如更改/user/1001为/user/1002
-    绕过客户端权限判断：前端按钮隐藏并不能限制后端访问
-    CORS配置不当导致恶意域名跨站读取数据
-
-案例：
-
-GitLab 2022年出现的严重越权漏洞允许普通用户通过REST API直接访问项目设置，导致敏感信息泄露。
-防御策略
-
-    所有权限校验必须在服务端完成
-    实施最小权限原则（PoLP）
-    使用访问控制模型（如RBAC、ABAC）
-    安全的对象引用映射（不直接暴露数据库ID）
-    对敏感操作添加二次验证或操作审计
-
-## A04: 安全配置错误（Security Misconfiguration）
-
-漏洞描述：应用程序、数据库或服务器的配置不当，导致安全漏洞。
-防御方法：
-
-    使用安全的默认设置，定期更新和打补丁。
-    实施最小权限原则，关闭不必要的服务和端口。
-
-## A05: 不安全的组件使用（Using Components with Known Vulnerabilities）
-
-漏洞描述：使用了带有已知漏洞的库或框架，攻击者可能利用这些漏洞进行攻击。
-防御方法：
-
-    定期扫描和更新组件，确保不使用有已知漏洞的库。
-    使用依赖项管理工具，避免版本冲突。
-
-## A06: 跨站脚本攻击（Cross-Site Scripting, XSS）
-
-漏洞描述：攻击者通过注入恶意脚本到网页中，窃取用户信息或操控页面。
-防御方法：
-
-    对所有用户输入进行HTML编码，防止恶意代码执行。
-    实施内容安全策略（CSP）。
-
-## A07: 安全日志和监控不足（Insufficient Logging and Monitoring）
-
-漏洞描述：缺乏充分的日志记录和监控，使得攻击活动不易被察觉。
-防御方法：
-
-    开启详细的日志记录并定期审计。
-    配置自动化监控工具，实时检测异常行为。
-
-## A08: 不安全的反序列化（Insecure Deserialization）
-
-漏洞描述：攻击者通过修改反序列化的数据，可能执行恶意代码。
-防御方法：
-
-    避免使用反序列化不信任的数据。
-    使用签名验证反序列化的数据。
-
-## A09: 使用不安全的通讯（Using Insecure Communication Channels）
-
-漏洞描述：通过不加密或弱加密的通信通道传输敏感数据，攻击者可进行中间人攻击。
-防御方法：
-
-    使用TLS（传输层安全协议）加密所有数据传输。
-    强制使用HTTPS，禁用不安全的协议。
-
-## A10: 不完整的安全机制（Insufficient Security Controls）
-
-漏洞描述：应用程序缺乏足够的安全防护措施，无法有效抵御各种攻击。
-防御方法：
-
-    实施综合安全策略，包括加密、身份验证、授权等多种防护措施。
-    定期进行渗透测试，评估应用程序的安全性。
-
-
-
+    <h1 id="OSWASP-Top-10"><a href="#OSWASP-Top-10" class="headerlink" title="OSWASP Top 10"></a>OSWASP Top 10</h1><h2 id="A01-破坏性注入（Injection-Attacks）"><a href="#A01-破坏性注入（Injection-Attacks）" class="headerlink" title="A01: 破坏性注入（Injection Attacks）"></a>A01: 破坏性注入（Injection Attacks）</h2><p>漏洞描述：注入漏洞发生在应用程序将不可信的数据发送到解释器时，攻击者可通过注入恶意代码来操纵目标系统。常见的注入 类 型包括：</p>
+<pre><code>SQL注入（SQLi）
+命令注入（Command Injection）
+NoSQL注入
+LDAP注入
+</code></pre>
+<p>攻击方式：</p>
+<p>以SQL注入为例，当用户输入未经过滤直接拼接到数据库查询中时，攻击者可注入例如：</p>
+<p>‘ OR ‘1’&#x3D;’1</p>
+<p>案例：</p>
+<p>2019年，Capital One 数据泄露事件（涉及逾1亿用户），部分攻击行为利用了 Web应用 的服务端元数据注入漏洞（SSRFi + 权限配置不当），导致敏感数据被下载。</p>
+<p>防御方法：</p>
+<pre><code>使用参数化查询避免SQL注入。
+对输入进行严格的验证和清洗，防止不安全的代码执行。
+</code></pre>
+<h2 id="A02-身份验证和会话管理不当（Broken-Authentication-and-Session-Management）"><a href="#A02-身份验证和会话管理不当（Broken-Authentication-and-Session-Management）" class="headerlink" title="A02: 身份验证和会话管理不当（Broken Authentication and Session Management）"></a>A02: 身份验证和会话管理不当（Broken Authentication and Session Management）</h2><p>漏洞描述：应用程序未正确限制用户访问其权限范围外的数据和功能，导致恶意用户获取敏感信息。常见类型包括：</p>
+<pre><code>弱密码策略
+会话ID可预测
+会话固定（Session Fixation）
+缺少登录限制或MFA（二次认证）
+</code></pre>
+<p>攻击方式：</p>
+<pre><code>暴力破解：尝试大量用户名/密码组合
+凭证填充攻击（Credential Stuffing）：利用数据泄漏中获取的账号密码批量登录
+会话劫持（Session Hijacking）：通过XSS或窃取cookies获取有效session
+</code></pre>
+<p>案例：</p>
+<p>2021年，Facebook业务账户劫持事件，攻击者通过社工手段骗取登录凭证，再结合弱会话失效机制导致大量账户被控制。</p>
+<p>防御方法：</p>
+<pre><code>实施多因素认证（MFA）
+会话ID在登录后重新生成，防止Session Fixation
+Session应设置合理的过期时间
+实施IP/设备绑定与异常行为监测
+使用业界认证框架（如OAuth 2.0、OpenID Connect）
+</code></pre>
+<h2 id="A03：失效的访问控制（Broken-Access-Control）"><a href="#A03：失效的访问控制（Broken-Access-Control）" class="headerlink" title="A03：失效的访问控制（Broken Access Control）"></a>A03：失效的访问控制（Broken Access Control）</h2><p>漏洞简介:</p>
+<p>访问控制失败意味着攻击者能够访问其权限之外的数据或操作。例如：</p>
+<pre><code>用户查看/修改其他用户的数据（水平越权）
+普通用户访问管理接口（垂直越权）
+</code></pre>
+<p>OWASP 2025报告指出，94% 的Web应用漏洞与访问控制有关。<br>攻击方式</p>
+<pre><code>URL篡改：例如更改/user/1001为/user/1002
+绕过客户端权限判断：前端按钮隐藏并不能限制后端访问
+CORS配置不当导致恶意域名跨站读取数据
+</code></pre>
+<p>案例：</p>
+<p>GitLab 2022年出现的严重越权漏洞允许普通用户通过REST API直接访问项目设置，导致敏感信息泄露。<br>防御策略</p>
+<pre><code>所有权限校验必须在服务端完成
+实施最小权限原则（PoLP）
+使用访问控制模型（如RBAC、ABAC）
+安全的对象引用映射（不直接暴露数据库ID）
+对敏感操作添加二次验证或操作审计
+</code></pre>
+<h2 id="A04-安全配置错误（Security-Misconfiguration）"><a href="#A04-安全配置错误（Security-Misconfiguration）" class="headerlink" title="A04: 安全配置错误（Security Misconfiguration）"></a>A04: 安全配置错误（Security Misconfiguration）</h2><p>漏洞描述：应用程序、数据库或服务器的配置不当，导致安全漏洞。<br>防御方法：</p>
+<pre><code>使用安全的默认设置，定期更新和打补丁。
+实施最小权限原则，关闭不必要的服务和端口。
+</code></pre>
+<h2 id="A05-不安全的组件使用（Using-Components-with-Known-Vulnerabilities）"><a href="#A05-不安全的组件使用（Using-Components-with-Known-Vulnerabilities）" class="headerlink" title="A05: 不安全的组件使用（Using Components with Known Vulnerabilities）"></a>A05: 不安全的组件使用（Using Components with Known Vulnerabilities）</h2><p>漏洞描述：使用了带有已知漏洞的库或框架，攻击者可能利用这些漏洞进行攻击。<br>防御方法：</p>
+<pre><code>定期扫描和更新组件，确保不使用有已知漏洞的库。
+使用依赖项管理工具，避免版本冲突。
+</code></pre>
+<h2 id="A06-跨站脚本攻击（Cross-Site-Scripting-XSS）"><a href="#A06-跨站脚本攻击（Cross-Site-Scripting-XSS）" class="headerlink" title="A06: 跨站脚本攻击（Cross-Site Scripting, XSS）"></a>A06: 跨站脚本攻击（Cross-Site Scripting, XSS）</h2><p>漏洞描述：攻击者通过注入恶意脚本到网页中，窃取用户信息或操控页面。<br>防御方法：</p>
+<pre><code>对所有用户输入进行HTML编码，防止恶意代码执行。
+实施内容安全策略（CSP）。
+</code></pre>
+<h2 id="A07-安全日志和监控不足（Insufficient-Logging-and-Monitoring）"><a href="#A07-安全日志和监控不足（Insufficient-Logging-and-Monitoring）" class="headerlink" title="A07: 安全日志和监控不足（Insufficient Logging and Monitoring）"></a>A07: 安全日志和监控不足（Insufficient Logging and Monitoring）</h2><p>漏洞描述：缺乏充分的日志记录和监控，使得攻击活动不易被察觉。<br>防御方法：</p>
+<pre><code>开启详细的日志记录并定期审计。
+配置自动化监控工具，实时检测异常行为。
+</code></pre>
+<h2 id="A08-不安全的反序列化（Insecure-Deserialization）"><a href="#A08-不安全的反序列化（Insecure-Deserialization）" class="headerlink" title="A08: 不安全的反序列化（Insecure Deserialization）"></a>A08: 不安全的反序列化（Insecure Deserialization）</h2><p>漏洞描述：攻击者通过修改反序列化的数据，可能执行恶意代码。<br>防御方法：</p>
+<pre><code>避免使用反序列化不信任的数据。
+使用签名验证反序列化的数据。
+</code></pre>
+<h2 id="A09-使用不安全的通讯（Using-Insecure-Communication-Channels）"><a href="#A09-使用不安全的通讯（Using-Insecure-Communication-Channels）" class="headerlink" title="A09: 使用不安全的通讯（Using Insecure Communication Channels）"></a>A09: 使用不安全的通讯（Using Insecure Communication Channels）</h2><p>漏洞描述：通过不加密或弱加密的通信通道传输敏感数据，攻击者可进行中间人攻击。<br>防御方法：</p>
+<pre><code>使用TLS（传输层安全协议）加密所有数据传输。
+强制使用HTTPS，禁用不安全的协议。
+</code></pre>
+<h2 id="A10-不完整的安全机制（Insufficient-Security-Controls）"><a href="#A10-不完整的安全机制（Insufficient-Security-Controls）" class="headerlink" title="A10: 不完整的安全机制（Insufficient Security Controls）"></a>A10: 不完整的安全机制（Insufficient Security Controls）</h2><p>漏洞描述：应用程序缺乏足够的安全防护措施，无法有效抵御各种攻击。<br>防御方法：</p>
+<pre><code>实施综合安全策略，包括加密、身份验证、授权等多种防护措施。
+定期进行渗透测试，评估应用程序的安全性。
+</code></pre>
 
   </div>
 </article>

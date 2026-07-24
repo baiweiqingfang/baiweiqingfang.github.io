@@ -56,19 +56,9 @@
     </div>
   </header>
   <div class="article-content">
-    
-# xss之js输出
-
-1.输入<script>alert(/xss/);</script>，点击submit，没有反应
-
-2.F12查看源代码发现浏览器会将用户输入插入到<script>标签中
-
-3.插入'</script><script>alert(/xss/)</script>进行闭合，点击submit，出现弹窗
-
-
-
-
-
+    <h1 id="xss之js输出"><a href="#xss之js输出" class="headerlink" title="xss之js输出"></a>xss之js输出</h1><p>1.输入<script>alert(/xss/);</script>，点击submit，没有反应</p>
+<p>2.F12查看源代码发现浏览器会将用户输入插入到<script>标签中</p>
+<p>3.插入&#39;</script><script>alert(/xss/)</script>进行闭合，点击submit，出现弹窗</p>
 
   </div>
 </article>

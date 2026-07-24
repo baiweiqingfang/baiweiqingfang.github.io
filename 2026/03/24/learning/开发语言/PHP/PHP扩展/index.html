@@ -56,41 +56,15 @@
     </div>
   </header>
   <div class="article-content">
-    
-# PHP扩展
-
-## 1.Xdebug
-
-Xdebug是一个php的扩展,用于进行调试和性能分析,使用的是DBGp协议。
-
-### 1.1Xdebug远程调试原理
-
-1.IDE(如PhpStorm)已经集成了一个遵循BGDP的Xdebug插件,当开启它的时候,
-会在本地开一个xdebug调试服务,监听在调试器中所设置的端口上,默认是9000,这个服务就会监听所有到9000端口的链接
-
-2.当浏览器发送一个带XDEBUG_SESSION_START的参数的请求到服务器时,服务器接受后将其转到后端的php处理,如果php开启了xdebug模块,则会将debug信息转发到客户端IP的IDE的调试端口上。当参数或者cookie信息中不带XDEBUG_SESSION_START,则不会启动调试。这就为后续在浏览器中添加开关提供了可能。
-
-### 1.2调试模式
-
-#### 1.2.1固定IP调试模式
-
-![image-20260324214132205](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260324214132205.png)
-
-xdebug.remote_connect_back=0是xdebug的默认方式,这种情况下,xdebug在收到调试通知时会读取配置xdebug.remote_host和xdebug.remote_port,默认是localhost:9000,然后向这
-个端口发送通知,这种方式只适合单一客户端开发调试。
-
-#### 1.2.2 非固定IP调试模式
-
-Xdebug根据请求来源(REMOTE_HOST)来发起调试
-
-![image-20260324214318000](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260324214318000.png)
-
-从用户发起请求到IDE的整个流程图：
-
-![image-20260324214415065](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260324214415065.png)
-
-
-
+    <h1 id="PHP扩展"><a href="#PHP扩展" class="headerlink" title="PHP扩展"></a>PHP扩展</h1><h2 id="1-Xdebug"><a href="#1-Xdebug" class="headerlink" title="1.Xdebug"></a>1.Xdebug</h2><p>Xdebug是一个php的扩展,用于进行调试和性能分析,使用的是DBGp协议。</p>
+<h3 id="1-1Xdebug远程调试原理"><a href="#1-1Xdebug远程调试原理" class="headerlink" title="1.1Xdebug远程调试原理"></a>1.1Xdebug远程调试原理</h3><p>1.IDE(如PhpStorm)已经集成了一个遵循BGDP的Xdebug插件,当开启它的时候,<br>会在本地开一个xdebug调试服务,监听在调试器中所设置的端口上,默认是9000,这个服务就会监听所有到9000端口的链接</p>
+<p>2.当浏览器发送一个带XDEBUG_SESSION_START的参数的请求到服务器时,服务器接受后将其转到后端的php处理,如果php开启了xdebug模块,则会将debug信息转发到客户端IP的IDE的调试端口上。当参数或者cookie信息中不带XDEBUG_SESSION_START,则不会启动调试。这就为后续在浏览器中添加开关提供了可能。</p>
+<h3 id="1-2调试模式"><a href="#1-2调试模式" class="headerlink" title="1.2调试模式"></a>1.2调试模式</h3><h4 id="1-2-1固定IP调试模式"><a href="#1-2-1固定IP调试模式" class="headerlink" title="1.2.1固定IP调试模式"></a>1.2.1固定IP调试模式</h4><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260324214132205.png" alt="image-20260324214132205"></p>
+<p>xdebug.remote_connect_back&#x3D;0是xdebug的默认方式,这种情况下,xdebug在收到调试通知时会读取配置xdebug.remote_host和xdebug.remote_port,默认是localhost:9000,然后向这<br>个端口发送通知,这种方式只适合单一客户端开发调试。</p>
+<h4 id="1-2-2-非固定IP调试模式"><a href="#1-2-2-非固定IP调试模式" class="headerlink" title="1.2.2 非固定IP调试模式"></a>1.2.2 非固定IP调试模式</h4><p>Xdebug根据请求来源(REMOTE_HOST)来发起调试</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260324214318000.png" alt="image-20260324214318000"></p>
+<p>从用户发起请求到IDE的整个流程图：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260324214415065.png" alt="image-20260324214415065"></p>
 
   </div>
 </article>

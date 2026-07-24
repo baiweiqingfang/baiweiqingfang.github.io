@@ -56,27 +56,15 @@
     </div>
   </header>
   <div class="article-content">
-    
-# BUU CODE REVIEW
-
-1.打开题目URL，显示如下：
-
+    <h1 id="BUU-CODE-REVIEW"><a href="#BUU-CODE-REVIEW" class="headerlink" title="BUU CODE REVIEW"></a>BUU CODE REVIEW</h1><p>1.打开题目URL，显示如下：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by PhpStorm.</span></span><br><span class="line"><span class="comment"> * User: jinzhao</span></span><br><span class="line"><span class="comment"> * Date: 2019/10/6</span></span><br><span class="line"><span class="comment"> * Time: 8:04 PM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BUU</span> </span>&#123;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$correct</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">   <span class="keyword">public</span> <span class="variable">$input</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           <span class="variable language_">$this</span>-&gt;correct = <span class="title function_ invoke__">base64_encode</span>(<span class="title function_ invoke__">uniqid</span>());</span><br><span class="line">           <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;correct === <span class="variable language_">$this</span>-&gt;input) &#123;</span><br><span class="line">               <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;/flag&quot;</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (<span class="built_in">Exception</span> <span class="variable">$e</span>) &#123;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;pleaseget&#x27;</span>] === <span class="string">&#x27;1&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;pleasepost&#x27;</span>] === <span class="string">&#x27;2&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;md51&#x27;</span>]) == <span class="title function_ invoke__">md5</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;md52&#x27;</span>]) &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;md51&#x27;</span>] != <span class="variable">$_POST</span>[<span class="string">&#x27;md52&#x27;</span>]) &#123;</span><br><span class="line">            <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;obj&#x27;</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-代码审计：
-
-pleaseget===1且pleasepost===2且MD51与MD52的值不相等但MD5值相等时，就会执行unserialize($_POST['obj']);
-
-传入构造的payload使BUU类实例化，执行结构后就会调用__destruct()函数，当$correct与$input相等时就会执行echo file_get_contents("/flag");得到flag
-
-PHP的==松散比较利用弱类型特性绕过
-
-$correct与$input的比较利用PHP引用的特性绕过
-
-![image-20260326163318718](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326163318718.png)
-
-
-
+<p>代码审计：</p>
+<p>pleaseget&#x3D;&#x3D;&#x3D;1且pleasepost&#x3D;&#x3D;&#x3D;2且MD51与MD52的值不相等但MD5值相等时，就会执行unserialize($_POST[‘obj’]);</p>
+<p>传入构造的payload使BUU类实例化，执行结构后就会调用__destruct()函数，当$correct与$input相等时就会执行echo file_get_contents(“&#x2F;flag”);得到flag</p>
+<p>PHP的&#x3D;&#x3D;松散比较利用弱类型特性绕过</p>
+<p>$correct与$input的比较利用PHP引用的特性绕过</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326163318718.png" alt="image-20260326163318718"></p>
 
   </div>
 </article>

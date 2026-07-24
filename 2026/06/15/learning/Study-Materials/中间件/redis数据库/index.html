@@ -52,66 +52,64 @@
     <h1>redis数据库</h1>
     <div class="post-meta">
       <time datetime="2026-06-15T06:49:47.000Z">2026.06.15</time>
-      <span>3 分钟阅读</span>
+      <span>2 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# redis数据库
-
-redis-cli
-
-redis-cli是 Redis 自带的命令行客户端工具
-
-| 参数 | 说明                                             |
-| ---- | ------------------------------------------------ |
-| -h   | 指定Redis服务器IP                                |
-| -p   | 指定端口                                         |
-| -x   | 把通过管道符传过来的数据，当作最后那个命令的参数 |
-
-
-
-## redis配置
-
-Redis 的配置文件位于 Redis 安装目录下，文件名为 redis.conf(Windows 名为 redis.windows.conf)
-
-| 配置项              | 说明                                    |
-| ------------------- | --------------------------------------- |
-| dbfilename dump.rdb | 指定本地数据库文件名，默认值为 dump.rdb |
-| dir ./              | 指定本地数据库存放目录                  |
-|                     |                                         |
-|                     |                                         |
-
-
-
-## redis命令
-
-### string
-
-#### set
-
-SET key value
-
-在内存中插入一条键值对，将字符串值value关联到key
-
-如果key已经持有其他值， SET就覆写旧值，无视类型
-
-### server
-
-#### config set
-
-动态地调整 Redis 服务器的配置(configuration)而无须重启
-
-CONFIG SET 可以修改的配置参数可以使用命令 `CONFIG GET *` 来列出，所有被 CONFIG SET 修改的配置参数都会立即生效。
-
-#### save
-
-执行一个同步保存操作，将当前 Redis 实例的所有数据快照(snapshot)以 RDB 文件的形式保存到硬盘
-
-Redis 在执行save把内存数据同步到磁盘时，会产生一些数据库特有的二进制乱码（脏数据）
-
-
-
+    <h1 id="redis数据库"><a href="#redis数据库" class="headerlink" title="redis数据库"></a>redis数据库</h1><p>redis-cli</p>
+<p>redis-cli是 Redis 自带的命令行客户端工具</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-h</td>
+<td>指定Redis服务器IP</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定端口</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>把通过管道符传过来的数据，当作最后那个命令的参数</td>
+</tr>
+</tbody></table>
+<h2 id="redis配置"><a href="#redis配置" class="headerlink" title="redis配置"></a>redis配置</h2><p>Redis 的配置文件位于 Redis 安装目录下，文件名为 redis.conf(Windows 名为 redis.windows.conf)</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dbfilename dump.rdb</td>
+<td>指定本地数据库文件名，默认值为 dump.rdb</td>
+</tr>
+<tr>
+<td>dir .&#x2F;</td>
+<td>指定本地数据库存放目录</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="redis命令"><a href="#redis命令" class="headerlink" title="redis命令"></a>redis命令</h2><h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><h4 id="set"><a href="#set" class="headerlink" title="set"></a>set</h4><p>SET key value</p>
+<p>在内存中插入一条键值对，将字符串值value关联到key</p>
+<p>如果key已经持有其他值， SET就覆写旧值，无视类型</p>
+<h3 id="server"><a href="#server" class="headerlink" title="server"></a>server</h3><h4 id="config-set"><a href="#config-set" class="headerlink" title="config set"></a>config set</h4><p>动态地调整 Redis 服务器的配置(configuration)而无须重启</p>
+<p>CONFIG SET 可以修改的配置参数可以使用命令 <code>CONFIG GET *</code> 来列出，所有被 CONFIG SET 修改的配置参数都会立即生效。</p>
+<h4 id="save"><a href="#save" class="headerlink" title="save"></a>save</h4><p>执行一个同步保存操作，将当前 Redis 实例的所有数据快照(snapshot)以 RDB 文件的形式保存到硬盘</p>
+<p>Redis 在执行save把内存数据同步到磁盘时，会产生一些数据库特有的二进制乱码（脏数据）</p>
 
   </div>
 </article>

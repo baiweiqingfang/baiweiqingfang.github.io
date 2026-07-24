@@ -52,96 +52,121 @@
     <h1>sqlmap</h1>
     <div class="post-meta">
       <time datetime="2026-03-26T03:46:07.000Z">2026.03.26</time>
-      <span>5 分钟阅读</span>
+      <span>2 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# sqlmap
-
-SQLmap是一个自动化的SQL注入工具,其主要功能是扫描、发现并利用给定的URL的SQL注入漏洞,其广泛的功能和选项包括数据库指纹,
-枚举,数据库提权,访问目标文件系统,并在获取完操作权限时实行任意命令
-
-工作流程：
-
-1.检测网站能否访问
-
-2.检测是否有waf
-
-3.判断可注入的参数
-
-4.判断可以用哪种SQL注入技术来注入
-
-5.识别出哪种数据库
-
-6.根据用户输入的参数进行操作
-
-支持十二种数据库：MySQL, Oracle, SQLite,PostgreSQL, Microsoft SQL Server, Microsoft Access, IBM DB2, Firebird,Sybase, SAP
-MaxDB,informix,HsqlDB
-
-## sqlmap目录结构
-
-### .git目录
-
-git代码管理仓库
-
-### doc目录
-
-包含了sqlmap的具体使用说明
-
-### shell目录
-
-包含多种脚本语言的shell，当注入成功后，就可以使用shell来连接远程服务器
-
-### tamper目录
-
-包含了一些常见的waf绕过版本
-
-### waf目录
-
-常见防火墙特征
-
-### xml目录
-
-payload目录
-
-
-
-
-
-
-
-
-
-
-
-| 参数                     | 含义                                     |
-| ------------------------ | ---------------------------------------- |
-|                          |                                          |
-|                          |                                          |
-| -columns                 | 列出所有的字段名                         |
-| -current-db              | 当前数据库                               |
-| -current-user            | 当前连接数据库用户                       |
-|                          |                                          |
-| -dbs                     | 列出所有的库名                           |
-| -u "url"                 | 检测注入点                               |
-| -D "cms"                 | 指定目标数据库                           |
-| -tables                  | 列出数据库中所有的表名                   |
-| -T "cms_users"           | 指定目标表名为 cms_users                 |
-|                          |                                          |
-| -C "username,password"   | 指定目标字段                             |
-| --dump                   | 列出字段内容                             |
-| -r                       | 从文件中读取 HTTP 请求                   |
-| -os-shell                | 在特定情况下，可以直接获得目标系统 Shell |
-| -level 3                 | 设置 sqlmap 检测等级为 3                 |
-| -cookie="username=admin" | 携带 Cookie 信息进行注入                 |
-| -g                       | 利用 Google 搜索引擎自动搜索注入点       |
-| --batch                  | 使用默认选项                             |
-| -random-agent            | 使用随机 User-Agent 信息                 |
-| -v 3                     | 显示 payload                             |
-
-
-
+    <h1 id="sqlmap"><a href="#sqlmap" class="headerlink" title="sqlmap"></a>sqlmap</h1><p>SQLmap是一个自动化的SQL注入工具,其主要功能是扫描、发现并利用给定的URL的SQL注入漏洞,其广泛的功能和选项包括数据库指纹,<br>枚举,数据库提权,访问目标文件系统,并在获取完操作权限时实行任意命令</p>
+<p>工作流程：</p>
+<p>1.检测网站能否访问</p>
+<p>2.检测是否有waf</p>
+<p>3.判断可注入的参数</p>
+<p>4.判断可以用哪种SQL注入技术来注入</p>
+<p>5.识别出哪种数据库</p>
+<p>6.根据用户输入的参数进行操作</p>
+<p>支持十二种数据库：MySQL, Oracle, SQLite,PostgreSQL, Microsoft SQL Server, Microsoft Access, IBM DB2, Firebird,Sybase, SAP<br>MaxDB,informix,HsqlDB</p>
+<h2 id="sqlmap目录结构"><a href="#sqlmap目录结构" class="headerlink" title="sqlmap目录结构"></a>sqlmap目录结构</h2><h3 id="git目录"><a href="#git目录" class="headerlink" title=".git目录"></a>.git目录</h3><p>git代码管理仓库</p>
+<h3 id="doc目录"><a href="#doc目录" class="headerlink" title="doc目录"></a>doc目录</h3><p>包含了sqlmap的具体使用说明</p>
+<h3 id="shell目录"><a href="#shell目录" class="headerlink" title="shell目录"></a>shell目录</h3><p>包含多种脚本语言的shell，当注入成功后，就可以使用shell来连接远程服务器</p>
+<h3 id="tamper目录"><a href="#tamper目录" class="headerlink" title="tamper目录"></a>tamper目录</h3><p>包含了一些常见的waf绕过版本</p>
+<h3 id="waf目录"><a href="#waf目录" class="headerlink" title="waf目录"></a>waf目录</h3><p>常见防火墙特征</p>
+<h3 id="xml目录"><a href="#xml目录" class="headerlink" title="xml目录"></a>xml目录</h3><p>payload目录</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-columns</td>
+<td>列出所有的字段名</td>
+</tr>
+<tr>
+<td>-current-db</td>
+<td>当前数据库</td>
+</tr>
+<tr>
+<td>-current-user</td>
+<td>当前连接数据库用户</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-dbs</td>
+<td>列出所有的库名</td>
+</tr>
+<tr>
+<td>-u “url”</td>
+<td>检测注入点</td>
+</tr>
+<tr>
+<td>-D “cms”</td>
+<td>指定目标数据库</td>
+</tr>
+<tr>
+<td>-tables</td>
+<td>列出数据库中所有的表名</td>
+</tr>
+<tr>
+<td>-T “cms_users”</td>
+<td>指定目标表名为 cms_users</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-C “username,password”</td>
+<td>指定目标字段</td>
+</tr>
+<tr>
+<td>–dump</td>
+<td>列出字段内容</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>从文件中读取 HTTP 请求</td>
+</tr>
+<tr>
+<td>-os-shell</td>
+<td>在特定情况下，可以直接获得目标系统 Shell</td>
+</tr>
+<tr>
+<td>-level 3</td>
+<td>设置 sqlmap 检测等级为 3</td>
+</tr>
+<tr>
+<td>-cookie&#x3D;”username&#x3D;admin”</td>
+<td>携带 Cookie 信息进行注入</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>利用 Google 搜索引擎自动搜索注入点</td>
+</tr>
+<tr>
+<td>–batch</td>
+<td>使用默认选项</td>
+</tr>
+<tr>
+<td>-random-agent</td>
+<td>使用随机 User-Agent 信息</td>
+</tr>
+<tr>
+<td>-v 3</td>
+<td>显示 payload</td>
+</tr>
+</tbody></table>
 
   </div>
 </article>

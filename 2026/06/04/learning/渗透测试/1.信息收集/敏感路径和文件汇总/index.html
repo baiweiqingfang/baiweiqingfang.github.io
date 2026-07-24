@@ -56,190 +56,123 @@
     </div>
   </header>
   <div class="article-content">
-    
-# 敏感路径和文件汇总
-
-## 1.信息泄露
-
-### 1.1PHP探针
-
-PHP 探针 = 把服务器所有敏感配置（OS/PHP/Apache/路径/权限）用网页形式展示出来的脚本，属于信息泄露
-
-常见 PHP 探针文件名：
-
-| 文件名          | 说明                      | 来源                  |
-| --------------- | ------------------------- | --------------------- |
-| `/phpinfo.php`  | 原生 `phpinfo()` 函数输出 | 开发者调试遗留        |
-| `/l.php`        | phpStudy 默认探针         | phpStudy 一键环境自带 |
-| `/tz.php`       | "探针"拼音缩写            | 常见自定义命名        |
-| `/p.php`        | "PHP"缩写                 | 常见自定义命名        |
-| `/tongji.php`   | "统计"拼音                | 常见自定义命名        |
-| `/info.php`     | "信息"缩写                | 常见自定义命名        |
-| `/test.php`     | "测试"文件                | 开发者遗留            |
-| `/admin888.php` | 伪装成后台                | 恶意后门常见          |
-
-#### 1.1.1PHP探针中的敏感信息
-
-1.绝对路径（Absolute Path）
-
-查找文件根目录、DOCUMENT_ROOT或脚本物理路径。
-
-C:/phpStudy/WWW/(Windows)或/var/www/html/(Linux)
-
-2.数据库连接检测
-
-大多数 PHP 探针最下方都有一个“数据库连接检测”模块。
-
-在输入框里尝试常用的弱口令：
-
-主机：127.0.0.1或localhos
-
-用户名：root
-
-密码：root
-
-3.服务器操作系统与环境
-
-服务器操作系统、PHP版本、服务器软件。
-
-4.PHP disable_functions
-
-搜索disable_functions，根据禁用的函数决定绕过方式
-
-5.开启的扩展与组件
-
-GD库、MySQL、Socket、Zend Optimizer
-
-### 1.2robots.txt
-
-Robots是一个协议，全称为网络爬虫协议,网站通过Robots协议告诉搜索引擎哪些页面可以访问，哪些不可以访问。
-
-#### 1.2.1User-agent
-指定搜索引擎，若为“*”，则表示允许所有搜索引擎
-
-注：
-
-（1）当robots.txt不为空的时候，必须至少有一条User-agent的记录
-
-（2）相同名字，只能有一条，但是不同的搜索引擎，可以有多条记录
-
-#### 1.2.2.Disallow
-禁止访问的目录
-
-注：
-
-（1）在robots.txt中至少要有一条Disallow
-
-（2）Disallow记录为空，则表示网站所有页面都允许访问
-
-（3）使用disallow，每个页面必须单独分开声明
-
-#### 1.2.3.Allow
-允许访问的目录
-
-#### 1.2.4.Sitemap
-向搜索引擎提交网站地图，增加网站收录
-
-## 2.后台管理
-
-### 2.1phpMyAdmin
-
-/phpmyadmin/README：phpMyAdmin 的官方说明文档，直接暴露版本号，默认位置：phpMyAdmin 安装包根目录
-
-/phpmyadmin/ChangeLog
-
-## 3.配置文件
-
-### 3.1操作系统
-
-#### 3.1.1Windows
-
-C:\Windows\System32\drivers\etc\hosts
-
-显示当前操作系统网卡的IP
-
-C:\Windows\win.ini
-
-Windows系統配置文件
-
-c\ProgramFiles\mysq/\my.ini
-
-MySQL配置
-
-#### 3.1.2Linux
-
-/etc/hosts
-
-显示当前操作系统网卡的IP
-
-/etc/passwd
-
-账户信息
-
-/etc/shadow
-
-账户密码文件
-
-/proc/net/arp
-
-显示arp缓存表(寻找内网其他主机)
-
-/proc/net/fib_trie
-
-显示当前网段路由信息
-
-/proc/net/tcp
-
-记录这台机器当前正在连接的所有内网IP和端口
-
-/var/log/apache2/access.log
-
-apache日志文件
-
-/var/log/nginx/access.log
-
-nginx日志文件
-
-/var/www/html
-
-Apache或Nginx服务器的默认网页根目录
-
-### 3.2开发语言
-
-#### 3.2.1PHP
-
-php.ini
-
-常见的php.ini文件默认路径：
-
-phpinfo.php (PHP 配置信息页)
-
-DOCUMENT_ROOT/SCRIPT_FILENAME： 告诉了网站在磁盘上的绝对路径
-
-_$SERVER["REMOTE_ADDR"]与内网 IP：观察是否泄露了内网网段信息。
-
-disable_functions：看看服务器是否禁用了命令执行函数
-
-Linux：
-
-/etc/php.ini
-
-/etc/php/X/apache2/php.ini（将X替换为PHP版本）
-
-Windows：
-
-C:\php\php.ini
-
-C:\Windows\php.ini
-
-## 4.上传点
-
-## 5.安装残留
-
-
-
-
-
+    <h1 id="敏感路径和文件汇总"><a href="#敏感路径和文件汇总" class="headerlink" title="敏感路径和文件汇总"></a>敏感路径和文件汇总</h1><h2 id="1-信息泄露"><a href="#1-信息泄露" class="headerlink" title="1.信息泄露"></a>1.信息泄露</h2><h3 id="1-1PHP探针"><a href="#1-1PHP探针" class="headerlink" title="1.1PHP探针"></a>1.1PHP探针</h3><p>PHP 探针 &#x3D; 把服务器所有敏感配置（OS&#x2F;PHP&#x2F;Apache&#x2F;路径&#x2F;权限）用网页形式展示出来的脚本，属于信息泄露</p>
+<p>常见 PHP 探针文件名：</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>说明</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/phpinfo.php</code></td>
+<td>原生 <code>phpinfo()</code> 函数输出</td>
+<td>开发者调试遗留</td>
+</tr>
+<tr>
+<td><code>/l.php</code></td>
+<td>phpStudy 默认探针</td>
+<td>phpStudy 一键环境自带</td>
+</tr>
+<tr>
+<td><code>/tz.php</code></td>
+<td>“探针”拼音缩写</td>
+<td>常见自定义命名</td>
+</tr>
+<tr>
+<td><code>/p.php</code></td>
+<td>“PHP”缩写</td>
+<td>常见自定义命名</td>
+</tr>
+<tr>
+<td><code>/tongji.php</code></td>
+<td>“统计”拼音</td>
+<td>常见自定义命名</td>
+</tr>
+<tr>
+<td><code>/info.php</code></td>
+<td>“信息”缩写</td>
+<td>常见自定义命名</td>
+</tr>
+<tr>
+<td><code>/test.php</code></td>
+<td>“测试”文件</td>
+<td>开发者遗留</td>
+</tr>
+<tr>
+<td><code>/admin888.php</code></td>
+<td>伪装成后台</td>
+<td>恶意后门常见</td>
+</tr>
+</tbody></table>
+<h4 id="1-1-1PHP探针中的敏感信息"><a href="#1-1-1PHP探针中的敏感信息" class="headerlink" title="1.1.1PHP探针中的敏感信息"></a>1.1.1PHP探针中的敏感信息</h4><p>1.绝对路径（Absolute Path）</p>
+<p>查找文件根目录、DOCUMENT_ROOT或脚本物理路径。</p>
+<p>C:&#x2F;phpStudy&#x2F;WWW&#x2F;(Windows)或&#x2F;var&#x2F;www&#x2F;html&#x2F;(Linux)</p>
+<p>2.数据库连接检测</p>
+<p>大多数 PHP 探针最下方都有一个“数据库连接检测”模块。</p>
+<p>在输入框里尝试常用的弱口令：</p>
+<p>主机：127.0.0.1或localhos</p>
+<p>用户名：root</p>
+<p>密码：root</p>
+<p>3.服务器操作系统与环境</p>
+<p>服务器操作系统、PHP版本、服务器软件。</p>
+<p>4.PHP disable_functions</p>
+<p>搜索disable_functions，根据禁用的函数决定绕过方式</p>
+<p>5.开启的扩展与组件</p>
+<p>GD库、MySQL、Socket、Zend Optimizer</p>
+<h3 id="1-2robots-txt"><a href="#1-2robots-txt" class="headerlink" title="1.2robots.txt"></a>1.2robots.txt</h3><p>Robots是一个协议，全称为网络爬虫协议,网站通过Robots协议告诉搜索引擎哪些页面可以访问，哪些不可以访问。</p>
+<h4 id="1-2-1User-agent"><a href="#1-2-1User-agent" class="headerlink" title="1.2.1User-agent"></a>1.2.1User-agent</h4><p>指定搜索引擎，若为“*”，则表示允许所有搜索引擎</p>
+<p>注：</p>
+<p>（1）当robots.txt不为空的时候，必须至少有一条User-agent的记录</p>
+<p>（2）相同名字，只能有一条，但是不同的搜索引擎，可以有多条记录</p>
+<h4 id="1-2-2-Disallow"><a href="#1-2-2-Disallow" class="headerlink" title="1.2.2.Disallow"></a>1.2.2.Disallow</h4><p>禁止访问的目录</p>
+<p>注：</p>
+<p>（1）在robots.txt中至少要有一条Disallow</p>
+<p>（2）Disallow记录为空，则表示网站所有页面都允许访问</p>
+<p>（3）使用disallow，每个页面必须单独分开声明</p>
+<h4 id="1-2-3-Allow"><a href="#1-2-3-Allow" class="headerlink" title="1.2.3.Allow"></a>1.2.3.Allow</h4><p>允许访问的目录</p>
+<h4 id="1-2-4-Sitemap"><a href="#1-2-4-Sitemap" class="headerlink" title="1.2.4.Sitemap"></a>1.2.4.Sitemap</h4><p>向搜索引擎提交网站地图，增加网站收录</p>
+<h2 id="2-后台管理"><a href="#2-后台管理" class="headerlink" title="2.后台管理"></a>2.后台管理</h2><h3 id="2-1phpMyAdmin"><a href="#2-1phpMyAdmin" class="headerlink" title="2.1phpMyAdmin"></a>2.1phpMyAdmin</h3><p>&#x2F;phpmyadmin&#x2F;README：phpMyAdmin 的官方说明文档，直接暴露版本号，默认位置：phpMyAdmin 安装包根目录</p>
+<p>&#x2F;phpmyadmin&#x2F;ChangeLog</p>
+<h2 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3.配置文件"></a>3.配置文件</h2><h3 id="3-1操作系统"><a href="#3-1操作系统" class="headerlink" title="3.1操作系统"></a>3.1操作系统</h3><h4 id="3-1-1Windows"><a href="#3-1-1Windows" class="headerlink" title="3.1.1Windows"></a>3.1.1Windows</h4><p>C:\Windows\System32\drivers\etc\hosts</p>
+<p>显示当前操作系统网卡的IP</p>
+<p>C:\Windows\win.ini</p>
+<p>Windows系統配置文件</p>
+<p>c\ProgramFiles\mysq&#x2F;\my.ini</p>
+<p>MySQL配置</p>
+<h4 id="3-1-2Linux"><a href="#3-1-2Linux" class="headerlink" title="3.1.2Linux"></a>3.1.2Linux</h4><p>&#x2F;etc&#x2F;hosts</p>
+<p>显示当前操作系统网卡的IP</p>
+<p>&#x2F;etc&#x2F;passwd</p>
+<p>账户信息</p>
+<p>&#x2F;etc&#x2F;shadow</p>
+<p>账户密码文件</p>
+<p>&#x2F;proc&#x2F;net&#x2F;arp</p>
+<p>显示arp缓存表(寻找内网其他主机)</p>
+<p>&#x2F;proc&#x2F;net&#x2F;fib_trie</p>
+<p>显示当前网段路由信息</p>
+<p>&#x2F;proc&#x2F;net&#x2F;tcp</p>
+<p>记录这台机器当前正在连接的所有内网IP和端口</p>
+<p>&#x2F;var&#x2F;log&#x2F;apache2&#x2F;access.log</p>
+<p>apache日志文件</p>
+<p>&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p>nginx日志文件</p>
+<p>&#x2F;var&#x2F;www&#x2F;html</p>
+<p>Apache或Nginx服务器的默认网页根目录</p>
+<h3 id="3-2开发语言"><a href="#3-2开发语言" class="headerlink" title="3.2开发语言"></a>3.2开发语言</h3><h4 id="3-2-1PHP"><a href="#3-2-1PHP" class="headerlink" title="3.2.1PHP"></a>3.2.1PHP</h4><p>php.ini</p>
+<p>常见的php.ini文件默认路径：</p>
+<p>phpinfo.php (PHP 配置信息页)</p>
+<p>DOCUMENT_ROOT&#x2F;SCRIPT_FILENAME： 告诉了网站在磁盘上的绝对路径</p>
+<p>_$SERVER[“REMOTE_ADDR”]与内网 IP：观察是否泄露了内网网段信息。</p>
+<p>disable_functions：看看服务器是否禁用了命令执行函数</p>
+<p>Linux：</p>
+<p>&#x2F;etc&#x2F;php.ini</p>
+<p>&#x2F;etc&#x2F;php&#x2F;X&#x2F;apache2&#x2F;php.ini（将X替换为PHP版本）</p>
+<p>Windows：</p>
+<p>C:\php\php.ini</p>
+<p>C:\Windows\php.ini</p>
+<h2 id="4-上传点"><a href="#4-上传点" class="headerlink" title="4.上传点"></a>4.上传点</h2><h2 id="5-安装残留"><a href="#5-安装残留" class="headerlink" title="5.安装残留"></a>5.安装残留</h2>
   </div>
 </article>
 

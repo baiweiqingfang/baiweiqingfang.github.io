@@ -56,25 +56,11 @@
     </div>
   </header>
   <div class="article-content">
-    
-# xss之href输出
-
-1.输入<script>alert(/xss/);</script>,点击submit，没有反应
-
-2.打开F12，查看源代码，发现代码被拼接到href属性
-
-3.尝试闭合a标签，输入'><img src=xss onerror=alert('xss')>，点击submit，依然没有反应
-
-4.使用JavaScript伪协议，输入javascript:alert('xss')，点击submit，再点击新出现的链接，出现弹窗
-
-# 注：
-
-1.JavaScript伪协议（javascript:）是一种在URL中使用的特殊协议，常见于HTML中的链接或按钮的href属性中，告诉浏览器：把后面的内容当 JS 执行
-
-
-
-
-
+    <h1 id="xss之href输出"><a href="#xss之href输出" class="headerlink" title="xss之href输出"></a>xss之href输出</h1><p>1.输入<script>alert(/xss/);</script>,点击submit，没有反应</p>
+<p>2.打开F12，查看源代码，发现代码被拼接到href属性</p>
+<p>3.尝试闭合a标签，输入’&gt;&lt;img src&#x3D;xss onerror&#x3D;alert(‘xss’)&gt;，点击submit，依然没有反应</p>
+<p>4.使用JavaScript伪协议，输入javascript:alert(‘xss’)，点击submit，再点击新出现的链接，出现弹窗</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.JavaScript伪协议（javascript:）是一种在URL中使用的特殊协议，常见于HTML中的链接或按钮的href属性中，告诉浏览器：把后面的内容当 JS 执行</p>
 
   </div>
 </article>

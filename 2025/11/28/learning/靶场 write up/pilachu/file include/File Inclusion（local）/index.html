@@ -52,60 +52,32 @@
     <h1>File Inclusion（local）</h1>
     <div class="post-meta">
       <time datetime="2025-11-28T08:07:31.000Z">2025.11.28</time>
-      <span>4 分钟阅读</span>
+      <span>3 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# File Inclusion（local）
-
-1.随便提交一个球员名字，观察到URL中上传了filename=file1.php
-
-2.可能还存在file2.php ...更改参数发现可以访问
-
-3.找到本地的靶场目录，发现还有file6.php，但F12查看源代码并没有此文件
-
-![image-20251127212855061](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251127212855061.png)
-
-4.尝试访问http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=file6.php&submit=提交查询
-
-发现这是一个敏感文件
-
-![image-20251127212948277](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251127212948277.png)
-
-5.尝试访问本地敏感文件http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=C:\Windows\System32\drivers\etc\hosts&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
-
-返回警告
-
-![image-20251128150736234](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128150736234.png)
-
-.(include/C:\Windows\System32\drivers\etc\hosts)  系统在路径前加了include/前缀
-
-6.使用相对路径http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=../../../../windows/system32/drivers/etc/hosts&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
-
-![image-20251128153708433](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128153708433.png)
-
-# 注：
-
-1.源代码分析
-
+    <h1 id="File-Inclusion（local）"><a href="#File-Inclusion（local）" class="headerlink" title="File Inclusion（local）"></a>File Inclusion（local）</h1><p>1.随便提交一个球员名字，观察到URL中上传了filename&#x3D;file1.php</p>
+<p>2.可能还存在file2.php …更改参数发现可以访问</p>
+<p>3.找到本地的靶场目录，发现还有file6.php，但F12查看源代码并没有此文件</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251127212855061.png" alt="image-20251127212855061"></p>
+<p>4.尝试访问<a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=file6.php&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2">http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=file6.php&amp;submit=提交查询</a></p>
+<p>发现这是一个敏感文件</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251127212948277.png" alt="image-20251127212948277"></p>
+<p>5.尝试访问本地敏感文件<a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=C:%5CWindows%5CSystem32%5Cdrivers%5Cetc%5Chosts&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2">http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=C:\Windows\System32\drivers\etc\hosts&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</a></p>
+<p>返回警告</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128150736234.png" alt="image-20251128150736234"></p>
+<p>.(include&#x2F;C:\Windows\System32\drivers\etc\hosts)  系统在路径前加了include&#x2F;前缀</p>
+<p>6.使用相对路径<a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=../../../../windows/system32/drivers/etc/hosts&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2">http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=../../../../windows/system32/drivers/etc/hosts&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</a></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128153708433.png" alt="image-20251128153708433"></p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.源代码分析</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$html</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>]!=<span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="variable">$filename</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span> <span class="string">&quot;include/<span class="subst">$filename</span>&quot;</span>;<span class="comment">//变量传进来直接包含,没做任何的安全限制</span></span><br><span class="line"><span class="comment">//     //安全的写法,使用白名单，严格指定包含的文件名</span></span><br><span class="line"><span class="comment">//     if($filename==&#x27;file1.php&#x27; || $filename==&#x27;file2.php&#x27; || $filename==&#x27;file3.php&#x27; || $filename==&#x27;file4.php&#x27; || $filename==&#x27;file5.php&#x27;)&#123;</span></span><br><span class="line"><span class="comment">//         include &quot;include/$filename&quot;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-2.windows这个目录在 Windows 系统中是一个“根目录特殊路径：
-
-无论当前在哪个盘
-
-只要写：\windows
-
-系统会自动映射为：
-
-C:\windows
-
-这是 Windows API 的默认行为（系统目录自动定位）
-
-
-
-
+<p>2.windows这个目录在 Windows 系统中是一个“根目录特殊路径：</p>
+<p>无论当前在哪个盘</p>
+<p>只要写：\windows</p>
+<p>系统会自动映射为：</p>
+<p>C:\windows</p>
+<p>这是 Windows API 的默认行为（系统目录自动定位）</p>
 
   </div>
 </article>

@@ -56,29 +56,15 @@
     </div>
   </header>
   <div class="article-content">
-    
-# client check
-
-1.直接上传.php文件失败
-
-2.打开F12，查看源代码，定位到浏览按钮
-
-3.删除onchange事件中的checkFileExt(this.value)
-
-4.上传.php文件，得到文件保存路径uploads/yjh.php
-
-5.替换URL中最后一个路径得到.php文件上传地址
-
-6.蚁剑添加数据连接，拿到shell
-
-# 注：
-
-1.HTML中，所有以on开头的属性都是事件处理器(event handler),本质上是JavaScript代码的入口
-
-2.onchange，内容改变事件，输入框内容改变并失焦是触发
-
-3.checkFileExt(this.value)函数，用来判断文件上传类型，只允许上传"jpg","png","gif"三种类型的文件，源代码如下：
-
+    <h1 id="client-check"><a href="#client-check" class="headerlink" title="client check"></a>client check</h1><p>1.直接上传.php文件失败</p>
+<p>2.打开F12，查看源代码，定位到浏览按钮</p>
+<p>3.删除onchange事件中的checkFileExt(this.value)</p>
+<p>4.上传.php文件，得到文件保存路径uploads&#x2F;yjh.php</p>
+<p>5.替换URL中最后一个路径得到.php文件上传地址</p>
+<p>6.蚁剑添加数据连接，拿到shell</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.HTML中，所有以on开头的属性都是事件处理器(event handler),本质上是JavaScript代码的入口</p>
+<p>2.onchange，内容改变事件，输入框内容改变并失焦是触发</p>
+<p>3.checkFileExt(this.value)函数，用来判断文件上传类型，只允许上传”jpg”,”png”,”gif”三种类型的文件，源代码如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">checkFileExt</span> (<span class="params">filename</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> flag = <span class="literal">false</span>; <span class="comment">//</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="string">&quot;jpg&quot;</span>, <span class="string">&quot;png&quot;</span>, <span class="string">&quot;gif&quot;</span>];</span><br><span class="line"><span class="comment">//取出上传文件的扩展名</span></span><br><span class="line"><span class="keyword">var</span> index = filename. <span class="title function_">lastIndexOf</span>(<span class="string">&quot;.&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> ext = filename. <span class="title function_">substr</span> (index+<span class="number">1</span>);</span><br><span class="line"><span class="comment">//比较</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;arr. length;i++)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(ext == arr[i])</span><br><span class="line"></span><br><span class="line">flag=<span class="literal">true</span>;<span class="comment">//一旦找到合适的,立即退出循环</span></span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//条件判断</span></span><br><span class="line"><span class="keyword">if</span>(!flag)</span><br><span class="line"></span><br><span class="line"><span class="title function_">alert</span>(<span class="string">&quot;上传的文件不符合要求,请重新选择!”);</span></span><br><span class="line"><span class="string">location. reload (true);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 
 

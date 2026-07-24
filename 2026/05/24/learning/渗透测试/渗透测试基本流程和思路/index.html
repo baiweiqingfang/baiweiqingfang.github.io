@@ -56,95 +56,57 @@
     </div>
   </header>
   <div class="article-content">
-    
-# 渗透测试基本流程和思路
-
-## 一.确定目标
-
-## 二. 信息收集（Reconnaissance）
-### 被动收集
-利用公开信息（如 WHOIS、DNS 记录、搜索引擎、GitHub、社交媒体）获取目标资产信息。
-
-### 主动收集
-
-#### 1.主机发现  
-
-使用ping、arp-scan、nmap等探测内网或目标网段中存活主机
-
-#### 2.端口扫描  
-
-使用nmap、masscan识别开放端口及对应服务。
-
-##### 2.1基准扫描
-
-先扫描默认的1000常见端口
-
-#####2.2指定端口扫描
-
-##### 2.3服务查点
-
-#### 3.Web 目录遍历  
-
-- 使用dirsearch、gobuster、ffuf、dirb、gobuster、御剑等工具枚举敏感路径或文件
-
-PHP探针
-
-指纹识别
-
-- 识别操作系统、Web 服务器、CMS、框架版本（如 `whatweb`、`Wappalyzer`、`nmap -sV`）。
-
-功能交互
-
-- 手动或自动化测试登录、上传、搜索等交互功能，挖掘潜在攻击面。
-
----
-
-## 三. 漏洞验证和利用（Exploitation）
-基于信息收集结果，结合CVE、POC或自定义脚本猜测可能存在的漏洞。
-
-手工或使用msf验证常见漏洞类型
-
-成功利用后获取初始访问权限（如webshell、低权限用户会话）。
-
-口令爆破，当无其他漏洞时，尝试弱密码登录
-
----
-
-## 四. 后渗透（Post-Exploitation）
-> 从获得初始权限开始，所有扩大战果、深入控制的操作均属于此阶段。
-
-利用反弹 Shell，将不稳定的WebShell权限转化为持久化的系统进程连接
-
-### 1. 权限提升（Privilege Escalation）
-
-- 利用本地配置错误、SUID/能力滥用、内核漏洞或凭证复用，提权至 root/Administrator。
-
-### 2. 本机信息收集
-- 枚举用户、计划任务、网络连接、SSH 密钥、浏览器历史、配置文件等，寻找横向移动线索。
-
-### 3. 权限维持（Persistence）
-- 添加 SSH 公钥、创建计划任务、部署 Webshell 或 Meterpreter 后门，确保长期访问。
-
-### 4. 内网渗透（Internal Network Penetration）
-- **代理隧道建立**：通过 `chisel`、`frp`、`proxychains` 等工具将流量代理至内网。
-- **内网扫描**：发现其他存活主机、开放服务
-- **横向移动**：利用凭证传递（Pass-the-Hash/Ticket）、SMB 爆破、服务漏洞等跳转到其他主机。
-- **域渗透（如适用）**：枚举域结构、利用 Kerberoasting、ACL 滥用等获取域控权限。
-
-### 5. 痕迹清理
-- 清除日志、隐藏进程、绕过 EDR，降低被发现风险（通常在红队演练中更关注）。
-
----
-
-## 五. 报告输出（Reporting）
-- 整理漏洞复现步骤、影响范围、风险等级（CVSS）。
-- 提供可落地的修复建议（如补丁、配置加固、权限最小化）。
-- 输出清晰的渗透路径图，体现攻击链完整性。
-
-
-
-
-
+    <h1 id="渗透测试基本流程和思路"><a href="#渗透测试基本流程和思路" class="headerlink" title="渗透测试基本流程和思路"></a>渗透测试基本流程和思路</h1><h2 id="一-确定目标"><a href="#一-确定目标" class="headerlink" title="一.确定目标"></a>一.确定目标</h2><h2 id="二-信息收集（Reconnaissance）"><a href="#二-信息收集（Reconnaissance）" class="headerlink" title="二. 信息收集（Reconnaissance）"></a>二. 信息收集（Reconnaissance）</h2><h3 id="被动收集"><a href="#被动收集" class="headerlink" title="被动收集"></a>被动收集</h3><p>利用公开信息（如 WHOIS、DNS 记录、搜索引擎、GitHub、社交媒体）获取目标资产信息。</p>
+<h3 id="主动收集"><a href="#主动收集" class="headerlink" title="主动收集"></a>主动收集</h3><h4 id="1-主机发现"><a href="#1-主机发现" class="headerlink" title="1.主机发现"></a>1.主机发现</h4><p>使用ping、arp-scan、nmap等探测内网或目标网段中存活主机</p>
+<h4 id="2-端口扫描"><a href="#2-端口扫描" class="headerlink" title="2.端口扫描"></a>2.端口扫描</h4><p>使用nmap、masscan识别开放端口及对应服务。</p>
+<h5 id="2-1基准扫描"><a href="#2-1基准扫描" class="headerlink" title="2.1基准扫描"></a>2.1基准扫描</h5><p>先扫描默认的1000常见端口</p>
+<p>#####2.2指定端口扫描</p>
+<h5 id="2-3服务查点"><a href="#2-3服务查点" class="headerlink" title="2.3服务查点"></a>2.3服务查点</h5><h4 id="3-Web-目录遍历"><a href="#3-Web-目录遍历" class="headerlink" title="3.Web 目录遍历"></a>3.Web 目录遍历</h4><ul>
+<li>使用dirsearch、gobuster、ffuf、dirb、gobuster、御剑等工具枚举敏感路径或文件</li>
+</ul>
+<p>PHP探针</p>
+<p>指纹识别</p>
+<ul>
+<li>识别操作系统、Web 服务器、CMS、框架版本（如 <code>whatweb</code>、<code>Wappalyzer</code>、<code>nmap -sV</code>）。</li>
+</ul>
+<p>功能交互</p>
+<ul>
+<li>手动或自动化测试登录、上传、搜索等交互功能，挖掘潜在攻击面。</li>
+</ul>
+<hr>
+<h2 id="三-漏洞验证和利用（Exploitation）"><a href="#三-漏洞验证和利用（Exploitation）" class="headerlink" title="三. 漏洞验证和利用（Exploitation）"></a>三. 漏洞验证和利用（Exploitation）</h2><p>基于信息收集结果，结合CVE、POC或自定义脚本猜测可能存在的漏洞。</p>
+<p>手工或使用msf验证常见漏洞类型</p>
+<p>成功利用后获取初始访问权限（如webshell、低权限用户会话）。</p>
+<p>口令爆破，当无其他漏洞时，尝试弱密码登录</p>
+<hr>
+<h2 id="四-后渗透（Post-Exploitation）"><a href="#四-后渗透（Post-Exploitation）" class="headerlink" title="四. 后渗透（Post-Exploitation）"></a>四. 后渗透（Post-Exploitation）</h2><blockquote>
+<p>从获得初始权限开始，所有扩大战果、深入控制的操作均属于此阶段。</p>
+</blockquote>
+<p>利用反弹 Shell，将不稳定的WebShell权限转化为持久化的系统进程连接</p>
+<h3 id="1-权限提升（Privilege-Escalation）"><a href="#1-权限提升（Privilege-Escalation）" class="headerlink" title="1. 权限提升（Privilege Escalation）"></a>1. 权限提升（Privilege Escalation）</h3><ul>
+<li>利用本地配置错误、SUID&#x2F;能力滥用、内核漏洞或凭证复用，提权至 root&#x2F;Administrator。</li>
+</ul>
+<h3 id="2-本机信息收集"><a href="#2-本机信息收集" class="headerlink" title="2. 本机信息收集"></a>2. 本机信息收集</h3><ul>
+<li>枚举用户、计划任务、网络连接、SSH 密钥、浏览器历史、配置文件等，寻找横向移动线索。</li>
+</ul>
+<h3 id="3-权限维持（Persistence）"><a href="#3-权限维持（Persistence）" class="headerlink" title="3. 权限维持（Persistence）"></a>3. 权限维持（Persistence）</h3><ul>
+<li>添加 SSH 公钥、创建计划任务、部署 Webshell 或 Meterpreter 后门，确保长期访问。</li>
+</ul>
+<h3 id="4-内网渗透（Internal-Network-Penetration）"><a href="#4-内网渗透（Internal-Network-Penetration）" class="headerlink" title="4. 内网渗透（Internal Network Penetration）"></a>4. 内网渗透（Internal Network Penetration）</h3><ul>
+<li><strong>代理隧道建立</strong>：通过 <code>chisel</code>、<code>frp</code>、<code>proxychains</code> 等工具将流量代理至内网。</li>
+<li><strong>内网扫描</strong>：发现其他存活主机、开放服务</li>
+<li><strong>横向移动</strong>：利用凭证传递（Pass-the-Hash&#x2F;Ticket）、SMB 爆破、服务漏洞等跳转到其他主机。</li>
+<li><strong>域渗透（如适用）</strong>：枚举域结构、利用 Kerberoasting、ACL 滥用等获取域控权限。</li>
+</ul>
+<h3 id="5-痕迹清理"><a href="#5-痕迹清理" class="headerlink" title="5. 痕迹清理"></a>5. 痕迹清理</h3><ul>
+<li>清除日志、隐藏进程、绕过 EDR，降低被发现风险（通常在红队演练中更关注）。</li>
+</ul>
+<hr>
+<h2 id="五-报告输出（Reporting）"><a href="#五-报告输出（Reporting）" class="headerlink" title="五. 报告输出（Reporting）"></a>五. 报告输出（Reporting）</h2><ul>
+<li>整理漏洞复现步骤、影响范围、风险等级（CVSS）。</li>
+<li>提供可落地的修复建议（如补丁、配置加固、权限最小化）。</li>
+<li>输出清晰的渗透路径图，体现攻击链完整性。</li>
+</ul>
 
   </div>
 </article>

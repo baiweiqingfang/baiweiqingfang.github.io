@@ -56,41 +56,21 @@
     </div>
   </header>
   <div class="article-content">
-    
-# xss之过滤
-
-1.输入<script>alert(/xss/);</script>，点击submit，没有反应
-
-2.查看源代码：
-
-文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\xss\xss_01.php
-
+    <h1 id="xss之过滤"><a href="#xss之过滤" class="headerlink" title="xss之过滤"></a>xss之过滤</h1><p>1.输入<script>alert(/xss/);</script>，点击submit，没有反应</p>
+<p>2.查看源代码：</p>
+<p>文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\xss\xss_01.php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;message&#x27;</span>] != <span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="comment">//这里会使用正则对&lt;script进行替换为空,也就是过滤掉</span></span><br><span class="line">    <span class="variable">$message</span>=<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/&lt;(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$_GET</span>[<span class="string">&#x27;message&#x27;</span>]);</span><br><span class="line"><span class="comment">//    $message=str_ireplace(&#x27;&lt;script&gt;&#x27;,$_GET[&#x27;message&#x27;]);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$message</span> == <span class="string">&#x27;yes&#x27;</span>)&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p&gt;那就去人民广场一个人坐一会儿吧!&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p&gt;别说这些&#x27;<span class="subst">&#123;$message&#125;</span>&#x27;的话,不要怕,就是干!&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-可知输入被过滤掉了
-
-3.使用大小写饶过<sCript>alert('XSS')</ScriPt>或者构造其他payload，如<img src=# onclick=alert('xss')>
-
-# 注：
-
-1.一般绕过方法有两种：
-
-双写绕过
-
-大小写绕过
-
-2.JavaScript中正则表达式的两种写法
-
-正则字面量（Literal）  
-
-必须用 `//` 包裹，不能加引号
-
-构造器 RegExp  
-
-不用 //，\要双写，适合运行时动态生成正则
-
-
-
+<p>可知输入被过滤掉了</p>
+<p>3.使用大小写饶过<sCript>alert(&#39;XSS&#39;)</ScriPt>或者构造其他payload，如&lt;img src&#x3D;# onclick&#x3D;alert(‘xss’)&gt;</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.一般绕过方法有两种：</p>
+<p>双写绕过</p>
+<p>大小写绕过</p>
+<p>2.JavaScript中正则表达式的两种写法</p>
+<p>正则字面量（Literal）  </p>
+<p>必须用 <code>//</code> 包裹，不能加引号</p>
+<p>构造器 RegExp  </p>
+<p>不用 &#x2F;&#x2F;，\要双写，适合运行时动态生成正则</p>
 
   </div>
 </article>

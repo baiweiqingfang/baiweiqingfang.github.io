@@ -56,166 +56,100 @@
     </div>
   </header>
   <div class="article-content">
-    
-# 1.XML
-
-(eXtensible Markup Language)可扩展标记语言，用于传输和存储数据
-
-优势：
-
-(1)XML简化了数据的读取共享,XML以文本的形式进行储存,可以供不同的应用程序进行读取共享
-
-(2)XML简化了数据的数据的传输,XML以文本的形式进行储存,可供不同的应用程序之间进行传输,读取
-
-(3)XML简化平台的变更,XML数据以文本格式存储。这使得XML在不损失数据的情况下,更容易扩展或升级到新的操作系统、新的应
-用程序或新的浏览器。
-
-## 1.1XML格式
-
-![image-20260321112625156](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260321112625156.png)
-
-XML文档必须包含根元素。该元素是所有其他元素的父元素。
-
-XML文档中的元素形成了一棵文档树。这棵树从根部开始，并扩展到树的最底端。
-
-第一行是 XML 声明。它定义 XML 的版本和所使用的编码
-
-元素中如果有特殊字符，需要使用实体编码
-
-XPath：
-
-表示 XML 路径语言
-
-## 1.2XML语法
-
-XML对大小写敏感 
-
-## 1.4XML属性
-
-XML元素指的是从开始标签到结束标签的部分
-
-在XML中,属性不属于数据的一部分
-
-## xinclude
-
-xinclude可以包含一个XML文件，调用一个写好的XML文件
-
-基本语法：
-
-首先需要声明 XInclude命名空间,然后使用<xi:include>元素引用外部文件:
-
+    <h1 id="1-XML"><a href="#1-XML" class="headerlink" title="1.XML"></a>1.XML</h1><p>(eXtensible Markup Language)可扩展标记语言，用于传输和存储数据</p>
+<p>优势：</p>
+<p>(1)XML简化了数据的读取共享,XML以文本的形式进行储存,可以供不同的应用程序进行读取共享</p>
+<p>(2)XML简化了数据的数据的传输,XML以文本的形式进行储存,可供不同的应用程序之间进行传输,读取</p>
+<p>(3)XML简化平台的变更,XML数据以文本格式存储。这使得XML在不损失数据的情况下,更容易扩展或升级到新的操作系统、新的应<br>用程序或新的浏览器。</p>
+<h2 id="1-1XML格式"><a href="#1-1XML格式" class="headerlink" title="1.1XML格式"></a>1.1XML格式</h2><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260321112625156.png" alt="image-20260321112625156"></p>
+<p>XML文档必须包含根元素。该元素是所有其他元素的父元素。</p>
+<p>XML文档中的元素形成了一棵文档树。这棵树从根部开始，并扩展到树的最底端。</p>
+<p>第一行是 XML 声明。它定义 XML 的版本和所使用的编码</p>
+<p>元素中如果有特殊字符，需要使用实体编码</p>
+<p>XPath：</p>
+<p>表示 XML 路径语言</p>
+<h2 id="1-2XML语法"><a href="#1-2XML语法" class="headerlink" title="1.2XML语法"></a>1.2XML语法</h2><p>XML对大小写敏感 </p>
+<h2 id="1-4XML属性"><a href="#1-4XML属性" class="headerlink" title="1.4XML属性"></a>1.4XML属性</h2><p>XML元素指的是从开始标签到结束标签的部分</p>
+<p>在XML中,属性不属于数据的一部分</p>
+<h2 id="xinclude"><a href="#xinclude" class="headerlink" title="xinclude"></a>xinclude</h2><p>xinclude可以包含一个XML文件，调用一个写好的XML文件</p>
+<p>基本语法：</p>
+<p>首先需要声明 XInclude命名空间,然后使用<a href="xi:include">xi:include</a>元素引用外部文件:</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 声明命名空间 -- &gt;</span></span><br><span class="line"><span class="comment">&lt;root xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt; </span></span><br><span class="line"><span class="comment">&lt;!-- 包含外部 XML文件 -- &gt;</span></span><br><span class="line"><span class="comment">&lt;xi:include href=&quot;header.xml&quot;/&gt; </span></span><br><span class="line"><span class="comment">&lt;!-- 文档主体内容 -- &gt;</span></span><br><span class="line"><span class="comment">&lt;content&gt;这是主文档内容&lt;/content&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 包含另一个文件 -- &gt;</span></span><br><span class="line"><span class="comment">&lt;xi:include href=&quot;footer.xml&quot;/&gt;&lt;/root&gt;</span></span><br></pre></td></tr></table></figure>
 
-# 2.DTD
-
-文档定义类型(document type definition，DTD)可定义合法的XML文档构建模块，它使用一系列合法的元素来定义文档的结构
-
-DTD可被成行地声明于XML文档中，也可作为一个外部引用
-
+<h1 id="2-DTD"><a href="#2-DTD" class="headerlink" title="2.DTD"></a>2.DTD</h1><p>文档定义类型(document type definition，DTD)可定义合法的XML文档构建模块，它使用一系列合法的元素来定义文档的结构</p>
+<p>DTD可被成行地声明于XML文档中，也可作为一个外部引用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素[元素声明]&gt;</span><br></pre></td></tr></table></figure>
 
-## 2.1DTD构建模块
-
-所有的XML均由以下构建模块构成：
-
-元素
-
-属性
-
-实体
-
-PCDATA
-
-（parsed character data）被解析的字符数据
-
-CDATA
-
-## 2.2DTD元素
-
-元素声明使用下面的语法：
-
+<h2 id="2-1DTD构建模块"><a href="#2-1DTD构建模块" class="headerlink" title="2.1DTD构建模块"></a>2.1DTD构建模块</h2><p>所有的XML均由以下构建模块构成：</p>
+<p>元素</p>
+<p>属性</p>
+<p>实体</p>
+<p>PCDATA</p>
+<p>（parsed character data）被解析的字符数据</p>
+<p>CDATA</p>
+<h2 id="2-2DTD元素"><a href="#2-2DTD元素" class="headerlink" title="2.2DTD元素"></a>2.2DTD元素</h2><p>元素声明使用下面的语法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT element-name category&gt;</span><br><span class="line"> 或</span><br><span class="line"> &lt;!ELEMENT element-name (element-content)&gt;</span><br></pre></td></tr></table></figure>
 
-声明只出现一次的元素 
-
+<p>声明只出现一次的元素 </p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;! ELEMENT element-name (child-name)&gt;</span><br></pre></td></tr></table></figure>
 
-声明最少出现一次的元素
-
- <! ELEMENT element-name(child-name+)>
-
-声明出现零次或多次的元素
-
-<! ELEMENT element-name(child-name*)>
-
-声明出现零次或一次的元素 
-
-<! ELEMENT element-name(child-name?)>
-
-属性值是必需的
-
-<! ATTLIST element-name attribute-name attribute-type #REQUIRED>
-
-属性不是必需的
-
-<! ATTLIST element-name attribute-name attribute-type #IMPLIED>
-
-属性值是固定的
-
-<! ATTLIST element-name attribute-name attribute-type #FIXED value>
-
-## 2.5DTD实体
-
-实体是一种在XML文档中声明的命名引用，用于代替内容或标记。
-
-实体引用是对实体的引用。
-
-实体可在内部或外部进行声明。
-
-当文档被XML解释器解析式，实体就会被展开
-
-一个实体(参数实体除外)由三部分构成: 一个和号 (&), 一个实体名称, 以及一个分号 (;)
-
-### 2.5.1字符实体
-
-在XML中,一些字符拥有特殊的意义，直接写入代码会报错，因此要用实体编码
-
-XML的五种预定义实体：
-
-| 实体引用 | 字符 |
-| -------- | ---- |
-| \&lt;    | <    |
-| \&gt;    | >    |
-| \&amp;   | &    |
-| \&quot;  | "    |
-| \&apos;  | '    |
-
-### 2.5.2命名实体
-
-只能用在DTD文档内
-
-声明：
-
+<p>声明最少出现一次的元素</p>
+<p> &lt;! ELEMENT element-name(child-name+)&gt;</p>
+<p>声明出现零次或多次的元素</p>
+<p>&lt;! ELEMENT element-name(child-name*)&gt;</p>
+<p>声明出现零次或一次的元素 </p>
+<p>&lt;! ELEMENT element-name(child-name?)&gt;</p>
+<p>属性值是必需的</p>
+<p>&lt;! ATTLIST element-name attribute-name attribute-type #REQUIRED&gt;</p>
+<p>属性不是必需的</p>
+<p>&lt;! ATTLIST element-name attribute-name attribute-type #IMPLIED&gt;</p>
+<p>属性值是固定的</p>
+<p>&lt;! ATTLIST element-name attribute-name attribute-type #FIXED value&gt;</p>
+<h2 id="2-5DTD实体"><a href="#2-5DTD实体" class="headerlink" title="2.5DTD实体"></a>2.5DTD实体</h2><p>实体是一种在XML文档中声明的命名引用，用于代替内容或标记。</p>
+<p>实体引用是对实体的引用。</p>
+<p>实体可在内部或外部进行声明。</p>
+<p>当文档被XML解释器解析式，实体就会被展开</p>
+<p>一个实体(参数实体除外)由三部分构成: 一个和号 (&amp;), 一个实体名称, 以及一个分号 (;)</p>
+<h3 id="2-5-1字符实体"><a href="#2-5-1字符实体" class="headerlink" title="2.5.1字符实体"></a>2.5.1字符实体</h3><p>在XML中,一些字符拥有特殊的意义，直接写入代码会报错，因此要用实体编码</p>
+<p>XML的五种预定义实体：</p>
+<table>
+<thead>
+<tr>
+<th>实体引用</th>
+<th>字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;lt;</td>
+<td>&lt;</td>
+</tr>
+<tr>
+<td>&amp;gt;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>&amp;amp;</td>
+<td>&amp;</td>
+</tr>
+<tr>
+<td>&amp;quot;</td>
+<td>“</td>
+</tr>
+<tr>
+<td>&amp;apos;</td>
+<td>‘</td>
+</tr>
+</tbody></table>
+<h3 id="2-5-2命名实体"><a href="#2-5-2命名实体" class="headerlink" title="2.5.2命名实体"></a>2.5.2命名实体</h3><p>只能用在DTD文档内</p>
+<p>声明：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY entity-name &quot;entity-value&quot;&gt; </span><br></pre></td></tr></table></figure>
 
-### 2.5.3外部实体
-
-声明：
-
+<h3 id="2-5-3外部实体"><a href="#2-5-3外部实体" class="headerlink" title="2.5.3外部实体"></a>2.5.3外部实体</h3><p>声明：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY entity-name SYSTEM &quot;URI/URL&quot;&gt; </span><br></pre></td></tr></table></figure>
 
-### 2.5.4参数实体
-
-实体名
-
-注：内部DTD禁止参数实体内再次调用参数实体
-
-# 3.SVG
-
-SVG（可缩放矢量图形，Scalable Vector Graphics）是一种用于描述二维图形的XML标记语言。
-
-
-
+<h3 id="2-5-4参数实体"><a href="#2-5-4参数实体" class="headerlink" title="2.5.4参数实体"></a>2.5.4参数实体</h3><p>实体名</p>
+<p>注：内部DTD禁止参数实体内再次调用参数实体</p>
+<h1 id="3-SVG"><a href="#3-SVG" class="headerlink" title="3.SVG"></a>3.SVG</h1><p>SVG（可缩放矢量图形，Scalable Vector Graphics）是一种用于描述二维图形的XML标记语言。</p>
 
   </div>
 </article>

@@ -52,1171 +52,833 @@
     <h1>PHP</h1>
     <div class="post-meta">
       <time datetime="2026-06-04T07:05:01.000Z">2026.06.04</time>
-      <span>42 分钟阅读</span>
+      <span>33 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# PHP手册  
-
-PHP（Hypertext Preprocessor）即“超文本预处理器”,是一种通用开源脚本语言，在服务器端执行，用于创建动态交互性站点
-
-## 1.功能
-
-生成动态页面内容
-
-创建，打开，读取，写入，关闭服务器上的文件
-
-收集表单数据
-
-添加，删除，修改数据库中的数据
-
-限制用户访问网站上的一些页面
-
-加密数据
-
-## 2.语言参考
-
-### 基本语法
-
-#### PHP标签
-
-当 PHP 处理文件时，通过识别起始和结束标签 `<?php` 和 `?>` 来定义PHP 代码执行的边界。PHP 解析器会忽略这些标签之外的内容，从而使 PHP 能够无缝嵌入到各种文档类型中。   
-
-### 类型
-
-#### NULL
-
-NULL表示变量没有值
-
-#### Boolean 布尔类型
-
-布尔型可以是TRUE或FALSE
-
-#### integer 整型
-
-以三种格式来指定：十进制，十六进制（以0x为前缀）或八进制（前缀为0）
-
-#### Float 浮点型
-
-浮点数时带小数部分的数字,或是指数形式
-
-#### String 字符串
-
-#### 数字字符串
-
-#### Array 数组
-
-array()函数用于创建数组
-
-#### 数组类型
-
-数值数组:带有数字ID键地数组
-
-
-关联数组:带有指定地键地数组,每个键关联一个值
-
-
-多维数组:包含一个或多个数组地数组
-
-#### Object对象
-
-对象数据类型也可以用于储存数据。
-
-首先,使用class关键字声明类对象。
-
-然后在类中定义数据类型,然后再实例化的类中使用数据类型
-
+    <h1 id="PHP手册"><a href="#PHP手册" class="headerlink" title="PHP手册"></a>PHP手册</h1><p>PHP（Hypertext Preprocessor）即“超文本预处理器”,是一种通用开源脚本语言，在服务器端执行，用于创建动态交互性站点</p>
+<h2 id="1-功能"><a href="#1-功能" class="headerlink" title="1.功能"></a>1.功能</h2><p>生成动态页面内容</p>
+<p>创建，打开，读取，写入，关闭服务器上的文件</p>
+<p>收集表单数据</p>
+<p>添加，删除，修改数据库中的数据</p>
+<p>限制用户访问网站上的一些页面</p>
+<p>加密数据</p>
+<h2 id="2-语言参考"><a href="#2-语言参考" class="headerlink" title="2.语言参考"></a>2.语言参考</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><h4 id="PHP标签"><a href="#PHP标签" class="headerlink" title="PHP标签"></a>PHP标签</h4><p>当 PHP 处理文件时，通过识别起始和结束标签 <code>&lt;?php</code> 和 <code>?&gt;</code> 来定义PHP 代码执行的边界。PHP 解析器会忽略这些标签之外的内容，从而使 PHP 能够无缝嵌入到各种文档类型中。   </p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><h4 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h4><p>NULL表示变量没有值</p>
+<h4 id="Boolean-布尔类型"><a href="#Boolean-布尔类型" class="headerlink" title="Boolean 布尔类型"></a>Boolean 布尔类型</h4><p>布尔型可以是TRUE或FALSE</p>
+<h4 id="integer-整型"><a href="#integer-整型" class="headerlink" title="integer 整型"></a>integer 整型</h4><p>以三种格式来指定：十进制，十六进制（以0x为前缀）或八进制（前缀为0）</p>
+<h4 id="Float-浮点型"><a href="#Float-浮点型" class="headerlink" title="Float 浮点型"></a>Float 浮点型</h4><p>浮点数时带小数部分的数字,或是指数形式</p>
+<h4 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String 字符串"></a>String 字符串</h4><h4 id="数字字符串"><a href="#数字字符串" class="headerlink" title="数字字符串"></a>数字字符串</h4><h4 id="Array-数组"><a href="#Array-数组" class="headerlink" title="Array 数组"></a>Array 数组</h4><p>array()函数用于创建数组</p>
+<h4 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h4><p>数值数组:带有数字ID键地数组</p>
+<p>关联数组:带有指定地键地数组,每个键关联一个值</p>
+<p>多维数组:包含一个或多个数组地数组</p>
+<h4 id="Object对象"><a href="#Object对象" class="headerlink" title="Object对象"></a>Object对象</h4><p>对象数据类型也可以用于储存数据。</p>
+<p>首先,使用class关键字声明类对象。</p>
+<p>然后在类中定义数据类型,然后再实例化的类中使用数据类型</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="variable">$color</span></span><br><span class="line">	<span class="title function_ invoke__">function_construct</span>(<span class="variable">$color</span> = <span class="string">&quot;green&quot;</span>)&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;color = <span class="variable">$color</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">what_color</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;color;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-### 变量
-
-#### 命名规则
-
-变量以$符号开始，后跟变量名
-
-变量名必须以字母或者下划线字符开始
-
-变量名只能包含字母数字字符以及下划线（A-z，0-9和_）
-
-变量名不能包含空格
-
-变量名区分大小写
-
-#### 变量作用域
-
-局部作用域和全局作用域
-
-global关键字：用于函数内访问全局变量，在函数内调用函数外定义的全局变量，要在变量前上global关键字
-
-static作用域：当一个函数完成时，它的所有变量都会被删除，在第一次声明变量时使用static关键字可以防止此操作
-
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><h4 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h4><p>变量以$符号开始，后跟变量名</p>
+<p>变量名必须以字母或者下划线字符开始</p>
+<p>变量名只能包含字母数字字符以及下划线（A-z，0-9和_）</p>
+<p>变量名不能包含空格</p>
+<p>变量名区分大小写</p>
+<h4 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h4><p>局部作用域和全局作用域</p>
+<p>global关键字：用于函数内访问全局变量，在函数内调用函数外定义的全局变量，要在变量前上global关键字</p>
+<p>static作用域：当一个函数完成时，它的所有变量都会被删除，在第一次声明变量时使用static关键字可以防止此操作</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">static</span> <span class="variable">$x</span> = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$x</span>;</span><br><span class="line">	<span class="variable">$x</span>++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-参数作用域：参数是通过调用代码将值传递给函数的局部变量，
-参数是在参数列表中声明的,作为函数声明的一部分。
-
-#### 可变变量
-
-可变变量（Variable Variables）是一种动态变量命名机制。将一个变量的值作为另一个变量的名称，从而在运行时动态创建或访问变量。
-
-使用双美元符号$$或${}结构：
-
+<p>参数作用域：参数是通过调用代码将值传递给函数的局部变量，<br>参数是在参数列表中声明的,作为函数声明的一部分。</p>
+<h4 id="可变变量"><a href="#可变变量" class="headerlink" title="可变变量"></a>可变变量</h4><p>可变变量（Variable Variables）是一种动态变量命名机制。将一个变量的值作为另一个变量的名称，从而在运行时动态创建或访问变量。</p>
+<p>使用双美元符号$$或${}结构：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$varName</span> = <span class="string">&quot;foo&quot;</span>;</span><br><span class="line"><span class="variable">$$varName</span> = <span class="string">&quot;bar&quot;</span>;  <span class="comment">// 等价于 $foo = &quot;bar&quot;;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$foo</span>;      <span class="comment">// 输出: bar</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$$varName</span>; <span class="comment">// 输出: bar</span></span><br></pre></td></tr></table></figure>
 
 
 
-### 常量
-
-#### 魔术常量
-
-一组特殊的预定义常量，其值根据使用上下文动态变化
-
-| 名字            | 说明                                                         |
-| --------------- | ------------------------------------------------------------ |
-| `__LINE__`      | 文件中的当前行号。                                           |
-| `__FILE__`      | 当前文件的完整路径和文件名。如果用在被包含文件中，则返回被包含的文件名。 |
-| `__DIR__`       | 文件所在的目录。如果用在被包括文件中，则返回被包括的文件所在的目录。 |
-| `__FUNCTION__`  | 当前函数的名称。                                             |
-| `__CLASS__`     | 当前类的名称。                                               |
-| `__TRAIT__`     | Trait 的名字。                                               |
-| `__METHOD__`    | 类的方法名。                                                 |
-| `__NAMESPACE__` | 当前命名空间的名称。                                         |
-
-### 运算符
-
-#### 算术运算符
-
-| 例子     | 名称 | 结果                             |
-| -------- | ---- | -------------------------------- |
-| +$a      | 标识 | 根据情况将 $a 转化为int或float。 |
-| -$a      | 取反 | $a的负值                         |
-| $a + $b  | 加法 | $a 和 $b 的和                    |
-| $a - $b  | 减法 | $a 和 $b 的差。                  |
-| $a * $b  | 乘法 | $a 和 $b 的积。                  |
-| $a / $b  | 除法 | $a 除以 $b 的商。                |
-| $a % $b  | 取模 | $a 除以 $b 的余数。              |
-| $a ** $b | 求幂 | $a 的 $b次方的值。               |
-
-#### 递增/递减
-
-| 示例 | 名称 | 效果                          |
-| ---- | ---- | ----------------------------- |
-| ++$a | 前加 | $a 的值加一，然后返回 $a。    |
-| $a++ | 后加 | 返回 $a，然后将 $a 的值加一。 |
-| --$a | 前减 | $a 的值减一， 然后返回 $a。   |
-| $a-- | 后减 | 返回 $a，然后将 $a 的值减一。 |
-
-#### 赋值运算符
-
-##### 算术赋值运算符
-
-| 示例      | 等同于        | 操作 |
-| --------- | ------------- | ---- |
-| $a += $b  | $a = $a + $b  | 加法 |
-| $a -= $b  | $a = $a - $b  | 减法 |
-| $a *= $b  | $a = $a * $b  | 乘法 |
-| $a /= $b  | $a = $a / $b  | 除法 |
-| $a %= $b  | $a = $a % $b  | 取模 |
-| $a **= $b | $a = $a ** $b | 指数 |
-
-#### 比较运算符
-
-| 例子      | 名称                       | 结果                                                         |
-| --------- | -------------------------- | ------------------------------------------------------------ |
-| $a == $b  | 等于                       | **`true`**，如果类型转换后 $a 等于 $b。                      |
-| $a === $b | 全等                       | **`true`**，如果 $a 等于 $b，并且它们的类型也相同。          |
-| $a != $b  | 不等                       | **`true`**，如果类型转换后 $a 不等于 $b。                    |
-| $a <> $b  | 不等                       | **`true`**，如果类型转换后 $a 不等于 $b。                    |
-| $a !== $b | 不全等                     | **`true`**，如果 $a 不等于 $b，或者它们的类型不同。          |
-| $a < $b   | 小于                       | **`true`**，如果 $a 严格小于 $b。                            |
-| $a > $b   | 大于                       | **`true`**，如果 $a 严格大于 $b。                            |
-| $a <= $b  | 小于等于                   | **`true`**，如果 $a 小于或者等于 $b。                        |
-| $a >= $b  | 大于等于                   | **`true`**，如果 $a 大于或者等于 $b。                        |
-| $a <=> $b | 太空船运算符（组合比较符） | 当$a小于、等于、大于 $b时      分别返回一个小于、等于、大于0的int值。 |
-
-#### 逻辑运算符
-
-| 例子       | 名称            | 结果                                                      |
-| ---------- | --------------- | --------------------------------------------------------- |
-| $a and $b  | And（逻辑与）   | **`true`**，如果 $a 和 $b 都为 **`true`**。               |
-| $a or $b   | Or（逻辑或）    | **`true`**，如果 $a 或 $b 任一为 **`true`**。             |
-| $a xor $b  | Xor（逻辑异或） | **`true`**，如果 $a 或 $b 任一为 **`true`**，但不同时是。 |
-| ! $a       | Not（逻辑非）   | **`true`**，如果 $a 不为 **`true`**。                     |
-| $a && $b   | And（逻辑与）   | **`true`**，如果 $a 和 $b 都为 **`true`**。               |
-| $a \|\| $b | Or（逻辑或）    | **`true`**，如果 $a 或 $b 任一为 **`true`**。             |
-
-php在进行异或运算的时候,可以理解为会对字符的二进制码(或者ASCII码)异或,然后再转化成为字符。
-
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><h4 id="魔术常量"><a href="#魔术常量" class="headerlink" title="魔术常量"></a>魔术常量</h4><p>一组特殊的预定义常量，其值根据使用上下文动态变化</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>__LINE__</code></td>
+<td>文件中的当前行号。</td>
+</tr>
+<tr>
+<td><code>__FILE__</code></td>
+<td>当前文件的完整路径和文件名。如果用在被包含文件中，则返回被包含的文件名。</td>
+</tr>
+<tr>
+<td><code>__DIR__</code></td>
+<td>文件所在的目录。如果用在被包括文件中，则返回被包括的文件所在的目录。</td>
+</tr>
+<tr>
+<td><code>__FUNCTION__</code></td>
+<td>当前函数的名称。</td>
+</tr>
+<tr>
+<td><code>__CLASS__</code></td>
+<td>当前类的名称。</td>
+</tr>
+<tr>
+<td><code>__TRAIT__</code></td>
+<td>Trait 的名字。</td>
+</tr>
+<tr>
+<td><code>__METHOD__</code></td>
+<td>类的方法名。</td>
+</tr>
+<tr>
+<td><code>__NAMESPACE__</code></td>
+<td>当前命名空间的名称。</td>
+</tr>
+</tbody></table>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h4><table>
+<thead>
+<tr>
+<th>例子</th>
+<th>名称</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+$a</td>
+<td>标识</td>
+<td>根据情况将 $a 转化为int或float。</td>
+</tr>
+<tr>
+<td>-$a</td>
+<td>取反</td>
+<td>$a的负值</td>
+</tr>
+<tr>
+<td>$a + $b</td>
+<td>加法</td>
+<td>$a 和 $b 的和</td>
+</tr>
+<tr>
+<td>$a - $b</td>
+<td>减法</td>
+<td>$a 和 $b 的差。</td>
+</tr>
+<tr>
+<td>$a * $b</td>
+<td>乘法</td>
+<td>$a 和 $b 的积。</td>
+</tr>
+<tr>
+<td>$a &#x2F; $b</td>
+<td>除法</td>
+<td>$a 除以 $b 的商。</td>
+</tr>
+<tr>
+<td>$a % $b</td>
+<td>取模</td>
+<td>$a 除以 $b 的余数。</td>
+</tr>
+<tr>
+<td>$a ** $b</td>
+<td>求幂</td>
+<td>$a 的 $b次方的值。</td>
+</tr>
+</tbody></table>
+<h4 id="递增-递减"><a href="#递增-递减" class="headerlink" title="递增&#x2F;递减"></a>递增&#x2F;递减</h4><table>
+<thead>
+<tr>
+<th>示例</th>
+<th>名称</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>++$a</td>
+<td>前加</td>
+<td>$a 的值加一，然后返回 $a。</td>
+</tr>
+<tr>
+<td>$a++</td>
+<td>后加</td>
+<td>返回 $a，然后将 $a 的值加一。</td>
+</tr>
+<tr>
+<td>–$a</td>
+<td>前减</td>
+<td>$a 的值减一， 然后返回 $a。</td>
+</tr>
+<tr>
+<td>$a–</td>
+<td>后减</td>
+<td>返回 $a，然后将 $a 的值减一。</td>
+</tr>
+</tbody></table>
+<h4 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h4><h5 id="算术赋值运算符"><a href="#算术赋值运算符" class="headerlink" title="算术赋值运算符"></a>算术赋值运算符</h5><table>
+<thead>
+<tr>
+<th>示例</th>
+<th>等同于</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$a +&#x3D; $b</td>
+<td>$a &#x3D; $a + $b</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>$a -&#x3D; $b</td>
+<td>$a &#x3D; $a - $b</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>$a *&#x3D; $b</td>
+<td>$a &#x3D; $a * $b</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>$a &#x2F;&#x3D; $b</td>
+<td>$a &#x3D; $a &#x2F; $b</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>$a %&#x3D; $b</td>
+<td>$a &#x3D; $a % $b</td>
+<td>取模</td>
+</tr>
+<tr>
+<td>$a **&#x3D; $b</td>
+<td>$a &#x3D; $a ** $b</td>
+<td>指数</td>
+</tr>
+</tbody></table>
+<h4 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h4><table>
+<thead>
+<tr>
+<th>例子</th>
+<th>名称</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$a &#x3D;&#x3D; $b</td>
+<td>等于</td>
+<td><strong><code>true</code></strong>，如果类型转换后 $a 等于 $b。</td>
+</tr>
+<tr>
+<td>$a &#x3D;&#x3D;&#x3D; $b</td>
+<td>全等</td>
+<td><strong><code>true</code></strong>，如果 $a 等于 $b，并且它们的类型也相同。</td>
+</tr>
+<tr>
+<td>$a !&#x3D; $b</td>
+<td>不等</td>
+<td><strong><code>true</code></strong>，如果类型转换后 $a 不等于 $b。</td>
+</tr>
+<tr>
+<td>$a &lt;&gt; $b</td>
+<td>不等</td>
+<td><strong><code>true</code></strong>，如果类型转换后 $a 不等于 $b。</td>
+</tr>
+<tr>
+<td>$a !&#x3D;&#x3D; $b</td>
+<td>不全等</td>
+<td><strong><code>true</code></strong>，如果 $a 不等于 $b，或者它们的类型不同。</td>
+</tr>
+<tr>
+<td>$a &lt; $b</td>
+<td>小于</td>
+<td><strong><code>true</code></strong>，如果 $a 严格小于 $b。</td>
+</tr>
+<tr>
+<td>$a &gt; $b</td>
+<td>大于</td>
+<td><strong><code>true</code></strong>，如果 $a 严格大于 $b。</td>
+</tr>
+<tr>
+<td>$a &lt;&#x3D; $b</td>
+<td>小于等于</td>
+<td><strong><code>true</code></strong>，如果 $a 小于或者等于 $b。</td>
+</tr>
+<tr>
+<td>$a &gt;&#x3D; $b</td>
+<td>大于等于</td>
+<td><strong><code>true</code></strong>，如果 $a 大于或者等于 $b。</td>
+</tr>
+<tr>
+<td>$a &lt;&#x3D;&gt; $b</td>
+<td>太空船运算符（组合比较符）</td>
+<td>当$a小于、等于、大于 $b时      分别返回一个小于、等于、大于0的int值。</td>
+</tr>
+</tbody></table>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><table>
+<thead>
+<tr>
+<th>例子</th>
+<th>名称</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$a and $b</td>
+<td>And（逻辑与）</td>
+<td><strong><code>true</code></strong>，如果 $a 和 $b 都为 <strong><code>true</code></strong>。</td>
+</tr>
+<tr>
+<td>$a or $b</td>
+<td>Or（逻辑或）</td>
+<td><strong><code>true</code></strong>，如果 $a 或 $b 任一为 <strong><code>true</code></strong>。</td>
+</tr>
+<tr>
+<td>$a xor $b</td>
+<td>Xor（逻辑异或）</td>
+<td><strong><code>true</code></strong>，如果 $a 或 $b 任一为 <strong><code>true</code></strong>，但不同时是。</td>
+</tr>
+<tr>
+<td>! $a</td>
+<td>Not（逻辑非）</td>
+<td><strong><code>true</code></strong>，如果 $a 不为 <strong><code>true</code></strong>。</td>
+</tr>
+<tr>
+<td>$a &amp;&amp; $b</td>
+<td>And（逻辑与）</td>
+<td><strong><code>true</code></strong>，如果 $a 和 $b 都为 <strong><code>true</code></strong>。</td>
+</tr>
+<tr>
+<td>$a || $b</td>
+<td>Or（逻辑或）</td>
+<td><strong><code>true</code></strong>，如果 $a 或 $b 任一为 <strong><code>true</code></strong>。</td>
+</tr>
+</tbody></table>
+<p>php在进行异或运算的时候,可以理解为会对字符的二进制码(或者ASCII码)异或,然后再转化成为字符。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="string">&#x27;A&#x27;</span>^<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">ord</span>(<span class="string">&#x27;A&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">ord</span>(<span class="string">&#x27;b&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">chr</span>(<span class="number">65</span>^<span class="number">98</span>));</span><br></pre></td></tr></table></figure>
 
-php在进行取反运算的时候,可以理解为会对字符的二进制码取反,然后再转化成为字符。
-
-可显字符范围是0×20-0x7E(32-126)
-
+<p>php在进行取反运算的时候,可以理解为会对字符的二进制码取反,然后再转化成为字符。</p>
+<p>可显字符范围是0×20-0x7E(32-126)</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">ord</span>(~<span class="string">&#x27;a&#x27;</span>));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&lt;/br&gt;&quot;</span>;</span><br><span class="line">输出<span class="number">158</span></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">chr</span>(~<span class="number">158</span>);</span><br><span class="line">输出a</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-#### 字符串运算符
+<h4 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h4><p>连接运算符”.”返回左右两边参数拼接后的字符串</p>
+<p>赋值运算符”.&#x3D;”将右边参数附加到左边参数之后</p>
+<h4 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(exp1) ? (exp2) : (exp3)</span><br></pre></td></tr></table></figure>
 
-连接运算符"."返回左右两边参数拼接后的字符串
-
-赋值运算符".="将右边参数附加到左边参数之后
-
-#### 三元运算符
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(exp1) ? (exp2) : (exp3)</span><br></pre></td></tr></table></figure>
-
-当exp1求值为TRUE时的值为exp2,为FALSE时的值为exp3
-
-### 流程控制
-
-#### 条件语句
-
-if 语句-在条件成立时执行代码
-
-if ... else 语句-在条件成立时执行一块代码,条件不成立时执行另一块代码
-
-if ... elseif .... else 语句-在若干条件之一成立时执行一个代码块
-
-switch 语句-在若干条件之一成立时执行I一个代码块
-
-#### 循环语句
-
-while-只要指定的条件成立,则循环执行代码块
-
-do ... while-首先执行一次代码块,然后在指定的条件成立时重复这个循环
-
-for-循环执行代码块指定的次数
-
-foreach-根据数组中每个元素来循环代码块
-
+<p>当exp1求值为TRUE时的值为exp2,为FALSE时的值为exp3</p>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h4><p>if 语句-在条件成立时执行代码</p>
+<p>if … else 语句-在条件成立时执行一块代码,条件不成立时执行另一块代码</p>
+<p>if … elseif …. else 语句-在若干条件之一成立时执行一个代码块</p>
+<p>switch 语句-在若干条件之一成立时执行I一个代码块</p>
+<h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><p>while-只要指定的条件成立,则循环执行代码块</p>
+<p>do … while-首先执行一次代码块,然后在指定的条件成立时重复这个循环</p>
+<p>for-循环执行代码块指定的次数</p>
+<p>foreach-根据数组中每个元素来循环代码块</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="variable">$array</span> <span class="keyword">as</span> <span class="variable">$value</span>)</span><br><span class="line">&#123;</span><br><span class="line">	要执行代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-每进行一次循环,当前数组元素的值就会被赋值给$value变量(数组指针会逐一地移动),在进行下一次循环时,将看到数组中的下一个值
-
-#### include()
-
-多次包含，多次执行；如果包含失败，脚本产生警告，继续运行。
-
-#### include_once()
-
-只包含一次，如果包含失败，脚本产生警告，继续运行。
-
-#### require() 
-
-多次包含，多次执行，如果包含失败，脚本产生错误，结束执行。
-
-#### require_once()
-
-只包含一次，如果包含失败，脚本产生错误，结束执行。
-
-### 函数
-
-#### 可变函数
-
-PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。   
-
-可变函数不能用于例如echo，print，unset()，isset()，empty()，include，[require以及类似的语言结构。需要使用自己的包装函数来将这些结构用作可变函数。   
-
+<p>每进行一次循环,当前数组元素的值就会被赋值给$value变量(数组指针会逐一地移动),在进行下一次循环时,将看到数组中的下一个值</p>
+<h4 id="include"><a href="#include" class="headerlink" title="include()"></a>include()</h4><p>多次包含，多次执行；如果包含失败，脚本产生警告，继续运行。</p>
+<h4 id="include-once"><a href="#include-once" class="headerlink" title="include_once()"></a>include_once()</h4><p>只包含一次，如果包含失败，脚本产生警告，继续运行。</p>
+<h4 id="require"><a href="#require" class="headerlink" title="require()"></a>require()</h4><p>多次包含，多次执行，如果包含失败，脚本产生错误，结束执行。</p>
+<h4 id="require-once"><a href="#require-once" class="headerlink" title="require_once()"></a>require_once()</h4><p>只包含一次，如果包含失败，脚本产生错误，结束执行。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="可变函数"><a href="#可变函数" class="headerlink" title="可变函数"></a>可变函数</h4><p>PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP将寻找与变量的值同名的函数，并且尝试执行它。可变函数可以用来实现包括回调函数，函数表在内的一些用途。   </p>
+<p>可变函数不能用于例如echo，print，unset()，isset()，empty()，include，[require以及类似的语言结构。需要使用自己的包装函数来将这些结构用作可变函数。   </p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$fun</span> = <span class="string">&#x27;phpinfo&#x27;</span>;</span><br><span class="line"><span class="variable">$fun</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echostr</span>(<span class="params"><span class="variable">$data</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$fun</span> = <span class="string">&quot;echostr&quot;</span></span><br><span class="line"><span class="variable">$fun</span>(<span class="string">&quot;string3&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-### 1.9类与对象
-
-#### 1.9.2基本概念
-
-类定义了一件事物的抽象特点，将数据的形式以及数据的操作封装在一起
-
-类的定义以关键字 class开头，后面跟着类名，后面跟着一对花括号，由成员变量(属性)+成员函数(方法)构成,对象是具有类类型的变量,是对类的实例。
-
+<h3 id="1-9类与对象"><a href="#1-9类与对象" class="headerlink" title="1.9类与对象"></a>1.9类与对象</h3><h4 id="1-9-2基本概念"><a href="#1-9-2基本概念" class="headerlink" title="1.9.2基本概念"></a>1.9.2基本概念</h4><p>类定义了一件事物的抽象特点，将数据的形式以及数据的操作封装在一起</p>
+<p>类的定义以关键字 class开头，后面跟着类名，后面跟着一对花括号，由成员变量(属性)+成员函数(方法)构成,对象是具有类类型的变量,是对类的实例。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span>&#123;</span><br><span class="line">    <span class="comment">//成员变量声明</span></span><br><span class="line">    <span class="comment">//成员函数声明</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-属性：定义在类内部的变量，该变量的值对外是不可见的,
-但是可以通过成员函数访问,
-在类被实例化为对象后,
-该变量即可成为对象的属性。
-
-方法：定义在类的内部,
-可用于访问对象的数据。
-
-访问权限修饰符:
-
-public/var:公共的,在类的内部，子类中或者类的外部都可以使用,不受限制
-
-protected:受保护的,在类的内部，子类中可以使用,但不能在类的外部使用
-
-private:私有的,只能在类的内部使用,在类的外部或者子类中都无法使用
-
-类名可以是任何不是PHP保留字的有效标签。
-
-有效类名以字母或下划线开头，后面跟着若干字母、数字或下划线。    
-
-当一个方法  在类定义内部被调用时，有一个可用的伪变量$this。$this是一个到当前对象的引用。
-
-要创建一个类的实例，必须使用new关键字
-
-#### 1.9.7构造函数和析构函数
-
-构造函数：在一个类中定义一个方法作为构造函数，具有构造函数的类会在每次创建新对象时先调用此方法,构造函数必须有两个下划线
-
+<p>属性：定义在类内部的变量，该变量的值对外是不可见的,<br>但是可以通过成员函数访问,<br>在类被实例化为对象后,<br>该变量即可成为对象的属性。</p>
+<p>方法：定义在类的内部,<br>可用于访问对象的数据。</p>
+<p>访问权限修饰符:</p>
+<p>public&#x2F;var:公共的,在类的内部，子类中或者类的外部都可以使用,不受限制</p>
+<p>protected:受保护的,在类的内部，子类中可以使用,但不能在类的外部使用</p>
+<p>private:私有的,只能在类的内部使用,在类的外部或者子类中都无法使用</p>
+<p>类名可以是任何不是PHP保留字的有效标签。</p>
+<p>有效类名以字母或下划线开头，后面跟着若干字母、数字或下划线。    </p>
+<p>当一个方法  在类定义内部被调用时，有一个可用的伪变量$this。$this是一个到当前对象的引用。</p>
+<p>要创建一个类的实例，必须使用new关键字</p>
+<h4 id="1-9-7构造函数和析构函数"><a href="#1-9-7构造函数和析构函数" class="headerlink" title="1.9.7构造函数和析构函数"></a>1.9.7构造函数和析构函数</h4><p>构造函数：在一个类中定义一个方法作为构造函数，具有构造函数的类会在每次创建新对象时先调用此方法,构造函数必须有两个下划线</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">__construct</span>(<span class="keyword">mixed</span> ...<span class="variable">$values</span>): <span class="keyword">void</span></span><br></pre></td></tr></table></figure>
 
-#### 1.9.9对象继承
-
-继承性是子类自动共享父类数据结构和方法的机制,是类之间
-的一种关系。
-
-在定义和实现一个类的时候,可以在一个已经存在的类的基础之上来进行,把一个已经存在的类所定义的内容作为自己的内容,并加入若干新的内容。
-
-父类:一个类被其它类继承,可将该类成为父类,或基类,超类。
-
-子类:一个类继承其他类称为子类,也可称为派生类。
-
+<h4 id="1-9-9对象继承"><a href="#1-9-9对象继承" class="headerlink" title="1.9.9对象继承"></a>1.9.9对象继承</h4><p>继承性是子类自动共享父类数据结构和方法的机制,是类之间<br>的一种关系。</p>
+<p>在定义和实现一个类的时候,可以在一个已经存在的类的基础之上来进行,把一个已经存在的类所定义的内容作为自己的内容,并加入若干新的内容。</p>
+<p>父类:一个类被其它类继承,可将该类成为父类,或基类,超类。</p>
+<p>子类:一个类继承其他类称为子类,也可称为派生类。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 子类名 <span class="keyword">extends</span> 父类名</span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-#### 1.9.18魔术方法
-
-预定义好的，在特定情况下自动触发的行为方法，触发前提：魔术方法所在的类（或对象）被调用
-
-\__call()
-
-触发时机:调用一个不存在的方法
-
-参数:
-
-$arg1:调用不存在的方法的名称
-
-$arg2:调用不存在的方法的参数
-
-返回值:调用不存在的方法的名称和参数
-
-\__callStatic()
-
-触发时机:静态调用或调用成员常量是使用的方法不存在
-
-参数:
-
-$arg1:调用不存在的方法的名称
-
-$arg2:调用不存在的方法的参数
-
-返回值:调用的不存在的方法的名称和参数
-
-\__clone()
-
-触发时机:当使用clone关键字拷贝完成一个对象后，新对象会自动调用定义的魔术方法\__clone
-
-\__construct()
-
-触发时机：对象实例化
-
-_\_destrut()析构函数
-
-触发时机：在对象的所有引用被删除或者当对象被显式销毁时执行的魔术方法
-
-功能，参数，返回值
-
-\__get()
-
-触发时机:调用的成员属性不存在
-
-参数:传参Sarg1
-
-返回值:不存在的成员属性的名称
-
-\__invoke()
-
-触发时机:把对象当成函数调用
-
-\__isset()
-
-触发时机:   对不可访问属性使用isset()或empty()时，\__isset()会被调用
-
-参数:
-
-$arg1:
-
-返回值:不存在的成员属性的名称
-
-\__set()
-
-触发时机:给不存在的成员属性赋值
-
-参数:
-
-$arg1:不存在成员属性的名称
-
-$arg2:不存在的成员属性赋的值
-
-返回值:不存在的成员属性的名称和赋的值
-
-\__sleep
-
-触发时机:序列化serialize()之前
-
-\__toString()
-
-触发时机：把对象当成字符串调用
-
-\__unset()
-
-触发时机:对不可访问属性使用unset()时
-
-参数:
-
-$arg1:
-
-返回值:不存在的成员属性的名称
-
-_\_weakup()
-
-触发时机：unserialize()反序列化之前
-
-功能:对象被序列化之前触发,返回需要被序列化存储的成员属性,删除不必要的属性。
-
-参数:成员属性
-
-返回值:需要被序列化存储的成员属性
-
-#### 预定义变量
-
-#### 超全局变量
-
-在全部作用域中始终可用的内置变量，这意味着它们在一个脚本的全部作用域中都可用，在函数或方法中无需执行global $variable; 就可以访问它们。  
-
-##### $GLOBALS
-
-$GLOBALS 是PHP的一个超级全局变量组,在一个PHP脚本的全部作用域中都可以访问
-
-$GOLBALS是一个包含了全部变量的全局组合数组,变量的名字就是数组的键
-
+<h4 id="1-9-18魔术方法"><a href="#1-9-18魔术方法" class="headerlink" title="1.9.18魔术方法"></a>1.9.18魔术方法</h4><p>预定义好的，在特定情况下自动触发的行为方法，触发前提：魔术方法所在的类（或对象）被调用</p>
+<p>__call()</p>
+<p>触发时机:调用一个不存在的方法</p>
+<p>参数:</p>
+<p>$arg1:调用不存在的方法的名称</p>
+<p>$arg2:调用不存在的方法的参数</p>
+<p>返回值:调用不存在的方法的名称和参数</p>
+<p>__callStatic()</p>
+<p>触发时机:静态调用或调用成员常量是使用的方法不存在</p>
+<p>参数:</p>
+<p>$arg1:调用不存在的方法的名称</p>
+<p>$arg2:调用不存在的方法的参数</p>
+<p>返回值:调用的不存在的方法的名称和参数</p>
+<p>__clone()</p>
+<p>触发时机:当使用clone关键字拷贝完成一个对象后，新对象会自动调用定义的魔术方法__clone</p>
+<p>__construct()</p>
+<p>触发时机：对象实例化</p>
+<p>__destrut()析构函数</p>
+<p>触发时机：在对象的所有引用被删除或者当对象被显式销毁时执行的魔术方法</p>
+<p>功能，参数，返回值</p>
+<p>__get()</p>
+<p>触发时机:调用的成员属性不存在</p>
+<p>参数:传参Sarg1</p>
+<p>返回值:不存在的成员属性的名称</p>
+<p>__invoke()</p>
+<p>触发时机:把对象当成函数调用</p>
+<p>__isset()</p>
+<p>触发时机:   对不可访问属性使用isset()或empty()时，__isset()会被调用</p>
+<p>参数:</p>
+<p>$arg1:</p>
+<p>返回值:不存在的成员属性的名称</p>
+<p>__set()</p>
+<p>触发时机:给不存在的成员属性赋值</p>
+<p>参数:</p>
+<p>$arg1:不存在成员属性的名称</p>
+<p>$arg2:不存在的成员属性赋的值</p>
+<p>返回值:不存在的成员属性的名称和赋的值</p>
+<p>__sleep</p>
+<p>触发时机:序列化serialize()之前</p>
+<p>__toString()</p>
+<p>触发时机：把对象当成字符串调用</p>
+<p>__unset()</p>
+<p>触发时机:对不可访问属性使用unset()时</p>
+<p>参数:</p>
+<p>$arg1:</p>
+<p>返回值:不存在的成员属性的名称</p>
+<p>__weakup()</p>
+<p>触发时机：unserialize()反序列化之前</p>
+<p>功能:对象被序列化之前触发,返回需要被序列化存储的成员属性,删除不必要的属性。</p>
+<p>参数:成员属性</p>
+<p>返回值:需要被序列化存储的成员属性</p>
+<h4 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h4><h4 id="超全局变量"><a href="#超全局变量" class="headerlink" title="超全局变量"></a>超全局变量</h4><p>在全部作用域中始终可用的内置变量，这意味着它们在一个脚本的全部作用域中都可用，在函数或方法中无需执行global $variable; 就可以访问它们。  </p>
+<h5 id="GLOBALS"><a href="#GLOBALS" class="headerlink" title="$GLOBALS"></a>$GLOBALS</h5><p>$GLOBALS 是PHP的一个超级全局变量组,在一个PHP脚本的全部作用域中都可以访问</p>
+<p>$GOLBALS是一个包含了全部变量的全局组合数组,变量的名字就是数组的键</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$foo</span> = <span class="string">&quot;local variable&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;$foo in global scope: &#x27;</span> . <span class="variable">$GLOBALS</span>[<span class="string">&quot;foo&quot;</span>] . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&#x27;$foo in current scope: &#x27;</span> . <span class="variable">$foo</span> . <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$foo</span> = <span class="string">&quot;Example content&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">test</span>();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-##### $_SERVER
-
-$_SERVER 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的array。
-
-这个数组中的项目由Web服务器创建。
-
-| 变量            | 含义                                                 |
-| --------------- | ---------------------------------------------------- |
-| DOCUMENT_ROOT   | 当前运行脚本所在的文档根目录。在服务器配置文件中定义 |
-| REMOTE_ADDR     | 浏览当前页面的用户的IP地址。                         |
-| SCRIPT_FILENAME | 当前执行脚本的绝对路径                               |
-|                 |                                                      |
-
-
-
-##### $_GET
-
-手机HTML表单保存通过get形式提交的数据
-
-##### $_POST
-
-手机HTML表单保存通过post形式提交的数据
-
-##### $_FILES
-
-通过HTTP POST方式上传到当前脚本的项目的二维关联数组
-
-数组的内容来自表单。userfile为表单中name属性的值
-
-[$_FILES['userfile'\]['name']]:
-
-客户端机器文件的原名称。      
-
-[$_FILES['userfile'\]['type']]:
-
-文件的 MIME 类型
-
-##### $_REQUEST
-
-手机HTML表单保存通过get和post形式提交的全部数据
-
-##### $_SESSION
-
-保存session会话数据
-
-##### $_ENV
-
-##### $_COOKIE
-
-保存cookie会话数据
-
-### 支持的协议和封装协议
-
-PHP带有很多内置URL风格的封装协议,可用于类似fopen()、copy0、file_exists()和filesize()的文件系统函数。
-
-file://访问本地文件系统
-
-http://访问HTTP(s)网址
-
-dict://字典服务协议，访问字典资源
-
-ftp://访问FTP(s)URLs
-
-php://访问各个输入/输出流(I/O streams)
-
-php://input协议：
-
-php://input代表可以访问请求的原始数据,简单来说POST请求的情况下,php://input可以获取到post的数据。
-
-php://output协议：
-
-php://output是一个只写的数据流,允许你以print和echo一样的方式写入到输出缓冲区。
-
-php://filter协议：：
-
-php://filter是一种元封装器,设计用于数据流打开时的筛选过滤应用
-
-php://filter 目标使用以下的参数作为它路径的一部分。    复合过滤链能够在一个路径上指定
-
-| 名称                      | 描述                                                         |
-| ------------------------- | ------------------------------------------------------------ |
-| resource=<要过滤的数据流> | 必须参数，指定了你要筛选过滤的数据流。                       |
-| read=<读链的筛选列表>     | 该参数可选。可以设定一个或多个过滤器名称，以管道符（`|`）分隔。 |
-| write=<写链的筛选列表>    | 该参数可选。可以设定一个或多个过滤器名称，以管道符（`|`）分隔。 |
-| <；两个链的筛选列表>      | 任何没有以 `read=` 或 `write=` 作前缀         的筛选器列表会视情况应用于读或写链。 |
-
-zlib://压缩流
-
- zlib:// -- bzip2:// -- zip://-压缩流
-
-zlib://使用 compress.zlib://file.gz
-
-bzip2://使用 compress.bzip2://file.bz2
-
-zip://使用 zip://archive.zip#dir/file.txt
-
-data://数据
-
-glob://查找匹配的文件路径模式
-
-phar://读取phar文件
-
-ssh2://-Secure Shell 2
-
-rar://RAR
-
-ogg://音频流
-
-expect://处理交互式的流
-
-![image-20260521150011271](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521150011271.png)
-
-![image-20260521151210662](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521151210662.png)
-
-## 3.函数参考
-
-### 3.1影响PHP行为的扩展
-
-#### 3.1.7PHP选项/信息
-
-##### PHP选项/信息 函数
-
-assert
-
-assert在php4 php5 php7.0都作为一个函数,可以动态调用;而php7.1之后则成为语言结构,不能动态调用。
-
-php_uname返回运行PHP的操作系统的描述
-
+<h5 id="SERVER"><a href="#SERVER" class="headerlink" title="$_SERVER"></a>$_SERVER</h5><p>$_SERVER 是一个包含了诸如头信息(header)、路径(path)、以及脚本位置(script locations)等等信息的array。</p>
+<p>这个数组中的项目由Web服务器创建。</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DOCUMENT_ROOT</td>
+<td>当前运行脚本所在的文档根目录。在服务器配置文件中定义</td>
+</tr>
+<tr>
+<td>REMOTE_ADDR</td>
+<td>浏览当前页面的用户的IP地址。</td>
+</tr>
+<tr>
+<td>SCRIPT_FILENAME</td>
+<td>当前执行脚本的绝对路径</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="GET"><a href="#GET" class="headerlink" title="$_GET"></a>$_GET</h5><p>手机HTML表单保存通过get形式提交的数据</p>
+<h5 id="POST"><a href="#POST" class="headerlink" title="$_POST"></a>$_POST</h5><p>手机HTML表单保存通过post形式提交的数据</p>
+<h5 id="FILES"><a href="#FILES" class="headerlink" title="$_FILES"></a>$_FILES</h5><p>通过HTTP POST方式上传到当前脚本的项目的二维关联数组</p>
+<p>数组的内容来自表单。userfile为表单中name属性的值</p>
+<p>[$_FILES[‘userfile’][‘name’]]:</p>
+<p>客户端机器文件的原名称。      </p>
+<p>[$_FILES[‘userfile’][‘type’]]:</p>
+<p>文件的 MIME 类型</p>
+<h5 id="REQUEST"><a href="#REQUEST" class="headerlink" title="$_REQUEST"></a>$_REQUEST</h5><p>手机HTML表单保存通过get和post形式提交的全部数据</p>
+<h5 id="SESSION"><a href="#SESSION" class="headerlink" title="$_SESSION"></a>$_SESSION</h5><p>保存session会话数据</p>
+<h5 id="ENV"><a href="#ENV" class="headerlink" title="$_ENV"></a>$_ENV</h5><h5 id="COOKIE"><a href="#COOKIE" class="headerlink" title="$_COOKIE"></a>$_COOKIE</h5><p>保存cookie会话数据</p>
+<h3 id="支持的协议和封装协议"><a href="#支持的协议和封装协议" class="headerlink" title="支持的协议和封装协议"></a>支持的协议和封装协议</h3><p>PHP带有很多内置URL风格的封装协议,可用于类似fopen()、copy0、file_exists()和filesize()的文件系统函数。</p>
+<p>file:&#x2F;&#x2F;访问本地文件系统</p>
+<p>http:&#x2F;&#x2F;访问HTTP(s)网址</p>
+<p>dict:&#x2F;&#x2F;字典服务协议，访问字典资源</p>
+<p>ftp:&#x2F;&#x2F;访问FTP(s)URLs</p>
+<p>php:&#x2F;&#x2F;访问各个输入&#x2F;输出流(I&#x2F;O streams)</p>
+<p>php:&#x2F;&#x2F;input协议：</p>
+<p>php:&#x2F;&#x2F;input代表可以访问请求的原始数据,简单来说POST请求的情况下,php:&#x2F;&#x2F;input可以获取到post的数据。</p>
+<p>php:&#x2F;&#x2F;output协议：</p>
+<p>php:&#x2F;&#x2F;output是一个只写的数据流,允许你以print和echo一样的方式写入到输出缓冲区。</p>
+<p>php:&#x2F;&#x2F;filter协议：：</p>
+<p>php:&#x2F;&#x2F;filter是一种元封装器,设计用于数据流打开时的筛选过滤应用</p>
+<p>php:&#x2F;&#x2F;filter 目标使用以下的参数作为它路径的一部分。    复合过滤链能够在一个路径上指定</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>resource&#x3D;&lt;要过滤的数据流&gt;</td>
+<td>必须参数，指定了你要筛选过滤的数据流。</td>
+</tr>
+<tr>
+<td>read&#x3D;&lt;读链的筛选列表&gt;</td>
+<td>该参数可选。可以设定一个或多个过滤器名称，以管道符（&#96;</td>
+</tr>
+<tr>
+<td>write&#x3D;&lt;写链的筛选列表&gt;</td>
+<td>该参数可选。可以设定一个或多个过滤器名称，以管道符（&#96;</td>
+</tr>
+<tr>
+<td>&lt;；两个链的筛选列表&gt;</td>
+<td>任何没有以 <code>read=</code> 或 <code>write=</code> 作前缀         的筛选器列表会视情况应用于读或写链。</td>
+</tr>
+</tbody></table>
+<p>zlib:&#x2F;&#x2F;压缩流</p>
+<p> zlib:&#x2F;&#x2F; – bzip2:&#x2F;&#x2F; – zip:&#x2F;&#x2F;-压缩流</p>
+<p>zlib:&#x2F;&#x2F;使用 compress.zlib:&#x2F;&#x2F;file.gz</p>
+<p>bzip2:&#x2F;&#x2F;使用 compress.bzip2:&#x2F;&#x2F;file.bz2</p>
+<p>zip:&#x2F;&#x2F;使用 zip:&#x2F;&#x2F;archive.zip#dir&#x2F;file.txt</p>
+<p>data:&#x2F;&#x2F;数据</p>
+<p>glob:&#x2F;&#x2F;查找匹配的文件路径模式</p>
+<p>phar:&#x2F;&#x2F;读取phar文件</p>
+<p>ssh2:&#x2F;&#x2F;-Secure Shell 2</p>
+<p>rar:&#x2F;&#x2F;RAR</p>
+<p>ogg:&#x2F;&#x2F;音频流</p>
+<p>expect:&#x2F;&#x2F;处理交互式的流</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521150011271.png" alt="image-20260521150011271"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521151210662.png" alt="image-20260521151210662"></p>
+<h2 id="3-函数参考"><a href="#3-函数参考" class="headerlink" title="3.函数参考"></a>3.函数参考</h2><h3 id="3-1影响PHP行为的扩展"><a href="#3-1影响PHP行为的扩展" class="headerlink" title="3.1影响PHP行为的扩展"></a>3.1影响PHP行为的扩展</h3><h4 id="3-1-7PHP选项-信息"><a href="#3-1-7PHP选项-信息" class="headerlink" title="3.1.7PHP选项&#x2F;信息"></a>3.1.7PHP选项&#x2F;信息</h4><h5 id="PHP选项-信息-函数"><a href="#PHP选项-信息-函数" class="headerlink" title="PHP选项&#x2F;信息 函数"></a>PHP选项&#x2F;信息 函数</h5><p>assert</p>
+<p>assert在php4 php5 php7.0都作为一个函数,可以动态调用;而php7.1之后则成为语言结构,不能动态调用。</p>
+<p>php_uname返回运行PHP的操作系统的描述</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">php_uname</span>(<span class="keyword">string</span> <span class="variable">$mode</span> = <span class="string">&quot;a&quot;</span>): <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
 
-参数：
-
-mode是单个字符，用于定义要返回什么信息：
-
-‘s’:操作系统名称
-
-ini_set为一个配置选项设置值
-
+<p>参数：</p>
+<p>mode是单个字符，用于定义要返回什么信息：</p>
+<p>‘s’:操作系统名称</p>
+<p>ini_set为一个配置选项设置值</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="keyword">string</span> <span class="variable">$option</span>, <span class="keyword">string</span>|<span class="keyword">int</span>|<span class="keyword">float</span>|<span class="keyword">bool</span>|<span class="literal">null</span> <span class="variable">$value</span>): <span class="keyword">string</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-参数：
-
-option：可修改的配置选项
-
-value：选项新的值。
-
-#### 错误处理
-
-##### 错误处理函数
-
-error_reporting()
-
-设置应该报告何种PHP错误
-
+<p>参数：</p>
+<p>option：可修改的配置选项</p>
+<p>value：选项新的值。</p>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><h5 id="错误处理函数"><a href="#错误处理函数" class="headerlink" title="错误处理函数"></a>错误处理函数</h5><p>error_reporting()</p>
+<p>设置应该报告何种PHP错误</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">error_reporting</span>(<span class="params">?<span class="keyword">int</span> <span class="variable">$error_level</span> = <span class="literal">null</span></span>): <span class="title">int</span></span></span><br></pre></td></tr></table></figure>
 
 
 
-### 3.5压缩和归档扩展
-
-#### 3.5.1Phar（PHP ARchive）
-
-phar扩展提供了一种方法，可以将整个PHP应用程序打包到一个名为“phar”（PHP Archive）的单个文件中，以便于分发和安装，类似于Java中的JAR包
-
-Phar结构：
-
-stub phar 文件标识,格式为xxx <? php xxx ;_ HALT_COMPiLER() ;? >;(头部信息)
-
-manifest 压缩文件的属性等信息,以序列化存储;
-
-contents 压缩文件的内容;
-
-signature签名,放在文件末尾;
-
-### 3.7数据库扩展
-
-#### 3.7.1数据库抽象层
-
-PDO模式（PHP Data Object）PHP数据对象，可以连接大多数数据库
-
-#### 3.7.2针对各种数据库系统对应的扩展
-
-Mysql模式：只可以操作MySQL数据库进行交互，已被取代
-
-基本过程：
-
-![image-20260316133759197](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260316133759197.png)
-
-##### 3.7.2.1MySQL函数
-
-mysql_connect:
-
-打开一个到MySQL服务器的连接
-
+<h3 id="3-5压缩和归档扩展"><a href="#3-5压缩和归档扩展" class="headerlink" title="3.5压缩和归档扩展"></a>3.5压缩和归档扩展</h3><h4 id="3-5-1Phar（PHP-ARchive）"><a href="#3-5-1Phar（PHP-ARchive）" class="headerlink" title="3.5.1Phar（PHP ARchive）"></a>3.5.1Phar（PHP ARchive）</h4><p>phar扩展提供了一种方法，可以将整个PHP应用程序打包到一个名为“phar”（PHP Archive）的单个文件中，以便于分发和安装，类似于Java中的JAR包</p>
+<p>Phar结构：</p>
+<p>stub phar 文件标识,格式为xxx &lt;? php xxx ;_ HALT_COMPiLER() ;? &gt;;(头部信息)</p>
+<p>manifest 压缩文件的属性等信息,以序列化存储;</p>
+<p>contents 压缩文件的内容;</p>
+<p>signature签名,放在文件末尾;</p>
+<h3 id="3-7数据库扩展"><a href="#3-7数据库扩展" class="headerlink" title="3.7数据库扩展"></a>3.7数据库扩展</h3><h4 id="3-7-1数据库抽象层"><a href="#3-7-1数据库抽象层" class="headerlink" title="3.7.1数据库抽象层"></a>3.7.1数据库抽象层</h4><p>PDO模式（PHP Data Object）PHP数据对象，可以连接大多数数据库</p>
+<h4 id="3-7-2针对各种数据库系统对应的扩展"><a href="#3-7-2针对各种数据库系统对应的扩展" class="headerlink" title="3.7.2针对各种数据库系统对应的扩展"></a>3.7.2针对各种数据库系统对应的扩展</h4><p>Mysql模式：只可以操作MySQL数据库进行交互，已被取代</p>
+<p>基本过程：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260316133759197.png" alt="image-20260316133759197"></p>
+<h5 id="3-7-2-1MySQL函数"><a href="#3-7-2-1MySQL函数" class="headerlink" title="3.7.2.1MySQL函数"></a>3.7.2.1MySQL函数</h5><p>mysql_connect:</p>
+<p>打开一个到MySQL服务器的连接</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">mysql_connect</span>(</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$server</span> = <span class="title function_ invoke__">ini_get</span>(<span class="string">&quot;mysql.default_host&quot;</span>),</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$username</span> = <span class="title function_ invoke__">ini_get</span>(<span class="string">&quot;mysql.default_user&quot;</span>),</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$password</span> = <span class="title function_ invoke__">ini_get</span>(<span class="string">&quot;mysql.default_password&quot;</span>),</span><br><span class="line">    <span class="keyword">bool</span> <span class="variable">$new_link</span> = <span class="literal">false</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$client_flags</span> = <span class="number">0</span></span><br><span class="line">): resource|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-返回值：
-
-如果成功则返回一个 MySQL 连接标识， 或者在失败时返回 **`false`**。  
-
-mysql_escape_string：
-
-将字符串中的特殊字符进行转义，以在 SQL 语句中使用
-
-mysql_real_escape_string：
-
-将字符串中的特殊字符进行转义，以在 SQL 语句中使用
-
-mysql_select_db：
-
-选择 MySQL 数据库
-
+<p>返回值：</p>
+<p>如果成功则返回一个 MySQL 连接标识， 或者在失败时返回 <strong><code>false</code></strong>。  </p>
+<p>mysql_escape_string：</p>
+<p>将字符串中的特殊字符进行转义，以在 SQL 语句中使用</p>
+<p>mysql_real_escape_string：</p>
+<p>将字符串中的特殊字符进行转义，以在 SQL 语句中使用</p>
+<p>mysql_select_db：</p>
+<p>选择 MySQL 数据库</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">mysql_select_db</span>(<span class="keyword">string</span> <span class="variable">$database_name</span>, resource $ link_identifier = ?): <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
 
-mysql_query：
-
-发送一条 MySQL 查询
-
-mysql_fetch_assoc：
-
-从结果集中取得一行作为关联数组    
-
-mysql_close：关闭 MySQL 连接
-
-Mysqli模式：MySQL的高级版本，支持了许多新的特性，仍然只能操作MySQL数据库
-
-基本流程：
-
-![image-20260316135706685](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260316135706685.png)
-
-##### 3.7.2.2mysqli类
-
-new mysqli（）:
-
-建立一个mysql连接
-
-类摘要：
-
+<p>mysql_query：</p>
+<p>发送一条 MySQL 查询</p>
+<p>mysql_fetch_assoc：</p>
+<p>从结果集中取得一行作为关联数组    </p>
+<p>mysql_close：关闭 MySQL 连接</p>
+<p>Mysqli模式：MySQL的高级版本，支持了许多新的特性，仍然只能操作MySQL数据库</p>
+<p>基本流程：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260316135706685.png" alt="image-20260316135706685"></p>
+<h5 id="3-7-2-2mysqli类"><a href="#3-7-2-2mysqli类" class="headerlink" title="3.7.2.2mysqli类"></a>3.7.2.2mysqli类</h5><p>new mysqli（）:</p>
+<p>建立一个mysql连接</p>
+<p>类摘要：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 方法 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="title function_ invoke__">__construct</span>(</span><br><span class="line">    ?<span class="keyword">string</span> <span class="variable">$hostname</span> = <span class="literal">null</span>,</span><br><span class="line">    ?<span class="keyword">string</span> <span class="variable">$username</span> = <span class="literal">null</span>,</span><br><span class="line">    #[\SensitiveParameter] ?<span class="keyword">string</span> <span class="variable">$password</span> = <span class="literal">null</span>,</span><br><span class="line">    ?<span class="keyword">string</span> <span class="variable">$database</span> = <span class="literal">null</span>,</span><br><span class="line">    ?<span class="keyword">int</span> <span class="variable">$port</span> = <span class="literal">null</span>,</span><br><span class="line">    ?<span class="keyword">string</span> <span class="variable">$socket</span> = <span class="literal">null</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
-MySQLi::query（）：
-
-对数据库进行一次查询
-
-返回值：
-
-失败时返回 **`false`**。对于生成结果集的成功查询，返回mysqli_result对象。对其它成功查询，**mysqli_query()** 将返回 **`true`**。  
-
-MySQLi::fetch_assoc（）：
-
-取出结果集中的一条数据。并以关联数组的形式返回
-
-MySQLi::fetch_all（）：
-
-取出结果集中的所有数据。并以关联数组的形式返回
-
-MySQLi::close（）：
-
-关闭MySQL连接
-
-##### 3.7.2.3 MySQL于MySQLi的区别
-
-MySQL是非持久连接，MySQLi是持久连接
-
-MySQL面向过程，MySQLi面向对象
-
-MySQL不支持多语句执行，MySQLi支持多语句执行
-
-MySQL默认支持，MySQLi需要开启MySQLi扩展
-
-### 3.9文件系统相关扩展
-
-#### 3.9.1文件系统函数
-
-##### basename
-
-返回路径中的文件名部分
-
-##### file_exists
-
-检查文件或目录是否存在
-
-##### mkdir
-
-新建目录
-
+<p>MySQLi::query（）：</p>
+<p>对数据库进行一次查询</p>
+<p>返回值：</p>
+<p>失败时返回 <strong><code>false</code></strong>。对于生成结果集的成功查询，返回mysqli_result对象。对其它成功查询，<strong>mysqli_query()</strong> 将返回 <strong><code>true</code></strong>。  </p>
+<p>MySQLi::fetch_assoc（）：</p>
+<p>取出结果集中的一条数据。并以关联数组的形式返回</p>
+<p>MySQLi::fetch_all（）：</p>
+<p>取出结果集中的所有数据。并以关联数组的形式返回</p>
+<p>MySQLi::close（）：</p>
+<p>关闭MySQL连接</p>
+<h5 id="3-7-2-3-MySQL于MySQLi的区别"><a href="#3-7-2-3-MySQL于MySQLi的区别" class="headerlink" title="3.7.2.3 MySQL于MySQLi的区别"></a>3.7.2.3 MySQL于MySQLi的区别</h5><p>MySQL是非持久连接，MySQLi是持久连接</p>
+<p>MySQL面向过程，MySQLi面向对象</p>
+<p>MySQL不支持多语句执行，MySQLi支持多语句执行</p>
+<p>MySQL默认支持，MySQLi需要开启MySQLi扩展</p>
+<h3 id="3-9文件系统相关扩展"><a href="#3-9文件系统相关扩展" class="headerlink" title="3.9文件系统相关扩展"></a>3.9文件系统相关扩展</h3><h4 id="3-9-1文件系统函数"><a href="#3-9-1文件系统函数" class="headerlink" title="3.9.1文件系统函数"></a>3.9.1文件系统函数</h4><h5 id="basename"><a href="#basename" class="headerlink" title="basename"></a>basename</h5><p>返回路径中的文件名部分</p>
+<h5 id="file-exists"><a href="#file-exists" class="headerlink" title="file_exists"></a>file_exists</h5><p>检查文件或目录是否存在</p>
+<h5 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h5><p>新建目录</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">mkdir</span>(</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$directory</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$permissions</span> = <span class="number">0777</span>,</span><br><span class="line">    <span class="keyword">bool</span> <span class="variable">$recursive</span> = <span class="literal">false</span>,</span><br><span class="line">    ?resource <span class="variable">$context</span> = <span class="literal">null</span></span><br><span class="line">): <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
 
-##### move_upload_file
+<h5 id="move-upload-file"><a href="#move-upload-file" class="headerlink" title="move_upload_file"></a>move_upload_file</h5><p>将上传的文件移动到新位置</p>
+<h5 id="readfile"><a href="#readfile" class="headerlink" title="readfile"></a>readfile</h5><p>输出文件</p>
+<h5 id="file"><a href="#file" class="headerlink" title="file"></a>file</h5><p>把整个文件读入一个数组中</p>
+<h5 id="file-put-contents"><a href="#file-put-contents" class="headerlink" title="file_put_contents"></a>file_put_contents</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">file_put_contents</span>(</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$filename</span>,</span><br><span class="line">    <span class="keyword">mixed</span> <span class="variable">$data</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$flags</span> = <span class="number">0</span>,</span><br><span class="line">    ?resource <span class="variable">$context</span> = <span class="literal">null</span></span><br><span class="line">): <span class="keyword">int</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-将上传的文件移动到新位置
-
-##### readfile
-
-输出文件
-
-##### file
-
-把整个文件读入一个数组中
-
-##### file_put_contents
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">file_put_contents</span>(</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$filename</span>,</span><br><span class="line">    <span class="keyword">mixed</span> <span class="variable">$data</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$flags</span> = <span class="number">0</span>,</span><br><span class="line">    ?resource <span class="variable">$context</span> = <span class="literal">null</span></span><br><span class="line">): <span class="keyword">int</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-将数据写入文件
-
-
-
-##### file_get_contents
-
-将整个文件的内容读入到一个字符串中
-
-##### symlink
-
-建立软连接
-
+<p>将数据写入文件</p>
+<h5 id="file-get-contents"><a href="#file-get-contents" class="headerlink" title="file_get_contents"></a>file_get_contents</h5><p>将整个文件的内容读入到一个字符串中</p>
+<h5 id="symlink"><a href="#symlink" class="headerlink" title="symlink"></a>symlink</h5><p>建立软连接</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">symlink</span>(<span class="keyword">string</span> <span class="variable">$target</span>, <span class="keyword">string</span> <span class="variable">$link</span>): <span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
 
-对已有的target建立一个名为link的软连接
-
-#### 3.9.2目录
-
-
-
-##### 3.9.2.1目录函数函数
-
-chdir
-
-改变目录
-
-### 图像生成和处理
-
-#### GD和图像处理函数
-
-##### getimagesize
-
-取得图像大小，该函数会检查图片文件头，如果不存在或不是一个有效的图像文件则报错
-
+<p>对已有的target建立一个名为link的软连接</p>
+<h4 id="3-9-2目录"><a href="#3-9-2目录" class="headerlink" title="3.9.2目录"></a>3.9.2目录</h4><h5 id="3-9-2-1目录函数函数"><a href="#3-9-2-1目录函数函数" class="headerlink" title="3.9.2.1目录函数函数"></a>3.9.2.1目录函数函数</h5><p>chdir</p>
+<p>改变目录</p>
+<h3 id="图像生成和处理"><a href="#图像生成和处理" class="headerlink" title="图像生成和处理"></a>图像生成和处理</h3><h4 id="GD和图像处理函数"><a href="#GD和图像处理函数" class="headerlink" title="GD和图像处理函数"></a>GD和图像处理函数</h4><h5 id="getimagesize"><a href="#getimagesize" class="headerlink" title="getimagesize"></a>getimagesize</h5><p>取得图像大小，该函数会检查图片文件头，如果不存在或不是一个有效的图像文件则报错</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">getimagesize</span>(<span class="keyword">string</span> <span class="variable">$filename</span>, <span class="keyword">array</span> &amp;<span class="variable">$image_info</span> = <span class="literal">null</span>): <span class="keyword">array</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-### 3.15进程控制扩展
-
-#### 3.15.4PCNTL
-
-pcntl_exec
-
-在当前进程空间执行指定程序
-
-#### 程序执行
-
-##### 程序执行函数
-
-exec执行一个外部程序
-
+<h3 id="3-15进程控制扩展"><a href="#3-15进程控制扩展" class="headerlink" title="3.15进程控制扩展"></a>3.15进程控制扩展</h3><h4 id="3-15-4PCNTL"><a href="#3-15-4PCNTL" class="headerlink" title="3.15.4PCNTL"></a>3.15.4PCNTL</h4><p>pcntl_exec</p>
+<p>在当前进程空间执行指定程序</p>
+<h4 id="程序执行"><a href="#程序执行" class="headerlink" title="程序执行"></a>程序执行</h4><h5 id="程序执行函数"><a href="#程序执行函数" class="headerlink" title="程序执行函数"></a>程序执行函数</h5><p>exec执行一个外部程序</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">exec</span>(<span class="keyword">string</span> <span class="variable">$command</span>, <span class="keyword">array</span> &amp;<span class="variable">$output</span> = <span class="literal">null</span>, <span class="keyword">int</span> &amp;<span class="variable">$result_code</span> = <span class="literal">null</span>): <span class="keyword">string</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-passthru执行外部程序并且显示原始输出
-
-shell_exec通过shell执行命令并将完整的输出字符串的方式返回
-
+<p>passthru执行外部程序并且显示原始输出</p>
+<p>shell_exec通过shell执行命令并将完整的输出字符串的方式返回</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">shell_exec</span>(<span class="keyword">string</span> <span class="variable">$command</span>): <span class="keyword">string</span>|<span class="literal">false</span>|<span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-system执行外部程序，并且显示输出
-
+<p>system执行外部程序，并且显示输出</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">system</span>(<span class="keyword">string</span> <span class="variable">$command</span>, <span class="keyword">int</span> &amp;<span class="variable">$result_code</span> = <span class="literal">null</span>): <span class="keyword">string</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-### 3.16其他基本扩展
-
-#### 3.16.1杂项函数
-
-eval ：把字符串作为PHP代码执行
-
+<h3 id="3-16其他基本扩展"><a href="#3-16其他基本扩展" class="headerlink" title="3.16其他基本扩展"></a>3.16其他基本扩展</h3><h4 id="3-16-1杂项函数"><a href="#3-16-1杂项函数" class="headerlink" title="3.16.1杂项函数"></a>3.16.1杂项函数</h4><p>eval ：把字符串作为PHP代码执行</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">eval</span>(<span class="keyword">string</span> <span class="variable">$code</span>): <span class="keyword">mixed</span></span><br></pre></td></tr></table></figure>
 
-highlight_file高亮一个文件
-
+<p>highlight_file高亮一个文件</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">string</span> <span class="variable">$filename</span>, <span class="keyword">bool</span> <span class="variable">$return</span> = <span class="literal">false</span>): <span class="keyword">string</span>|<span class="keyword">bool</span></span><br></pre></td></tr></table></figure>
 
-参数：
-
-filename：预高亮文件的路径
-
-return：设置参数为true使函数返回高亮后的代码
-
-uniqid：生成基于时间的标识符
-
-#### 3.16.2JSON函数
-
-json_decode：对JSON格式的字符串进行解码
-
-json_encode：对JSON格式的字符串进行编码
-
-#### 3.16.16 URL函数
-
-base64_encode
-
-使用MIME base64对数据进行编码
-
-urlencode
-
-编码URL字符串
-
-### 3.17其他服务
-
-#### 3.17.1cURL
-
-##### cURL函数
-
-curl_exec()
-
-执行 cURL 会话
-
-curl_init()
-
-初始cURL会话
-
-curl_setopt()
-
-设置 cURL 传输选项
-
+<p>参数：</p>
+<p>filename：预高亮文件的路径</p>
+<p>return：设置参数为true使函数返回高亮后的代码</p>
+<p>uniqid：生成基于时间的标识符</p>
+<h4 id="3-16-2JSON函数"><a href="#3-16-2JSON函数" class="headerlink" title="3.16.2JSON函数"></a>3.16.2JSON函数</h4><p>json_decode：对JSON格式的字符串进行解码</p>
+<p>json_encode：对JSON格式的字符串进行编码</p>
+<h4 id="3-16-16-URL函数"><a href="#3-16-16-URL函数" class="headerlink" title="3.16.16 URL函数"></a>3.16.16 URL函数</h4><p>base64_encode</p>
+<p>使用MIME base64对数据进行编码</p>
+<p>urlencode</p>
+<p>编码URL字符串</p>
+<h3 id="3-17其他服务"><a href="#3-17其他服务" class="headerlink" title="3.17其他服务"></a>3.17其他服务</h3><h4 id="3-17-1cURL"><a href="#3-17-1cURL" class="headerlink" title="3.17.1cURL"></a>3.17.1cURL</h4><h5 id="cURL函数"><a href="#cURL函数" class="headerlink" title="cURL函数"></a>cURL函数</h5><p>curl_exec()</p>
+<p>执行 cURL 会话</p>
+<p>curl_init()</p>
+<p>初始cURL会话</p>
+<p>curl_setopt()</p>
+<p>设置 cURL 传输选项</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">curl_setopt</span>(<span class="params">CurlHandle <span class="variable">$handle</span>, <span class="keyword">int</span> <span class="variable">$option</span>, <span class="keyword">mixed</span> <span class="variable">$value</span></span>): <span class="title">bool</span></span></span><br></pre></td></tr></table></figure>
 
-参数：
-
-handle
-
-由curl_init()返回的 cURL 句柄
-
-option
-
-需要设置的CURLOPT_\*选项
-
-| CURLOPT_\*选项         | 说明                                       |
-| ---------------------- | ------------------------------------------ |
-| CURLOPT_FOLLOWLOCATION | 是否自动跟随重定向                         |
-| CURLOPT_HEADER         | 是否在输出中包含HTTP响应头                 |
-| CURLOPT_RETURNTRANSFER | 是否将结果转换成字符串返回，而不是直接显示 |
-| CURLOPT_URL            | 请求的目标网址                             |
-
-value
-
-将设置在option选项上的值
-
-curl_close()
-
-关闭 cURL 会话
-
-#### 3.17.9网络
-
-##### 3.17.9.1网络函数
-
-fsockopen
-
-打开Internet或者Unix套接字连接
-
-proc_open
-
-在服务器上启动一个shell程序
-
-### 3.7Session扩展
-
-#### 3.7.1Session函数
-
-session_destroy
-
-删除session文件
-
-session_start()
-
-启用新的session会话或重用现有的session会话
-
-### 3.8文本处理
-
-#### PCRE
-
-##### PCRE函数
-
-pcre_replace 进行一个正则表达式的搜索和替换
-
+<p>参数：</p>
+<p>handle</p>
+<p>由curl_init()返回的 cURL 句柄</p>
+<p>option</p>
+<p>需要设置的CURLOPT_*选项</p>
+<table>
+<thead>
+<tr>
+<th>CURLOPT_*选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CURLOPT_FOLLOWLOCATION</td>
+<td>是否自动跟随重定向</td>
+</tr>
+<tr>
+<td>CURLOPT_HEADER</td>
+<td>是否在输出中包含HTTP响应头</td>
+</tr>
+<tr>
+<td>CURLOPT_RETURNTRANSFER</td>
+<td>是否将结果转换成字符串返回，而不是直接显示</td>
+</tr>
+<tr>
+<td>CURLOPT_URL</td>
+<td>请求的目标网址</td>
+</tr>
+</tbody></table>
+<p>value</p>
+<p>将设置在option选项上的值</p>
+<p>curl_close()</p>
+<p>关闭 cURL 会话</p>
+<h4 id="3-17-9网络"><a href="#3-17-9网络" class="headerlink" title="3.17.9网络"></a>3.17.9网络</h4><h5 id="3-17-9-1网络函数"><a href="#3-17-9-1网络函数" class="headerlink" title="3.17.9.1网络函数"></a>3.17.9.1网络函数</h5><p>fsockopen</p>
+<p>打开Internet或者Unix套接字连接</p>
+<p>proc_open</p>
+<p>在服务器上启动一个shell程序</p>
+<h3 id="3-7Session扩展"><a href="#3-7Session扩展" class="headerlink" title="3.7Session扩展"></a>3.7Session扩展</h3><h4 id="3-7-1Session函数"><a href="#3-7-1Session函数" class="headerlink" title="3.7.1Session函数"></a>3.7.1Session函数</h4><p>session_destroy</p>
+<p>删除session文件</p>
+<p>session_start()</p>
+<p>启用新的session会话或重用现有的session会话</p>
+<h3 id="3-8文本处理"><a href="#3-8文本处理" class="headerlink" title="3.8文本处理"></a>3.8文本处理</h3><h4 id="PCRE"><a href="#PCRE" class="headerlink" title="PCRE"></a>PCRE</h4><h5 id="PCRE函数"><a href="#PCRE函数" class="headerlink" title="PCRE函数"></a>PCRE函数</h5><p>pcre_replace 进行一个正则表达式的搜索和替换</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> <span class="title function_ invoke__">pcre_replace</span>(</span><br><span class="line">    <span class="keyword">string</span>|<span class="keyword">array</span> <span class="variable">$pattern</span>,</span><br><span class="line">    <span class="keyword">string</span>|<span class="keyword">array</span> <span class="variable">$replacement</span>,</span><br><span class="line">    <span class="keyword">string</span>|<span class="keyword">array</span> <span class="variable">$subject</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$limit</span> = -<span class="number">1</span>,</span><br><span class="line">    <span class="keyword">int</span> &amp;<span class="variable">$count</span> = <span class="literal">null</span></span><br><span class="line">): <span class="keyword">string</span>|<span class="keyword">array</span>|<span class="literal">null</span></span><br></pre></td></tr></table></figure>
 
-搜索subject中匹配pattern的部分，以replacement 进行替换。  
-
-preg_match 执行匹配正则表达式
-
+<p>搜索subject中匹配pattern的部分，以replacement 进行替换。  </p>
+<p>preg_match 执行匹配正则表达式</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match</span>(</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$pattern</span>,</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$subject</span>,</span><br><span class="line">    <span class="keyword">array</span> &amp;<span class="variable">$matches</span> = <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$flags</span> = <span class="number">0</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$offset</span> = <span class="number">0</span></span><br><span class="line">): <span class="keyword">int</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
 
 
-#### 3.8.1字符串
-
-##### 3.8.1.1字符串函数
-
-addslashes:使用反斜线引用字符串
-
-返回转义后的字符串
-
-这些字符是：
-
-单引号（`'`）
-
-双引号（`"`）
-
-反斜线（`\`）
-
-NUL（NUL 字节）
-
-echo:输出一个或多个字符串
-
-implode:用字符串连接数组元素
-
+<h4 id="3-8-1字符串"><a href="#3-8-1字符串" class="headerlink" title="3.8.1字符串"></a>3.8.1字符串</h4><h5 id="3-8-1-1字符串函数"><a href="#3-8-1-1字符串函数" class="headerlink" title="3.8.1.1字符串函数"></a>3.8.1.1字符串函数</h5><p>addslashes:使用反斜线引用字符串</p>
+<p>返回转义后的字符串</p>
+<p>这些字符是：</p>
+<p>单引号（<code>&#39;</code>）</p>
+<p>双引号（<code>&quot;</code>）</p>
+<p>反斜线（<code>\</code>）</p>
+<p>NUL（NUL 字节）</p>
+<p>echo:输出一个或多个字符串</p>
+<p>implode:用字符串连接数组元素</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">implode</span>(<span class="keyword">string</span> <span class="variable">$separator</span>, <span class="keyword">array</span> <span class="variable">$array</span>): <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
 
-返回一个包含所有数组元素并且顺序相同的字符串,每个元素之间有 separator分隔。  
-
-md5:计算字符串的 MD5 散列值
-
-print:输出字符串
-
-strstr:查找字符串的首次出现
-
-strtolower:将字符串转化为小写
-
-strlen：获取字符串长度
-
+<p>返回一个包含所有数组元素并且顺序相同的字符串,每个元素之间有 separator分隔。  </p>
+<p>md5:计算字符串的 MD5 散列值</p>
+<p>print:输出字符串</p>
+<p>strstr:查找字符串的首次出现</p>
+<p>strtolower:将字符串转化为小写</p>
+<p>strlen：获取字符串长度</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strlen</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
 
-strrpos：查找字符串首次出现的位置
-
+<p>strrpos：查找字符串首次出现的位置</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strrpos</span>(<span class="keyword">string</span> <span class="variable">$haystack</span>, <span class="keyword">string</span> <span class="variable">$needle</span>, <span class="keyword">int</span> <span class="variable">$offset</span> = <span class="number">0</span>): <span class="keyword">int</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-substr：返回字符串的子串 
-
+<p>substr：返回字符串的子串 </p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">substr</span>(<span class="keyword">string</span> <span class="variable">$string</span>, <span class="keyword">int</span> <span class="variable">$offset</span>, ?<span class="keyword">int</span> <span class="variable">$length</span> = <span class="literal">null</span>): <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
 
-htmlspecialchars：将特殊字符转换为 HTML 实体
-
+<p>htmlspecialchars：将特殊字符转换为 HTML 实体</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="title function_ invoke__">htmlspecialchars</span>(</span><br><span class="line">    <span class="keyword">string</span> <span class="variable">$string</span>,</span><br><span class="line">    <span class="keyword">int</span> <span class="variable">$flags</span> = ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401,</span><br><span class="line">    ?<span class="keyword">string</span> <span class="variable">$encoding</span> = <span class="literal">null</span>,</span><br><span class="line">    <span class="keyword">bool</span> <span class="variable">$double_encode</span> = <span class="literal">true</span></span><br><span class="line">): <span class="keyword">string</span></span><br></pre></td></tr></table></figure>
 
-参数：
-
-flags 位掩码，由以下某个或多个标记组成，设置转义处理细节、无效单元序列、文档类型。默认是ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401。     
-
-有效的flags常量：
-
-| 常量名称       | 描述                                                         |
-| -------------- | ------------------------------------------------------------ |
-| ENT_QUOTES     | 既转换双引号也转换单引号。                                   |
-| ENT_SUBSTITUTE | 替换无效的代码单元序列为Unicode代替符(Replacement Character),U+FFFD (UTF-8) 或者\&#xFFFD; (其他)，而不是返回空字符串。 |
-| ENT_HTML401    | 以 HTML 4.01 处理代码                                        |
-
-stristr返回haystack字符串从needle第一次出现的位置开始到结尾的字符串
-
+<p>参数：</p>
+<p>flags 位掩码，由以下某个或多个标记组成，设置转义处理细节、无效单元序列、文档类型。默认是ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401。     </p>
+<p>有效的flags常量：</p>
+<table>
+<thead>
+<tr>
+<th>常量名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ENT_QUOTES</td>
+<td>既转换双引号也转换单引号。</td>
+</tr>
+<tr>
+<td>ENT_SUBSTITUTE</td>
+<td>替换无效的代码单元序列为Unicode代替符(Replacement Character),U+FFFD (UTF-8) 或者&amp;#xFFFD; (其他)，而不是返回空字符串。</td>
+</tr>
+<tr>
+<td>ENT_HTML401</td>
+<td>以 HTML 4.01 处理代码</td>
+</tr>
+</tbody></table>
+<p>stristr返回haystack字符串从needle第一次出现的位置开始到结尾的字符串</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">stristr</span>(<span class="keyword">string</span> <span class="variable">$haystack</span>, <span class="keyword">string</span> <span class="variable">$needle</span>, <span class="keyword">bool</span> <span class="variable">$before_needle</span> = <span class="literal">false</span>): <span class="keyword">string</span>|<span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-addslashes：
-
-使用反斜线转义字符串，返回转义后的字符。
-
-str_replace：
-
-子字符串替换，只替代一次
-
+<p>addslashes：</p>
+<p>使用反斜线转义字符串，返回转义后的字符。</p>
+<p>str_replace：</p>
+<p>子字符串替换，只替代一次</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">str_replace</span>(</span><br><span class="line">    <span class="keyword">array</span>|<span class="keyword">string</span> <span class="variable">$search</span>,</span><br><span class="line">    <span class="keyword">array</span>|<span class="keyword">string</span> <span class="variable">$replace</span>,</span><br><span class="line">    <span class="keyword">string</span>|<span class="keyword">array</span> <span class="variable">$subject</span>,</span><br><span class="line">    <span class="keyword">int</span> &amp;<span class="variable">$count</span> = <span class="literal">null</span></span><br><span class="line">): <span class="keyword">string</span>|<span class="keyword">array</span></span><br></pre></td></tr></table></figure>
 
-$search：查找的目标值,一个数组可以指定多个目标。      
-
-$replace：search的替换值。一个数组可以被用来指定多重替换。      
-
-$subject：执行替换的数组或者字符串     
-
-### 3.9变量与类型相关扩展
-
-#### 数组
-
-##### 数组函数
-
-###### arsort
-
-根据关联数组的值,对数组进行降序排列
-
+<p>$search：查找的目标值,一个数组可以指定多个目标。      </p>
+<p>$replace：search的替换值。一个数组可以被用来指定多重替换。      </p>
+<p>$subject：执行替换的数组或者字符串     </p>
+<h3 id="3-9变量与类型相关扩展"><a href="#3-9变量与类型相关扩展" class="headerlink" title="3.9变量与类型相关扩展"></a>3.9变量与类型相关扩展</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><h5 id="数组函数"><a href="#数组函数" class="headerlink" title="数组函数"></a>数组函数</h5><h6 id="arsort"><a href="#arsort" class="headerlink" title="arsort"></a>arsort</h6><p>根据关联数组的值,对数组进行降序排列</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">arsort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">int</span> <span class="variable">$flags</span> = SORT_REGULAR): <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-###### asort
-
-根据关联数组的值,对数组进行升序排列
-
+<h6 id="asort"><a href="#asort" class="headerlink" title="asort"></a>asort</h6><p>根据关联数组的值,对数组进行升序排列</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">asort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">int</span> <span class="variable">$flags</span> = SORT_REGULAR): <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-###### count
-
-统计数组、Countable对象中所有元素的数量
-
+<h6 id="count"><a href="#count" class="headerlink" title="count"></a>count</h6><p>统计数组、Countable对象中所有元素的数量</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">count</span>(<span class="built_in">Countable</span>|<span class="keyword">array</span> <span class="variable">$value</span>, <span class="keyword">int</span> <span class="variable">$mode</span> = COUNT_NORMAL): <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
 
-###### krsort
-
-根据关联数组的键,对数组进行降序排列
-
+<h6 id="krsort"><a href="#krsort" class="headerlink" title="krsort"></a>krsort</h6><p>根据关联数组的键,对数组进行降序排列</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">krsort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">int</span> <span class="variable">$flags</span> = SORT_REGULAR): <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-###### ksort
-
-根据关联数组的键,对数组进行升序排列
-
+<h6 id="ksort"><a href="#ksort" class="headerlink" title="ksort"></a>ksort</h6><p>根据关联数组的键,对数组进行升序排列</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">ksort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">int</span> <span class="variable">$flags</span> = SORT_REGULAR): <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-###### rsort
-
-对数组进行降序排列
-
+<h6 id="rsort"><a href="#rsort" class="headerlink" title="rsort"></a>rsort</h6><p>对数组进行降序排列</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">rsort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">int</span> <span class="variable">$flags</span> = SORT_REGULAR): <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-###### sort
-
-对数组进行升序排列
-
+<h6 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h6><p>对数组进行升序排列</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">sort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">int</span> <span class="variable">$flags</span> = SORT_REGULAR): <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
-#### 3.2变量处理函数
-
-##### isset
-
-检测变量是否声明且值不为NULL
-
-##### print_r
-
-以人类可读的方式显示变量的信息
-
-##### serialize
-
-生成值的可存储表示 
-
-##### var_dump
-
-打印变量相关信息
-
+<h4 id="3-2变量处理函数"><a href="#3-2变量处理函数" class="headerlink" title="3.2变量处理函数"></a>3.2变量处理函数</h4><h5 id="isset"><a href="#isset" class="headerlink" title="isset"></a>isset</h5><p>检测变量是否声明且值不为NULL</p>
+<h5 id="print-r"><a href="#print-r" class="headerlink" title="print_r"></a>print_r</h5><p>以人类可读的方式显示变量的信息</p>
+<h5 id="serialize"><a href="#serialize" class="headerlink" title="serialize"></a>serialize</h5><p>生成值的可存储表示 </p>
+<h5 id="var-dump"><a href="#var-dump" class="headerlink" title="var_dump"></a>var_dump</h5><p>打印变量相关信息</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="keyword">mixed</span> ...<span class="variable">$values</span>): <span class="keyword">void</span></span><br></pre></td></tr></table></figure>
 
-##### intval
-
-获取变量的整数值，若第一个是字符，则返回0
-
-##### unset
-
-销毁指定变量
-
-##### unserialize
-
-PHP反序列化,执行unserialize时，PHP会在内存中重新构建一个test类的对象
-
-#### 其他服务
-
-##### 网络
-
-###### 网络函数
-
-header：
-
-发送原生HTTP头
-
-### 3.12XML操作
-
-#### 3.12.1DOM
-
-DOMDocument用来读取XML文档，DOMDocument是一个类，需要先实例化为对象
-
-内置方法：
-
-| 方法                 | 作用                                       |
-| -------------------- | ------------------------------------------ |
-| item                 |                                            |
-| load                 | 从文件路径加载 XML 文档，并解析成 DOM 树。 |
-| loadXML              | 从字符串加载XML                            |
-| nodeValue            |                                            |
-| getElementsByTagName | 在整个文档中查找所有指定标签名的元素       |
-| saveXML              | 保存为XML字符串                            |
-|                      |                                            |
-
-#### 3.12.3SImpleXML
-
-##### 3.12.3.2SimpleXML函数
-
-simplexml_import_dom
-
-
-
-simplexml_load_file
-
-把XML文档载入对象中
-
-## 17.引用
-
-## PHP弱类型
-
-在PHP中,以下变量的定义方式是允许的:
-
+<h5 id="intval"><a href="#intval" class="headerlink" title="intval"></a>intval</h5><p>获取变量的整数值，若第一个是字符，则返回0</p>
+<h5 id="unset"><a href="#unset" class="headerlink" title="unset"></a>unset</h5><p>销毁指定变量</p>
+<h5 id="unserialize"><a href="#unserialize" class="headerlink" title="unserialize"></a>unserialize</h5><p>PHP反序列化,执行unserialize时，PHP会在内存中重新构建一个test类的对象</p>
+<h4 id="其他服务"><a href="#其他服务" class="headerlink" title="其他服务"></a>其他服务</h4><h5 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h5><h6 id="网络函数"><a href="#网络函数" class="headerlink" title="网络函数"></a>网络函数</h6><p>header：</p>
+<p>发送原生HTTP头</p>
+<h3 id="3-12XML操作"><a href="#3-12XML操作" class="headerlink" title="3.12XML操作"></a>3.12XML操作</h3><h4 id="3-12-1DOM"><a href="#3-12-1DOM" class="headerlink" title="3.12.1DOM"></a>3.12.1DOM</h4><p>DOMDocument用来读取XML文档，DOMDocument是一个类，需要先实例化为对象</p>
+<p>内置方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>item</td>
+<td></td>
+</tr>
+<tr>
+<td>load</td>
+<td>从文件路径加载 XML 文档，并解析成 DOM 树。</td>
+</tr>
+<tr>
+<td>loadXML</td>
+<td>从字符串加载XML</td>
+</tr>
+<tr>
+<td>nodeValue</td>
+<td></td>
+</tr>
+<tr>
+<td>getElementsByTagName</td>
+<td>在整个文档中查找所有指定标签名的元素</td>
+</tr>
+<tr>
+<td>saveXML</td>
+<td>保存为XML字符串</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="3-12-3SImpleXML"><a href="#3-12-3SImpleXML" class="headerlink" title="3.12.3SImpleXML"></a>3.12.3SImpleXML</h4><h5 id="3-12-3-2SimpleXML函数"><a href="#3-12-3-2SimpleXML函数" class="headerlink" title="3.12.3.2SimpleXML函数"></a>3.12.3.2SimpleXML函数</h5><p>simplexml_import_dom</p>
+<p>simplexml_load_file</p>
+<p>把XML文档载入对象中</p>
+<h2 id="17-引用"><a href="#17-引用" class="headerlink" title="17.引用"></a>17.引用</h2><h2 id="PHP弱类型"><a href="#PHP弱类型" class="headerlink" title="PHP弱类型"></a>PHP弱类型</h2><p>在PHP中,以下变量的定义方式是允许的:</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="variable">$a</span> = <span class="keyword">array</span>(<span class="string">&quot;apple&quot;</span>,<span class="string">&quot;pear&quot;</span>,<span class="string">&quot;banana&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-PHP对变量的数据类型没有限制,可以在任何地时候将变量赋值给任意的其他类型的变量,同时变量也可以转换成任意地其他类型的数据,也就是说PHP是一种弱类型语言。
-
-弱类型导致的问题：
-
-类型转换是无法避免的,当是两个变量类型不匹配的时候,PHP会自动地进行变量转换。但是PHP是一个弱类型的语言,导致在进行类型转换可能会出现一些问题。
-
-最常见的int与string类型间的转换
-
-int转string可以使用如下方法:
-
-$a = 1;
-
-$stra=(string)$a;
-
-或
-
-$stra=strval($a);
-
-而string转int可以使用intval函数
-
-
-
-
+<p>PHP对变量的数据类型没有限制,可以在任何地时候将变量赋值给任意的其他类型的变量,同时变量也可以转换成任意地其他类型的数据,也就是说PHP是一种弱类型语言。</p>
+<p>弱类型导致的问题：</p>
+<p>类型转换是无法避免的,当是两个变量类型不匹配的时候,PHP会自动地进行变量转换。但是PHP是一个弱类型的语言,导致在进行类型转换可能会出现一些问题。</p>
+<p>最常见的int与string类型间的转换</p>
+<p>int转string可以使用如下方法:</p>
+<p>$a &#x3D; 1;</p>
+<p>$stra&#x3D;(string)$a;</p>
+<p>或</p>
+<p>$stra&#x3D;strval($a);</p>
+<p>而string转int可以使用intval函数</p>
 
   </div>
 </article>

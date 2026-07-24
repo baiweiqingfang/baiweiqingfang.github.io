@@ -56,29 +56,13 @@
     </div>
   </header>
   <div class="article-content">
-    
-# vulhub dns-zone-transfer漏洞复现
-
-## 启动环境
-
-cd vulhub dns dns-zone-transfer
-
-sudo docker-compose up -d
-
-## 执行命令
-
-dig vulhub.org ## 获取vulhub.org的IP
-
-![image-20251028222201929](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251028222201929.png)
-
-dig axfr vulhub.org @127.0.0.1## 向指定DNS服务器请求整个区的完整记录
-
-127.0.0.1：本机地址
-
-![image-20251028223541173](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251028223541173.png)
-
-
-
+    <h1 id="vulhub-dns-zone-transfer漏洞复现"><a href="#vulhub-dns-zone-transfer漏洞复现" class="headerlink" title="vulhub dns-zone-transfer漏洞复现"></a>vulhub dns-zone-transfer漏洞复现</h1><h2 id="启动环境"><a href="#启动环境" class="headerlink" title="启动环境"></a>启动环境</h2><p>cd vulhub dns dns-zone-transfer</p>
+<p>sudo docker-compose up -d</p>
+<h2 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h2><p>dig vulhub.org ## 获取vulhub.org的IP</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251028222201929.png" alt="image-20251028222201929"></p>
+<p>dig axfr vulhub.org @127.0.0.1## 向指定DNS服务器请求整个区的完整记录</p>
+<p>127.0.0.1：本机地址</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251028223541173.png" alt="image-20251028223541173"></p>
 
   </div>
 </article>

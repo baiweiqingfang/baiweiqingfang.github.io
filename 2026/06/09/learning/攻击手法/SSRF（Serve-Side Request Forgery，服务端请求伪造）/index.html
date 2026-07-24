@@ -52,198 +52,81 @@
     <h1>SSRF（Serve-Side Request Forgery，服务端请求伪造）</h1>
     <div class="post-meta">
       <time datetime="2026-06-09T15:42:57.000Z">2026.06.09</time>
-      <span>7 分钟阅读</span>
+      <span>5 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# SSRF（Serve-Side Request Forgery，服务端请求伪造）
-
-由攻击者构造形成由服务器发起请求的一个安全漏洞，一般情况下，攻击的目标是从外网无法访问的内部系统（因为它是由服务端发起，所以能够请求到与它相连而与外网隔离的内部系统）
-
-## 1.产生原因
-
-很多服务器为了实现特定功能（如：抓取其他网页的标题、获取远程快照、下载文件、请求 API 等），必须具备访问其他机器的能力，且没有对目标地址做过滤与限制
-
-## 2.漏洞危害
-
-扫描内部网络，可以访问到本来不能访问的内网服务，或找出存活的内网主机或者开放端口
-
-向内部主机发送精心构造的数据包以达到攻击的效果
-
-DOS
-
-进行暴力穷举，做进一步的信息收集
-
-配合file，dict，gopher，ftp等协议进行请求，加以应用
-
-## 3.漏洞防御
-
-1.在服务端开启OpenSSL，按照规则生成数据，再用加密证书发送，经过校验才能通过
-
-![image-20260320214750122](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260320214750122.png)
-
-2.在服务端发起请求前开启认证cookie，password，token
-
-3.正则防御
-
-![image-20260320215031347](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260320215031347.png)
-
-此类正则可以过滤掉内网的IP，从而达到防止内网SSRF的目的
-
-4.禁用不必要的file，ditc，gopher等可能造成RCE或文件读写的协议（或只允许通过http的请求）
-
-5.
-
-![image-20260518151850268](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518151850268.png)
-
-1.解析目标URL,获取其Host
-
-2.解析Host,获取Host指向的IP地址
-
-3.检查IP地址是否合法
-
-4.请求URL
-
-5.如果有跳转,拿出跳转URL,执行上述步骤
-
-6.如果IP检测伪合法的，则进入curl的阶段发包
-
-第一次DNS解析:
-是对URL的host
-进行DNS解析
-
-第二次DNS解析:
-使用CURL发包的时候进行解析
-
-注：
-
-Java或其他语言栈不支持很花里胡哨的协议, 如果我跳转链接写了个file或者dict协议,在php的语言栈中可以进行跳转绕后进行攻击,但是JAVA中的跳转只能跳转访问VPS的那个协议,也就是http协议。
-
-## 4.漏洞场景
-
-从远程服务器请求资源
-
-## 5.漏洞验证
-
-### 5.1DNSLog
-
-## 6.利用方式
-
-D:\Desktop\靶场write up\ssrf-labs.md
-
-### 6.1信息收集
-
-1.利用file伪协议查看文件内容：
-
+    <h1 id="SSRF（Serve-Side-Request-Forgery，服务端请求伪造）"><a href="#SSRF（Serve-Side-Request-Forgery，服务端请求伪造）" class="headerlink" title="SSRF（Serve-Side Request Forgery，服务端请求伪造）"></a>SSRF（Serve-Side Request Forgery，服务端请求伪造）</h1><p>由攻击者构造形成由服务器发起请求的一个安全漏洞，一般情况下，攻击的目标是从外网无法访问的内部系统（因为它是由服务端发起，所以能够请求到与它相连而与外网隔离的内部系统）</p>
+<h2 id="1-产生原因"><a href="#1-产生原因" class="headerlink" title="1.产生原因"></a>1.产生原因</h2><p>很多服务器为了实现特定功能（如：抓取其他网页的标题、获取远程快照、下载文件、请求 API 等），必须具备访问其他机器的能力，且没有对目标地址做过滤与限制</p>
+<h2 id="2-漏洞危害"><a href="#2-漏洞危害" class="headerlink" title="2.漏洞危害"></a>2.漏洞危害</h2><p>扫描内部网络，可以访问到本来不能访问的内网服务，或找出存活的内网主机或者开放端口</p>
+<p>向内部主机发送精心构造的数据包以达到攻击的效果</p>
+<p>DOS</p>
+<p>进行暴力穷举，做进一步的信息收集</p>
+<p>配合file，dict，gopher，ftp等协议进行请求，加以应用</p>
+<h2 id="3-漏洞防御"><a href="#3-漏洞防御" class="headerlink" title="3.漏洞防御"></a>3.漏洞防御</h2><p>1.在服务端开启OpenSSL，按照规则生成数据，再用加密证书发送，经过校验才能通过</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260320214750122.png" alt="image-20260320214750122"></p>
+<p>2.在服务端发起请求前开启认证cookie，password，token</p>
+<p>3.正则防御</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260320215031347.png" alt="image-20260320215031347"></p>
+<p>此类正则可以过滤掉内网的IP，从而达到防止内网SSRF的目的</p>
+<p>4.禁用不必要的file，ditc，gopher等可能造成RCE或文件读写的协议（或只允许通过http的请求）</p>
+<ol start="5">
+<li></li>
+</ol>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518151850268.png" alt="image-20260518151850268"></p>
+<p>1.解析目标URL,获取其Host</p>
+<p>2.解析Host,获取Host指向的IP地址</p>
+<p>3.检查IP地址是否合法</p>
+<p>4.请求URL</p>
+<p>5.如果有跳转,拿出跳转URL,执行上述步骤</p>
+<p>6.如果IP检测伪合法的，则进入curl的阶段发包</p>
+<p>第一次DNS解析:<br>是对URL的host<br>进行DNS解析</p>
+<p>第二次DNS解析:<br>使用CURL发包的时候进行解析</p>
+<p>注：</p>
+<p>Java或其他语言栈不支持很花里胡哨的协议, 如果我跳转链接写了个file或者dict协议,在php的语言栈中可以进行跳转绕后进行攻击,但是JAVA中的跳转只能跳转访问VPS的那个协议,也就是http协议。</p>
+<h2 id="4-漏洞场景"><a href="#4-漏洞场景" class="headerlink" title="4.漏洞场景"></a>4.漏洞场景</h2><p>从远程服务器请求资源</p>
+<h2 id="5-漏洞验证"><a href="#5-漏洞验证" class="headerlink" title="5.漏洞验证"></a>5.漏洞验证</h2><h3 id="5-1DNSLog"><a href="#5-1DNSLog" class="headerlink" title="5.1DNSLog"></a>5.1DNSLog</h3><h2 id="6-利用方式"><a href="#6-利用方式" class="headerlink" title="6.利用方式"></a>6.利用方式</h2><p>D:\Desktop\靶场write up\ssrf-labs.md</p>
+<h3 id="6-1信息收集"><a href="#6-1信息收集" class="headerlink" title="6.1信息收集"></a>6.1信息收集</h3><p>1.利用file伪协议查看文件内容：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file://filename</span><br></pre></td></tr></table></figure>
 
-2.利用http伪协议遍历内网存活主机及端口
-
-通过hosts文件可以得到内网地址，burp suite抓包在intruder模块爆破最后两位跟端口号得到内网存活主机及端口号
-
-3.利用dict伪协议查看开放端口：
-
+<p>2.利用http伪协议遍历内网存活主机及端口</p>
+<p>通过hosts文件可以得到内网地址，burp suite抓包在intruder模块爆破最后两位跟端口号得到内网存活主机及端口号</p>
+<p>3.利用dict伪协议查看开放端口：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict://ip:port</span><br></pre></td></tr></table></figure>
 
-或读取数据：
-
+<p>或读取数据：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dict://ip:port/filename</span><br></pre></td></tr></table></figure>
 
-4.利用http伪协议遍历网站目录
-
-burp suite抓包在intruder模块进行爆破
-
+<p>4.利用http伪协议遍历网站目录</p>
+<p>burp suite抓包在intruder模块进行爆破</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://ip/$name$.$name$</span><br></pre></td></tr></table></figure>
 
-导入Kali下的字典/usr/share/wordlists/dirb/comment.txt
-
-### 6.2利用gopher伪协议提交参数
-
-#### 6.2.1get形式：
-
-需要保留的头部信息：
-
-1.路径：GET /filename?$name$=value HTTP/1.1
-
-2.目标IP地址：Host:IP:port 
-
-直接提交：
-
+<p>导入Kali下的字典&#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;dirb&#x2F;comment.txt</p>
+<h3 id="6-2利用gopher伪协议提交参数"><a href="#6-2利用gopher伪协议提交参数" class="headerlink" title="6.2利用gopher伪协议提交参数"></a>6.2利用gopher伪协议提交参数</h3><h4 id="6-2-1get形式："><a href="#6-2-1get形式：" class="headerlink" title="6.2.1get形式："></a>6.2.1get形式：</h4><p>需要保留的头部信息：</p>
+<p>1.路径：GET &#x2F;filename?$name$&#x3D;value HTTP&#x2F;1.1</p>
+<p>2.目标IP地址：Host:IP:port </p>
+<p>直接提交：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gopher://ip:port/_GET%20/filename%3f$name$=value%20HTTP/1.1%0d%0AHost:%20ip%0d%OA</span><br></pre></td></tr></table></figure>
 
-burpsuite抓包提交，需要进行两次URL编码
-
-#### 6.2.2post形式：
-
-需要保留头部信息:
-
+<p>burpsuite抓包提交，需要进行两次URL编码</p>
+<h4 id="6-2-2post形式："><a href="#6-2-2post形式：" class="headerlink" title="6.2.2post形式："></a>6.2.2post形式：</h4><p>需要保留头部信息:</p>
 <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/filename</span> <span class="meta">HTTP/1.1</span></span><br><span class="line">Host:IP:port</span><br><span class="line"><span class="attribute">Content-Type</span>:</span><br><span class="line">Content-Length:</span><br></pre></td></tr></table></figure>
 
-提交内容的键值，可以通过查看网页源代码
-
-burpsuite抓包提交，需要进行两次URL编码
-
-### 6.3命令执行
-
-### 6.4XXE漏洞利用
-
-### 6.5 SQL注入漏洞利用
-
-### 6.6文件上传漏洞利用
-
-### 6.7文件包含漏洞利用
-
-### 6.8MySQL未授权查询
-
-### 6.9MySQL未授权文件写入
-
-### 6.10tomcat文件写入
-
-### 6.11redis未授权webshell写入
-
-### 6.12redis未授权ssh公钥写入
-
-### 6.13redis未授权计划任务shell反弹
-
-## 7.绕过方式
-
-### 7.1回环地址绕过
-
-使用IP地址的其他表示方式
-
-(点分)二进制，(点分)八进制，(点分)十进制，(点分)十六进制，或者只对地址的某八位进行转换
-
-### 7.2302重定向绕过
-
-针对SSRF服务器对用户输入的URL做过滤的情况
-
-![image-20260514154128917](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260514154128917.png)
-
-1.攻击者给SSRF服务器传一个看起来很正常的公网URL
-
-2.SSRF服务器拿到这个 URL，一看是公网域名，不是127.0.0.1这种敏感地址，于是发起请求。
-
-3.实际上看起来很正常的公网URL是攻击者控制的服务器。当它收到请求后，它不返回正常内容，而是返回一个302 Found响应，并在Location头部写上http://127.0.0.1:80
-
-4.SSRF服务器在处理请求时，默认会遵循重定向逻辑，就会自动去访问Location里的地址。因为它已经过了第一步的地址检查关卡，所以它会直接请求自己本地的127.0.0.1
-
-### 7.3DNS Rebinding Attack（DNS重绑定攻击）
-
-![image-20260518152500058](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518152500058.png)
-
-攻击原理：利用服务器两次解析同一域名的短暂间隙,更换域名背后的ip达到突破同源策略或过waf进行ssrf的目的
-
-![image-20260518153841399](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518153841399.png)
-
-利用此网站进行DNS重绑定攻击https://lock.cmpxchg8b.com/rebinder.html
-
-![image-20260518155930051](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518155930051.png)
-
-
-
-
-
+<p>提交内容的键值，可以通过查看网页源代码</p>
+<p>burpsuite抓包提交，需要进行两次URL编码</p>
+<h3 id="6-3命令执行"><a href="#6-3命令执行" class="headerlink" title="6.3命令执行"></a>6.3命令执行</h3><h3 id="6-4XXE漏洞利用"><a href="#6-4XXE漏洞利用" class="headerlink" title="6.4XXE漏洞利用"></a>6.4XXE漏洞利用</h3><h3 id="6-5-SQL注入漏洞利用"><a href="#6-5-SQL注入漏洞利用" class="headerlink" title="6.5 SQL注入漏洞利用"></a>6.5 SQL注入漏洞利用</h3><h3 id="6-6文件上传漏洞利用"><a href="#6-6文件上传漏洞利用" class="headerlink" title="6.6文件上传漏洞利用"></a>6.6文件上传漏洞利用</h3><h3 id="6-7文件包含漏洞利用"><a href="#6-7文件包含漏洞利用" class="headerlink" title="6.7文件包含漏洞利用"></a>6.7文件包含漏洞利用</h3><h3 id="6-8MySQL未授权查询"><a href="#6-8MySQL未授权查询" class="headerlink" title="6.8MySQL未授权查询"></a>6.8MySQL未授权查询</h3><h3 id="6-9MySQL未授权文件写入"><a href="#6-9MySQL未授权文件写入" class="headerlink" title="6.9MySQL未授权文件写入"></a>6.9MySQL未授权文件写入</h3><h3 id="6-10tomcat文件写入"><a href="#6-10tomcat文件写入" class="headerlink" title="6.10tomcat文件写入"></a>6.10tomcat文件写入</h3><h3 id="6-11redis未授权webshell写入"><a href="#6-11redis未授权webshell写入" class="headerlink" title="6.11redis未授权webshell写入"></a>6.11redis未授权webshell写入</h3><h3 id="6-12redis未授权ssh公钥写入"><a href="#6-12redis未授权ssh公钥写入" class="headerlink" title="6.12redis未授权ssh公钥写入"></a>6.12redis未授权ssh公钥写入</h3><h3 id="6-13redis未授权计划任务shell反弹"><a href="#6-13redis未授权计划任务shell反弹" class="headerlink" title="6.13redis未授权计划任务shell反弹"></a>6.13redis未授权计划任务shell反弹</h3><h2 id="7-绕过方式"><a href="#7-绕过方式" class="headerlink" title="7.绕过方式"></a>7.绕过方式</h2><h3 id="7-1回环地址绕过"><a href="#7-1回环地址绕过" class="headerlink" title="7.1回环地址绕过"></a>7.1回环地址绕过</h3><p>使用IP地址的其他表示方式</p>
+<p>(点分)二进制，(点分)八进制，(点分)十进制，(点分)十六进制，或者只对地址的某八位进行转换</p>
+<h3 id="7-2302重定向绕过"><a href="#7-2302重定向绕过" class="headerlink" title="7.2302重定向绕过"></a>7.2302重定向绕过</h3><p>针对SSRF服务器对用户输入的URL做过滤的情况</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260514154128917.png" alt="image-20260514154128917"></p>
+<p>1.攻击者给SSRF服务器传一个看起来很正常的公网URL</p>
+<p>2.SSRF服务器拿到这个 URL，一看是公网域名，不是127.0.0.1这种敏感地址，于是发起请求。</p>
+<p>3.实际上看起来很正常的公网URL是攻击者控制的服务器。当它收到请求后，它不返回正常内容，而是返回一个302 Found响应，并在Location头部写上<a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.0.0.1:80</a></p>
+<p>4.SSRF服务器在处理请求时，默认会遵循重定向逻辑，就会自动去访问Location里的地址。因为它已经过了第一步的地址检查关卡，所以它会直接请求自己本地的127.0.0.1</p>
+<h3 id="7-3DNS-Rebinding-Attack（DNS重绑定攻击）"><a href="#7-3DNS-Rebinding-Attack（DNS重绑定攻击）" class="headerlink" title="7.3DNS Rebinding Attack（DNS重绑定攻击）"></a>7.3DNS Rebinding Attack（DNS重绑定攻击）</h3><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518152500058.png" alt="image-20260518152500058"></p>
+<p>攻击原理：利用服务器两次解析同一域名的短暂间隙,更换域名背后的ip达到突破同源策略或过waf进行ssrf的目的</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518153841399.png" alt="image-20260518153841399"></p>
+<p>利用此网站进行DNS重绑定攻击<a target="_blank" rel="noopener" href="https://lock.cmpxchg8b.com/rebinder.html">https://lock.cmpxchg8b.com/rebinder.html</a></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260518155930051.png" alt="image-20260518155930051"></p>
 
   </div>
 </article>

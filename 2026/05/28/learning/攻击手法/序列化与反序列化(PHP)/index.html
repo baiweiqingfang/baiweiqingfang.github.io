@@ -52,245 +52,120 @@
     <h1>序列化与反序列化(PHP)</h1>
     <div class="post-meta">
       <time datetime="2026-05-28T08:27:00.000Z">2026.05.28</time>
-      <span>15 分钟阅读</span>
+      <span>14 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# PHP反序列化漏洞
-
-## 1.产生原因
-
-反序列化漏洞是基于序列化和反序列化的操作,在反序列化unserialize()时存在用户可控参数,而反序列化会自动调用一些魔术方法,如果魔术方法内存在一些敏感操作,而且参数是通过反序列化产生的,那么用户就可以通过改变参数来执行敏感操作,进行对象注入从而达到攻击的目的
-
-## 2.漏洞场景
-
-## 3.防御方式
-
-## 4.利用方式
-
-### 4.1session反序列化
-
-session处理器使用不当带来的问题
-
-第一种方式:
-
-首先设置存储方式为php_serialize
-
+    <h1 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h1><h2 id="1-产生原因"><a href="#1-产生原因" class="headerlink" title="1.产生原因"></a>1.产生原因</h2><p>反序列化漏洞是基于序列化和反序列化的操作,在反序列化unserialize()时存在用户可控参数,而反序列化会自动调用一些魔术方法,如果魔术方法内存在一些敏感操作,而且参数是通过反序列化产生的,那么用户就可以通过改变参数来执行敏感操作,进行对象注入从而达到攻击的目的</p>
+<h2 id="2-漏洞场景"><a href="#2-漏洞场景" class="headerlink" title="2.漏洞场景"></a>2.漏洞场景</h2><h2 id="3-防御方式"><a href="#3-防御方式" class="headerlink" title="3.防御方式"></a>3.防御方式</h2><h2 id="4-利用方式"><a href="#4-利用方式" class="headerlink" title="4.利用方式"></a>4.利用方式</h2><h3 id="4-1session反序列化"><a href="#4-1session反序列化" class="headerlink" title="4.1session反序列化"></a>4.1session反序列化</h3><p>session处理器使用不当带来的问题</p>
+<p>第一种方式:</p>
+<p>首先设置存储方式为php_serialize</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;session,serialize_handler&quot;</span>, <span class="string">&quot;php_serialize&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;session,save_path&quot;</span>, <span class="string">&quot;.&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;ichungiu&#x27;</span>] = <span class="string">&#x27;|O:8:&quot;stdClass&quot;:0:&#123;&#125;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$_SESSION</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-输出：
-
+<p>输出：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">array</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="string">&#x27;ichungiu&#x27;</span> =&gt;</span><br><span class="line">  <span class="keyword">string</span>(<span class="number">20</span>) <span class="string">&quot;|O:8:&quot;</span><span class="built_in">stdClass</span><span class="string">&quot;:0:&#123;&#125;&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-在文件中存储为：
-
+<p>在文件中存储为：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:1:&#123;s:8:&quot;ichunqiu&quot;<span class="comment">;s:20:&quot;|O:8:&quot;stdClass&quot;:0:&#123;&#125;&quot;;&#125;</span></span><br></pre></td></tr></table></figure>
 
-之后再设置为php，对session文件进行解析
-
+<p>之后再设置为php，对session文件进行解析</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;session,serialize_handler&quot;</span>, <span class="string">&quot;php&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;session,save_path&quot;</span>, <span class="string">&quot;.&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&#x27;ichungiu&#x27;</span>] = <span class="string">&#x27;|O:8:&quot;stdClass&quot;:0:&#123;&#125;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="variable">$_SESSION</span>);</span><br></pre></td></tr></table></figure>
 
-输出：
-
+<p>输出：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">array</span> (size=<span class="number">2</span>)</span><br><span class="line"><span class="string">&#x27;a:1: &#123;s:8:&quot;ichunqiu&quot;;s:20:&quot;&#x27;</span> =&gt;</span><br><span class="line"><span class="keyword">object</span>(<span class="built_in">stdClass</span>)[<span class="number">1</span>]</span><br><span class="line"><span class="string">&#x27;ichunqiu&#x27;</span> =&gt; <span class="keyword">string</span> <span class="string">&#x27;|0:8:&quot;stdClass&quot;:0:&#123;&#125;&#x27;</span> (length=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
 
-在文件中存储为：
-
+<p>在文件中存储为：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a:1:&#123;s:8:&quot;ichungiu&quot;<span class="comment">;s:20:&quot;|O:8:&quot;stdClass&quot;:0:&#123;&#125;&quot;;&#125;|O:8:&quot;stdClass&quot;:0:&#123;&#125;ichungiu|s:20:&quot;|O:8:&quot;stdClass&quot;:0:&#123;&#125;&quot;;</span></span><br></pre></td></tr></table></figure>
 
-第二种方式：
-
-foo1.php:
-
-传入foo1.php?ichunqiu=|O:4:"Owo0":1:{s:2:"hi";s:5:"pwned";}
-
+<p>第二种方式：</p>
+<p>foo1.php:</p>
+<p>传入foo1.php?ichunqiu&#x3D;|O:4:”Owo0”:1:{s:2:”hi”;s:5:”pwned”;}</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;session.serialize_handler&#x27;</span>, <span class="string">&quot;php_serialize&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;session,save_path&quot;</span>, <span class="string">&quot;.&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>():</span><br><span class="line"></span><br><span class="line"><span class="variable">$_SESSION</span>[ <span class="string">&#x27;ichunqiu&#x27;</span> ] = <span class="variable">$_GET</span>[ <span class="string">&#x27;ichunqiu&#x27;</span> ];</span><br></pre></td></tr></table></figure>
 
-foo2.php:
-
-对传入的session参数进行解析
-
+<p>foo2.php:</p>
+<p>对传入的session参数进行解析</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;session.serialize_handler&#x27;</span>, <span class="string">&quot;php&quot;</span>):</span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&quot;session,save_path&quot;</span>, <span class="string">&quot;.&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">session_start</span>():</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Owo0</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="variable">$hi</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">&quot;hi&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;hi;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-### 4.2Phar反序列化
+<h3 id="4-2Phar反序列化"><a href="#4-2Phar反序列化" class="headerlink" title="4.2Phar反序列化"></a>4.2Phar反序列化</h3><p>调用phar伪协议,可读取.phar文件</p>
+<p>Phar协议解析文件时,会自动触发对manifest字段的序列化字符串进行反序列化</p>
+<p>使用条件：</p>
+<p>phar文件能上传到服务器端</p>
+<p>要有可用反序列化魔术方法作为跳板</p>
+<p>要有文件操作函数</p>
+<p>文件操作函数参数可控,且:、&#x2F;、phar等特殊字符没有被过滤</p>
+<p>Phar需要PHP&gt;&#x3D;5.2在php.ini中将phar.readonly设为Off</p>
+<h2 id="5-绕过方式"><a href="#5-绕过方式" class="headerlink" title="5.绕过方式"></a>5.绕过方式</h2><h3 id="5-1加号绕过"><a href="#5-1加号绕过" class="headerlink" title="5.1加号绕过"></a>5.1加号绕过</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>,<span class="variable">$cmd</span>))</span><br></pre></td></tr></table></figure>
 
-调用phar伪协议,可读取.phar文件
-
-Phar协议解析文件时,会自动触发对manifest字段的序列化字符串进行反序列化
-
-使用条件：
-
-phar文件能上传到服务器端
-
-要有可用反序列化魔术方法作为跳板
-
-要有文件操作函数
-
-文件操作函数参数可控,且:、/、phar等特殊字符没有被过滤
-
-Phar需要PHP>=5.2在php.ini中将phar.readonly设为Off
-
-## 5.绕过方式
-
-### 5.1加号绕过
-
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/[oc]:\d+:/i&#x27;</span>,<span class="variable">$cmd</span>))</span><br></pre></td></tr></table></figure>
-
-在数字前面输入加号使正则匹配失效
-
-### 5.2URL编码
-
-## PHP反序列化漏洞
-
-核心:对象注入
-
-基本步骤:
-
-1.全局寻找 __ destruct方法
-
-2.全局寻找 __ wake方法
-
-3.全局寻找代码执行函数
-
-4.全局寻找 __ toString函数,找到符合$a->function($b)类型的方法,且$a,$b可控
-5.全局寻找可用的function方法,如果没有可用的,寻找可用的 __ call方法
-
-![image-20260322160811065](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260322160811065.png)
-
-可能涉及的魔法方法
-
-_\_construct(), __ destruct() 构造函数/析构函数
-
-__ call(), __ callStatic()调用对象方法不存在或不允许被调用/调用对象的静态方法不存在或不允许时
-
-_\_get(), __ set()获取对象不存在或无法访问的属性时/设置对象不存在或无法访问的属性时
-
-_\_isset(), __ unset()判断不可访问的类属性时/删除不可访问的类属性时
-
-_\_sleep(), __ wakeup()调用searialize()后/调用unsearizlie()方法后
-_\_toString()当对象被处理成字符串时
-
-_\_invoke()对象当方法用的时候
-
-__ clone()$a在调用clone
-
-# php反序列化常见的触发方法
-
-## 命令执行函数
-
-1.eval(),assert()
-
-最简单的命令执行函数
-
-2.preg_replace()
-
- preg_replace("/waf/e",$_POST["cmd"],"a waf"); 当/e模式时可以执行命令(需要较低的php版本)
-
-3.create_function() 
-
-$func =create_function(",$_POST['cmd']);$func(); 制造function
-
-4.array_map() 
-
-$array1=array_map($_POST['cmd'],$array);相当于python中的map函数
-
-5.call_user_func(),call_user_func_array()
-call_user_func("assert",$_POST['cmd']);
-call_user_func_array("assert",$array);
-
-调用用户的方法
-
-6.array_filter()
-
-array_filter($array,$_POST['cmd'])自己编写的过滤器
-
-7.usort()
-
-usort($_GET,'asse'.'rt');自己编写的排序器
-
-8.array_walk 
-
-array_walk($array, "function"," is ok");
-
-## phar的攻击扩展面
-
-phar文件由4个部分组成
-
-(1)a stub:可以理解为一个标志,格式为xxx <? php xxx ;__ HALT_COMPILER() ;? >,前面内容不限,但必须 __ HALT_COMPILER() ;? >
-来结尾,否则phar扩展将无法识别这个文件为phar文件。
-
-(2) a manifest describing the contents:phar文件本质上是一种压缩文件,其中每个被压缩文件的权限、属性等信息都放在这部分。这
-部分还会以序列化的形式存储用户自定义的meta-data,这是上述攻击手法最核心的地方。
-
-(3)the file contents:被压缩文件的内容。
-
-(4) [optional] a signature for verifying Phar integrity (phar file format only):签名,放在文件末尾
-
-ps:php中,要生成Phar文件,要将php.ini中的phar.readonly选项设置为Off
-
-可以和phar配合使用的方法
-
-(1) include, include_once,require,require_once//文件包含函数
-
-(2)file_get_contents,file_exsists,is_dir//文件判断,读取,操作函数
-
-(3)XXE,和XXE中的文件读取相配合,达到phar的反序列化效果
-
-(4)利用mysql的文件读取,从而达到phar的反序列化效果
-
-## 反序列化字符串逃逸
-
-1.反序列化字符串减少逃逸：多逃逸出一个成员属性，第一个字符串减少,吃掉有效代码,在第二个字符串构造代码
-
+<p>在数字前面输入加号使正则匹配失效</p>
+<h3 id="5-2URL编码"><a href="#5-2URL编码" class="headerlink" title="5.2URL编码"></a>5.2URL编码</h3><h2 id="PHP反序列化漏洞-1"><a href="#PHP反序列化漏洞-1" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h2><p>核心:对象注入</p>
+<p>基本步骤:</p>
+<p>1.全局寻找 __ destruct方法</p>
+<p>2.全局寻找 __ wake方法</p>
+<p>3.全局寻找代码执行函数</p>
+<p>4.全局寻找 __ toString函数,找到符合$a-&gt;function($b)类型的方法,且$a,$b可控<br>5.全局寻找可用的function方法,如果没有可用的,寻找可用的 __ call方法</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260322160811065.png" alt="image-20260322160811065"></p>
+<p>可能涉及的魔法方法</p>
+<p>__construct(), __ destruct() 构造函数&#x2F;析构函数</p>
+<p>__ call(), __ callStatic()调用对象方法不存在或不允许被调用&#x2F;调用对象的静态方法不存在或不允许时</p>
+<p>__get(), __ set()获取对象不存在或无法访问的属性时&#x2F;设置对象不存在或无法访问的属性时</p>
+<p>__isset(), __ unset()判断不可访问的类属性时&#x2F;删除不可访问的类属性时</p>
+<p>__sleep(), __ wakeup()调用searialize()后&#x2F;调用unsearizlie()方法后<br>__toString()当对象被处理成字符串时</p>
+<p>__invoke()对象当方法用的时候</p>
+<p>__ clone()$a在调用clone</p>
+<h1 id="php反序列化常见的触发方法"><a href="#php反序列化常见的触发方法" class="headerlink" title="php反序列化常见的触发方法"></a>php反序列化常见的触发方法</h1><h2 id="命令执行函数"><a href="#命令执行函数" class="headerlink" title="命令执行函数"></a>命令执行函数</h2><p>1.eval(),assert()</p>
+<p>最简单的命令执行函数</p>
+<p>2.preg_replace()</p>
+<p> preg_replace(“&#x2F;waf&#x2F;e”,$_POST[“cmd”],”a waf”); 当&#x2F;e模式时可以执行命令(需要较低的php版本)</p>
+<p>3.create_function() </p>
+<p>$func &#x3D;create_function(“,$_POST[‘cmd’]);$func(); 制造function</p>
+<p>4.array_map() </p>
+<p>$array1&#x3D;array_map($_POST[‘cmd’],$array);相当于python中的map函数</p>
+<p>5.call_user_func(),call_user_func_array()<br>call_user_func(“assert”,$_POST[‘cmd’]);<br>call_user_func_array(“assert”,$array);</p>
+<p>调用用户的方法</p>
+<p>6.array_filter()</p>
+<p>array_filter($array,$_POST[‘cmd’])自己编写的过滤器</p>
+<p>7.usort()</p>
+<p>usort($_GET,’asse’.’rt’);自己编写的排序器</p>
+<p>8.array_walk </p>
+<p>array_walk($array, “function”,” is ok”);</p>
+<h2 id="phar的攻击扩展面"><a href="#phar的攻击扩展面" class="headerlink" title="phar的攻击扩展面"></a>phar的攻击扩展面</h2><p>phar文件由4个部分组成</p>
+<p>(1)a stub:可以理解为一个标志,格式为xxx &lt;? php xxx ;__ HALT_COMPILER() ;? &gt;,前面内容不限,但必须 __ HALT_COMPILER() ;? &gt;<br>来结尾,否则phar扩展将无法识别这个文件为phar文件。</p>
+<p>(2) a manifest describing the contents:phar文件本质上是一种压缩文件,其中每个被压缩文件的权限、属性等信息都放在这部分。这<br>部分还会以序列化的形式存储用户自定义的meta-data,这是上述攻击手法最核心的地方。</p>
+<p>(3)the file contents:被压缩文件的内容。</p>
+<p>(4) [optional] a signature for verifying Phar integrity (phar file format only):签名,放在文件末尾</p>
+<p>ps:php中,要生成Phar文件,要将php.ini中的phar.readonly选项设置为Off</p>
+<p>可以和phar配合使用的方法</p>
+<p>(1) include, include_once,require,require_once&#x2F;&#x2F;文件包含函数</p>
+<p>(2)file_get_contents,file_exsists,is_dir&#x2F;&#x2F;文件判断,读取,操作函数</p>
+<p>(3)XXE,和XXE中的文件读取相配合,达到phar的反序列化效果</p>
+<p>(4)利用mysql的文件读取,从而达到phar的反序列化效果</p>
+<h2 id="反序列化字符串逃逸"><a href="#反序列化字符串逃逸" class="headerlink" title="反序列化字符串逃逸"></a>反序列化字符串逃逸</h2><p>1.反序列化字符串减少逃逸：多逃逸出一个成员属性，第一个字符串减少,吃掉有效代码,在第二个字符串构造代码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$name</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$safe</span>=<span class="keyword">array</span>(<span class="string">&quot;flag&quot;</span>,<span class="string">&quot;php&quot;</span>);</span><br><span class="line">    <span class="variable">$name</span>=<span class="title function_ invoke__">str_replace</span>(<span class="variable">$safe</span>,<span class="string">&quot;hk&quot;</span>,<span class="variable">$name</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$name</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$user</span>;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$pass</span>;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$vip</span> = <span class="literal">false</span> ;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$user</span>,<span class="variable">$pass</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;user=<span class="variable">$user</span>;</span><br><span class="line">    <span class="variable language_">$this</span>-&gt;pass=<span class="variable">$pass</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$param</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;user&#x27;</span>];</span><br><span class="line"><span class="variable">$pass</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;pass&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span>=<span class="title function_ invoke__">serialize</span>(<span class="keyword">new</span> <span class="title function_ invoke__">test</span>(<span class="variable">$param</span>,<span class="variable">$pass</span>));</span><br><span class="line"><span class="variable">$profile</span>=<span class="title function_ invoke__">unserialize</span>(<span class="title function_ invoke__">filter</span>(<span class="variable">$param</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$profile</span>-&gt;vip)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-当$profile->vip的值存在时，会输出flag.php的内容，但类定义里vip默认是false，且代码中没有直接修改pass的地方，只能控制$user跟$pass
-
-将get方式提交的字符串user，pass分别赋值给$param，$pass，通过new test($param，$pass)触发__construct函数将$param跟$pass分别赋值给$user，$pass属性，并对实例化的类进行序列化，将得到字符串赋值给$param，对$param使用filter函数过滤后再进行序列化，将得到的对象赋值给$profile
-
-filter函数分析：每出现一个php，内容长度减1，或者每出现一个flag，内容长度减2但前面的 s:长度 标签没变
-
-构造要逃逸的字符串：
-
+<p>当$profile-&gt;vip的值存在时，会输出flag.php的内容，但类定义里vip默认是false，且代码中没有直接修改pass的地方，只能控制$user跟$pass</p>
+<p>将get方式提交的字符串user，pass分别赋值给$param，$pass，通过new test($param，$pass)触发__construct函数将$param跟$pass分别赋值给$user，$pass属性，并对实例化的类进行序列化，将得到字符串赋值给$param，对$param使用filter函数过滤后再进行序列化，将得到的对象赋值给$profile</p>
+<p>filter函数分析：每出现一个php，内容长度减1，或者每出现一个flag，内容长度减2但前面的 s:长度 标签没变</p>
+<p>构造要逃逸的字符串：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;;s:3:&quot;</span>vip<span class="string">&quot;;s:4:&quot;</span><span class="literal">true</span><span class="string">&quot;;&#125;</span></span><br></pre></td></tr></table></figure>
 
-正常序列化的字符串：
-
+<p>正常序列化的字符串：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">4</span>:<span class="string">&quot;test&quot;</span>:<span class="number">3</span>:&#123;s:<span class="number">4</span>:<span class="string">&quot;user&quot;</span>;s:长度:<span class="string">&quot;[user内容]&quot;</span>;s:<span class="number">4</span>:<span class="string">&quot;pass&quot;</span>;s:长度:<span class="string">&quot;[pass内容]&quot;</span>;s:<span class="number">3</span>:<span class="string">&quot;vip&quot;</span>;b:<span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
 
-利用字符串减少吃掉";s:4:"pass";s:长度:"，利用$pass传递要逃逸的字符串，还要把$user吃掉的键补上，所以$pass=;s:4:"pass";s:4:"test";s:3:"vip";b:1;},所以吃掉的内容为";s:4:"pass";s:38:，共18个字符因此需要18个php
-
-2.反序列化字符串增加逃逸：构造出一个逃逸成员属性，第一个字符串增多,吐出多余代码,把多余位代码构造成逃逸的成员属性
-
+<p>利用字符串减少吃掉”;s:4:”pass”;s:长度:”，利用$pass传递要逃逸的字符串，还要把$user吃掉的键补上，所以$pass&#x3D;;s:4:”pass”;s:4:”test”;s:3:”vip”;b:1;},所以吃掉的内容为”;s:4:”pass”;s:38:，共18个字符因此需要18个php</p>
+<p>2.反序列化字符串增加逃逸：构造出一个逃逸成员属性，第一个字符串增多,吐出多余代码,把多余位代码构造成逃逸的成员属性</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$name</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$safe</span>=<span class="keyword">array</span>(<span class="string">&quot;flag&quot;</span>,<span class="string">&quot;php&quot;</span>);</span><br><span class="line">    <span class="variable">$name</span>=<span class="title function_ invoke__">str_replace</span>(<span class="variable">$safe</span>,<span class="string">&quot;hack&quot;</span>,<span class="variable">$name</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$name</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$user</span>;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$pass</span>=<span class="string">&#x27;daydream&#x27;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$user</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;user=<span class="variable">$user</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$param</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;param&#x27;</span>];</span><br><span class="line"><span class="variable">$param</span>=<span class="title function_ invoke__">serialize</span>(<span class="keyword">new</span> <span class="title function_ invoke__">test</span>(<span class="variable">$param</span>));</span><br><span class="line"><span class="variable">$profile</span>=<span class="title function_ invoke__">unserialize</span>(<span class="title function_ invoke__">filter</span>(<span class="variable">$param</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$profile</span>-&gt;pass==<span class="string">&#x27;escaping&#x27;</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;flag.php&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-当$profile->pass == escaping时，会输出flag.php的值，但类定义里pass默认是daydream，且代码中没有直接修改pass的地方，只能控制$user
-
-将get方式提交的字符串param赋值给$param，通过new test($param) 触发__construct函数将$param赋值给$user属性，并对实例化的类进行序列化，将得到字符串赋值给$param，对$param使用filter函数过滤后再进行序列化，将得到的对象赋值给$profile
-
-filter函数分析：每出现一个php，内容长度加1，但前面的 s:长度 标签没变
-
-构造要逃逸的字符串
-
+<p>当$profile-&gt;pass &#x3D;&#x3D; escaping时，会输出flag.php的值，但类定义里pass默认是daydream，且代码中没有直接修改pass的地方，只能控制$user</p>
+<p>将get方式提交的字符串param赋值给$param，通过new test($param) 触发__construct函数将$param赋值给$user属性，并对实例化的类进行序列化，将得到字符串赋值给$param，对$param使用filter函数过滤后再进行序列化，将得到的对象赋值给$profile</p>
+<p>filter函数分析：每出现一个php，内容长度加1，但前面的 s:长度 标签没变</p>
+<p>构造要逃逸的字符串</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;;s:4:&quot;</span>pass<span class="string">&quot;;s:8:&quot;</span>escaping<span class="string">&quot;;&#125;</span></span><br></pre></td></tr></table></figure>
 
-总计29个字符，要挤出29个位置，而一个php变hack只能挤出1个位置，所以需要29个php
-
+<p>总计29个字符，要挤出29个位置，而一个php变hack只能挤出1个位置，所以需要29个php</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?param=<span class="number">29</span>个php<span class="string">&quot;;s:4:&quot;</span>pass<span class="string">&quot;;s:8:&quot;</span>escaping<span class="string">&quot;;&#125;</span></span><br></pre></td></tr></table></figure>
 
-## POP链（Property-Oriented Programming Chain）
-
-在反序列化中,能控制的数据就是对象中的属性值(成员变量),
-所以在PHP反序列化中有一种漏洞利用方法叫“面向属性编程",
-EPPOP( Property Oriented Programming)
-
-POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据的
-一种payload
-
-
-
-
+<h2 id="POP链（Property-Oriented-Programming-Chain）"><a href="#POP链（Property-Oriented-Programming-Chain）" class="headerlink" title="POP链（Property-Oriented Programming Chain）"></a>POP链（Property-Oriented Programming Chain）</h2><p>在反序列化中,能控制的数据就是对象中的属性值(成员变量),<br>所以在PHP反序列化中有一种漏洞利用方法叫“面向属性编程”,<br>EPPOP( Property Oriented Programming)</p>
+<p>POP链就是利用魔法方法在里面进行多次跳转然后获取敏感数据的<br>一种payload</p>
 
   </div>
 </article>

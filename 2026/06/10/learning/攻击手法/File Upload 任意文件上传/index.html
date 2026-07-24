@@ -52,237 +52,141 @@
     <h1>File Upload 任意文件上传</h1>
     <div class="post-meta">
       <time datetime="2026-06-10T14:04:27.000Z">2026.06.10</time>
-      <span>9 分钟阅读</span>
+      <span>6 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# File Upload 任意文件上传
+    <h1 id="File-Upload-任意文件上传"><a href="#File-Upload-任意文件上传" class="headerlink" title="File Upload 任意文件上传"></a>File Upload 任意文件上传</h1><p>Web 应用开放了文件上传功能，对文件上传功能没有做限制或限制不足。</p>
+<p>用户可以利用文件上传功能向服务器上传恶意文件，对服务器造成危害。</p>
+<h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><table>
+<thead>
+<tr>
+<th>Windows</th>
+<th>Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cmd  PowerShell</td>
+<td>bash  sh  zsh</td>
+</tr>
+</tbody></table>
+<h2 id="WebShell"><a href="#WebShell" class="headerlink" title="WebShell"></a>WebShell</h2><p>WebShell 是一个网站的后门,也是一个命令解释器。通过web 方式,使用HTTP&#x2F;HTTPS 协议传递命令消息到服务器,并且继承了web 用户的权限,在服务器上远程执行命令。WebShell 从本质上讲,是一类以网页脚本语言编写的代码执行环境，其核心功能是为攻击者提供对目标网站服务器的远程操作权限</p>
+<p>WebShell 接收来自于Web 用户的命令,然后在服务器端执行,也称为网站木马、木马后门、网马等。</p>
+<table>
+<thead>
+<tr>
+<th>Web 容器</th>
+<th>支持的脚本语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Apache HTTPD</td>
+<td>PHP</td>
+</tr>
+<tr>
+<td>IIS</td>
+<td>ASP、ASPX、PHP</td>
+</tr>
+<tr>
+<td>Tomcat</td>
+<td>JSP、JSPX</td>
+</tr>
+</tbody></table>
+<h3 id="大马"><a href="#大马" class="headerlink" title="大马"></a>大马</h3><p>代码量较大</p>
+<h3 id="小马"><a href="#小马" class="headerlink" title="小马"></a>小马</h3><p>一句话木马，需要与蚁剑连接</p>
+<p>特点：短小精悍，功能强大</p>
+<p>三大基本功能：文件管理，虚拟终端，数据库管理</p>
+<h2 id="漏洞危害"><a href="#漏洞危害" class="headerlink" title="漏洞危害"></a>漏洞危害</h2><ul>
+<li>获取WebShell。</li>
+<li>任意文件读取。</li>
+<li>任意命令执行。</li>
+<li>控制网站。</li>
+<li>控制服务器。</li>
+</ul>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><p>文件上传漏洞完美利用,受到以下条件限制:</p>
+<p>· Web服务器开启文件上传功能,Web 用户可以使用该功能。</p>
+<p>· Web用户({www|www-data|apache})对目标目录具有可写权限,甚至具有执行权限。一般情况下,Web 目录都有执行权限。<br>· 完美利用意味着文件可以执行,也就是说代码可以被服务器解析。服务器开启了PUT 方法。</p>
+<h3 id="绕过姿势"><a href="#绕过姿势" class="headerlink" title="绕过姿势"></a>绕过姿势</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">&quot;php&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-Web 应用开放了文件上传功能，对文件上传功能没有做限制或限制不足。
-
-用户可以利用文件上传功能向服务器上传恶意文件，对服务器造成危害。
-
-## shell
-
-| Windows         | Linux         |
-| --------------- | ------------- |
-| cmd  PowerShell | bash  sh  zsh |
-
-## WebShell
-
-WebShell 是一个网站的后门,也是一个命令解释器。通过web 方式,使用HTTP/HTTPS 协议传递命令消息到服务器,并且继承了web 用户的权限,在服务器上远程执行命令。WebShell 从本质上讲,是一类以网页脚本语言编写的代码执行环境，其核心功能是为攻击者提供对目标网站服务器的远程操作权限
-
-WebShell 接收来自于Web 用户的命令,然后在服务器端执行,也称为网站木马、木马后门、网马等。
-
-| Web 容器     | 支持的脚本语言 |
-| ------------ | -------------- |
-| Apache HTTPD | PHP            |
-| IIS          | ASP、ASPX、PHP |
-| Tomcat       | JSP、JSPX      |
-
-### 大马
-
-代码量较大
-
-### 小马
-
-一句话木马，需要与蚁剑连接
-
-特点：短小精悍，功能强大
-
-三大基本功能：文件管理，虚拟终端，数据库管理
-
-## 漏洞危害
-
-- 获取WebShell。
-- 任意文件读取。
-- 任意命令执行。
-- 控制网站。
-- 控制服务器。
-
-## 漏洞利用
-
-文件上传漏洞完美利用,受到以下条件限制:
-
-· Web服务器开启文件上传功能,Web 用户可以使用该功能。
-
-· Web用户({www|www-data|apache})对目标目录具有可写权限,甚至具有执行权限。一般情况下,Web 目录都有执行权限。
-· 完美利用意味着文件可以执行,也就是说代码可以被服务器解析。服务器开启了PUT 方法。
-
-### 绕过姿势
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">&quot;php&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-等价于
-
+<p>等价于</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-### 前端（客户端）绕过
-
-D:\Study-Materials\渗透测试\靶场write up\Upload-Labs\Pass-01.md
-
-### 后端（服务器绕过）
-
-#### $_FILE['xxx'['type']]获取content-type绕过
-
-D:\Study-Materials\渗透测试\靶场write up\Upload-Labs\Pass-02.md
-
-#### getimagesize校验文件头绕过
-
-D:\Study-Materials\渗透测试\靶场write up\dvwa\File Upload.md
-
-给一句话木马添加文件头
-
-png
-
-![image-20260315162747698](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315162747698.png)
-
-jpg
-
-![image-20260315162830240](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315162830240.png)
-
-gif
-
-gif的文件头为可见字符GIF89a
-
-![image-20260315163839171](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315163839171.png)
-
-#### 文件后缀名校验绕过--特殊后缀名
-
-可使用php3,php4,php5,pht,phtml来绕过（仅限apache服务器）
-
-D:\Study-Materials\渗透测试\靶场write up\Upload-Labs\Pass-03.md
-
-#### 文件后缀名校验绕过--特殊后缀名--上传配置文件绕过
-
-.htaccess
-
-1绕过原理
-
-它负责所在目录下的网站配置,且会影响到所在目录的子目录。
-主要通过修改apache对某个后缀名的解析规则来实现的(无需重启apache服务)。
-
-2 payload
-
-![image-20260315183844269](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315183844269.png)
-
-D:\Study-Materials\靶场write up\Upload-Labs\Pass-04.md
-
-user.ini
-
-1 绕过原理简单来讲,它会影响部分php.ini中的配置,从而将指定文件的内容按php来解析。影响范围同样为所在目录及其子目录。
-
-要等待php.ini中user_ini.cache_ttl设置的时间或重启apache才能生效,且只在
-php5.3.0之后的版本中才生效。
-
-2.payload
-
+<h3 id="前端（客户端）绕过"><a href="#前端（客户端）绕过" class="headerlink" title="前端（客户端）绕过"></a>前端（客户端）绕过</h3><p>D:\Study-Materials\渗透测试\靶场write up\Upload-Labs\Pass-01.md</p>
+<h3 id="后端（服务器绕过）"><a href="#后端（服务器绕过）" class="headerlink" title="后端（服务器绕过）"></a>后端（服务器绕过）</h3><h4 id="FILE-‘xxx’-‘type’-获取content-type绕过"><a href="#FILE-‘xxx’-‘type’-获取content-type绕过" class="headerlink" title="$_FILE[‘xxx’[‘type’]]获取content-type绕过"></a>$_FILE[‘xxx’[‘type’]]获取content-type绕过</h4><p>D:\Study-Materials\渗透测试\靶场write up\Upload-Labs\Pass-02.md</p>
+<h4 id="getimagesize校验文件头绕过"><a href="#getimagesize校验文件头绕过" class="headerlink" title="getimagesize校验文件头绕过"></a>getimagesize校验文件头绕过</h4><p>D:\Study-Materials\渗透测试\靶场write up\dvwa\File Upload.md</p>
+<p>给一句话木马添加文件头</p>
+<p>png</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315162747698.png" alt="image-20260315162747698"></p>
+<p>jpg</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315162830240.png" alt="image-20260315162830240"></p>
+<p>gif</p>
+<p>gif的文件头为可见字符GIF89a</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315163839171.png" alt="image-20260315163839171"></p>
+<h4 id="文件后缀名校验绕过–特殊后缀名"><a href="#文件后缀名校验绕过–特殊后缀名" class="headerlink" title="文件后缀名校验绕过–特殊后缀名"></a>文件后缀名校验绕过–特殊后缀名</h4><p>可使用php3,php4,php5,pht,phtml来绕过（仅限apache服务器）</p>
+<p>D:\Study-Materials\渗透测试\靶场write up\Upload-Labs\Pass-03.md</p>
+<h4 id="文件后缀名校验绕过–特殊后缀名–上传配置文件绕过"><a href="#文件后缀名校验绕过–特殊后缀名–上传配置文件绕过" class="headerlink" title="文件后缀名校验绕过–特殊后缀名–上传配置文件绕过"></a>文件后缀名校验绕过–特殊后缀名–上传配置文件绕过</h4><p>.htaccess</p>
+<p>1绕过原理</p>
+<p>它负责所在目录下的网站配置,且会影响到所在目录的子目录。<br>主要通过修改apache对某个后缀名的解析规则来实现的(无需重启apache服务)。</p>
+<p>2 payload</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315183844269.png" alt="image-20260315183844269"></p>
+<p>D:\Study-Materials\靶场write up\Upload-Labs\Pass-04.md</p>
+<p>user.ini</p>
+<p>1 绕过原理简单来讲,它会影响部分php.ini中的配置,从而将指定文件的内容按php来解析。影响范围同样为所在目录及其子目录。</p>
+<p>要等待php.ini中user_ini.cache_ttl设置的时间或重启apache才能生效,且只在<br>php5.3.0之后的版本中才生效。</p>
+<p>2.payload</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto_prepend_file=<span class="keyword">eval</span>.jpg</span><br><span class="line">auto_append_file=<span class="keyword">eval</span>.jpg</span><br></pre></td></tr></table></figure>
 
-auto_prepend_file=eval.jpg会在index.php执行之前包含eval.php
-
-auto_append_file=eval.jpg会在index.php执行之后包含eval.php
-
-#### 文件后缀名校验绕过--大小写绕过
-
-#### 其他绕过
-
-双写绕过
-
-二次渲染绕过：
-
-其原理是通过Web服务器端的相关函数对用户上传的图片进行重新二次渲染生成新的突破，破坏掉原始图片文件中可能隐藏的恶意代码，从而有效防范了图片马等常见文件上传攻击手段
-
-因此我们可以将一个正常显示的图片上传到服务器，寻找图片被渲染之后与原始图片部分对比仍然相同的数据块部分，将webshell代码插在该部分，进行上传
-
-方法：
-
-1.准备图片马
-
-2.将原图片上传，下载渲染后的图片进行对比 ，可以利用工具找相同处，在相同的地方覆盖字符串，插入一句话木马，或者恶意指令
-
-### 利用服务器特性进行绕过
-
-Nginx:
-
-1.Nginx文件名逻辑漏洞(CVE-2013-4547)
-即在0.8.41~1.4.3/1.5.0~1.5.7版本中,如果上传一个1.gif (f后面有空格),
-之后再访问http://ip:port/1.gif\x20\x00.php即可将1.gif解析为php(\x20为空格,\x00
-为\0)。
-
-2.Nginx配置不当解析漏洞
-该漏洞与Nginx、php版本无关,属于用户配置不当造成的解析漏洞。
-
-Apache：
-
-1.Apache换行解析漏洞(CVE-2017-15715)，在2.4.0~2.4.29版本中,在解析PHP时,1.php\x0A将被按照PHP后缀进行解析。
-
-2.Apache多后缀解析漏洞，在有多个后缀的情况下,只要文件名中含有.php后缀,即可被解析为php。
-
-tomcat：
-
-Tomcat任意文件写入(CVE-2017-12615)
-
-在文件名后面加/
-
-# 漏洞防御
-
-## 前端（客户端）校验
-
-使用JavaScript进行校验，一般值校验后缀名
-
-![image-20260314210709929](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314210709929.png)
-
-## 后端（服务端）校验
-
-### 1.主要通过$_FILE['xxx'['type']]来获取content-type,之后进行校验
-
-![image-20260315090600240](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315090600240.png)
-
-### 2.大多数通过getimagesize来校验文件头
-
-![image-20260315091914346](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315091914346.png)
-
-### 3.文件后缀名校验
-
-白名单和黑名单校验，使用白名单较为安全
-
-代码角度：
-
-- 上传文件重命名，尽量少的从客户端获取信息，包括文件名、文件类型、文件内容等；
-- 文件内容检测；
-- 进行二次渲染，过滤掉图片马中的恶意代码；
-- 避免文件包含漏洞；
-- 严格处理文件路径，防御00 截断漏洞；
-- 检测Token 值，防止数据包重放。
-
-业务角度：
-
-强口令策略，避免恶意攻击者登录网站后台；
-
-尽量避免Web 用户修改上传白名单。
-
-Web 容器角度：
-
-- 及时更新Web 容器，防止[解析漏洞](https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=解析漏洞&zhida_source=entity)产生。
-- 禁用Web 容器PUT 方法。
-
-系统角度：
-
-- 避开空格、点`.`、`::$DATA` 等windows 系统特性。
-
-服务器部署：
-
-- 严格控制权限，[执行权限](https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=执行权限&zhida_source=entity)与写权限分离。
-- 建立单独的文件存储服务器，类似于[站库分离](https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=站库分离&zhida_source=entity)。
-
-
-
-
-
+<p>auto_prepend_file&#x3D;eval.jpg会在index.php执行之前包含eval.php</p>
+<p>auto_append_file&#x3D;eval.jpg会在index.php执行之后包含eval.php</p>
+<h4 id="文件后缀名校验绕过–大小写绕过"><a href="#文件后缀名校验绕过–大小写绕过" class="headerlink" title="文件后缀名校验绕过–大小写绕过"></a>文件后缀名校验绕过–大小写绕过</h4><h4 id="其他绕过"><a href="#其他绕过" class="headerlink" title="其他绕过"></a>其他绕过</h4><p>双写绕过</p>
+<p>二次渲染绕过：</p>
+<p>其原理是通过Web服务器端的相关函数对用户上传的图片进行重新二次渲染生成新的突破，破坏掉原始图片文件中可能隐藏的恶意代码，从而有效防范了图片马等常见文件上传攻击手段</p>
+<p>因此我们可以将一个正常显示的图片上传到服务器，寻找图片被渲染之后与原始图片部分对比仍然相同的数据块部分，将webshell代码插在该部分，进行上传</p>
+<p>方法：</p>
+<p>1.准备图片马</p>
+<p>2.将原图片上传，下载渲染后的图片进行对比 ，可以利用工具找相同处，在相同的地方覆盖字符串，插入一句话木马，或者恶意指令</p>
+<h3 id="利用服务器特性进行绕过"><a href="#利用服务器特性进行绕过" class="headerlink" title="利用服务器特性进行绕过"></a>利用服务器特性进行绕过</h3><p>Nginx:</p>
+<p>1.Nginx文件名逻辑漏洞(CVE-2013-4547)<br>即在0.8.41<del>1.4.3&#x2F;1.5.0</del>1.5.7版本中,如果上传一个1.gif (f后面有空格),<br>之后再访问<a href="http://ip:port/1.gif\x20\x00.php即可将1.gif解析为php">http://ip:port/1.gif\x20\x00.php即可将1.gif解析为php</a>(\x20为空格,\x00<br>为\0)。</p>
+<p>2.Nginx配置不当解析漏洞<br>该漏洞与Nginx、php版本无关,属于用户配置不当造成的解析漏洞。</p>
+<p>Apache：</p>
+<p>1.Apache换行解析漏洞(CVE-2017-15715)，在2.4.0~2.4.29版本中,在解析PHP时,1.php\x0A将被按照PHP后缀进行解析。</p>
+<p>2.Apache多后缀解析漏洞，在有多个后缀的情况下,只要文件名中含有.php后缀,即可被解析为php。</p>
+<p>tomcat：</p>
+<p>Tomcat任意文件写入(CVE-2017-12615)</p>
+<p>在文件名后面加&#x2F;</p>
+<h1 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h1><h2 id="前端（客户端）校验"><a href="#前端（客户端）校验" class="headerlink" title="前端（客户端）校验"></a>前端（客户端）校验</h2><p>使用JavaScript进行校验，一般值校验后缀名</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314210709929.png" alt="image-20260314210709929"></p>
+<h2 id="后端（服务端）校验"><a href="#后端（服务端）校验" class="headerlink" title="后端（服务端）校验"></a>后端（服务端）校验</h2><h3 id="1-主要通过-FILE-‘xxx’-‘type’-来获取content-type-之后进行校验"><a href="#1-主要通过-FILE-‘xxx’-‘type’-来获取content-type-之后进行校验" class="headerlink" title="1.主要通过$_FILE[‘xxx’[‘type’]]来获取content-type,之后进行校验"></a>1.主要通过$_FILE[‘xxx’[‘type’]]来获取content-type,之后进行校验</h3><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315090600240.png" alt="image-20260315090600240"></p>
+<h3 id="2-大多数通过getimagesize来校验文件头"><a href="#2-大多数通过getimagesize来校验文件头" class="headerlink" title="2.大多数通过getimagesize来校验文件头"></a>2.大多数通过getimagesize来校验文件头</h3><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315091914346.png" alt="image-20260315091914346"></p>
+<h3 id="3-文件后缀名校验"><a href="#3-文件后缀名校验" class="headerlink" title="3.文件后缀名校验"></a>3.文件后缀名校验</h3><p>白名单和黑名单校验，使用白名单较为安全</p>
+<p>代码角度：</p>
+<ul>
+<li>上传文件重命名，尽量少的从客户端获取信息，包括文件名、文件类型、文件内容等；</li>
+<li>文件内容检测；</li>
+<li>进行二次渲染，过滤掉图片马中的恶意代码；</li>
+<li>避免文件包含漏洞；</li>
+<li>严格处理文件路径，防御00 截断漏洞；</li>
+<li>检测Token 值，防止数据包重放。</li>
+</ul>
+<p>业务角度：</p>
+<p>强口令策略，避免恶意攻击者登录网站后台；</p>
+<p>尽量避免Web 用户修改上传白名单。</p>
+<p>Web 容器角度：</p>
+<ul>
+<li>及时更新Web 容器，防止<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9E&zhida_source=entity">解析漏洞</a>产生。</li>
+<li>禁用Web 容器PUT 方法。</li>
+</ul>
+<p>系统角度：</p>
+<ul>
+<li>避开空格、点<code>.</code>、<code>::$DATA</code> 等windows 系统特性。</li>
+</ul>
+<p>服务器部署：</p>
+<ul>
+<li>严格控制权限，<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E6%89%A7%E8%A1%8C%E6%9D%83%E9%99%90&zhida_source=entity">执行权限</a>与写权限分离。</li>
+<li>建立单独的文件存储服务器，类似于<a target="_blank" rel="noopener" href="https://zhida.zhihu.com/search?content_id=227391870&content_type=Article&match_order=1&q=%E7%AB%99%E5%BA%93%E5%88%86%E7%A6%BB&zhida_source=entity">站库分离</a>。</li>
+</ul>
 
   </div>
 </article>

@@ -52,53 +52,27 @@
     <h1>File Upload</h1>
     <div class="post-meta">
       <time datetime="2026-03-15T10:05:33.000Z">2026.03.15</time>
-      <span>3 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# File Upload
-
-## Low
-
-![image-20260314202448673](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202448673.png)
-
-上传一句话木马
-
-![image-20260314202525785](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202525785.png)
-
-上传成功，得到一句话木马的位置
-
-![image-20260314202633706](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202633706.png)
-
-使用蚁剑连接
-
-![image-20260314202714215](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202714215.png)
-
-连接成功
-
-## High
-
-1.查看源码
-
-![image-20260315163033992](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315163033992.png)
-
-代码审计得到$_FILE['xxx'['type']]获取content-type跟getimagename()校验方法
-
-2.上传一句话木马info.phpburp suite抓包发送到重放器
-
-![image-20260315180230189](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315180230189.png)
-
-3.将后缀名改为.jpg并在请求正文头部添加GIF89a,点击发送，找到文件上传位置
-
-![image-20260315180422442](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315180422442.png)
-
-4.一句话木马成功执行
-
-![image-20260315173058794](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315173058794.png)
-
-
-
+    <h1 id="File-Upload"><a href="#File-Upload" class="headerlink" title="File Upload"></a>File Upload</h1><h2 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h2><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202448673.png" alt="image-20260314202448673"></p>
+<p>上传一句话木马</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202525785.png" alt="image-20260314202525785"></p>
+<p>上传成功，得到一句话木马的位置</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202633706.png" alt="image-20260314202633706"></p>
+<p>使用蚁剑连接</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260314202714215.png" alt="image-20260314202714215"></p>
+<p>连接成功</p>
+<h2 id="High"><a href="#High" class="headerlink" title="High"></a>High</h2><p>1.查看源码</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315163033992.png" alt="image-20260315163033992"></p>
+<p>代码审计得到$_FILE[‘xxx’[‘type’]]获取content-type跟getimagename()校验方法</p>
+<p>2.上传一句话木马info.phpburp suite抓包发送到重放器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315180230189.png" alt="image-20260315180230189"></p>
+<p>3.将后缀名改为.jpg并在请求正文头部添加GIF89a,点击发送，找到文件上传位置</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315180422442.png" alt="image-20260315180422442"></p>
+<p>4.一句话木马成功执行</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260315173058794.png" alt="image-20260315173058794"></p>
 
   </div>
 </article>

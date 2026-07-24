@@ -52,97 +52,250 @@
     <h1>主动信息收集</h1>
     <div class="post-meta">
       <time datetime="2026-06-20T13:05:24.000Z">2026.06.20</time>
-      <span>6 分钟阅读</span>
+      <span>3 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# 主动信息收集
-
-## 基础知识
-
-### IP地址分类
-
-部分企业由于私有地址不够用，会出现公网私用情况
-
-#### 私有地址
-
-| 私有地址 | IP地址范围                    |
-| -------- | ----------------------------- |
-| 回环地址 | 127.0.0.1                     |
-| A类      | 10.0.0.0 ~ 10.255.255.255     |
-| B类      | 172.16.0.0 ~ 172.31.255.255   |
-| C类      | 192.168.0.0 ~ 192.168.255.255 |
-
-#### 公有地址
-
-### 常见端口号
-
-远程连接服务端口：
-
-| 端口号 | 服务   | 风险                          |
-| ------ | ------ | ----------------------------- |
-| 22     | SSH    | 弱口令爆破  SSH隧道  文件传输 |
-| 23     | Telnet | 弱口令爆破  嗅探              |
-| 3389   | RDP    | 弱口令爆破  shift后门         |
-| 5900   | VNC    | 弱口令爆破                    |
-
-Web应用服务端口：
-
-| 端口号     | 服务                         | 风险                      |
-| ---------- | ---------------------------- | ------------------------- |
-| 80  433    | 常见Web服务端口              | Web漏洞攻击  服务组件漏洞 |
-| 7001  7002 | weblogic管理控制台           | 反序列化  弱口令爆破      |
-| 8080  8089 | Jboos  Resin  Jetty  Jenkins | 反序列化  弱口令爆破      |
-| 9090       | WebSphere控制台              | 反序列化  弱口令爆破      |
-| 4848       | GlassFish控制台              | 弱口令爆破                |
-| 1352       | Lotus Domino邮件服务         | 弱口令爆破  信息泄露      |
-| 10000      | Webmin-Web控制面板           | 弱口令爆破                |
-
-数据库服务端口：
-
-| 端口号       | 服务              | 风险                            |
-| ------------ | ----------------- | ------------------------------- |
-| 1433         | MSSQL(SQL Server) | 弱口令爆破  注入  提权          |
-| 1521         | Oracle DB         | 弱口令爆破  注入  提权  TNS漏洞 |
-| 5432         | PortgreSQL        | 弱口令爆破  注入  提权          |
-| 27017  27018 | MongoDB           | 未授权访问  弱口令爆破          |
-| 6379         | Redis             | 未授权访问  弱口令爆破          |
-| 5000         | SysBase  DB2      | 未授权访问  弱口令爆破  注入    |
-
-邮件服务端口：
-
-| 端口号 | 服务     | 风险     |
-| ------ | -------- | -------- |
-| 25     | SMTP     | 邮件伪造 |
-| 110    | POP3协议 | 破解     |
-| 143    | IMAP协议 | 破解     |
-
-网络协议端口号：
-
-| 端口号 | 服务     | 风险                         |
-| ------ | -------- | ---------------------------- |
-| 53     | DNS      | 子域名爆破  DNS劫持  域传送  |
-| 67  68 | DHCP服务 | 地址池耗尽  DHCP欺骗         |
-| 161    | SNMP协议 | 收集目标内网信息  弱口令爆破 |
-
-特殊服务端口：
-
-| 端口号        | 服务                   | 风险              |
-| ------------- | ---------------------- | ----------------- |
-| 2181          | Zookeeper服务          |                   |
-| 8069          | Zabbix服务             | 远程执行  SQL注入 |
-| 9200  9300    | Elasticsearch          |                   |
-| 11211         | Memchache服务          |                   |
-| 512  513  514 | Linux Rexec服务        |                   |
-| 873           | Rsysnc服务             |                   |
-| 3690          | SVN服务                |                   |
-| 50000         | SAP Management Console |                   |
-
-
-
-
-
+    <h1 id="主动信息收集"><a href="#主动信息收集" class="headerlink" title="主动信息收集"></a>主动信息收集</h1><h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="IP地址分类"><a href="#IP地址分类" class="headerlink" title="IP地址分类"></a>IP地址分类</h3><p>部分企业由于私有地址不够用，会出现公网私用情况</p>
+<h4 id="私有地址"><a href="#私有地址" class="headerlink" title="私有地址"></a>私有地址</h4><table>
+<thead>
+<tr>
+<th>私有地址</th>
+<th>IP地址范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>回环地址</td>
+<td>127.0.0.1</td>
+</tr>
+<tr>
+<td>A类</td>
+<td>10.0.0.0 ~ 10.255.255.255</td>
+</tr>
+<tr>
+<td>B类</td>
+<td>172.16.0.0 ~ 172.31.255.255</td>
+</tr>
+<tr>
+<td>C类</td>
+<td>192.168.0.0 ~ 192.168.255.255</td>
+</tr>
+</tbody></table>
+<h4 id="公有地址"><a href="#公有地址" class="headerlink" title="公有地址"></a>公有地址</h4><h3 id="常见端口号"><a href="#常见端口号" class="headerlink" title="常见端口号"></a>常见端口号</h3><p>远程连接服务端口：</p>
+<table>
+<thead>
+<tr>
+<th>端口号</th>
+<th>服务</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>22</td>
+<td>SSH</td>
+<td>弱口令爆破  SSH隧道  文件传输</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Telnet</td>
+<td>弱口令爆破  嗅探</td>
+</tr>
+<tr>
+<td>3389</td>
+<td>RDP</td>
+<td>弱口令爆破  shift后门</td>
+</tr>
+<tr>
+<td>5900</td>
+<td>VNC</td>
+<td>弱口令爆破</td>
+</tr>
+</tbody></table>
+<p>Web应用服务端口：</p>
+<table>
+<thead>
+<tr>
+<th>端口号</th>
+<th>服务</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>80  433</td>
+<td>常见Web服务端口</td>
+<td>Web漏洞攻击  服务组件漏洞</td>
+</tr>
+<tr>
+<td>7001  7002</td>
+<td>weblogic管理控制台</td>
+<td>反序列化  弱口令爆破</td>
+</tr>
+<tr>
+<td>8080  8089</td>
+<td>Jboos  Resin  Jetty  Jenkins</td>
+<td>反序列化  弱口令爆破</td>
+</tr>
+<tr>
+<td>9090</td>
+<td>WebSphere控制台</td>
+<td>反序列化  弱口令爆破</td>
+</tr>
+<tr>
+<td>4848</td>
+<td>GlassFish控制台</td>
+<td>弱口令爆破</td>
+</tr>
+<tr>
+<td>1352</td>
+<td>Lotus Domino邮件服务</td>
+<td>弱口令爆破  信息泄露</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>Webmin-Web控制面板</td>
+<td>弱口令爆破</td>
+</tr>
+</tbody></table>
+<p>数据库服务端口：</p>
+<table>
+<thead>
+<tr>
+<th>端口号</th>
+<th>服务</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1433</td>
+<td>MSSQL(SQL Server)</td>
+<td>弱口令爆破  注入  提权</td>
+</tr>
+<tr>
+<td>1521</td>
+<td>Oracle DB</td>
+<td>弱口令爆破  注入  提权  TNS漏洞</td>
+</tr>
+<tr>
+<td>5432</td>
+<td>PortgreSQL</td>
+<td>弱口令爆破  注入  提权</td>
+</tr>
+<tr>
+<td>27017  27018</td>
+<td>MongoDB</td>
+<td>未授权访问  弱口令爆破</td>
+</tr>
+<tr>
+<td>6379</td>
+<td>Redis</td>
+<td>未授权访问  弱口令爆破</td>
+</tr>
+<tr>
+<td>5000</td>
+<td>SysBase  DB2</td>
+<td>未授权访问  弱口令爆破  注入</td>
+</tr>
+</tbody></table>
+<p>邮件服务端口：</p>
+<table>
+<thead>
+<tr>
+<th>端口号</th>
+<th>服务</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>25</td>
+<td>SMTP</td>
+<td>邮件伪造</td>
+</tr>
+<tr>
+<td>110</td>
+<td>POP3协议</td>
+<td>破解</td>
+</tr>
+<tr>
+<td>143</td>
+<td>IMAP协议</td>
+<td>破解</td>
+</tr>
+</tbody></table>
+<p>网络协议端口号：</p>
+<table>
+<thead>
+<tr>
+<th>端口号</th>
+<th>服务</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>53</td>
+<td>DNS</td>
+<td>子域名爆破  DNS劫持  域传送</td>
+</tr>
+<tr>
+<td>67  68</td>
+<td>DHCP服务</td>
+<td>地址池耗尽  DHCP欺骗</td>
+</tr>
+<tr>
+<td>161</td>
+<td>SNMP协议</td>
+<td>收集目标内网信息  弱口令爆破</td>
+</tr>
+</tbody></table>
+<p>特殊服务端口：</p>
+<table>
+<thead>
+<tr>
+<th>端口号</th>
+<th>服务</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2181</td>
+<td>Zookeeper服务</td>
+<td></td>
+</tr>
+<tr>
+<td>8069</td>
+<td>Zabbix服务</td>
+<td>远程执行  SQL注入</td>
+</tr>
+<tr>
+<td>9200  9300</td>
+<td>Elasticsearch</td>
+<td></td>
+</tr>
+<tr>
+<td>11211</td>
+<td>Memchache服务</td>
+<td></td>
+</tr>
+<tr>
+<td>512  513  514</td>
+<td>Linux Rexec服务</td>
+<td></td>
+</tr>
+<tr>
+<td>873</td>
+<td>Rsysnc服务</td>
+<td></td>
+</tr>
+<tr>
+<td>3690</td>
+<td>SVN服务</td>
+<td></td>
+</tr>
+<tr>
+<td>50000</td>
+<td>SAP Management Console</td>
+<td></td>
+</tr>
+</tbody></table>
 
   </div>
 </article>

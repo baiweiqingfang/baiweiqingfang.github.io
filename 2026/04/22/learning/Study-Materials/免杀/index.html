@@ -52,60 +52,37 @@
     <h1>免杀</h1>
     <div class="post-meta">
       <time datetime="2026-04-22T07:19:25.000Z">2026.04.22</time>
-      <span>3 分钟阅读</span>
+      <span>2 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# 免杀（Anti-Antivirus，简称AV Bypass）
-
-通过各种技术手段，使恶意代码或渗透工具在目标系统中运行，而不被杀毒软件（AV）、终端检测与响应系统（EDR）或其它安全监测机制发现并拦截。
-
-## 安全软件的三种检测方式
-
-静态扫描：扫描文件，看它的特征码（Signature）是否匹配已知的病毒库。
-
-启发式分析：根据代码中是否存在某些可疑的函数调用序列或逻辑结构，来判断它是否具有恶意倾向。
-
-动态行为监控：代码运行后，如果它尝试注入进程、修改注册表核心项或加密大量文件，就会被立即掐断。
-
-## 常见免杀方式
-
-### 1. 静态免杀（针对静态扫描/指纹）
-
-- **特征码修改**：通过改变二进制代码中的字符串、指令顺序或添加无用指令，避开杀毒软件的“黑名单”。
-- **加壳（Packing）**：给程序穿一件“加密外套”，让安全软件扫描不到里面的真实代码。
-- **资源伪装**：给木马加上正规公司的图标、数字签名或版本信息。
-
-msfvenom  
-
-### 2. 内存免杀（针对“文件落地”）
-
-- **分离免杀**：把恶意代码（Payload）和加载器（Loader）分开。程序运行后才去下载或读取 Payload。
-- **内存加载（无文件执行）**：Payload 不保存在硬盘上，而是直接通过脚本（如 PowerShell）或者反射式加载技术直接塞进内存运行。
-
-powershell内存注入
-
-利用msfvenom生成payload
-
-msfvenom -p <payload> LHOST=<IP> LPORT=<port> -f powershell -o <path>
-
-使用cs
-
-### 3. 行为免杀（针对动态监控）
-
-- **白名单利用 (LOLBins)**：利用 Windows 自带的合法工具（比如 `certutil`, `powershell`, `mshta`）来运行恶意代码。因为这些工具是“名门正派”，不容易触发报警。
-- **系统调用 (Syscalls)**：绕过 Windows 系统常见的监控接口，直接和底层内核对话，躲避安全软件的“钩子”。
-
-### 4. 辅助手段
-
-- **延时执行**：先睡眠（Sleep）几分钟再运行，以此骗过杀毒软件开头的快速沙箱扫描。
-- **反沙箱/反调试**：程序运行前先检查自己是不是在虚拟机里，如果是，就装死不运行。
-
-msfevasion
-
-
-
+    <h1 id="免杀（Anti-Antivirus，简称AV-Bypass）"><a href="#免杀（Anti-Antivirus，简称AV-Bypass）" class="headerlink" title="免杀（Anti-Antivirus，简称AV Bypass）"></a>免杀（Anti-Antivirus，简称AV Bypass）</h1><p>通过各种技术手段，使恶意代码或渗透工具在目标系统中运行，而不被杀毒软件（AV）、终端检测与响应系统（EDR）或其它安全监测机制发现并拦截。</p>
+<h2 id="安全软件的三种检测方式"><a href="#安全软件的三种检测方式" class="headerlink" title="安全软件的三种检测方式"></a>安全软件的三种检测方式</h2><p>静态扫描：扫描文件，看它的特征码（Signature）是否匹配已知的病毒库。</p>
+<p>启发式分析：根据代码中是否存在某些可疑的函数调用序列或逻辑结构，来判断它是否具有恶意倾向。</p>
+<p>动态行为监控：代码运行后，如果它尝试注入进程、修改注册表核心项或加密大量文件，就会被立即掐断。</p>
+<h2 id="常见免杀方式"><a href="#常见免杀方式" class="headerlink" title="常见免杀方式"></a>常见免杀方式</h2><h3 id="1-静态免杀（针对静态扫描-指纹）"><a href="#1-静态免杀（针对静态扫描-指纹）" class="headerlink" title="1. 静态免杀（针对静态扫描&#x2F;指纹）"></a>1. 静态免杀（针对静态扫描&#x2F;指纹）</h3><ul>
+<li><strong>特征码修改</strong>：通过改变二进制代码中的字符串、指令顺序或添加无用指令，避开杀毒软件的“黑名单”。</li>
+<li><strong>加壳（Packing）</strong>：给程序穿一件“加密外套”，让安全软件扫描不到里面的真实代码。</li>
+<li><strong>资源伪装</strong>：给木马加上正规公司的图标、数字签名或版本信息。</li>
+</ul>
+<p>msfvenom  </p>
+<h3 id="2-内存免杀（针对“文件落地”）"><a href="#2-内存免杀（针对“文件落地”）" class="headerlink" title="2. 内存免杀（针对“文件落地”）"></a>2. 内存免杀（针对“文件落地”）</h3><ul>
+<li><strong>分离免杀</strong>：把恶意代码（Payload）和加载器（Loader）分开。程序运行后才去下载或读取 Payload。</li>
+<li><strong>内存加载（无文件执行）</strong>：Payload 不保存在硬盘上，而是直接通过脚本（如 PowerShell）或者反射式加载技术直接塞进内存运行。</li>
+</ul>
+<p>powershell内存注入</p>
+<p>利用msfvenom生成payload</p>
+<p>msfvenom -p <payload> LHOST&#x3D;<IP> LPORT&#x3D;<port> -f powershell -o <path></p>
+<p>使用cs</p>
+<h3 id="3-行为免杀（针对动态监控）"><a href="#3-行为免杀（针对动态监控）" class="headerlink" title="3. 行为免杀（针对动态监控）"></a>3. 行为免杀（针对动态监控）</h3><ul>
+<li><strong>白名单利用 (LOLBins)</strong>：利用 Windows 自带的合法工具（比如 <code>certutil</code>, <code>powershell</code>, <code>mshta</code>）来运行恶意代码。因为这些工具是“名门正派”，不容易触发报警。</li>
+<li><strong>系统调用 (Syscalls)</strong>：绕过 Windows 系统常见的监控接口，直接和底层内核对话，躲避安全软件的“钩子”。</li>
+</ul>
+<h3 id="4-辅助手段"><a href="#4-辅助手段" class="headerlink" title="4. 辅助手段"></a>4. 辅助手段</h3><ul>
+<li><strong>延时执行</strong>：先睡眠（Sleep）几分钟再运行，以此骗过杀毒软件开头的快速沙箱扫描。</li>
+<li><strong>反沙箱&#x2F;反调试</strong>：程序运行前先检查自己是不是在虚拟机里，如果是，就装死不运行。</li>
+</ul>
+<p>msfevasion</p>
 
   </div>
 </article>

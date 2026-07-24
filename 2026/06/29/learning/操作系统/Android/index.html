@@ -52,157 +52,91 @@
     <h1>Android</h1>
     <div class="post-meta">
       <time datetime="2026-06-29T04:53:39.000Z">2026.06.29</time>
-      <span>9 分钟阅读</span>
+      <span>8 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Android
-
-## 平台架构
-
-![image-20260628161429563](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260628161429563.png)
-
-### Linux内核（Linux  Kernel）
-
-Android 平台的基础是 Linux 内核
-
-### 硬件抽象层（Hardware Abstraction Layer，HAL）
-
-提供用于向较高级别的 Java API 框架公开设备硬件功能的标准接口。HAL 由多个库模块组成，每个模块都为特定类型的硬件组件
-
-### Android运行时（Android Runtime）
-
-ART (Android Runtime)是Android系统的一种运行时环境，用于在Android设备上执行应用程序
-
-在Android 5.0及以上版本中，ART取代了之前的Dalvik虚拟机，成为了默认的运行时环境
-
-与Dalvik虚拟机不同，ART在应用程序安装时进行预编译，将Dalvik字节码转换为本地机器指令，并生成一个优化的DEX文件。这种预编译和优化的方法提高了应用程序的性能和启动速度，并减少了应用程序的内存占用。此外，ART还提供了新的调试工具，如实时编译（JIT）编译器和堆栈跟踪等。
-
-虽然ART取代了Dalvik作为Android系统的默认运行时环境，但Dalvik仍然被保留在Android系统中，以支持旧的应用程序。为了向后兼容性，ART可以在需要时将Dalvik字节码转换为本地指令，并在运行时执行。但是，这种转换会降低性能和效率，因此开发者通常建议将应用程序重新编译为ART格式以获得更好的性能和体验。
-
-### 原生C/C++库（Native C/C++ Libraries）
-
-### Java API框架（Java API Framework）
-
-#### Dalvik 虚拟机（DVM）
-
-Android系统的应用层是采用Java开发的，运行在Dalvik虚拟机中
-
-Dalvik虚拟机采用了一种基于寄存器的架构，并使用DEX格式（Dalvik Executable）来表示Java字节码
-
-在应用程序安装时，所有的Java字节码都会被转换成DEX格式，并且去除重复字节码，减小应用程序大小，降低内存占用和加载时间
-
-它可以支持已转换为.dex（Dalvik Executable）格式的Java应用程序的运行
-
-#### .dex文件
-
-DEX（Dalvik Executable）文件是一种专门为Android操作系统设计的可执行文件格式
-
-它是将Java字节码转换为Dalvik字节码的结果
-
-Dalvik字节码是一种特殊的字节码，用于在Android设备上执行Java代码
-
-Android应用程序中的所有Java代码都被编译成DEX文件，然后打包到APK文件中，当用户安装应用程序时，DEX文件会被解压并加载到设备的内存中，以便在设备上执行应用程序
-
-### 系统应用（System Apps）
-
-## Android 沙箱
-
-Android沙箱是一种安全机制，用于隔离应用程序和系统的敏感资源，以避免应用程序对系统造成损害或非法访问用户数据。每个Android应用程序都在其自己的沙箱中运行，这意味着它只能访问特定的文件和系统资源，无法影响其他应用程序或整个系统。
-
-Android沙箱是由Linux内核提供的安全功能，具有以下特点：
-
-1. 权限控制：每个应用程序都被分配一个特定的用户ID和组ID，并且只能访问特定的文件和系统资源
-2. 文件系统隔离：每个应用程序都有自己的私有文件夹，只有该应用程序才能访问这些文件夹，沙箱还会隔离每个应用程序的系统资源，
-3. 进程隔离：每个应用程序都在其自己的进程中运行，并与其他应用程序和系统进程隔离
-4. 操作系统级别的安全性：Android使用一系列操作系统级别的安全功能来保护应用程序和系统免受安全漏洞和恶意攻击的影响
-
-## Android 应用程序组件
-
-安卓应用程序组件是构成安卓应用程序的基本单元，主要有以下四种：
-
-1. 活动（Activity）：负责管理应用程序的用户界面，通过活动可以与用户交互。在应用程序中，通常会包含多个活动，每个活动对应一个屏幕或一个页面。
-2. 服务（Service）：在后台运行的组件，不具有用户界面，主要用于执行长时间运行的任务或处理与用户界面无关的操作。服务可以在应用程序内部运行，也可以作为独立的进程运行。常见的应用场景包括播放音乐、下载文件、上传数据等。
-3. 广播接收器（Broadcast Receiver）：用于接收系统广播和应用程序广播。它可以在应用程序之间传递消息，实现应用程序之间的通信，并在事件发生时作出相应的处理。可以接收来自系统的广播，例如电池电量变化、屏幕开关、网络连接状态等，也可以接收来自其他应用程序发送的广播。
-4. 内容提供者（Content Provider）：用于管理应用程序的数据，允许其他应用程序访问和共享应用程序的数据。内容提供者可以访问文件系统、SQLite 数据库、网络等数据源。
-
-## 应用签名
-
-在 Android 中，应用签名用于验证应用的身份和完整性。签名由开发者创建，并且在应用发布到 Play Store 或者其他应用市场之前进行验证。如果应用被篡改或者被恶意修改，则应用的签名将无法验证，使得应用无法被安装或者运行。
-
-应用签名分为两个部分：应用证书和应用的签名。应用证书是用于验证应用身份的公共证书，签名是用于验证应用完整性的私有密钥。
-
-Android 应用签名的主要步骤如下：
-
-1. 生成应用证书
-
-应用证书用于验证应用的身份，一般由开发者在开发阶段生成。可以使用 keytool 工具来生成应用证书。生成命令如下：
-
+    <h1 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h1><h2 id="平台架构"><a href="#平台架构" class="headerlink" title="平台架构"></a>平台架构</h2><p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260628161429563.png" alt="image-20260628161429563"></p>
+<h3 id="Linux内核（Linux-Kernel）"><a href="#Linux内核（Linux-Kernel）" class="headerlink" title="Linux内核（Linux  Kernel）"></a>Linux内核（Linux  Kernel）</h3><p>Android 平台的基础是 Linux 内核</p>
+<h3 id="硬件抽象层（Hardware-Abstraction-Layer，HAL）"><a href="#硬件抽象层（Hardware-Abstraction-Layer，HAL）" class="headerlink" title="硬件抽象层（Hardware Abstraction Layer，HAL）"></a>硬件抽象层（Hardware Abstraction Layer，HAL）</h3><p>提供用于向较高级别的 Java API 框架公开设备硬件功能的标准接口。HAL 由多个库模块组成，每个模块都为特定类型的硬件组件</p>
+<h3 id="Android运行时（Android-Runtime）"><a href="#Android运行时（Android-Runtime）" class="headerlink" title="Android运行时（Android Runtime）"></a>Android运行时（Android Runtime）</h3><p>ART (Android Runtime)是Android系统的一种运行时环境，用于在Android设备上执行应用程序</p>
+<p>在Android 5.0及以上版本中，ART取代了之前的Dalvik虚拟机，成为了默认的运行时环境</p>
+<p>与Dalvik虚拟机不同，ART在应用程序安装时进行预编译，将Dalvik字节码转换为本地机器指令，并生成一个优化的DEX文件。这种预编译和优化的方法提高了应用程序的性能和启动速度，并减少了应用程序的内存占用。此外，ART还提供了新的调试工具，如实时编译（JIT）编译器和堆栈跟踪等。</p>
+<p>虽然ART取代了Dalvik作为Android系统的默认运行时环境，但Dalvik仍然被保留在Android系统中，以支持旧的应用程序。为了向后兼容性，ART可以在需要时将Dalvik字节码转换为本地指令，并在运行时执行。但是，这种转换会降低性能和效率，因此开发者通常建议将应用程序重新编译为ART格式以获得更好的性能和体验。</p>
+<h3 id="原生C-C-库（Native-C-C-Libraries）"><a href="#原生C-C-库（Native-C-C-Libraries）" class="headerlink" title="原生C&#x2F;C++库（Native C&#x2F;C++ Libraries）"></a>原生C&#x2F;C++库（Native C&#x2F;C++ Libraries）</h3><h3 id="Java-API框架（Java-API-Framework）"><a href="#Java-API框架（Java-API-Framework）" class="headerlink" title="Java API框架（Java API Framework）"></a>Java API框架（Java API Framework）</h3><h4 id="Dalvik-虚拟机（DVM）"><a href="#Dalvik-虚拟机（DVM）" class="headerlink" title="Dalvik 虚拟机（DVM）"></a>Dalvik 虚拟机（DVM）</h4><p>Android系统的应用层是采用Java开发的，运行在Dalvik虚拟机中</p>
+<p>Dalvik虚拟机采用了一种基于寄存器的架构，并使用DEX格式（Dalvik Executable）来表示Java字节码</p>
+<p>在应用程序安装时，所有的Java字节码都会被转换成DEX格式，并且去除重复字节码，减小应用程序大小，降低内存占用和加载时间</p>
+<p>它可以支持已转换为.dex（Dalvik Executable）格式的Java应用程序的运行</p>
+<h4 id="dex文件"><a href="#dex文件" class="headerlink" title=".dex文件"></a>.dex文件</h4><p>DEX（Dalvik Executable）文件是一种专门为Android操作系统设计的可执行文件格式</p>
+<p>它是将Java字节码转换为Dalvik字节码的结果</p>
+<p>Dalvik字节码是一种特殊的字节码，用于在Android设备上执行Java代码</p>
+<p>Android应用程序中的所有Java代码都被编译成DEX文件，然后打包到APK文件中，当用户安装应用程序时，DEX文件会被解压并加载到设备的内存中，以便在设备上执行应用程序</p>
+<h3 id="系统应用（System-Apps）"><a href="#系统应用（System-Apps）" class="headerlink" title="系统应用（System Apps）"></a>系统应用（System Apps）</h3><h2 id="Android-沙箱"><a href="#Android-沙箱" class="headerlink" title="Android 沙箱"></a>Android 沙箱</h2><p>Android沙箱是一种安全机制，用于隔离应用程序和系统的敏感资源，以避免应用程序对系统造成损害或非法访问用户数据。每个Android应用程序都在其自己的沙箱中运行，这意味着它只能访问特定的文件和系统资源，无法影响其他应用程序或整个系统。</p>
+<p>Android沙箱是由Linux内核提供的安全功能，具有以下特点：</p>
+<ol>
+<li>权限控制：每个应用程序都被分配一个特定的用户ID和组ID，并且只能访问特定的文件和系统资源</li>
+<li>文件系统隔离：每个应用程序都有自己的私有文件夹，只有该应用程序才能访问这些文件夹，沙箱还会隔离每个应用程序的系统资源，</li>
+<li>进程隔离：每个应用程序都在其自己的进程中运行，并与其他应用程序和系统进程隔离</li>
+<li>操作系统级别的安全性：Android使用一系列操作系统级别的安全功能来保护应用程序和系统免受安全漏洞和恶意攻击的影响</li>
+</ol>
+<h2 id="Android-应用程序组件"><a href="#Android-应用程序组件" class="headerlink" title="Android 应用程序组件"></a>Android 应用程序组件</h2><p>安卓应用程序组件是构成安卓应用程序的基本单元，主要有以下四种：</p>
+<ol>
+<li>活动（Activity）：负责管理应用程序的用户界面，通过活动可以与用户交互。在应用程序中，通常会包含多个活动，每个活动对应一个屏幕或一个页面。</li>
+<li>服务（Service）：在后台运行的组件，不具有用户界面，主要用于执行长时间运行的任务或处理与用户界面无关的操作。服务可以在应用程序内部运行，也可以作为独立的进程运行。常见的应用场景包括播放音乐、下载文件、上传数据等。</li>
+<li>广播接收器（Broadcast Receiver）：用于接收系统广播和应用程序广播。它可以在应用程序之间传递消息，实现应用程序之间的通信，并在事件发生时作出相应的处理。可以接收来自系统的广播，例如电池电量变化、屏幕开关、网络连接状态等，也可以接收来自其他应用程序发送的广播。</li>
+<li>内容提供者（Content Provider）：用于管理应用程序的数据，允许其他应用程序访问和共享应用程序的数据。内容提供者可以访问文件系统、SQLite 数据库、网络等数据源。</li>
+</ol>
+<h2 id="应用签名"><a href="#应用签名" class="headerlink" title="应用签名"></a>应用签名</h2><p>在 Android 中，应用签名用于验证应用的身份和完整性。签名由开发者创建，并且在应用发布到 Play Store 或者其他应用市场之前进行验证。如果应用被篡改或者被恶意修改，则应用的签名将无法验证，使得应用无法被安装或者运行。</p>
+<p>应用签名分为两个部分：应用证书和应用的签名。应用证书是用于验证应用身份的公共证书，签名是用于验证应用完整性的私有密钥。</p>
+<p>Android 应用签名的主要步骤如下：</p>
+<ol>
+<li>生成应用证书</li>
+</ol>
+<p>应用证书用于验证应用的身份，一般由开发者在开发阶段生成。可以使用 keytool 工具来生成应用证书。生成命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -<span class="built_in">alias</span> myalias -keyalg RSA -keystore mykey.keystore</span><br></pre></td></tr></table></figure>
 
 
 
-其中，myalias 是别名，RSA 是加密算法，mykey.keystore 是保存证书的文件名。
-
-1. 签署应用
-
-签署应用需要使用 jarsigner 工具，该工具包含在 JDK 中。签署命令如下：
-
+<p>其中，myalias 是别名，RSA 是加密算法，mykey.keystore 是保存证书的文件名。</p>
+<ol>
+<li>签署应用</li>
+</ol>
+<p>签署应用需要使用 jarsigner 工具，该工具包含在 JDK 中。签署命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jarsigner -verbose -keystore mykey.keystore myapp.apk myalias</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">jarsigner -verbose -keystore mykey.keystore -signedjar new.apk old.apk myalias</span><br></pre></td></tr></table></figure>
 
 
 
-其中，mykey.keystore 是保存应用证书的文件，myapp.apk 是待签名的应用文件，myalias 是证书别名。
-
-1. 验证签名
-
-在应用发布前，需要验证应用签名是否有效。可以使用 jarsigner 工具来验证签名，命令如下：
-
+<p>其中，mykey.keystore 是保存应用证书的文件，myapp.apk 是待签名的应用文件，myalias 是证书别名。</p>
+<ol>
+<li>验证签名</li>
+</ol>
+<p>在应用发布前，需要验证应用签名是否有效。可以使用 jarsigner 工具来验证签名，命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jarsigner -verify -certs -verbose myapp.apk</span><br></pre></td></tr></table></figure>
 
 
 
-如果输出信息中包含类似于 "jar verified" 的信息，则说明应用签名有效。否则，应用的签名将无法验证，需要重新签署应用。
-
-## zipalign
-
-Zipalign是一个Android SDK提供的工具，用于对Android应用程序的APK文件进行优化，以便在Android设备上更高效地执行。APK文件在编译后通常包含未对齐的数据，这可能会导致应用程序在运行时消耗更多的内存和处理器时间。Zipalign工具会将APK文件中的资源重新对齐，使得应用程序在设备上加载时更加高效。
-
+<p>如果输出信息中包含类似于 “jar verified” 的信息，则说明应用签名有效。否则，应用的签名将无法验证，需要重新签署应用。</p>
+<h2 id="zipalign"><a href="#zipalign" class="headerlink" title="zipalign"></a>zipalign</h2><p>Zipalign是一个Android SDK提供的工具，用于对Android应用程序的APK文件进行优化，以便在Android设备上更高效地执行。APK文件在编译后通常包含未对齐的数据，这可能会导致应用程序在运行时消耗更多的内存和处理器时间。Zipalign工具会将APK文件中的资源重新对齐，使得应用程序在设备上加载时更加高效。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zipalign -v 4 input.apk output.apk</span><br></pre></td></tr></table></figure>
 
 
 
-## webview是什么
-
-WebView 是 Android 平台上的一个控件，它可以嵌入应用程序中，用于显示网页、HTML 内容以及其他支持网页浏览器所能显示的内容。WebView 可以通过应用程序内部的代码来加载并渲染网页，提供了在应用程序内部浏览网页的能力，使得应用程序可以更加灵活地展示内容、提供功能和交互。
-
-WebView 在 Android 开发中有着广泛的应用，比如：实现应用内浏览器、展示网页内容、在应用内部打开 PDF、文档等文件、实现与 Web 端的交互等等。在 WebView 中，我们可以使用 JavaScript 和 Java 之间的交互来实现更为丰富的交互和功能。同时，开发者也可以通过 WebView 设置一些参数和选项来控制 WebView 的行为和显示效果。
-
-## APK
-
-APK（Android Package）文件是Android操作系统上安装应用程序的一种文件格式
-
-APK文件实际上是一个压缩文件，它包含了应用程序的所有代码、资源和其他文件
-
-APK文件结构：
-
-1. AndroidManifest.xml：主要配置文件，包含应用程序的所有信息
-2. classes.dex：核心代码文件，包含应用程序的所有Java代码
-3. resources.arsc: 包含了应用程序的所有非代码资源，该文件用于支持应用程序的多语言和多种配置
-4. lib/：包含应用程序使用的所有本地库文件，通常按照不同的CPU架构分别存放
-5. res/：包含应用程序的所有资源文件
-6. assets/：包含应用程序的所有未编译的资源文件
-7. META-INF/：目录包含APK文件的数字签名信息
-
-## ADB
-
-adb（Android Debug Bridge）是一种用于在 Android 设备和计算机之间通信的命令行工具
-
-adb 是 Android SDK（Software Development Kit）的一部分。
-
-
-
+<h2 id="webview是什么"><a href="#webview是什么" class="headerlink" title="webview是什么"></a>webview是什么</h2><p>WebView 是 Android 平台上的一个控件，它可以嵌入应用程序中，用于显示网页、HTML 内容以及其他支持网页浏览器所能显示的内容。WebView 可以通过应用程序内部的代码来加载并渲染网页，提供了在应用程序内部浏览网页的能力，使得应用程序可以更加灵活地展示内容、提供功能和交互。</p>
+<p>WebView 在 Android 开发中有着广泛的应用，比如：实现应用内浏览器、展示网页内容、在应用内部打开 PDF、文档等文件、实现与 Web 端的交互等等。在 WebView 中，我们可以使用 JavaScript 和 Java 之间的交互来实现更为丰富的交互和功能。同时，开发者也可以通过 WebView 设置一些参数和选项来控制 WebView 的行为和显示效果。</p>
+<h2 id="APK"><a href="#APK" class="headerlink" title="APK"></a>APK</h2><p>APK（Android Package）文件是Android操作系统上安装应用程序的一种文件格式</p>
+<p>APK文件实际上是一个压缩文件，它包含了应用程序的所有代码、资源和其他文件</p>
+<p>APK文件结构：</p>
+<ol>
+<li>AndroidManifest.xml：主要配置文件，包含应用程序的所有信息</li>
+<li>classes.dex：核心代码文件，包含应用程序的所有Java代码</li>
+<li>resources.arsc: 包含了应用程序的所有非代码资源，该文件用于支持应用程序的多语言和多种配置</li>
+<li>lib&#x2F;：包含应用程序使用的所有本地库文件，通常按照不同的CPU架构分别存放</li>
+<li>res&#x2F;：包含应用程序的所有资源文件</li>
+<li>assets&#x2F;：包含应用程序的所有未编译的资源文件</li>
+<li>META-INF&#x2F;：目录包含APK文件的数字签名信息</li>
+</ol>
+<h2 id="ADB"><a href="#ADB" class="headerlink" title="ADB"></a>ADB</h2><p>adb（Android Debug Bridge）是一种用于在 Android 设备和计算机之间通信的命令行工具</p>
+<p>adb 是 Android SDK（Software Development Kit）的一部分。</p>
 
   </div>
 </article>

@@ -56,23 +56,12 @@
     </div>
   </header>
   <div class="article-content">
-    
-# xss之htmlspecialchars
-
-1.htmlspecialchars函数能将特殊字符转化为HTML实体
-
-2.输入特殊字符&'"<>,点击submit
-
-3.F12打开开发者管理工具，点击网络，选中报文，点击响应，打开原始，找到输入的字符串
-
-![image-20251118211205940](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251118211205940.png)
-
-可知只有‘未被转义
-
-3.闭合a标签，输入'onclick='alert(/xss/)',点击submit，再次点击'onclick='alert(/xss/)'触发弹窗
-
-
-
+    <h1 id="xss之htmlspecialchars"><a href="#xss之htmlspecialchars" class="headerlink" title="xss之htmlspecialchars"></a>xss之htmlspecialchars</h1><p>1.htmlspecialchars函数能将特殊字符转化为HTML实体</p>
+<p>2.输入特殊字符&amp;’”&lt;&gt;,点击submit</p>
+<p>3.F12打开开发者管理工具，点击网络，选中报文，点击响应，打开原始，找到输入的字符串</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251118211205940.png" alt="image-20251118211205940"></p>
+<p>可知只有‘未被转义</p>
+<p>3.闭合a标签，输入’onclick&#x3D;’alert(&#x2F;xss&#x2F;)’,点击submit，再次点击’onclick&#x3D;’alert(&#x2F;xss&#x2F;)’触发弹窗</p>
 
   </div>
 </article>

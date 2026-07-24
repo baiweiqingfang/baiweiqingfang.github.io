@@ -52,469 +52,564 @@
     <h1>Linux</h1>
     <div class="post-meta">
       <time datetime="2026-06-20T11:04:46.000Z">2026.06.20</time>
-      <span>14 分钟阅读</span>
+      <span>8 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Linux
-
-## 操作符
-
-;
-
-先执行上一个命令，再执后一个命令
-
-&
-
-简单拼接，命令之间无制约关系
-
-&&逻辑与
-
-前一个命令成功执行后才执行后一个
-
-||逻辑或
-
-前一个命令未成功执行才执行后一个
-
-### 通配符
-
-通配符是一种特殊的字符，可以匹配一个或多个文件或目录的名称
-
-*
-
-匹配任意长度的任意字符，包括空字符
-
-？
-
-一定有一个字符
-
-### 管道符
-
-|
-
-将上一个命令的输出作为下一个命令的输入
-
-### 重定向
-
-重定向是一种特殊的操作符，用来改变命令的输入或输出的来源或目的地
-
-系统运行命令时有三个默认的流（管道）：
-
-0：标准输入（键盘输入）
-
-1：标准输出（屏幕上打印的正常结果）
-
-2：准错误输出（程序报错、权限拒绝的提示）
-
-\>重定向
-
-输出到文件
-
-### 单引号
-
-### 双引号
-
-## Linux命令
-
-Linux命令可以换行执行，分割命令时要有换行符
-
-### bash(Bourne shell)
-
-启动一个命令解释器
-
-bash 参数 文件名
-
-| 参数 | 说明           |
-| ---- | -------------- |
-| -i   | 使用交互式模式 |
-| -p   | 特权模式       |
-|      |                |
-
-/dev/tcp/IP/端口
-
-让 bash 通过 TCP 连接
-
-### cat
-
-显示文件内容
-
-### cd
-
-目录跳转
-
-| 参数  | 说明                 |
-| ----- | -------------------- |
-| ..    | 切换到上一层路径     |
-| ../.. | 上一层路径的上一层   |
-| --    | 回到刚切换过来的路径 |
-| ~     | 回到用户路径         |
-
-### chmod(change mode)
-
-改变文件或目录权限
-
-### crontab（cron  table）
-
-管理定时计划任务
-
-crontab 参数 对象
-
-| 参数 | 说明                   |
-| ---- | ---------------------- |
-| -e   | 编辑任务               |
-| -i   | 删除前询问用户是否确认 |
-| -l   | 显示认为               |
-
-
-
-### echo
-
-输出指定字符串或变量提取后的值
-
-echo 参数 字符串或$变量名
-
-| 参数    | 说明               |
-| ------- | ------------------ |
-| -e "\n" | 换行后光标移至行首 |
-|         |                    |
-|         |                    |
-
-
-
-### ls（list）
-
-查看当前目录下的文件
-
-ls [参数] [文件或目录]
-
-| 参数 | 说明                       |
-| ---- | -------------------------- |
-| -a   | 显示隐藏文件               |
-| -al  | 显示详细信息又显示隐藏文件 |
-| -l   | 查看文件属于哪个用户的     |
-| -lh  | 查看文件或目录权限         |
-| -t   | 按照文件的创建时间进行排序 |
-
-
-
-### curl（CommandLine URL）
-是在Shell终端界面中基于URL规则进行文件传输工作，支持多种协议，默认是http或http://
-
-curl 参数 网址URL 文件名
-
-| 参数 | 说明                 |
-| ---- | -------------------- |
-| -O   | 保留远程文件的原始名 |
-| -s   | 静默执行模式         |
-|      |                      |
-|      |                      |
-
-### find
-
-根据给定的路径和条件查找相关文件或目录，支持正则表达式，结合管道符后能够实现更加复杂的功能
-
-find 路径 条件 文件名
-
-| 参数           | 说明                   |
-| -------------- | ---------------------- |
-| -exec [命令]\; | 跟着运行后面的系统命令 |
-| -name          | 匹配文件名             |
-| -perm          | 匹配文件权限           |
-|                |                        |
-
-
-
-### grep
-
-global search regular expression and print out the line 用于全面搜索的正则表达式，并将结果输出
-
-grep 参数 " "
-
-| 参数 | 说明 |
-| ---- | ---- |
-|      |      |
-|      |      |
-|      |      |
-
-### ifconfig
-
-查看IP
-
-### jobs
-
-显示终端后台的作业信息，查看到当前系统中终端后台的任务列表及其运行状态，查看任务列表及对应的进程号码
-
-jobs 参数
-
-### mkdir
-
-创建文件夹
-
-### mv
-
-移动文件
-
-### mysql
-
-用于MySQL服务器的客户端工具，它工作在Shell命令行终端中，完成对远程MySQL数据库服务器的管理操作
-
-mysql [参数] [数据库]
-
-常用参数：
-
-| 参数 | 说明               |
-| ---- | ------------------ |
-| -p   | 设置服务器的密码   |
-| -u   | 设置服务器的用户名 |
-|      |                    |
-|      |                    |
-
--p与密码之间必须连在一起
-
-### nc（net  cat）
-
-扫描与连接指定端口
-
-nc 参数 域名或IP地址
-
-| 参数 | 说明                                           |
-| ---- | ---------------------------------------------- |
-| -e   | Execute,一旦连接建立成功，就运行后面指定的程序 |
-| -l   | 使用监听模式                                   |
-| -p   | 设置本地主机使用的端口                         |
-| -v   | 显示执行过程详细信息                           |
-
-
-
-### netstat（network statistics）
-
-显示各种网络相关信息
-
-netstat 参数
-
-| 参数 | 说明                               |
-| ---- | ---------------------------------- |
-| -l   | 仅显示正在监听的服务状态           |
-| -n   | 直接使用IP地址，不使用域名         |
-| -p   | 显示正在使用接口的程序识别码和名称 |
-| -t   | 显示TCP传输协议的连线状态          |
-
-### php
-
-php 参数
-
-| 参数 | 说明               |
-| ---- | ------------------ |
-|      |                    |
-| S    | 运行内置服务器模式 |
-|      |                    |
-
-
-
-
-### ping
-
-测试网络连接是否正常
-
-ping 参数 域名或IP地址
-
-| 参数 | 说明                 |
-| ---- | -------------------- |
-| -c   | 设置发送数据包的次数 |
-|      |                      |
-|      |                      |
-
-
-
-### pwd（print working directory）
-
-当前所在目录的绝对路径名称
-
-### python
-
-python 参数
-
-| 参数   | 说明               |
-| ------ | ------------------ |
-| -c " " | 直接运行python语句 |
-| -m     | 将模块按照脚本执行 |
-|        |                    |
-
-### rm
-
-删除文件
-
-rm 参数 文件名
-
-| 参数 | 说明                         |
-| ---- | ---------------------------- |
-|      |                              |
-| -r   | 递归删除目录及其内全部子文件 |
-|      |                              |
-
-### sh
-
-执行指定的脚本文件
-
-sh [参数] 脚本名
-
-### ssh
-
-安全地远程连接服务器主机系统
-
-ssh 参数 域名或IP地址
-
-
-
-### strings
-
-打印文件中的可见字符
-
-### tac
-
-反向显示文件内容
-
-### touch
-
-新建文件
-
-### uname（UNIX name）
-
-查看系统主机名、内核及硬件架构等信息。如果不加任何参数，默认仅显示系统内核名称（相当于-s参数）
-
-uname 参数
-
-| 参数 | 说明 |
-| ---- | ---- |
-|      |      |
-|      |      |
-|      |      |
-
-
-
-### wget
-
-从指定网址下载网络文件
-
-wget 参数 网址URL 对象
-
-### which
-
-查找命令文件，能够快速搜索二进制程序所对应的位置，只关心命令文件本身的路径
-
-which 参数 文件名
-
-### whoami
-
-显示当前用户名
-
-## Linux用户与组
-
-### 超级用户
-root：最高权限，可执行任何操作
-
-### 系统用户
-www-data：Linux系统中为Web服务器（如Nginx/Apache）预创建的专用用户，权限被严格限制，仅能访问Web相关的文件和目录。这遵循了“最小权限原则”，降低被攻击时的风险。
-
-mysql：MySQL 数据库服务用户
-
-nobody：无特权服务用户
-
-daemon：后台守护进程用户
-
-### 普通用户
-可登录的普通账户
-
-## Linux权限
-
-ls -lh命令查看文件或目录权限，命令结果格式为：
-
-每一行以空格为分隔符分为九个字段
-
-| 字段数 | 例         | 说明                                                         |
-| ------ | ---------- | ------------------------------------------------------------ |
-| 1      | drwxr-xr-x | 文件或目录权限                                               |
-| 2      | 2          | 如果文件类型是文件,表示文件的节点数<br/>如果文件类型是目录,表示子目录的个数 |
-| 3      | root       | 所有者的名字                                                 |
-| 4      | root       | 所有组的名字                                                 |
-| 5      | 137        | 文件大小                                                     |
-| 6      | Feb        |                                                              |
-| 7      | 23         | 文件最后一次修改时间                                         |
-| 8      | 10：25     |                                                              |
-| 9      | Desktop    | 文件或目录名字                                               |
-
-权限表达：
-
-文件或目录权限，以含义分隔，共五个字段
-
-| 字段数 | 示例 | 含义         | 说明                                                         |
-| ------ | ---- | ------------ | ------------------------------------------------------------ |
-| 1      | d    | 文件类型     | - 文件<br/>d 目录<br/>l 符号链接<br/>c 字符型设备<br/>b 块设备 |
-| 2      | rwx  | 所有者权限   | u 所有者                                                     |
-| 3      | r-x  | 所属组权限   | g 所属组                                                     |
-| 4      | r-x  | 其他用户权限 | o 其他用户                                                   |
-| 5      | .    |              |                                                              |
-
-
-
-### SUID
-
-在 Linux 权限的底层，一共有四位数，特殊权限位作为首位
-
-当一个可执行文件具有SUID 标志时,无论哪个用户运行该文件(命令),都具有该文件所有者的权限
-
-## Linux进程
-
-### cron 
-
-是Linux的一个常驻进程，名字叫 crond，用来实现定时计划任务
-
-cron每分钟都会醒来一次，检查系统里有没有到了时间需要执行的任务
-
-## 计划任务(Cron Job / Scheduled Task)
-
-预先设定好、在特定时间自动执行的任务
-
-计划任务文件命令格式：
-
+    <h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><p>;</p>
+<p>先执行上一个命令，再执后一个命令</p>
+<p>&amp;</p>
+<p>简单拼接，命令之间无制约关系</p>
+<p>&amp;&amp;逻辑与</p>
+<p>前一个命令成功执行后才执行后一个</p>
+<p>||逻辑或</p>
+<p>前一个命令未成功执行才执行后一个</p>
+<h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><p>通配符是一种特殊的字符，可以匹配一个或多个文件或目录的名称</p>
+<ul>
+<li></li>
+</ul>
+<p>匹配任意长度的任意字符，包括空字符</p>
+<p>？</p>
+<p>一定有一个字符</p>
+<h3 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h3><p>|</p>
+<p>将上一个命令的输出作为下一个命令的输入</p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>重定向是一种特殊的操作符，用来改变命令的输入或输出的来源或目的地</p>
+<p>系统运行命令时有三个默认的流（管道）：</p>
+<p>0：标准输入（键盘输入）</p>
+<p>1：标准输出（屏幕上打印的正常结果）</p>
+<p>2：准错误输出（程序报错、权限拒绝的提示）</p>
+<p>&gt;重定向</p>
+<p>输出到文件</p>
+<h3 id="单引号"><a href="#单引号" class="headerlink" title="单引号"></a>单引号</h3><h3 id="双引号"><a href="#双引号" class="headerlink" title="双引号"></a>双引号</h3><h2 id="Linux命令"><a href="#Linux命令" class="headerlink" title="Linux命令"></a>Linux命令</h2><p>Linux命令可以换行执行，分割命令时要有换行符</p>
+<h3 id="bash-Bourne-shell"><a href="#bash-Bourne-shell" class="headerlink" title="bash(Bourne shell)"></a>bash(Bourne shell)</h3><p>启动一个命令解释器</p>
+<p>bash 参数 文件名</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>使用交互式模式</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>特权模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>&#x2F;dev&#x2F;tcp&#x2F;IP&#x2F;端口</p>
+<p>让 bash 通过 TCP 连接</p>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>显示文件内容</p>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><p>目录跳转</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>..</td>
+<td>切换到上一层路径</td>
+</tr>
+<tr>
+<td>..&#x2F;..</td>
+<td>上一层路径的上一层</td>
+</tr>
+<tr>
+<td>–</td>
+<td>回到刚切换过来的路径</td>
+</tr>
+<tr>
+<td>~</td>
+<td>回到用户路径</td>
+</tr>
+</tbody></table>
+<h3 id="chmod-change-mode"><a href="#chmod-change-mode" class="headerlink" title="chmod(change mode)"></a>chmod(change mode)</h3><p>改变文件或目录权限</p>
+<h3 id="crontab（cron-table）"><a href="#crontab（cron-table）" class="headerlink" title="crontab（cron  table）"></a>crontab（cron  table）</h3><p>管理定时计划任务</p>
+<p>crontab 参数 对象</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e</td>
+<td>编辑任务</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>删除前询问用户是否确认</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示认为</td>
+</tr>
+</tbody></table>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>输出指定字符串或变量提取后的值</p>
+<p>echo 参数 字符串或$变量名</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e “\n”</td>
+<td>换行后光标移至行首</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="ls（list）"><a href="#ls（list）" class="headerlink" title="ls（list）"></a>ls（list）</h3><p>查看当前目录下的文件</p>
+<p>ls [参数] [文件或目录]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示隐藏文件</td>
+</tr>
+<tr>
+<td>-al</td>
+<td>显示详细信息又显示隐藏文件</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>查看文件属于哪个用户的</td>
+</tr>
+<tr>
+<td>-lh</td>
+<td>查看文件或目录权限</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>按照文件的创建时间进行排序</td>
+</tr>
+</tbody></table>
+<h3 id="curl（CommandLine-URL）"><a href="#curl（CommandLine-URL）" class="headerlink" title="curl（CommandLine URL）"></a>curl（CommandLine URL）</h3><p>是在Shell终端界面中基于URL规则进行文件传输工作，支持多种协议，默认是http或http:&#x2F;&#x2F;</p>
+<p>curl 参数 网址URL 文件名</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-O</td>
+<td>保留远程文件的原始名</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>静默执行模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>根据给定的路径和条件查找相关文件或目录，支持正则表达式，结合管道符后能够实现更加复杂的功能</p>
+<p>find 路径 条件 文件名</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-exec [命令];</td>
+<td>跟着运行后面的系统命令</td>
+</tr>
+<tr>
+<td>-name</td>
+<td>匹配文件名</td>
+</tr>
+<tr>
+<td>-perm</td>
+<td>匹配文件权限</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>global search regular expression and print out the line 用于全面搜索的正则表达式，并将结果输出</p>
+<p>grep 参数 “ “</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h3><p>查看IP</p>
+<h3 id="jobs"><a href="#jobs" class="headerlink" title="jobs"></a>jobs</h3><p>显示终端后台的作业信息，查看到当前系统中终端后台的任务列表及其运行状态，查看任务列表及对应的进程号码</p>
+<p>jobs 参数</p>
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><p>创建文件夹</p>
+<h3 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h3><p>移动文件</p>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p>用于MySQL服务器的客户端工具，它工作在Shell命令行终端中，完成对远程MySQL数据库服务器的管理操作</p>
+<p>mysql [参数] [数据库]</p>
+<p>常用参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>设置服务器的密码</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>设置服务器的用户名</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>-p与密码之间必须连在一起</p>
+<h3 id="nc（net-cat）"><a href="#nc（net-cat）" class="headerlink" title="nc（net  cat）"></a>nc（net  cat）</h3><p>扫描与连接指定端口</p>
+<p>nc 参数 域名或IP地址</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e</td>
+<td>Execute,一旦连接建立成功，就运行后面指定的程序</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>使用监听模式</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>设置本地主机使用的端口</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程详细信息</td>
+</tr>
+</tbody></table>
+<h3 id="netstat（network-statistics）"><a href="#netstat（network-statistics）" class="headerlink" title="netstat（network statistics）"></a>netstat（network statistics）</h3><p>显示各种网络相关信息</p>
+<p>netstat 参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>仅显示正在监听的服务状态</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>直接使用IP地址，不使用域名</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示正在使用接口的程序识别码和名称</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>显示TCP传输协议的连线状态</td>
+</tr>
+</tbody></table>
+<h3 id="php"><a href="#php" class="headerlink" title="php"></a>php</h3><p>php 参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>S</td>
+<td>运行内置服务器模式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h3><p>测试网络连接是否正常</p>
+<p>ping 参数 域名或IP地址</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>设置发送数据包的次数</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="pwd（print-working-directory）"><a href="#pwd（print-working-directory）" class="headerlink" title="pwd（print working directory）"></a>pwd（print working directory）</h3><p>当前所在目录的绝对路径名称</p>
+<h3 id="python"><a href="#python" class="headerlink" title="python"></a>python</h3><p>python 参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c “ “</td>
+<td>直接运行python语句</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>将模块按照脚本执行</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h3><p>删除文件</p>
+<p>rm 参数 文件名</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归删除目录及其内全部子文件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="sh"><a href="#sh" class="headerlink" title="sh"></a>sh</h3><p>执行指定的脚本文件</p>
+<p>sh [参数] 脚本名</p>
+<h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><p>安全地远程连接服务器主机系统</p>
+<p>ssh 参数 域名或IP地址</p>
+<h3 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h3><p>打印文件中的可见字符</p>
+<h3 id="tac"><a href="#tac" class="headerlink" title="tac"></a>tac</h3><p>反向显示文件内容</p>
+<h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><p>新建文件</p>
+<h3 id="uname（UNIX-name）"><a href="#uname（UNIX-name）" class="headerlink" title="uname（UNIX name）"></a>uname（UNIX name）</h3><p>查看系统主机名、内核及硬件架构等信息。如果不加任何参数，默认仅显示系统内核名称（相当于-s参数）</p>
+<p>uname 参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>从指定网址下载网络文件</p>
+<p>wget 参数 网址URL 对象</p>
+<h3 id="which"><a href="#which" class="headerlink" title="which"></a>which</h3><p>查找命令文件，能够快速搜索二进制程序所对应的位置，只关心命令文件本身的路径</p>
+<p>which 参数 文件名</p>
+<h3 id="whoami"><a href="#whoami" class="headerlink" title="whoami"></a>whoami</h3><p>显示当前用户名</p>
+<h2 id="Linux用户与组"><a href="#Linux用户与组" class="headerlink" title="Linux用户与组"></a>Linux用户与组</h2><h3 id="超级用户"><a href="#超级用户" class="headerlink" title="超级用户"></a>超级用户</h3><p>root：最高权限，可执行任何操作</p>
+<h3 id="系统用户"><a href="#系统用户" class="headerlink" title="系统用户"></a>系统用户</h3><p>www-data：Linux系统中为Web服务器（如Nginx&#x2F;Apache）预创建的专用用户，权限被严格限制，仅能访问Web相关的文件和目录。这遵循了“最小权限原则”，降低被攻击时的风险。</p>
+<p>mysql：MySQL 数据库服务用户</p>
+<p>nobody：无特权服务用户</p>
+<p>daemon：后台守护进程用户</p>
+<h3 id="普通用户"><a href="#普通用户" class="headerlink" title="普通用户"></a>普通用户</h3><p>可登录的普通账户</p>
+<h2 id="Linux权限"><a href="#Linux权限" class="headerlink" title="Linux权限"></a>Linux权限</h2><p>ls -lh命令查看文件或目录权限，命令结果格式为：</p>
+<p>每一行以空格为分隔符分为九个字段</p>
+<table>
+<thead>
+<tr>
+<th>字段数</th>
+<th>例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>drwxr-xr-x</td>
+<td>文件或目录权限</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>如果文件类型是文件,表示文件的节点数<br/>如果文件类型是目录,表示子目录的个数</td>
+</tr>
+<tr>
+<td>3</td>
+<td>root</td>
+<td>所有者的名字</td>
+</tr>
+<tr>
+<td>4</td>
+<td>root</td>
+<td>所有组的名字</td>
+</tr>
+<tr>
+<td>5</td>
+<td>137</td>
+<td>文件大小</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Feb</td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td>23</td>
+<td>文件最后一次修改时间</td>
+</tr>
+<tr>
+<td>8</td>
+<td>10：25</td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Desktop</td>
+<td>文件或目录名字</td>
+</tr>
+</tbody></table>
+<p>权限表达：</p>
+<p>文件或目录权限，以含义分隔，共五个字段</p>
+<table>
+<thead>
+<tr>
+<th>字段数</th>
+<th>示例</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>d</td>
+<td>文件类型</td>
+<td>- 文件<br/>d 目录<br/>l 符号链接<br/>c 字符型设备<br/>b 块设备</td>
+</tr>
+<tr>
+<td>2</td>
+<td>rwx</td>
+<td>所有者权限</td>
+<td>u 所有者</td>
+</tr>
+<tr>
+<td>3</td>
+<td>r-x</td>
+<td>所属组权限</td>
+<td>g 所属组</td>
+</tr>
+<tr>
+<td>4</td>
+<td>r-x</td>
+<td>其他用户权限</td>
+<td>o 其他用户</td>
+</tr>
+<tr>
+<td>5</td>
+<td>.</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="SUID"><a href="#SUID" class="headerlink" title="SUID"></a>SUID</h3><p>在 Linux 权限的底层，一共有四位数，特殊权限位作为首位</p>
+<p>当一个可执行文件具有SUID 标志时,无论哪个用户运行该文件(命令),都具有该文件所有者的权限</p>
+<h2 id="Linux进程"><a href="#Linux进程" class="headerlink" title="Linux进程"></a>Linux进程</h2><h3 id="cron"><a href="#cron" class="headerlink" title="cron"></a>cron</h3><p>是Linux的一个常驻进程，名字叫 crond，用来实现定时计划任务</p>
+<p>cron每分钟都会醒来一次，检查系统里有没有到了时间需要执行的任务</p>
+<h2 id="计划任务-Cron-Job-Scheduled-Task"><a href="#计划任务-Cron-Job-Scheduled-Task" class="headerlink" title="计划任务(Cron Job &#x2F; Scheduled Task)"></a>计划任务(Cron Job &#x2F; Scheduled Task)</h2><p>预先设定好、在特定时间自动执行的任务</p>
+<p>计划任务文件命令格式：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">*　　*　　*　　*　　*　　command</span><br><span class="line">分  时　 日　 月　 周　  命令</span><br></pre></td></tr></table></figure>
 
 
 
-# Shell
-
-编码方式UTF-8
-
-## 变量
-
-### 特殊变量
-
-$IFSI（nternal Field Separator，内部字段分隔符）
-
-Bash（Linux 命令行）中的一个环境变量，用来告诉 Shell 如何分割命令和参数。
-
-默认值：
-
-空格 (` `)
-
-制表符 (`\t`)
-
-换行符 (`\n`)
-
-### 环境变量
-
-由操作系统或用户设置的特殊变量，用于配置 Shell 的行为和影响其执行环境。
-
-#### LD_PRELOAD
-
-Linux/Unix系统的一个环境变量，它可以影响程序的运行时的链接，它允许在程序运行前定义优先加载的动态链接库。通过这个环境变量，可以在主程序和其动态链接库的中间加载别的动态链接库，甚至覆盖系统的函数库。
-
-LD_PRELOAD 超脱于动态链接库的搜索路径先后顺序之外，它可以指定在程序运行前优先加载的动态链接库
-
-
-
-
+<h1 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h1><p>编码方式UTF-8</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h3 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h3><p>$IFSI（nternal Field Separator，内部字段分隔符）</p>
+<p>Bash（Linux 命令行）中的一个环境变量，用来告诉 Shell 如何分割命令和参数。</p>
+<p>默认值：</p>
+<p>空格 (<code> </code>)</p>
+<p>制表符 (<code>\t</code>)</p>
+<p>换行符 (<code>\n</code>)</p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>由操作系统或用户设置的特殊变量，用于配置 Shell 的行为和影响其执行环境。</p>
+<h4 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h4><p>Linux&#x2F;Unix系统的一个环境变量，它可以影响程序的运行时的链接，它允许在程序运行前定义优先加载的动态链接库。通过这个环境变量，可以在主程序和其动态链接库的中间加载别的动态链接库，甚至覆盖系统的函数库。</p>
+<p>LD_PRELOAD 超脱于动态链接库的搜索路径先后顺序之外，它可以指定在程序运行前优先加载的动态链接库</p>
 
   </div>
 </article>

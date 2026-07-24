@@ -52,47 +52,24 @@
     <h1>Java框架</h1>
     <div class="post-meta">
       <time datetime="2026-06-25T06:41:59.000Z">2026.06.25</time>
-      <span>2 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Java框架
-
-## Shiro
-
-Apache Shiro 是一个 Java 安全框架，提供了认证、授权、加密和会话管理等功能，对于任何一个应用程序，Shiro 都可以提供全面的安全管理服务。
-
-### Shiro服务器识别身份加解密处理的流程
-
-加密：
-
-1.用户使用账号密码进行登录，并勾选"Remember Me"
-
-2.Shiro验证用户登录信息，通过后，查看用户是否勾选了”Remember Me“
-
-3.若勾选，则将用户身份序列化，并将序列化后的内容进行AES加密，再使用base64编码
-
-4.最后将处理好的内容放于cookie中的rememberMe字段，并返回给用户浏览器
-
-解密：
-
-1、当服务端收到来自未经身份验证的用户的请求时，会在客户端发送请求中的cookie中获取rememberMe字段内容
-
-2、将获取到的rememberMe字段进行base64解码，再使用AES解密
-
-3、最后将解密的内容进行反序列化，获取到用户身份
-
-三、Key
-
-AES加密的密钥Key被硬编码在代码里
-
-于是可得到Payload的构造流程：
-
-恶意命令-->序列化-->AES加密-->base64编码-->发送Cookie
-
-
-
+    <h1 id="Java框架"><a href="#Java框架" class="headerlink" title="Java框架"></a>Java框架</h1><h2 id="Shiro"><a href="#Shiro" class="headerlink" title="Shiro"></a>Shiro</h2><p>Apache Shiro 是一个 Java 安全框架，提供了认证、授权、加密和会话管理等功能，对于任何一个应用程序，Shiro 都可以提供全面的安全管理服务。</p>
+<h3 id="Shiro服务器识别身份加解密处理的流程"><a href="#Shiro服务器识别身份加解密处理的流程" class="headerlink" title="Shiro服务器识别身份加解密处理的流程"></a>Shiro服务器识别身份加解密处理的流程</h3><p>加密：</p>
+<p>1.用户使用账号密码进行登录，并勾选”Remember Me”</p>
+<p>2.Shiro验证用户登录信息，通过后，查看用户是否勾选了”Remember Me“</p>
+<p>3.若勾选，则将用户身份序列化，并将序列化后的内容进行AES加密，再使用base64编码</p>
+<p>4.最后将处理好的内容放于cookie中的rememberMe字段，并返回给用户浏览器</p>
+<p>解密：</p>
+<p>1、当服务端收到来自未经身份验证的用户的请求时，会在客户端发送请求中的cookie中获取rememberMe字段内容</p>
+<p>2、将获取到的rememberMe字段进行base64解码，再使用AES解密</p>
+<p>3、最后将解密的内容进行反序列化，获取到用户身份</p>
+<p>三、Key</p>
+<p>AES加密的密钥Key被硬编码在代码里</p>
+<p>于是可得到Payload的构造流程：</p>
+<p>恶意命令–&gt;序列化–&gt;AES加密–&gt;base64编码–&gt;发送Cookie</p>
 
   </div>
 </article>

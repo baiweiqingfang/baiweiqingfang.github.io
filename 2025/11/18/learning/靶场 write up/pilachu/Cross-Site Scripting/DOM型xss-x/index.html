@@ -56,21 +56,11 @@
     </div>
   </header>
   <div class="article-content">
-    
-# DOM型xss-x
-
-1.输入<script>alert(/xss/);</script>，点击请说出你的伤心往事，出现一个链接
-
-2.点击这个链接，出现另一个链接
-
-3.F12查看源代码，发现输入被拼接到这个链接的href属性
-
-![image-20251117220505660](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251117220505660.png)
-
-4.闭合a标签，输入'><img src=xss onerror=alert('xss')>点击请说出你的伤心往事，再点击出现的链接，出现弹窗
-
-
-
+    <h1 id="DOM型xss-x"><a href="#DOM型xss-x" class="headerlink" title="DOM型xss-x"></a>DOM型xss-x</h1><p>1.输入<script>alert(/xss/);</script>，点击请说出你的伤心往事，出现一个链接</p>
+<p>2.点击这个链接，出现另一个链接</p>
+<p>3.F12查看源代码，发现输入被拼接到这个链接的href属性</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251117220505660.png" alt="image-20251117220505660"></p>
+<p>4.闭合a标签，输入’&gt;&lt;img src&#x3D;xss onerror&#x3D;alert(‘xss’)&gt;点击请说出你的伤心往事，再点击出现的链接，出现弹窗</p>
 
   </div>
 </article>

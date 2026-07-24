@@ -56,79 +56,35 @@
     </div>
   </header>
   <div class="article-content">
-    
-# 中间件
-
-## Web 服务器中间件
-
-- **主要漏洞**：解析漏洞、目录遍历、配置错误。
-- **攻击特点**：通常用来作为跳板，或者通过解析漏洞把一个 `.jpg` 当成 `.php` 执行。它们本身很少出现像 WebLogic 那样直接“白送”系统权限的反序列化漏洞。
-
-Nginx / Apache 
-
-在 Web 服务器（如 Apache 或 Nginx）的配置中，有一个概念叫 **Directory Index（目录索引）**。
-
-当你只输入 IP 而不输入具体文件名时，服务器会按照预设的优先级去文件夹里寻找“招牌”文件。通常的顺序是：
-
-1. `index.html`
-2. `index.php` (探针文件通常被重命名为此文件)
-3. `default.php`
-
-##  应用服务器中间件
-
-- **主要漏洞**：**反序列化 (Deserialization)**、后台弱口令上传 WAR 包。
-- **攻击特点**：因为它们负责处理复杂的 Java 对象，所以逻辑更复杂，漏洞也更致命。一旦利用成功，通常直接就是 **系统命令执行 (RCE)**。
-
-### WebLogic
-
-默认管理后台：http://localhost:7001/console
-
- / Tomcat / JBoss
-
-## 数据库中间件
-
-用于管理数据库连接、负载均衡、缓存等的软件
-
-### MySQL
-
-默认端口3306
-
-风险：弱口令爆破 注入 提权
-
-### MSQL（SQL server）
-
-
-
-Proxy和pgpool
-
-## 消息中间件
-
-用于在应用程序之间进行异步消息传递，如RabbitMQ和Apache Kafka。 ]
-
-## 缓存中间件
-
-用于加速数据访问，减轻数据库负载，如Redis和Memcached。
-
-## 应用服务器中间件
-
-用于托管和管理应用程序的执行环境，如Tomcat和Jboss。 
-
-### tomcat
-
-tomcat既是一个 Web 服务器（能处理常规的 HTTP 请求、网页文件），又是一个运行环境，负责解析和运行 Java 编写的网站程序
-
-默认端口8080
-
-风险：任意文件上传
-
-## API网关中间件
-
- 用于管理和控制API的访问和调用，如Kong和Apigee。 
-
-
-
-
-
+    <h1 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h1><h2 id="Web-服务器中间件"><a href="#Web-服务器中间件" class="headerlink" title="Web 服务器中间件"></a>Web 服务器中间件</h2><ul>
+<li><strong>主要漏洞</strong>：解析漏洞、目录遍历、配置错误。</li>
+<li><strong>攻击特点</strong>：通常用来作为跳板，或者通过解析漏洞把一个 <code>.jpg</code> 当成 <code>.php</code> 执行。它们本身很少出现像 WebLogic 那样直接“白送”系统权限的反序列化漏洞。</li>
+</ul>
+<p>Nginx &#x2F; Apache </p>
+<p>在 Web 服务器（如 Apache 或 Nginx）的配置中，有一个概念叫 <strong>Directory Index（目录索引）</strong>。</p>
+<p>当你只输入 IP 而不输入具体文件名时，服务器会按照预设的优先级去文件夹里寻找“招牌”文件。通常的顺序是：</p>
+<ol>
+<li><code>index.html</code></li>
+<li><code>index.php</code> (探针文件通常被重命名为此文件)</li>
+<li><code>default.php</code></li>
+</ol>
+<h2 id="应用服务器中间件"><a href="#应用服务器中间件" class="headerlink" title="应用服务器中间件"></a>应用服务器中间件</h2><ul>
+<li><strong>主要漏洞</strong>：<strong>反序列化 (Deserialization)</strong>、后台弱口令上传 WAR 包。</li>
+<li><strong>攻击特点</strong>：因为它们负责处理复杂的 Java 对象，所以逻辑更复杂，漏洞也更致命。一旦利用成功，通常直接就是 <strong>系统命令执行 (RCE)</strong>。</li>
+</ul>
+<h3 id="WebLogic"><a href="#WebLogic" class="headerlink" title="WebLogic"></a>WebLogic</h3><p>默认管理后台：<a target="_blank" rel="noopener" href="http://localhost:7001/console">http://localhost:7001/console</a></p>
+<p> &#x2F; Tomcat &#x2F; JBoss</p>
+<h2 id="数据库中间件"><a href="#数据库中间件" class="headerlink" title="数据库中间件"></a>数据库中间件</h2><p>用于管理数据库连接、负载均衡、缓存等的软件</p>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><p>默认端口3306</p>
+<p>风险：弱口令爆破 注入 提权</p>
+<h3 id="MSQL（SQL-server）"><a href="#MSQL（SQL-server）" class="headerlink" title="MSQL（SQL server）"></a>MSQL（SQL server）</h3><p>Proxy和pgpool</p>
+<h2 id="消息中间件"><a href="#消息中间件" class="headerlink" title="消息中间件"></a>消息中间件</h2><p>用于在应用程序之间进行异步消息传递，如RabbitMQ和Apache Kafka。 ]</p>
+<h2 id="缓存中间件"><a href="#缓存中间件" class="headerlink" title="缓存中间件"></a>缓存中间件</h2><p>用于加速数据访问，减轻数据库负载，如Redis和Memcached。</p>
+<h2 id="应用服务器中间件-1"><a href="#应用服务器中间件-1" class="headerlink" title="应用服务器中间件"></a>应用服务器中间件</h2><p>用于托管和管理应用程序的执行环境，如Tomcat和Jboss。 </p>
+<h3 id="tomcat"><a href="#tomcat" class="headerlink" title="tomcat"></a>tomcat</h3><p>tomcat既是一个 Web 服务器（能处理常规的 HTTP 请求、网页文件），又是一个运行环境，负责解析和运行 Java 编写的网站程序</p>
+<p>默认端口8080</p>
+<p>风险：任意文件上传</p>
+<h2 id="API网关中间件"><a href="#API网关中间件" class="headerlink" title="API网关中间件"></a>API网关中间件</h2><p> 用于管理和控制API的访问和调用，如Kong和Apigee。 </p>
 
   </div>
 </article>

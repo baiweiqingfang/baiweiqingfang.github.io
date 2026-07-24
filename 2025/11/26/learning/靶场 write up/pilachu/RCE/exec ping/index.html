@@ -56,61 +56,31 @@
     </div>
   </header>
   <div class="article-content">
-    
-# exec "ping"
-
-1.输入随便一个IP，出现回显
-
-![image-20251126011430774](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251126011430774.png)
-
-2.输入127.0.0.1 | whoami发现执行了whoami命令，说明此处存在RCE漏洞
-
-![image-20251126011452478](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251126011452478.png)
-
-# 注
-
-1.命令连接符
-
-Windows：|， ||， &&， &
-
-Linux：|， ||， &&， ；
-
-|：
-
-管道操作符
-
-可以把前一个命令的标准输出传输到后一个命令的标准输入，不管a的执行结果是否正确，b都可以执行
-
-||：
-
-逻辑或
-
-该命令有短路情况
-
-a || b如果命令a执行成功，则命令b不会执行；只有命令a执行失败的情况下才会执行命令b
-
-&&：
-
-逻辑与
-
-该命令有短路情况
-
-a && b如果命令a执行成功，则命令b不会执行；只有命令a执行失败的情况下才会执行命令b
-
-&：
-
-Windows特有
-
-允许在一行内从左向右顺序执行多条命令，前一条命令失败也不影响后一条命令的 执行
-
-；：
-
-Linux特有
-
-允许在一行内从左向右顺序执行多条命令，前一条命令失败也不影响后一条命令的执行
-
-2.源代码分析
-
+    <h1 id="exec-“ping”"><a href="#exec-“ping”" class="headerlink" title="exec “ping”"></a>exec “ping”</h1><p>1.输入随便一个IP，出现回显</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251126011430774.png" alt="image-20251126011430774"></p>
+<p>2.输入127.0.0.1 | whoami发现执行了whoami命令，说明此处存在RCE漏洞</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251126011452478.png" alt="image-20251126011452478"></p>
+<h1 id="注"><a href="#注" class="headerlink" title="注"></a>注</h1><p>1.命令连接符</p>
+<p>Windows：|， ||， &amp;&amp;， &amp;</p>
+<p>Linux：|， ||， &amp;&amp;， ；</p>
+<p>|：</p>
+<p>管道操作符</p>
+<p>可以把前一个命令的标准输出传输到后一个命令的标准输入，不管a的执行结果是否正确，b都可以执行</p>
+<p>||：</p>
+<p>逻辑或</p>
+<p>该命令有短路情况</p>
+<p>a || b如果命令a执行成功，则命令b不会执行；只有命令a执行失败的情况下才会执行命令b</p>
+<p>&amp;&amp;：</p>
+<p>逻辑与</p>
+<p>该命令有短路情况</p>
+<p>a &amp;&amp; b如果命令a执行成功，则命令b不会执行；只有命令a执行失败的情况下才会执行命令b</p>
+<p>&amp;：</p>
+<p>Windows特有</p>
+<p>允许在一行内从左向右顺序执行多条命令，前一条命令失败也不影响后一条命令的 执行</p>
+<p>；：</p>
+<p>Linux特有</p>
+<p>允许在一行内从左向右顺序执行多条命令，前一条命令失败也不影响后一条命令的执行</p>
+<p>2.源代码分析</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//header(&quot;Content-type:text/html; charset=gbk&quot;);</span></span><br><span class="line"><span class="variable">$result</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_POST</span>[<span class="string">&#x27;ipaddress&#x27;</span>]!=<span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="variable">$ip</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;ipaddress&#x27;</span>];</span><br><span class="line"><span class="comment">//     $check=explode(&#x27;.&#x27;, $ip);可以先拆分，然后校验数字以范围，第一位和第四位1-255，中间两位0-255</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">stristr</span>(<span class="title function_ invoke__">php_uname</span>(<span class="string">&#x27;s&#x27;</span>), <span class="string">&#x27;windows&#x27;</span>))&#123;</span><br><span class="line"><span class="comment">//         var_dump(php_uname(&#x27;s&#x27;));</span></span><br><span class="line">        <span class="variable">$result</span>.=<span class="title function_ invoke__">shell_exec</span>(<span class="string">&#x27;ping &#x27;</span>.<span class="variable">$ip</span>);<span class="comment">//直接将变量拼接进来，没做处理</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="variable">$result</span>.=<span class="title function_ invoke__">shell_exec</span>(<span class="string">&#x27;ping -c 4 &#x27;</span>.<span class="variable">$ip</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 

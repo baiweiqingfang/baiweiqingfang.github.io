@@ -52,107 +52,152 @@
     <h1>Windows操作系统</h1>
     <div class="post-meta">
       <time datetime="2026-05-29T08:16:09.000Z">2026.05.29</time>
-      <span>9 分钟阅读</span>
+      <span>3 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# Windows
-
-## shell
-
-编码方式GBK (CP936)
-
-### cmd
-
-### powershell
-
-具备在本地执行远端代码的能力
-
-## Windows命令
-
-| 命令                                          | 用途                                                         |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| calc                                          | 弹计算器                                                     |
-| chcp 65001                                    | 在Windows控制台中将字符编码设置为UTF-8                       |
-| dir                                           | 查看此路径下的所有文件和路径                                 |
-| ipconfig                                      |                                                              |
-| ipconfig /all                                 | 获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名          |
-| net config Workstation                        | 查看当前计算机的名称，计算机所属的域或工作组， 登录域，其他网络设置 |
-| net localgroup administrators                 | 查看本地管理员组当中的用户成员                               |
-| net localgroup administrators <username> /add | 将用户加入管理员组                                           |
-| net user                                      | 列出所有本地用户                                             |
-| net user <username>                           | 查看用户的详细信息                                           |
-| net user <username> <password> /add           | 创建用户 密码                                                |
-| net view                                      | 查看局域网内其他主机名                                       |
-| net view /domain                              | 查看有几个域                                                 |
-| ping                                          | Ping命令是一个用于测试网络连接的工具。它通过发送ICMP回显请求消息到目标地址，并报告是否收到预期的ICMP回显应答 |
-| powershell.exe                                | 启用powershell                                               |
-| powershell.exe -c <command>                   | 启用powershell执行命令                                       |
-| powershell.exe -nop                           | 启用powershell时不加载环境配置                               |
-| powershell.exe -w hidden                      | 启用powershell时窗口隐藏                                     |
-| systeminfo                                    | 用于显示本地或远程计算机的系统配置信息                       |
-| whoami /priv                                  | 查看当前用户及权限                                           |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-|                                               |                                                              |
-
-## 进程管理
-
-explorer.exe
-
-资源管理器
-
-## Windows用户与组
-
-### 默认用户账户
-
-Users
-
-Administrator
-
-System
-
-## Windows文件系统
-
-### NTML
-
-## Windows服务
-
-### Kerberos Key Distribution Center
-
-Kerberos Database: 包含了一个 Realm 中所有的 principal、密码与其他信息。（默认：Berkeley DB）
-
-Authentication Service(身份验证服务，AS): 进行用户信息认证，为客户端提供 Ticket Granting Tickets(票据，TGT)。
-
-Ticket Granting Service(票据授予服务TGS): 验证 TGT 与 Authenticator，为客户端提供Service Tickets
-
-### 活动目录
-
-#### D（Domain，域）
-
-活动目录的一种实现形式，主要由域控制器和成员计算机组成
-
-#### DC（Domain Controller，域控制器）
-
-域控制器是安装了活动目录的一台计算机（一般为Windows server），活动目录的数据都存储在域控制器内
-
-一个域可以有多台域控制器
-
-#### PDC（Primary Domain Controller，主域控制器）
-
-在 AD域中，是指在一个域中主要负责处理账号登录请求和维护域中账号数据库的服务器。
-
-
-
-
+    <h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><h2 id="shell"><a href="#shell" class="headerlink" title="shell"></a>shell</h2><p>编码方式GBK (CP936)</p>
+<h3 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h3><h3 id="powershell"><a href="#powershell" class="headerlink" title="powershell"></a>powershell</h3><p>具备在本地执行远端代码的能力</p>
+<h2 id="Windows命令"><a href="#Windows命令" class="headerlink" title="Windows命令"></a>Windows命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>calc</td>
+<td>弹计算器</td>
+</tr>
+<tr>
+<td>chcp 65001</td>
+<td>在Windows控制台中将字符编码设置为UTF-8</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>查看此路径下的所有文件和路径</td>
+</tr>
+<tr>
+<td>ipconfig</td>
+<td></td>
+</tr>
+<tr>
+<td>ipconfig &#x2F;all</td>
+<td>获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名</td>
+</tr>
+<tr>
+<td>net config Workstation</td>
+<td>查看当前计算机的名称，计算机所属的域或工作组， 登录域，其他网络设置</td>
+</tr>
+<tr>
+<td>net localgroup administrators</td>
+<td>查看本地管理员组当中的用户成员</td>
+</tr>
+<tr>
+<td>net localgroup administrators <username> &#x2F;add</td>
+<td>将用户加入管理员组</td>
+</tr>
+<tr>
+<td>net user</td>
+<td>列出所有本地用户</td>
+</tr>
+<tr>
+<td>net user <username></td>
+<td>查看用户的详细信息</td>
+</tr>
+<tr>
+<td>net user <username> <password> &#x2F;add</td>
+<td>创建用户 密码</td>
+</tr>
+<tr>
+<td>net view</td>
+<td>查看局域网内其他主机名</td>
+</tr>
+<tr>
+<td>net view &#x2F;domain</td>
+<td>查看有几个域</td>
+</tr>
+<tr>
+<td>ping</td>
+<td>Ping命令是一个用于测试网络连接的工具。它通过发送ICMP回显请求消息到目标地址，并报告是否收到预期的ICMP回显应答</td>
+</tr>
+<tr>
+<td>powershell.exe</td>
+<td>启用powershell</td>
+</tr>
+<tr>
+<td>powershell.exe -c <command></td>
+<td>启用powershell执行命令</td>
+</tr>
+<tr>
+<td>powershell.exe -nop</td>
+<td>启用powershell时不加载环境配置</td>
+</tr>
+<tr>
+<td>powershell.exe -w hidden</td>
+<td>启用powershell时窗口隐藏</td>
+</tr>
+<tr>
+<td>systeminfo</td>
+<td>用于显示本地或远程计算机的系统配置信息</td>
+</tr>
+<tr>
+<td>whoami &#x2F;priv</td>
+<td>查看当前用户及权限</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><p>explorer.exe</p>
+<p>资源管理器</p>
+<h2 id="Windows用户与组"><a href="#Windows用户与组" class="headerlink" title="Windows用户与组"></a>Windows用户与组</h2><h3 id="默认用户账户"><a href="#默认用户账户" class="headerlink" title="默认用户账户"></a>默认用户账户</h3><p>Users</p>
+<p>Administrator</p>
+<p>System</p>
+<h2 id="Windows文件系统"><a href="#Windows文件系统" class="headerlink" title="Windows文件系统"></a>Windows文件系统</h2><h3 id="NTML"><a href="#NTML" class="headerlink" title="NTML"></a>NTML</h3><h2 id="Windows服务"><a href="#Windows服务" class="headerlink" title="Windows服务"></a>Windows服务</h2><h3 id="Kerberos-Key-Distribution-Center"><a href="#Kerberos-Key-Distribution-Center" class="headerlink" title="Kerberos Key Distribution Center"></a>Kerberos Key Distribution Center</h3><p>Kerberos Database: 包含了一个 Realm 中所有的 principal、密码与其他信息。（默认：Berkeley DB）</p>
+<p>Authentication Service(身份验证服务，AS): 进行用户信息认证，为客户端提供 Ticket Granting Tickets(票据，TGT)。</p>
+<p>Ticket Granting Service(票据授予服务TGS): 验证 TGT 与 Authenticator，为客户端提供Service Tickets</p>
+<h3 id="活动目录"><a href="#活动目录" class="headerlink" title="活动目录"></a>活动目录</h3><h4 id="D（Domain，域）"><a href="#D（Domain，域）" class="headerlink" title="D（Domain，域）"></a>D（Domain，域）</h4><p>活动目录的一种实现形式，主要由域控制器和成员计算机组成</p>
+<h4 id="DC（Domain-Controller，域控制器）"><a href="#DC（Domain-Controller，域控制器）" class="headerlink" title="DC（Domain Controller，域控制器）"></a>DC（Domain Controller，域控制器）</h4><p>域控制器是安装了活动目录的一台计算机（一般为Windows server），活动目录的数据都存储在域控制器内</p>
+<p>一个域可以有多台域控制器</p>
+<h4 id="PDC（Primary-Domain-Controller，主域控制器）"><a href="#PDC（Primary-Domain-Controller，主域控制器）" class="headerlink" title="PDC（Primary Domain Controller，主域控制器）"></a>PDC（Primary Domain Controller，主域控制器）</h4><p>在 AD域中，是指在一个域中主要负责处理账号登录请求和维护域中账号数据库的服务器。</p>
 
   </div>
 </article>

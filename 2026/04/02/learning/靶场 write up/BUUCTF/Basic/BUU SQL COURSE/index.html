@@ -52,87 +52,46 @@
     <h1>BUU SQL COURSE</h1>
     <div class="post-meta">
       <time datetime="2026-04-02T01:08:24.000Z">2026.04.02</time>
-      <span>4 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# BUU SQL COURSE
-
-1.打开题目URL，显示如下：
-
-![image-20260326134246476](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326134246476.png)
-
-尝试寻找注入点，能交互的选项只用登录，测试新闻1，测试新闻2，测试新闻3
-
-2.点击登录，返回如下界面：
-
-![image-20260326134407950](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326134407950.png)
-
-burp suite抓包发现是POST传参，在repeater模块更改参数测试注入点
-
-1' or 1=1# 或1 or 1=1#
-
-均返回
-
-![image-20260326135552186](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326135552186.png)
-
-可能不存在注入点
-
-3.点击测试新闻，使用burp suite抓包发现GET请求中存在id参数
-
-![image-20260326135909531](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326135909531.png)
-
-拼接URL得到注入点：
-
-http://41a35b5d-be5c-4baf-a076-e02a3ffc82e4.node5.buuoj.cn:81/backend/content_detail.php?id=2
-
-3.判断注入点  
-
-id=2 and 1=1%23正常回显
-
-id=2‘ and 1=1%23无回显
-
-判断为数字型
-
-4.猜列数
-
-![image-20260326165631345](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165631345.png)
-
-![image-20260326165643786](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165643786.png)
-
-列数为2
-
-5.联合查询判断回显位
-
-![image-20260326165757711](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165757711.png)
-
-均回显，从第二位注入
-
-6.拿库名
-
-![image-20260326165952859](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165952859.png)
-
-7.拿表名
-
-![image-20260326170105556](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170105556.png)
-
-8.拿列名
-
-![image-20260326170735690](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170735690.png)
-
-9.爆数据
-
-![image-20260326170816252](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170816252.png)
-
-![image-20260326170835693](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170835693.png)
-
-10.登录拿到flag
-
-![image-20260326170903617](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170903617.png)
-
-
-
+    <h1 id="BUU-SQL-COURSE"><a href="#BUU-SQL-COURSE" class="headerlink" title="BUU SQL COURSE"></a>BUU SQL COURSE</h1><p>1.打开题目URL，显示如下：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326134246476.png" alt="image-20260326134246476"></p>
+<p>尝试寻找注入点，能交互的选项只用登录，测试新闻1，测试新闻2，测试新闻3</p>
+<p>2.点击登录，返回如下界面：</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326134407950.png" alt="image-20260326134407950"></p>
+<p>burp suite抓包发现是POST传参，在repeater模块更改参数测试注入点</p>
+<p>1’ or 1&#x3D;1# 或1 or 1&#x3D;1#</p>
+<p>均返回</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326135552186.png" alt="image-20260326135552186"></p>
+<p>可能不存在注入点</p>
+<p>3.点击测试新闻，使用burp suite抓包发现GET请求中存在id参数</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326135909531.png" alt="image-20260326135909531"></p>
+<p>拼接URL得到注入点：</p>
+<p><a target="_blank" rel="noopener" href="http://41a35b5d-be5c-4baf-a076-e02a3ffc82e4.node5.buuoj.cn:81/backend/content_detail.php?id=2">http://41a35b5d-be5c-4baf-a076-e02a3ffc82e4.node5.buuoj.cn:81/backend/content_detail.php?id=2</a></p>
+<p>3.判断注入点  </p>
+<p>id&#x3D;2 and 1&#x3D;1%23正常回显</p>
+<p>id&#x3D;2‘ and 1&#x3D;1%23无回显</p>
+<p>判断为数字型</p>
+<p>4.猜列数</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165631345.png" alt="image-20260326165631345"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165643786.png" alt="image-20260326165643786"></p>
+<p>列数为2</p>
+<p>5.联合查询判断回显位</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165757711.png" alt="image-20260326165757711"></p>
+<p>均回显，从第二位注入</p>
+<p>6.拿库名</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326165952859.png" alt="image-20260326165952859"></p>
+<p>7.拿表名</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170105556.png" alt="image-20260326170105556"></p>
+<p>8.拿列名</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170735690.png" alt="image-20260326170735690"></p>
+<p>9.爆数据</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170816252.png" alt="image-20260326170816252"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170835693.png" alt="image-20260326170835693"></p>
+<p>10.登录拿到flag</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260326170903617.png" alt="image-20260326170903617"></p>
 
   </div>
 </article>

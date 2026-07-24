@@ -52,49 +52,78 @@
     <h1>dirsearch</h1>
     <div class="post-meta">
       <time datetime="2026-07-09T10:03:02.000Z">2026.07.09</time>
-      <span>2 分钟阅读</span>
+      <span>1 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# dirsearch
-
-dirsearch是一个基于python的命令行工具，用于暴力扫描页面结构，包括网页中的目录和文件。
-
-## 特点
-
-1.多线程
-
-2.支持多种后缀（-e | -extensions asp.php）
-
-3.递归的暴力扫描
-
-4.支持HTTP代理
-
-5.用户代理随机化
-
-6.启发式检测无效网站
-
-| 颜色 | HTTP 状态码      | 含义                         |
-| ---- | ---------------- | ---------------------------- |
-| 绿色 | 200 OK           | 文件/目录存在且可访问        |
-| 蓝色 | 301/302 Redirect | 目录存在（重定向到具体路径） |
-| 黄色 | 403 Forbidden    | 目录存在但禁止访问           |
-| 红色 | 404 Not Found    | 路径不存在                   |
-
-| 参数 | 说明                                         |
-| ---- | -------------------------------------------- |
-| -e   | 指定网站语言                                 |
-| -i   | 只显示指定状态码的结果                       |
-| -r   | 递归目录（跑出目录后，继续跑目录下面的目录） |
-| -u   | 指定url                                      |
-| -w   | 指定字典                                     |
-|      |                                              |
-
-
-
-
-
+    <h1 id="dirsearch"><a href="#dirsearch" class="headerlink" title="dirsearch"></a>dirsearch</h1><p>dirsearch是一个基于python的命令行工具，用于暴力扫描页面结构，包括网页中的目录和文件。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>1.多线程</p>
+<p>2.支持多种后缀（-e | -extensions asp.php）</p>
+<p>3.递归的暴力扫描</p>
+<p>4.支持HTTP代理</p>
+<p>5.用户代理随机化</p>
+<p>6.启发式检测无效网站</p>
+<table>
+<thead>
+<tr>
+<th>颜色</th>
+<th>HTTP 状态码</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>绿色</td>
+<td>200 OK</td>
+<td>文件&#x2F;目录存在且可访问</td>
+</tr>
+<tr>
+<td>蓝色</td>
+<td>301&#x2F;302 Redirect</td>
+<td>目录存在（重定向到具体路径）</td>
+</tr>
+<tr>
+<td>黄色</td>
+<td>403 Forbidden</td>
+<td>目录存在但禁止访问</td>
+</tr>
+<tr>
+<td>红色</td>
+<td>404 Not Found</td>
+<td>路径不存在</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e</td>
+<td>指定网站语言</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>只显示指定状态码的结果</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归目录（跑出目录后，继续跑目录下面的目录）</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>指定url</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>指定字典</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
   </div>
 </article>

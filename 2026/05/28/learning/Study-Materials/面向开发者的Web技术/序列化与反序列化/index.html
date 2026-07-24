@@ -52,109 +52,49 @@
     <h1>序列化与反序列化</h1>
     <div class="post-meta">
       <time datetime="2026-05-28T08:21:06.000Z">2026.05.28</time>
-      <span>4 分钟阅读</span>
+      <span>3 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# 序列化与反序列化(PHP)
-
-## 1.序列化
-
-将对象的状态转换为可存储或可传输格式的过程
-
-对象在内存中一般以特定的数据结构（指针、引用、哈希表、链表等）存在，由于不同机器架构不同、数据对齐不同、指针无意义等问题，直接传输内存数据是不可靠的，所以需要将对象转换成连续的字节流（或标准格式的文本），使得：
-
-可以写入磁盘文件
-
-可以通过网络发送到远端
-
-可以被其他进程或设备正确解析
-
-### 1.1序列化表达方式
-
-所有格式第一位都是数据类型的英文字母简写
-
-![image-20260430194659262](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260430194659262.png)
-
-![image-20260430194817934](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260430194817934.png)
-
-![image-20260430195027130](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260430195027130.png)
-
-private私有属性序列化时，在变量名前加“%00类名%00”
-
-![image-20260510154109657](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260510154109657.png)
-
-protected受保护属性序列化时，在变量名前加“%00*%00”
-
-![image-20260510154134000](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260510154134000.png)
-
-### 1.2序列化格式
-
-JSON，XML
-
-### 1.3序列化函数
-
-serialize
-
-json_encode
-
-## 2.反序列化
-
-把收到的字节流或文本格式数据，还原成内存中的对象或数据结构，供程序继续操作。
-
-反序列化生成的对象里的值,由反序列化里的值提供;与原有类预定义的值无关
-
-反序列化不触发类的成员方法;需要调用方法后才能触发
-
-### 2.1反序列化分隔符
-
-在前面字符串没有问题的情况下;}是反序列化结束符,
-后面的字符串不影响反序列化结果
-
-成员属性数量一致
-
-成员属性名称长度一致
-
-内容长度一致
-
-### 2.2反序列化函数
-
-unserialize
-
-json_decode
-
-### 2.3反序列化变量合成
-
-当执行unserialize反序列化，字符串跟类中变量不一致时，存在变量合成
-
-1.覆盖（Overwrite）
-
-来源：字符串中有，类定义中也有。
-
-结果：字符串里的值会覆盖类定义的默认值。
-
-2.注入（Injection）
-
-来源：字符串中有，但类定义中没有。
-
-结果：PHP 会将其作为动态属性强行塞入对象。
-
-3.残留（Persistence）
-
-来源：类定义中有，但字符串中没有。
-
-结果：该属性会保留类定义时的默认值。
-
+    <h1 id="序列化与反序列化-PHP"><a href="#序列化与反序列化-PHP" class="headerlink" title="序列化与反序列化(PHP)"></a>序列化与反序列化(PHP)</h1><h2 id="1-序列化"><a href="#1-序列化" class="headerlink" title="1.序列化"></a>1.序列化</h2><p>将对象的状态转换为可存储或可传输格式的过程</p>
+<p>对象在内存中一般以特定的数据结构（指针、引用、哈希表、链表等）存在，由于不同机器架构不同、数据对齐不同、指针无意义等问题，直接传输内存数据是不可靠的，所以需要将对象转换成连续的字节流（或标准格式的文本），使得：</p>
+<p>可以写入磁盘文件</p>
+<p>可以通过网络发送到远端</p>
+<p>可以被其他进程或设备正确解析</p>
+<h3 id="1-1序列化表达方式"><a href="#1-1序列化表达方式" class="headerlink" title="1.1序列化表达方式"></a>1.1序列化表达方式</h3><p>所有格式第一位都是数据类型的英文字母简写</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260430194659262.png" alt="image-20260430194659262"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260430194817934.png" alt="image-20260430194817934"></p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260430195027130.png" alt="image-20260430195027130"></p>
+<p>private私有属性序列化时，在变量名前加“%00类名%00”</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260510154109657.png" alt="image-20260510154109657"></p>
+<p>protected受保护属性序列化时，在变量名前加“%00*%00”</p>
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260510154134000.png" alt="image-20260510154134000"></p>
+<h3 id="1-2序列化格式"><a href="#1-2序列化格式" class="headerlink" title="1.2序列化格式"></a>1.2序列化格式</h3><p>JSON，XML</p>
+<h3 id="1-3序列化函数"><a href="#1-3序列化函数" class="headerlink" title="1.3序列化函数"></a>1.3序列化函数</h3><p>serialize</p>
+<p>json_encode</p>
+<h2 id="2-反序列化"><a href="#2-反序列化" class="headerlink" title="2.反序列化"></a>2.反序列化</h2><p>把收到的字节流或文本格式数据，还原成内存中的对象或数据结构，供程序继续操作。</p>
+<p>反序列化生成的对象里的值,由反序列化里的值提供;与原有类预定义的值无关</p>
+<p>反序列化不触发类的成员方法;需要调用方法后才能触发</p>
+<h3 id="2-1反序列化分隔符"><a href="#2-1反序列化分隔符" class="headerlink" title="2.1反序列化分隔符"></a>2.1反序列化分隔符</h3><p>在前面字符串没有问题的情况下;}是反序列化结束符,<br>后面的字符串不影响反序列化结果</p>
+<p>成员属性数量一致</p>
+<p>成员属性名称长度一致</p>
+<p>内容长度一致</p>
+<h3 id="2-2反序列化函数"><a href="#2-2反序列化函数" class="headerlink" title="2.2反序列化函数"></a>2.2反序列化函数</h3><p>unserialize</p>
+<p>json_decode</p>
+<h3 id="2-3反序列化变量合成"><a href="#2-3反序列化变量合成" class="headerlink" title="2.3反序列化变量合成"></a>2.3反序列化变量合成</h3><p>当执行unserialize反序列化，字符串跟类中变量不一致时，存在变量合成</p>
+<p>1.覆盖（Overwrite）</p>
+<p>来源：字符串中有，类定义中也有。</p>
+<p>结果：字符串里的值会覆盖类定义的默认值。</p>
+<p>2.注入（Injection）</p>
+<p>来源：字符串中有，但类定义中没有。</p>
+<p>结果：PHP 会将其作为动态属性强行塞入对象。</p>
+<p>3.残留（Persistence）</p>
+<p>来源：类定义中有，但字符串中没有。</p>
+<p>结果：该属性会保留类定义时的默认值。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$v1</span> = <span class="string">&quot;a&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$v2</span> = <span class="string">&quot;dazhuang&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="keyword">new</span> <span class="title function_ invoke__">A</span>());</span><br><span class="line"></span><br><span class="line"><span class="variable">$b</span> = <span class="string">&#x27;O:1:&quot;A&quot;:2:&#123;s:2:&quot;v1&quot;;s:1:&quot;a&quot;;s:2:&quot;v3&quot;;s:3:&quot;ben&quot;;&#125;&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">var_dump</span>(<span class="title function_ invoke__">unserialize</span>(<span class="variable">$b</span>));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-![image-20260510170702989](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260510170702989.png)
-
-## 
-
-
-
-
+<p><img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260510170702989.png" alt="image-20260510170702989"></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
   </div>
 </article>
 

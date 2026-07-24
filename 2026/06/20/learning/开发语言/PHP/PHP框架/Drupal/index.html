@@ -56,81 +56,61 @@
     </div>
   </header>
   <div class="article-content">
-    
-# Drupal
-
-全局配置文件默认路径在网站目录下的 sites/default/settings.php，这个文件是用 PHP 编写的，里面定义了网站运行所需的大部分底层核心参数：
-
-1. 数据库连接凭证（Database Credentials）
-
-文件中包含了网站连接数据库的账号、密码、数据库名、主机地址以及端口。
-
-代码格式：
-
+    <h1 id="Drupal"><a href="#Drupal" class="headerlink" title="Drupal"></a>Drupal</h1><p>全局配置文件默认路径在网站目录下的 sites&#x2F;default&#x2F;settings.php，这个文件是用 PHP 编写的，里面定义了网站运行所需的大部分底层核心参数：</p>
+<ol>
+<li>数据库连接凭证（Database Credentials）</li>
+</ol>
+<p>文件中包含了网站连接数据库的账号、密码、数据库名、主机地址以及端口。</p>
+<p>代码格式：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$databases</span>[<span class="string">&#x27;default&#x27;</span>][<span class="string">&#x27;default&#x27;</span>] = <span class="keyword">array</span> (</span><br><span class="line">  <span class="string">&#x27;database&#x27;</span> =&gt; <span class="string">&#x27;drupal_db&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;db_user&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;P@ssw0rd123!&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;host&#x27;</span> =&gt; <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;driver&#x27;</span> =&gt; <span class="string">&#x27;mysql&#x27;</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
-2. 哈希盐值（Hash Salt）
-
-- 变量名为 `$settings['hash_salt']`。
-- 这是一个随机生成的长字符串，用于给用户的密码加密（加盐）、生成一次性登录链接或验证安全令牌（Token）。如果这个盐值泄露，攻击者伪造身份令牌的难度会大大降低。
-
-3. 文件系统路径（File Paths）
-
-- 定义了网站存放公共上传文件（如图片）、私有敏感文件以及临时缓存文件的绝对或相对路径。
-
-4. 逆向代理与受信任主机配置（Trusted Host Patterns）
-
-- 安全配置项，用来防御**HTTP Host头攻击**。它会限制服务器只响应特定域名的请求（例如只允许 `omc.cn`），防止恶意流量通过伪造 Host 头混进网站。
-
-Drupal 框架（特别是你目前接触的 Drupal 7、8、9 及更高版本）的密码加密方式，在密码学中属于**高强度的、定制化的加盐多轮迭代哈希算法（Salted Multi-round Iterative Hashing）**。
-
-在底层实现上，它主要基于 **SHA-512** 散列算法，并融入了防暴力破解的动态拉伸机制。
-
-我们来拆解一下它最核心的加密特征和底层运作流程：
-
-## 一、 密文的外观特征（如何一眼认出它）
-
-你在数据库中看到的密文格式通常长这样： `$S$DvQi6Y600iNeXRIeEMF94Y6FvN8nujJcEDTCP9nS5.i38jnEKuDR`
-
-成熟的 Web 框架都会对密文进行格式化编码，Drupal 的这 55 个字符其实是一块**自解释的数据板**，包含了三个部分：
-
-- **`$S$` (前 3 位)**：这是 Drupal 的**算法签名（Identifer）**。告诉框架内部的 `password.inc` 函数：“我是用 Drupal 7/8 的专属算法加密的，请用对应的逻辑来处理我。”
-- **第 4 位字符（如 `D`）**：代表**迭代次数（Count Log2）**。它是一个自定义的编码字符。在 Drupal 7 中，`D` 代表加密循环需要执行 215=32768 轮。通过修改这个字符，运维可以自由调整加密的强度。
-- **后续字符**：紧接着的 8 个字符是随机生成的**盐值（Salt）**，而最后剩下的部分则是经过 3 万多轮 SHA-512 计算后得到的**最终散列值（Hash）**。它们全部通过一种定制的 Base64 字符集（`./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`）进行了全文本编码。
-
-## 二、 底层加密的“三道工序”
-
-当一个明文密码被送进 Drupal 的加密函数（如 `_password_crypt()`）时，它会经历以下标准的密码学处理：
-
-### 1. 双重盐值拼接（Double Salting）
-
-为了防止黑客使用预先计算好的“彩虹表”进行批量反查，Drupal 会使用两种盐：
-
-- **动态盐（Dynamic Salt）**：每次创建用户时随机生成的 8 位字符（随密文一起存入数据库）。
-- **全局盐（Site Salt）**：我们在 `settings.php` 里看到的 `$drupal_hash_salt` 变量。 加密时，函数会把“明文密码 + 动态盐 + 全局盐”紧紧拼接在一起，作为初始的输入字符串。
-
-### 2. 疯狂的拉伸循环（Key Stretching）
-
-这是 Drupal 最强悍的防御武器。它不会只做一次 SHA-512，而是会利用一个 `hash()` 循环，把上一次计算出来的哈希结果，再次与明文密码拼接，然后丢进下一次 SHA-512 计算中。 这个过程会雷打不动地**重复循环 32,768 次**（即 215 次）。
-
-> **为什么要循环这么多次？** 这种技术在安全上叫**密钥拉伸**。它故意提高了单次加密的 CPU 算力消耗。虽然正常用户登录时，服务器算这 3 万次只需要零点几秒，用户毫无察觉；但如果黑客拿着显卡想用字典暴力穷举，极高的算力成本会让他的破解速度下降几万倍，直接劝退暴力破解。
-
-### 3. 定制 Base64 编码
-
-32768 轮循环结束后，会得到一个二进制的哈希大块（Digest）。Drupal 内部实现了一个标准的自定义 `_password_base64_encode()` 函数，将这个二进制块转换成我们在数据库里看到的由字母、数字、点号和斜杠组成的 55 位可读文本，最终写入 `users` 表的 `pass` 字段。
-
-## 📊 总结与横向对比
-
-在网络安全和代码审计中，不同的主流 CMS 框架都有各自的加密偏好：
-
-- **Drupal 7+**：`$S$` 开头，基于 **SHA-512** 的 32768 次密钥拉伸。
-- **WordPress**：`$P$` 或 `$H$` 开头，基于 **MD5** 的 8192 次迭代（基于 Portable PHP password hashing framework）。
-- **现代中间件/系统**：很多已转向 **Bcrypt** (`$2y$`) 或 **Argon2**，它们除了消耗 CPU 外，还会强制消耗内存，对抗专用矿机（ASIC/GPU）的能力更强。
-
-正因为 Drupal 内部的 PHP 源代码里严丝合缝地写好了这套“拼接 → 3万次SHA-512 → 定制编码”的函数逻辑，所以我们在实战中才必须要借助它自带的 `password-hash.sh` 脚本来生成合法的密文，或者直接在数据库层用已知明文的合法密文去进行覆盖。
-
-
-
+<ol start="2">
+<li>哈希盐值（Hash Salt）</li>
+</ol>
+<ul>
+<li>变量名为 <code>$settings[&#39;hash_salt&#39;]</code>。</li>
+<li>这是一个随机生成的长字符串，用于给用户的密码加密（加盐）、生成一次性登录链接或验证安全令牌（Token）。如果这个盐值泄露，攻击者伪造身份令牌的难度会大大降低。</li>
+</ul>
+<ol start="3">
+<li>文件系统路径（File Paths）</li>
+</ol>
+<ul>
+<li>定义了网站存放公共上传文件（如图片）、私有敏感文件以及临时缓存文件的绝对或相对路径。</li>
+</ul>
+<ol start="4">
+<li>逆向代理与受信任主机配置（Trusted Host Patterns）</li>
+</ol>
+<ul>
+<li>安全配置项，用来防御<strong>HTTP Host头攻击</strong>。它会限制服务器只响应特定域名的请求（例如只允许 <code>omc.cn</code>），防止恶意流量通过伪造 Host 头混进网站。</li>
+</ul>
+<p>Drupal 框架（特别是你目前接触的 Drupal 7、8、9 及更高版本）的密码加密方式，在密码学中属于<strong>高强度的、定制化的加盐多轮迭代哈希算法（Salted Multi-round Iterative Hashing）</strong>。</p>
+<p>在底层实现上，它主要基于 <strong>SHA-512</strong> 散列算法，并融入了防暴力破解的动态拉伸机制。</p>
+<p>我们来拆解一下它最核心的加密特征和底层运作流程：</p>
+<h2 id="一、-密文的外观特征（如何一眼认出它）"><a href="#一、-密文的外观特征（如何一眼认出它）" class="headerlink" title="一、 密文的外观特征（如何一眼认出它）"></a>一、 密文的外观特征（如何一眼认出它）</h2><p>你在数据库中看到的密文格式通常长这样： <code>$S$DvQi6Y600iNeXRIeEMF94Y6FvN8nujJcEDTCP9nS5.i38jnEKuDR</code></p>
+<p>成熟的 Web 框架都会对密文进行格式化编码，Drupal 的这 55 个字符其实是一块<strong>自解释的数据板</strong>，包含了三个部分：</p>
+<ul>
+<li><strong><code>$S$</code> (前 3 位)</strong>：这是 Drupal 的<strong>算法签名（Identifer）</strong>。告诉框架内部的 <code>password.inc</code> 函数：“我是用 Drupal 7&#x2F;8 的专属算法加密的，请用对应的逻辑来处理我。”</li>
+<li><strong>第 4 位字符（如 <code>D</code>）</strong>：代表<strong>迭代次数（Count Log2）</strong>。它是一个自定义的编码字符。在 Drupal 7 中，<code>D</code> 代表加密循环需要执行 215&#x3D;32768 轮。通过修改这个字符，运维可以自由调整加密的强度。</li>
+<li><strong>后续字符</strong>：紧接着的 8 个字符是随机生成的<strong>盐值（Salt）</strong>，而最后剩下的部分则是经过 3 万多轮 SHA-512 计算后得到的<strong>最终散列值（Hash）</strong>。它们全部通过一种定制的 Base64 字符集（<code>./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</code>）进行了全文本编码。</li>
+</ul>
+<h2 id="二、-底层加密的“三道工序”"><a href="#二、-底层加密的“三道工序”" class="headerlink" title="二、 底层加密的“三道工序”"></a>二、 底层加密的“三道工序”</h2><p>当一个明文密码被送进 Drupal 的加密函数（如 <code>_password_crypt()</code>）时，它会经历以下标准的密码学处理：</p>
+<h3 id="1-双重盐值拼接（Double-Salting）"><a href="#1-双重盐值拼接（Double-Salting）" class="headerlink" title="1. 双重盐值拼接（Double Salting）"></a>1. 双重盐值拼接（Double Salting）</h3><p>为了防止黑客使用预先计算好的“彩虹表”进行批量反查，Drupal 会使用两种盐：</p>
+<ul>
+<li><strong>动态盐（Dynamic Salt）</strong>：每次创建用户时随机生成的 8 位字符（随密文一起存入数据库）。</li>
+<li><strong>全局盐（Site Salt）</strong>：我们在 <code>settings.php</code> 里看到的 <code>$drupal_hash_salt</code> 变量。 加密时，函数会把“明文密码 + 动态盐 + 全局盐”紧紧拼接在一起，作为初始的输入字符串。</li>
+</ul>
+<h3 id="2-疯狂的拉伸循环（Key-Stretching）"><a href="#2-疯狂的拉伸循环（Key-Stretching）" class="headerlink" title="2. 疯狂的拉伸循环（Key Stretching）"></a>2. 疯狂的拉伸循环（Key Stretching）</h3><p>这是 Drupal 最强悍的防御武器。它不会只做一次 SHA-512，而是会利用一个 <code>hash()</code> 循环，把上一次计算出来的哈希结果，再次与明文密码拼接，然后丢进下一次 SHA-512 计算中。 这个过程会雷打不动地<strong>重复循环 32,768 次</strong>（即 215 次）。</p>
+<blockquote>
+<p><strong>为什么要循环这么多次？</strong> 这种技术在安全上叫<strong>密钥拉伸</strong>。它故意提高了单次加密的 CPU 算力消耗。虽然正常用户登录时，服务器算这 3 万次只需要零点几秒，用户毫无察觉；但如果黑客拿着显卡想用字典暴力穷举，极高的算力成本会让他的破解速度下降几万倍，直接劝退暴力破解。</p>
+</blockquote>
+<h3 id="3-定制-Base64-编码"><a href="#3-定制-Base64-编码" class="headerlink" title="3. 定制 Base64 编码"></a>3. 定制 Base64 编码</h3><p>32768 轮循环结束后，会得到一个二进制的哈希大块（Digest）。Drupal 内部实现了一个标准的自定义 <code>_password_base64_encode()</code> 函数，将这个二进制块转换成我们在数据库里看到的由字母、数字、点号和斜杠组成的 55 位可读文本，最终写入 <code>users</code> 表的 <code>pass</code> 字段。</p>
+<h2 id="📊-总结与横向对比"><a href="#📊-总结与横向对比" class="headerlink" title="📊 总结与横向对比"></a>📊 总结与横向对比</h2><p>在网络安全和代码审计中，不同的主流 CMS 框架都有各自的加密偏好：</p>
+<ul>
+<li><strong>Drupal 7+</strong>：<code>$S$</code> 开头，基于 <strong>SHA-512</strong> 的 32768 次密钥拉伸。</li>
+<li><strong>WordPress</strong>：<code>$P$</code> 或 <code>$H$</code> 开头，基于 <strong>MD5</strong> 的 8192 次迭代（基于 Portable PHP password hashing framework）。</li>
+<li><strong>现代中间件&#x2F;系统</strong>：很多已转向 <strong>Bcrypt</strong> (<code>$2y$</code>) 或 <strong>Argon2</strong>，它们除了消耗 CPU 外，还会强制消耗内存，对抗专用矿机（ASIC&#x2F;GPU）的能力更强。</li>
+</ul>
+<p>正因为 Drupal 内部的 PHP 源代码里严丝合缝地写好了这套“拼接 → 3万次SHA-512 → 定制编码”的函数逻辑，所以我们在实战中才必须要借助它自带的 <code>password-hash.sh</code> 脚本来生成合法的密文，或者直接在数据库层用已知明文的合法密文去进行覆盖。</p>
 
   </div>
 </article>

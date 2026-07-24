@@ -52,85 +52,50 @@
     <h1>SQL server数据库</h1>
     <div class="post-meta">
       <time datetime="2026-06-29T05:12:54.000Z">2026.06.29</time>
-      <span>5 分钟阅读</span>
+      <span>4 分钟阅读</span>
     </div>
   </header>
   <div class="article-content">
-    
-# SQL server数据库
-
-## 系统数据库
-
-master：记录了SqlServer实例的所有系统级消息，包括实例范围的元数据（如登录账号、端点、链接服务器和系统配置设置）
-
-- msdb：供SqlServer代理服务调度报警和作业记录操作员的使用，保存关于调度报警、作业、操作员等信息
-- model：SqlServer实例上创建的所有数据库的模板
-- tempdb：临时数据库，用于保存临时对象或中间结果集，为数据库的排列等操作提供一个临时的工作空间
-
-## 实例数据库
-
-- ReportServer：存储SSRS配置部分，报告定义，报告元数据，报告历史，缓存政策，快照，资源，安全设置，加密的数据，调度和提交数据，以及扩展信息
-- ReportServerTempDB：存储中间处理产品，例如缓冲的报告、会话和执行数据等
-
-## 数据库组成
-
-数据库是以文件的形式存在的，由文件和文件组组成
-
-#### 文件
-
-文件基本分为以下三类：
-
-主要数据文件：存放数据和数据库的初始化信息。每个数据库有且只能有一个主要数据文件`.mdf`结尾
-
-次要数据文件：存放除了主要数据文件以外的所有数据文件。次要数据文件不是必须的，可以没有，也可以有多个`.ndf`结尾
-
-事务日志文件：存放用户回复数据库的所有文件信息。每个数据库至少有一个日志文件，也可以有多个`.ldf`结尾
-
-#### 文件组
-
-文件组是数据库文件一种逻辑管理单位，将数据库文件分成不同的文件组，方便对文件的分配和管理，分为两种类型：
-
-主文件组Primary：主要是数据文件和没有明确指派给其他文件组的文件
-
-用户自定义的文件组：Create DataBase 或者 Alter DataBase语句，FileGroup关键字指定的文件组
-
-#### 设计原则
-
-文件只能是一个文件组的成员
-
-文件或文件组不能由多个数据库使用
-
-日志不能作为文件组的一部分
-
-## SqlServer权限
-
-sqlserver中的权限控制被分成服务器和数据库两个级别，一个服务器可以包含多个数据库。服务器级别权限可以让我们控制登录、服务器资源操作等等；数据库级别的权限可以让我们对具体的表\视图\数据等数据库内资源进行操作。
-
-sqlserver服务器级别的权限，可以把权限简单的归为以下三类：
-
-- **sa权限：**即服务器角色sysadmin。拥有数据库操作，文件管理，命令执行，注册表读取等权限。SQLServer数据库的最高权限
-- **db权限：**文件管理，数据库操作等权限 users-administrators
-- **public权限：**数据库操作 guest-users
-
-如果我们找到一个SqlServer数据库的注入点，可以通过以下命令判断当前用户的权限，查询语句返回1，说明是对应的权限。
-
+    <h1 id="SQL-server数据库"><a href="#SQL-server数据库" class="headerlink" title="SQL server数据库"></a>SQL server数据库</h1><h2 id="系统数据库"><a href="#系统数据库" class="headerlink" title="系统数据库"></a>系统数据库</h2><p>master：记录了SqlServer实例的所有系统级消息，包括实例范围的元数据（如登录账号、端点、链接服务器和系统配置设置）</p>
+<ul>
+<li>msdb：供SqlServer代理服务调度报警和作业记录操作员的使用，保存关于调度报警、作业、操作员等信息</li>
+<li>model：SqlServer实例上创建的所有数据库的模板</li>
+<li>tempdb：临时数据库，用于保存临时对象或中间结果集，为数据库的排列等操作提供一个临时的工作空间</li>
+</ul>
+<h2 id="实例数据库"><a href="#实例数据库" class="headerlink" title="实例数据库"></a>实例数据库</h2><ul>
+<li>ReportServer：存储SSRS配置部分，报告定义，报告元数据，报告历史，缓存政策，快照，资源，安全设置，加密的数据，调度和提交数据，以及扩展信息</li>
+<li>ReportServerTempDB：存储中间处理产品，例如缓冲的报告、会话和执行数据等</li>
+</ul>
+<h2 id="数据库组成"><a href="#数据库组成" class="headerlink" title="数据库组成"></a>数据库组成</h2><p>数据库是以文件的形式存在的，由文件和文件组组成</p>
+<h4 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h4><p>文件基本分为以下三类：</p>
+<p>主要数据文件：存放数据和数据库的初始化信息。每个数据库有且只能有一个主要数据文件<code>.mdf</code>结尾</p>
+<p>次要数据文件：存放除了主要数据文件以外的所有数据文件。次要数据文件不是必须的，可以没有，也可以有多个<code>.ndf</code>结尾</p>
+<p>事务日志文件：存放用户回复数据库的所有文件信息。每个数据库至少有一个日志文件，也可以有多个<code>.ldf</code>结尾</p>
+<h4 id="文件组"><a href="#文件组" class="headerlink" title="文件组"></a>文件组</h4><p>文件组是数据库文件一种逻辑管理单位，将数据库文件分成不同的文件组，方便对文件的分配和管理，分为两种类型：</p>
+<p>主文件组Primary：主要是数据文件和没有明确指派给其他文件组的文件</p>
+<p>用户自定义的文件组：Create DataBase 或者 Alter DataBase语句，FileGroup关键字指定的文件组</p>
+<h4 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h4><p>文件只能是一个文件组的成员</p>
+<p>文件或文件组不能由多个数据库使用</p>
+<p>日志不能作为文件组的一部分</p>
+<h2 id="SqlServer权限"><a href="#SqlServer权限" class="headerlink" title="SqlServer权限"></a>SqlServer权限</h2><p>sqlserver中的权限控制被分成服务器和数据库两个级别，一个服务器可以包含多个数据库。服务器级别权限可以让我们控制登录、服务器资源操作等等；数据库级别的权限可以让我们对具体的表\视图\数据等数据库内资源进行操作。</p>
+<p>sqlserver服务器级别的权限，可以把权限简单的归为以下三类：</p>
+<ul>
+<li>**sa权限：**即服务器角色sysadmin。拥有数据库操作，文件管理，命令执行，注册表读取等权限。SQLServer数据库的最高权限</li>
+<li>**db权限：**文件管理，数据库操作等权限 users-administrators</li>
+<li>**public权限：**数据库操作 guest-users</li>
+</ul>
+<p>如果我们找到一个SqlServer数据库的注入点，可以通过以下命令判断当前用户的权限，查询语句返回1，说明是对应的权限。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--判断是否是SA权限</span><br><span class="line">select is_srvrolemember(&#x27;sysadmin&#x27;)</span><br><span class="line">--判断是否是db_owner权限</span><br><span class="line">select is_member(&#x27;db_owner&#x27;)</span><br><span class="line">--判断是否是public权限</span><br><span class="line">select is_srvrolemember(&#x27;public&#x27;)</span><br></pre></td></tr></table></figure>
 
-## T-SQL语言
+<h2 id="T-SQL语言"><a href="#T-SQL语言" class="headerlink" title="T-SQL语言"></a>T-SQL语言</h2><ol>
+<li><strong>DDL（数据定义语言）</strong>：用于定义和管理数据库及对象，如<code>CREATE</code>、<code>ALTER</code>、<code>DROP</code> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34901049/article/details/100555429"><img src="https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg" alt="CSDN">CSDN</a>。</li>
+<li><strong>DML（数据操作语言）</strong>：用于操作表中的数据，如<code>INSERT</code>、<code>UPDATE</code>、<code>DELETE</code> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34901049/article/details/100555429"><img src="https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg" alt="CSDN">CSDN</a>。</li>
+<li><strong>DCL（数据控制语言）</strong>：用于权限管理和安全控制，如<code>GRANT</code>、<code>REVOKE</code>、<code>DENY</code> <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34901049/article/details/100555429"><img src="https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg" alt="CSDN">CSDN</a>。</li>
+<li><strong>附加语言元素</strong>：包括变量、运算符、函数、注释及流程控制语句 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34901049/article/details/100555429"><img src="https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg" alt="CSDN">CSDN</a>。</li>
+</ol>
+<h2 id="SQL-server注释符"><a href="#SQL-server注释符" class="headerlink" title="SQL server注释符"></a>SQL server注释符</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- </span></span><br><span class="line"><span class="comment">/* */</span></span><br></pre></td></tr></table></figure>
 
-1. **DDL（数据定义语言）**：用于定义和管理数据库及对象，如`CREATE`、`ALTER`、`DROP` [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
-2. **DML（数据操作语言）**：用于操作表中的数据，如`INSERT`、`UPDATE`、`DELETE` [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
-3. **DCL（数据控制语言）**：用于权限管理和安全控制，如`GRANT`、`REVOKE`、`DENY` [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
-4. **附加语言元素**：包括变量、运算符、函数、注释及流程控制语句 [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
-
-## SQL server注释符
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- </span></span><br><span class="line"><span class="comment">/* */</span></span><br></pre></td></tr></table></figure>
-
--- 后面通常需要跟空格，字母或换行
-
-
-
+<p>– 后面通常需要跟空格，字母或换行</p>
 
   </div>
 </article>

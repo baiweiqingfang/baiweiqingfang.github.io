@@ -56,45 +56,21 @@
     </div>
   </header>
   <div class="article-content">
-    
-# Windows权限维持
-
- 创建新管理员用户 
-
-net user username 123 /add 
-
-将baimao用户加入到本地管理员组当中 
-
-net localgroup administrators username /add
-
-## 1.黄金票据
-
-在Kerberos认证中,Client通过AS(身份认证服务)认证后,AS会给Client一个 Logon Session Key和TGT,而Logon Session Key并不会保存在KDC中，krbtgt的NTLM Hash又是固定的,所以只要得到krbtgt的NTLM Hash，就可以伪造TGT和Logon Session Key来进入下一步Client与TGS的交互。而已有了黄金票据之后,就跳过AS验证,不用验证账户和密码,所以也不担心域管密码修改 
-
-利用条件：
-
-域SID
-
-域名称
-
-krbtgt NTLM hash
-
-## 2.白银票据
-
-在Kerberos认证的第三步，Client带着ST和Authenticator3向Server上的某个服务进行请求，Server接收到Client的请求之后,通过自己的Master Key 解密ST,从而获得 Session Key。通过 Session Key 解密 Authenticator3,进而验证对方的身份,验证成功就让 Client 访问server上的指定服务了。所以我们只需要知道Server用户的Hash就可以伪造出一个ST,且不会经过KDC,伪造的门票只对部分服务起作用
-
-利用条件：
-
-目标服务器全域名
-
-域sid
-
-可利用的服务
-
-服务账号的NTLM hash
-
-
-
+    <h1 id="Windows权限维持"><a href="#Windows权限维持" class="headerlink" title="Windows权限维持"></a>Windows权限维持</h1><p> 创建新管理员用户 </p>
+<p>net user username 123 &#x2F;add </p>
+<p>将baimao用户加入到本地管理员组当中 </p>
+<p>net localgroup administrators username &#x2F;add</p>
+<h2 id="1-黄金票据"><a href="#1-黄金票据" class="headerlink" title="1.黄金票据"></a>1.黄金票据</h2><p>在Kerberos认证中,Client通过AS(身份认证服务)认证后,AS会给Client一个 Logon Session Key和TGT,而Logon Session Key并不会保存在KDC中，krbtgt的NTLM Hash又是固定的,所以只要得到krbtgt的NTLM Hash，就可以伪造TGT和Logon Session Key来进入下一步Client与TGS的交互。而已有了黄金票据之后,就跳过AS验证,不用验证账户和密码,所以也不担心域管密码修改 </p>
+<p>利用条件：</p>
+<p>域SID</p>
+<p>域名称</p>
+<p>krbtgt NTLM hash</p>
+<h2 id="2-白银票据"><a href="#2-白银票据" class="headerlink" title="2.白银票据"></a>2.白银票据</h2><p>在Kerberos认证的第三步，Client带着ST和Authenticator3向Server上的某个服务进行请求，Server接收到Client的请求之后,通过自己的Master Key 解密ST,从而获得 Session Key。通过 Session Key 解密 Authenticator3,进而验证对方的身份,验证成功就让 Client 访问server上的指定服务了。所以我们只需要知道Server用户的Hash就可以伪造出一个ST,且不会经过KDC,伪造的门票只对部分服务起作用</p>
+<p>利用条件：</p>
+<p>目标服务器全域名</p>
+<p>域sid</p>
+<p>可利用的服务</p>
+<p>服务账号的NTLM hash</p>
 
   </div>
 </article>
