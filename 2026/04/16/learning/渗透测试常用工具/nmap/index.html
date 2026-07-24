@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>nmap | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>nmap</h1>
+    <div class="post-meta">
+      <time datetime="2026-04-16T08:55:02.000Z">2026.04.16</time>
+      <span>24 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+## nmap
+
+Nmap由 Gordon Lyon（Fyodor）开发。
+
+被用于主机发现、端口扫描、服务识别、操作系统指纹、漏洞探测等任务。
+
+| 参数         | 描述                                                         |
+| ------------ | ------------------------------------------------------------ |
+| -A           | 全面扫描/综合扫描（等同于同时开启了-O,-sV.-sC/--script=default,--traceroute） |
+| -F           | 快速扫描，只扫描最常见的100个端口                            |
+| -oA          | （All）保存为全部格式                                        |
+| -oN <file>   | （Normal）保存为文本格式                                     |
+| -oS          |                                                              |
+| -oX          | 保存为.xml格式                                               |
+| -p-          | 扫描全部 65535 个 TCP 端口（等价于 -p 1-65535<br>默认情况下 Nmap 只扫最常见的 1000 个端口 |
+| -Pn          | 跳过ping检测主机是否存活，直接对目标进行端口扫描             |
+| -p \<number> | 指定端口                                                     |
+| -sC          | 额外执行脚本，输出可直接用于攻击的情报                       |
+| -sn/-sP      | ping扫描，只做主机发现，不扫描端口                           |
+| -sS          | TCP半连接扫描,需要root权限，目标系统记录日志较少，隐蔽性高   |
+| -sT          | TCP全连接扫描，不需要root权限，目标系统会完整记录日志，隐蔽性差 |
+| -sV          | 在发现某个 TCP/UDP 端口开放之后，继续扫描得到运行在该端口上的具体服务名称 + 版本号等<br>可能被日志记录 |
+|              |                                                              |
+| -T4          | aggressive（激进）速度快                                     |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+| -v           | 详细模式                                                     |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+|              |                                                              |
+
+免 Ping 扫描，穿透防火墙，避免被防火墙发现
+nmap -P0 192.168.1.103
+TCP SYN Ping 扫描
+nmap -PS -v 192.168.1.103
+nmap -PS80,10-100 -v 192.168.1.103 （针对防火墙丢弃 RST 包）
+TCP ACK Ping 扫描
+nmap -PA -v 192.168.1.103
+UDP Ping 扫描
+nmap -PU -v 192.168.1.103
+ICMP Ping Types 扫描
+nmap -PU -v 192.168.1.103 (ICMP ECHO)
+nmap -PP -v 192.168.1.103 (ICMP 时间戳)
+nmap -PM -v 192.168.1.103 (ICMP 地址掩码)
+ARP Ping 扫描
+nmap -PR -v 192.168.1.103
+列表 扫描
+nmap -sL -v 192.168.1.103
+禁止方向域名解析
+nmap -n -sL -v 192.168.1.103
+方向域名解析
+nmap -R -sL -v 192.168.1.103
+使用系统域名解析系统
+nmap --system-dns 192.168.1.2 192.168.1.103
+扫描 IPV6 地址
+nmap -6 IPv6
+路由跟踪
+nmap --traceroute -v www.sunbridgegroup.com
+SCTP INIT Ping 扫描
+nmap -PY -v 192.168.1.103
+
+时序扫描
+nmap -T(0-5) 192.168.1.103
+
+nmap -p T:80,U:445 192.168.1.103
+
+nmap --top-ports 100 192.168.1.103 (扫描最有用的前 100 个端口)
+TCP SYN 扫描 （高效的扫描方式）
+nmap -sS -v 192.168.1.103
+TCP 连接扫描
+nmap -sT -v 192.168.1.103
+UDP 连接扫描
+nmap -sU -p 80-100 192.168.1.103
+隐蔽扫描
+nmap -sN 61.241.194.153(NULL 扫描)
+nmap -sF 61.241.194.153(FIN 扫描)
+nmap -sX 61.241.194.153(Xmas 扫描)
+TCP ACK 扫描
+nmap -sA 192.168.1.103
+TCP 窗口扫描
+nmap -sW -v -F 192.168.1.103
+TCP Maimon 扫描
+nmap -sM -T4 192.168.1.103
+自定义 扫描
+nmap -sT --scanflags SYNURG 192.168.1.103
+空闲 扫描( 隐藏 IP )
+nmap -sI www.0day.co:80 192.168.1.103
+IP 协议 扫描
+nmap -sO -T4 192.168.1.103
+FTP Bounce 扫描
+(已经不被支持)
+
+### 三、指纹识别与探测
+
+版本探测
+nmap -sV 192.168.1.103
+nmap -sV -A 192.168.1.103
+全端口版本探测
+nmap -sV --allports 192.168.1.103
+设置扫描强度
+nmap -sV --version-intensity (0-9) 192.168.1.103
+轻量级扫描
+nmap -sV --version-light 2 192.168.1.103
+重量级扫描
+nmap -sV --version-all 192.168.1.103
+获取详细版本信息
+nmap -sV --version-trace 192.168.1.103
+RPC 扫描
+nmap -sS -sR 192.168.1.103
+对指定的目标进行操作系统监测
+nmap -O --osscan-limit 192.168.1.103
+推测系统并识别
+nmap -O --osscan-guess 192.168.1.103
+
+### 四、伺机而动
+调整并行扫描组的大小
+nmap --min-hostgroup 30 192.168.1.110/24
+nmap --max-hostgroup 30 902 192.168.1.104
+调整探测报文的并行度
+nmap --min-parallelism 100 192.168.1.104
+nmap --max-parallelism 100 192.168.1.104
+调整探测报文超时
+nmap --initial-rtt-timeout 100ms 192.168.1.104
+nmap --max-rtt-timeout 100ms 192.168.1.104
+nmap --min-rtt-timeout 100ms 192.168.1.104
+放弃缓慢的目标主机
+nmap --host-timeout 1800000ms 192.168.1.104
+调整报文适合时间间隔
+nmap --scan-delay 1s 192.168.1.104
+nmap --max-scan-delay 1s 192.168.1.104
+
+### 五、防火墙/IDS 逃逸
+报文分段
+nmap -f -v 61.241.194.153
+指定偏移大小
+nmap --mtu 16 192.168.1.104
+IP 欺骗
+nmap -D RND:11 192.168.1.104
+nmap -D 192.168.1.104,192.168.1.103,192.168.1.101 192.168.1.104
+源地址欺骗
+nmap -sI www.0day.cn:80 192.168.1.104
+源端口欺骗
+nmap --source-port 902 192.168.1.104
+指定发包长度
+nmap --data-length 30 192.168.1.104
+目标主机随机排序
+nmap --randomize-hosts 192.168.1.104
+MAX 地址欺骗
+nmap -sT -Pn --spoof-mac 0 192.168.1.104
+
+### 六、信息收集
+IP 信息收集
+nmap --script ip-geolocation-* www.pcos.cn
+WHOIS 查询
+nmap --script whois-domain www.pcos.cn
+nmap --script whois-domain --script-args whois.whodb=nofollow
+www.ithome.com
+nmap -sn --script whois-domain -v -iL host.txt
+搜索邮件信息(新版可能没有这个模块)
+nmap --script http-email-harvest www.pcos.cn
+IP 反查
+nmap -sn --script hostmap-ip2hosts www.pcos.cn
+DNS 信息收集
+nmap --script dns-brute www.pcos.cn
+nmap --script dns-brute dns-brute.threads=10 www.pcos.cn
+nmap --script dns-brute dns-brute.threads=10,dns-brute.hostlis
+www.pcos.cn
+检索系统信息
+nmap -p 445 445 192.168.1.104 --script membase-http-info
+后台打印机服务漏洞
+nmap --script smb-security-mode.nse -p 445 119.29.155.45
+系统漏洞扫描
+nmap --script smb-check-vulns.nse -p 445 119.29.155.45
+9.扫描 Web 漏洞
+nmap -p80 --script http-stored-xss.nse/http-sql-injection.nse
+119.29.155.45
+通过 Snmp 列举 Windows 服务/账户
+nmap -sU -p 161 --script=snmp-win32-services 192.168.1.104
+nmap -sU -f -p 161 --script=snmp-win32-users 192.168.1.110
+枚举 DNS 服务器的主机名
+nmap --script dns-brute --script-args dns-brute.domain=baidu.com
+HTTP 信息收集
+nmap -sV -p 80 www.0day.com (HTTP 版本探测)
+nmap -p 80 --script=http-headers www.pcos.cn (HTTP 信息头探测)
+nmap -p 80 --script=http-sitemap-generator www.pcos.cn (爬行 Web 目
+录结构)
+枚举 SSL 密钥
+nmap -p 443 --script=ssl-enum-ciphers www.baidu.com
+SSH 服务密钥信息探测
+map -p 22 --script ssh-hostkey --script-args ssh_hostkey=full 127.0.0.1
+### 七、数据库渗透测试
+Mysql 列举数据库
+nmap -p3306 --script=mysql-databases --script-args
+mysqluser=root,mysqlpass 192.168.1.101
+列举 MySQL 变量
+nmap -p3306 --script=mysql-variables 192.168.1.3
+nmap -sV --script=mysql-variables 192.168.1.3 (无法确定端口的情况下)
+检查 MySQL 密码
+nmap -p3306 --script=mysql-empty-password 192.168.1.3
+nmap -sV -F -T4 --script=mysql-empty-password 192.168.1.3
+审计 MySQL 密码
+nmap --script=mysql-brute 192.168.1.101
+nmap -p3306 --script=mysql-brute userdb=/root/passdb.txt
+passdb=/root/pass.txt 192.168.1.101 (指定字典)
+审计 MySQL 安全配置
+nmap -p3306 --script mysql-audit --script-args
+"mysql-audit.username='root',mysql-audit.password='123',mysql-audit.fi
+lename='nselib/data/mysql-cis.audit'" 192.168.1.104
+审计 Oracle 密码
+nmap --script=oracle-brute -p 1521 --script-args oracle-brute.sid=test
+192.168.1.121
+nmap --script=oracle-brute -p 1521 --script-args oracle-brute.sid=test
+--script-args userdb=/tmp/usernames.txt,passdb=/tmp/password.txt
+192.168.1.105
+审计 msSQL 密码
+nmap -p 1433 --script ms-sql-brute --script-args
+userdb=name.txt,passdb=pass.txt 192.168.1.104
+检查 msSQL 空密码
+nmap -p 1433 --script ms-sql-empty-password 192.168.1.104
+读取 msSQL 数据
+nmap -p 1433 --script ms-sql-tables --script-args
+mssql.username=sa,mssql.Password=sa 192.168.1.101
+读取 msSQL 执行系统命令
+nmap -p 1433 --script ms-sql-xp-cmdshell --script-args
+mssql.username=sa,mssql.password=sa,ms-sql-xp-cmdshell.cmd="ipconf
+ig" 192.168.1.101
+审计 PgSQL 密码
+nmap -p 5432 --script pgsql-brute 192.168.1.101
+### 八、渗透测试
+审计 HTTP 身份验证
+nmap --script=http-brute -p 80 www.pcos.cn
+审计 FTP 服务器
+nmap --script ftp-brute -p 21 192.168.1.101
+nmap --script ftp-brute --script-args userdb=user.txt,passdb=pass.txt -p
+21 192.168.1.101
+nmap --script=ftp-anon 192.168.1.101
+审计 Wordpress 程序
+nmap -p80 --script http-wordpress-brute 192.168.1.110
+nmap -p80 --script http-wordpress-brute --script-args
+userdb=user.txt,passdb=passwd.txt 192.168.1.110
+nmap -p80 --script http-wordpress-brute --script-args
+http-wordpress-brute.threads=10 192.168.1.110
+审计 Joomla 程序
+nmap -p80 --script http-joomla-brute 192.168.1.110
+nmap -p80 --script http-joomla-brute --script-args
+uesrdb=user.txt,passdb=passwd.txt 192.168.1.110
+nmap -p80 --script http-joomla-brute --script-args
+uesrdb=user.txt,passdb=passwd.txt,http-joomla-brute.threads=5
+192.168.1.110
+审计 邮件服务器
+nmap -p110 --script=pop3-brute 192.168.1.110
+审计 SMB 口令
+nmap --script smb-brute.nse -p 445 192.168.1.110
+nmap --script smb-brute.nse --script-args passdb=pass.txt -p 445
+192.168.1.110
+审计 VNC 服务
+nmap --script vnc-brute -p 5900 192.168.1.110
+审计 SMTP 服务器
+nmap -p 25 --script smtp-brute 192.168.1.110
+nmap -p 25 --script=smtp-enum-users.nse smith.jack.com (枚举远程系
+统所有用户)
+检测 Stuxnet 蠕虫
+nmap --script stuxnet-detect -p 445 192.168.1.110
+SNMP 服务安全审计
+nmap -sU -p 161 --script=snmp-netstat 192.168.1.101 (获取目标主机网
+络连接状态)
+nmap -sU -p 161 --script=snmp-processes 192.168.1.110 (枚举目标主机
+的系统进程)
+nmap -sU -p 161 --script=snmp-win32-services 192.168.1.110 ( 获 得
+windows 服务器的服务)
+nmap -sU -p 161 --script snmp-brute 192.168.1.110
+
+### 九、Zenmap
+
+mIntense scan (详细扫描)
+nmap -T4 -A -v 192.168.1.101
+Intense scan plus UDP (UDP 扫描经典使用)
+nmap -sS -sU -T4 -A -v 192.168.1.101
+Intense scan, all TCP ports (TCP 扫描)
+nmap -p 1-65535 -T4 -A -v 192.168.1.101
+Quick scan
+nmap -T4 -F 192.168.1.101/24
+Quick scan plus
+nmap -sV -T4 -O -F --version-light 192.168.1.101/24
+Quick traceroute
+nmap -sn --traceroute 192.168.1.101
+Regular scan
+nmap 192.168.1.101
+Slow comprehensive scan
+nmap -sS -sU -T4 -A -v -PE -PP -PS80,443 -PA3389 -PU40125 -PY -g 53
+--script "default or (discovery and safe)" 192.168.1.101
+
+### 十. Nmap 技巧
+发送以太网数据包
+nmap --send-eth 192.168.1.111
+网络层发送
+nmap --send-ip 192.168.1.111
+假定拥有所有权
+nmap --privileged 192.168.1.111
+在交互模式中启动
+nmap --interactive
+查看 Nmap 版本号
+nmap -V
+设置调试级别
+nmap -d (1-9) 192.168.1.111
+跟踪发送接收的报文
+nmap --packet-trace -p 20-30 192.168.1.111
+列举接口和路由
+nmap --iflist www.iteye.com
+指定网络接口
+nmap -e eth0 192.168.1.111
+继续中断扫描
+nmap -oG 1.txt -v 192.168.126.1/24
+nmap --resume 1.txt (继续扫描)
+Dnmap
+dnmap_server -f test (指定命令脚本)
+dnmap_client -s 192.168.1.107 -a test
+编写 Nse 脚本
+(1) -- The scanning module --
+author = "Wing"
+categories = {"version"}
+portrule = function(host,port)
+return port.protocol == "tcp" and port.number == 80 and
+port.state == "open"
+end
+action = function(host,port)
+return "Found!!!"
+end
+(2) -- The scanning module --
+author = "Wing"
+categories = {"version"}
+local comm=require "comm"
+require "shortport"
+local http=require "http"
+portrule = function(host,port)
+return (port.number == 80) and (port.start=="open")
+end
+action = function(host,port)
+local uri = "/admin.php"
+local response = http.get(host,port,uri)
+return "Found!!!"
+end
+探测防火墙
+nmap --script=firewalk --traceroute 192.168.1.111
+VMware 认证破解
+nmap -p 902 --script vmauthd-brute 192.168.1.107
+
+### 十一. Nmap 的保存和输出
+
+若没指定保存路径，输出文件会保存在当前目录
+
+保存
+nmap -F -oS d:/test2.txt 192.168.1.111
+Grep 保存
+nmap -F -oG d:/test2.txt 192.168.1.111
+保存到所有格式
+nmap -F -oA d:/test2 192.168.1.111
+补充保存文件
+nmap -F -append-output -oN d:/test2.txt 192.168.1.111
+转换 XML 保存
+nmap -F -oX testB.xml --stylesheet
+Nmap Scan Report - Scanned at 192.168.1.111
+忽略 XML 声明的 XSL 样式表
+nmap -oX d:/testC.xml --no-stylesheet 192.168.1.111
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

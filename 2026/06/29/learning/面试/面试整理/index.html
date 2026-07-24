@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>面试整理 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>面试整理</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-29T06:02:15.000Z">2026.06.29</time>
+      <span>5 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# 面试整理
+
+1.web方向的漏洞据三个例子
+
+SQL注入，XXE，XSS，任意文件上传，任意文件读取，任意文件包含，PHP反序列化，Java反序列化，SSRF，RCE，未授权漏洞，SSTI
+
+2.sql注入攻击类型
+
+字符型和数字型
+
+3.报错注入常用的函数
+
+updatexml，extractvalue，floor() + rand() + group by
+
+4.时间盲注常用的函数
+
+sleep
+
+sleep被ban了：get_lock
+
+5.时间盲注大致流程
+
+使用sleep函数寻找注入点，猜测核心数据的长度，使用二分法对逐个字符进行盲猜，重复循环，拼接出完整字符串，直到把数据库名、表名、字段名全跑出来，最后使用同样的逻辑拖取目标数据
+
+6.时间盲注爆数据的函数
+
+sleep(n)
+
+benchmark(count, expr)
+
+if(condition, true_action, false_action)
+
+substr(str, pos, len) 或 mid(str, pos, len)
+
+ascii(char) 或 ord(char)
+
+length(str)
+
+7.SQL server时间盲注函数
+
+WAITFOR DELAY '0:0:5'
+
+8.SQL server攻击方式
+
+SA权限开启xp_cmdshell getshell
+
+9.如何判断SQL数据库类型
+
+根据端口判断 
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Oracle：默认端口 1521</span><br><span class="line">SQL Server：默认端口 1433</span><br><span class="line">MySQL：默认端口 3306</span><br></pre></td></tr></table></figure>
+
+根据字符拼接方式判断
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MySQL：id=1 and &#x27;a&#x27;+&#x27;b&#x27;=&#x27;ab&#x27; </span><br><span class="line">id=1 and CONCAT(&#x27;a&#x27;,&#x27;b&#x27;)=&#x27;ab&#x27;</span><br><span class="line">SQL server：id=1 and &#x27;a&#x27;+&#x27;b&#x27;=&#x27;ab&#x27; </span><br><span class="line">Oracle：id=1 and &#x27;a&#x27;||&#x27;b&#x27;=&#x27;ab&#x27;</span><br><span class="line">id=1 and CONCAT(&#x27;a&#x27;,&#x27;b&#x27;)=&#x27;ab&#x27; </span><br></pre></td></tr></table></figure>
+
+根据盲注函数判断
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MySQL：sleep</span><br><span class="line">SQL server：waitfor delay </span><br><span class="line">PostgreSQL:PG_SLEEP(5) GENERATE_SERIES(1,1000000)</span><br></pre></td></tr></table></figure>
+
+> ### 1. 初级版：遇到抓包闪退 / Hook 检测怎么办？
+>
+> **核心思路**：强调用现成工具替换、查阅开源资料。
+>
+> > “在遇到 App 一挂代理或 Frida 就闪退的情况时，我首先会判断是不是触发了基础的特征检测。
+> >
+> > 比如防抓包，我会检查是不是 SSL Pinning 导致的，通常我会直接用 Objection 里自带的 `android sslpinning disable` 命令，或者去 Github 找常用的 JustTrustMe 脚本试试。
+> >
+> > 如果是挂 Frida 闪退，我知道原版 Frida 特征太明显了，所以我日常测试会默认使用魔改版的 Frida（比如 hluda），这能顺手解决很大一部分初级的反调试。如果换了魔改版还是闪退，受限于我目前的逆向水平，我可能不会去死磕底层的汇编代码，但我会去抓一下系统的 Logcat 日志，看看闪退前报了什么错，然后带着报错信息去查阅大佬们的文章，或者向团队里更有经验的师傅请教。”
+>
+> ### 2. 初级版：怎么绕过签名校验重新打包？
+>
+> **核心思路**：强调效率和自动化工具，点到为止。
+>
+> > “绕签名校验这块，为了提高日常测试的效率，我主要依赖现成的自动化方案。
+> >
+> > 最快的方法是直接用 MT 管理器或者 NP 管理器这类工具，它们内置了‘一键过签’的功能，应对很多中低防护的 App 非常方便。
+> >
+> > 如果需要上动态 Hook，我也储备了一些开源的过签脚本。我知道它的核心原理其实就是 Hook 掉系统获取签名的 API，当它对比签名时，直接把正确的 Hash 塞回去。虽然我自己从零手写这种脚本可能还有点吃力，但我能看懂现成脚本的逻辑，并且能根据不同 App 的特征进行简单的修改和适配。”
+>
+> ### 3. 初级版：关于 App 脱壳
+>
+> > “对于脱壳，我目前的实战经验主要集中在应对‘一代壳’（整体加密）上。
+> >
+> > 我知道无论壳怎么加，最终代码都要在内存里解密跑起来。所以我最常用的是 FRIDA-DEXDump 或者 BlackDex 这类工具。只要 App 能运行，我就趁它在内存里解密的时候，把 DEX 文件给 Dump 出来。
+> >
+> > 至于更复杂的二代指令抽取壳，甚至 VMP 壳，我了解过理论，知道这需要刷入像 FART 这样的定制脱壳机，通过修改系统底层去主动调用方法来解密。但我目前手头还没有这种硬件环境，对于 ARM 汇编的阅读能力也还在学习阶段。所以针对加了强壳的 App，我现阶段的重点还是会放在流量抓包、伪造请求，去全力挖掘后端的 Web 漏洞。客户端深度逆向是我后续非常渴望在公司的大牛指导下深入学习的方向。”
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

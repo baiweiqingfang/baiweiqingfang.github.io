@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>SQL server数据库 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>SQL server数据库</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-29T05:12:54.000Z">2026.06.29</time>
+      <span>5 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# SQL server数据库
+
+## 系统数据库
+
+master：记录了SqlServer实例的所有系统级消息，包括实例范围的元数据（如登录账号、端点、链接服务器和系统配置设置）
+
+- msdb：供SqlServer代理服务调度报警和作业记录操作员的使用，保存关于调度报警、作业、操作员等信息
+- model：SqlServer实例上创建的所有数据库的模板
+- tempdb：临时数据库，用于保存临时对象或中间结果集，为数据库的排列等操作提供一个临时的工作空间
+
+## 实例数据库
+
+- ReportServer：存储SSRS配置部分，报告定义，报告元数据，报告历史，缓存政策，快照，资源，安全设置，加密的数据，调度和提交数据，以及扩展信息
+- ReportServerTempDB：存储中间处理产品，例如缓冲的报告、会话和执行数据等
+
+## 数据库组成
+
+数据库是以文件的形式存在的，由文件和文件组组成
+
+#### 文件
+
+文件基本分为以下三类：
+
+主要数据文件：存放数据和数据库的初始化信息。每个数据库有且只能有一个主要数据文件`.mdf`结尾
+
+次要数据文件：存放除了主要数据文件以外的所有数据文件。次要数据文件不是必须的，可以没有，也可以有多个`.ndf`结尾
+
+事务日志文件：存放用户回复数据库的所有文件信息。每个数据库至少有一个日志文件，也可以有多个`.ldf`结尾
+
+#### 文件组
+
+文件组是数据库文件一种逻辑管理单位，将数据库文件分成不同的文件组，方便对文件的分配和管理，分为两种类型：
+
+主文件组Primary：主要是数据文件和没有明确指派给其他文件组的文件
+
+用户自定义的文件组：Create DataBase 或者 Alter DataBase语句，FileGroup关键字指定的文件组
+
+#### 设计原则
+
+文件只能是一个文件组的成员
+
+文件或文件组不能由多个数据库使用
+
+日志不能作为文件组的一部分
+
+## SqlServer权限
+
+sqlserver中的权限控制被分成服务器和数据库两个级别，一个服务器可以包含多个数据库。服务器级别权限可以让我们控制登录、服务器资源操作等等；数据库级别的权限可以让我们对具体的表\视图\数据等数据库内资源进行操作。
+
+sqlserver服务器级别的权限，可以把权限简单的归为以下三类：
+
+- **sa权限：**即服务器角色sysadmin。拥有数据库操作，文件管理，命令执行，注册表读取等权限。SQLServer数据库的最高权限
+- **db权限：**文件管理，数据库操作等权限 users-administrators
+- **public权限：**数据库操作 guest-users
+
+如果我们找到一个SqlServer数据库的注入点，可以通过以下命令判断当前用户的权限，查询语句返回1，说明是对应的权限。
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--判断是否是SA权限</span><br><span class="line">select is_srvrolemember(&#x27;sysadmin&#x27;)</span><br><span class="line">--判断是否是db_owner权限</span><br><span class="line">select is_member(&#x27;db_owner&#x27;)</span><br><span class="line">--判断是否是public权限</span><br><span class="line">select is_srvrolemember(&#x27;public&#x27;)</span><br></pre></td></tr></table></figure>
+
+## T-SQL语言
+
+1. **DDL（数据定义语言）**：用于定义和管理数据库及对象，如`CREATE`、`ALTER`、`DROP` [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
+2. **DML（数据操作语言）**：用于操作表中的数据，如`INSERT`、`UPDATE`、`DELETE` [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
+3. **DCL（数据控制语言）**：用于权限管理和安全控制，如`GRANT`、`REVOKE`、`DENY` [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
+4. **附加语言元素**：包括变量、运算符、函数、注释及流程控制语句 [![CSDN](https://www.bing.com/th?id=ODF.XgN2n5Bhof8syOMYSfYpGg)CSDN](https://blog.csdn.net/qq_34901049/article/details/100555429)。
+
+## SQL server注释符
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- </span></span><br><span class="line"><span class="comment">/* */</span></span><br></pre></td></tr></table></figure>
+
+-- 后面通常需要跟空格，字母或换行
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

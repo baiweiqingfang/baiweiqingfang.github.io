@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>Windows操作系统 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>Windows操作系统</h1>
+    <div class="post-meta">
+      <time datetime="2026-05-29T08:16:09.000Z">2026.05.29</time>
+      <span>9 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# Windows
+
+## shell
+
+编码方式GBK (CP936)
+
+### cmd
+
+### powershell
+
+具备在本地执行远端代码的能力
+
+## Windows命令
+
+| 命令                                          | 用途                                                         |
+| --------------------------------------------- | ------------------------------------------------------------ |
+| calc                                          | 弹计算器                                                     |
+| chcp 65001                                    | 在Windows控制台中将字符编码设置为UTF-8                       |
+| dir                                           | 查看此路径下的所有文件和路径                                 |
+| ipconfig                                      |                                                              |
+| ipconfig /all                                 | 获取域名、IP地址、DHCP服务器、网关、MAC地址、主机名          |
+| net config Workstation                        | 查看当前计算机的名称，计算机所属的域或工作组， 登录域，其他网络设置 |
+| net localgroup administrators                 | 查看本地管理员组当中的用户成员                               |
+| net localgroup administrators <username> /add | 将用户加入管理员组                                           |
+| net user                                      | 列出所有本地用户                                             |
+| net user <username>                           | 查看用户的详细信息                                           |
+| net user <username> <password> /add           | 创建用户 密码                                                |
+| net view                                      | 查看局域网内其他主机名                                       |
+| net view /domain                              | 查看有几个域                                                 |
+| ping                                          | Ping命令是一个用于测试网络连接的工具。它通过发送ICMP回显请求消息到目标地址，并报告是否收到预期的ICMP回显应答 |
+| powershell.exe                                | 启用powershell                                               |
+| powershell.exe -c <command>                   | 启用powershell执行命令                                       |
+| powershell.exe -nop                           | 启用powershell时不加载环境配置                               |
+| powershell.exe -w hidden                      | 启用powershell时窗口隐藏                                     |
+| systeminfo                                    | 用于显示本地或远程计算机的系统配置信息                       |
+| whoami /priv                                  | 查看当前用户及权限                                           |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+|                                               |                                                              |
+
+## 进程管理
+
+explorer.exe
+
+资源管理器
+
+## Windows用户与组
+
+### 默认用户账户
+
+Users
+
+Administrator
+
+System
+
+## Windows文件系统
+
+### NTML
+
+## Windows服务
+
+### Kerberos Key Distribution Center
+
+Kerberos Database: 包含了一个 Realm 中所有的 principal、密码与其他信息。（默认：Berkeley DB）
+
+Authentication Service(身份验证服务，AS): 进行用户信息认证，为客户端提供 Ticket Granting Tickets(票据，TGT)。
+
+Ticket Granting Service(票据授予服务TGS): 验证 TGT 与 Authenticator，为客户端提供Service Tickets
+
+### 活动目录
+
+#### D（Domain，域）
+
+活动目录的一种实现形式，主要由域控制器和成员计算机组成
+
+#### DC（Domain Controller，域控制器）
+
+域控制器是安装了活动目录的一台计算机（一般为Windows server），活动目录的数据都存储在域控制器内
+
+一个域可以有多台域控制器
+
+#### PDC（Primary Domain Controller，主域控制器）
+
+在 AD域中，是指在一个域中主要负责处理账号登录请求和维护域中账号数据库的服务器。
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

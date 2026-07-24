@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>stack1 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>stack1</h1>
+    <div class="post-meta">
+      <time datetime="2026-04-13T15:05:30.000Z">2026.04.13</time>
+      <span>14 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# stack1
+
+靶场密码为123.com
+
+## 1.网络结构
+
+| 主机       | IP                          | 网卡             |
+| ---------- | --------------------------- | ---------------- |
+| Kali Linux | 192.168.243.*               | NAT              |
+| Windows7   | 192.168.243.\*/192.168.52.* | NAT/VMnet2       |
+| Win2k3     | 192.168.52.138              | VMnet2（仅主机） |
+| Win2k8     | 192.168.52.141              | Vmnet2（仅主机） |
+
+Windows7的内网网卡首选DNS服务器设为域控的IP192.168.52.138
+
+![image-20260209141846399](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209141846399.png)
+
+## 2.外网打点
+
+arp-scan扫描网段，找到主机IP192.168.243.162
+
+![image-20260209142009951](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142009951.png)
+
+nmap扫描主机
+
+![image-20260209142149981](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142149981.png)
+
+发现开放80，3306，139和445端口，因此可以从Web网页，MySQL数据库，SMB服务三个方面入手
+
+访问网页显示为PHPstudy探针
+
+![image-20260209142402498](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142402498.png)
+
+扫描目录，发现一些敏感文件
+
+![image-20260209142502305](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142502305.png)
+
+### 2.1通过MySQL数据库
+
+访问/phpmyadmin/README  查看PHPmyadmin版本
+
+![image-20260209142813756](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209142813756.png)
+
+访问phpmyadmin，尝试使用弱密码登录u-root，p-root
+
+![image-20260209143101216](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260209143101216.png)
+
+点击SQL执行命令
+
+![image-20260410152552434](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410152552434.png)
+
+1.查看general_log配置
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;%general%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+![image-20260410173731329](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410173731329.png)
+
+2.打开日志功能
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> general_log<span class="operator">=</span>&quot;On&quot;</span><br></pre></td></tr></table></figure>
+
+3.将日志文件位置改为www目录下
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> general_log_file<span class="operator">=</span>&quot;C:\\phpStudy\\WWW\\shell.php&quot;</span><br></pre></td></tr></table></figure>
+
+4.再次查看general_log配置
+
+![image-20260410175112438](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410175112438.png)
+
+5.写入shell
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> &quot;&lt;?php eval($_POST[&#x27;shell&#x27;]) ;?&gt;&quot;;</span><br></pre></td></tr></table></figure>
+
+![image-20260410191932163](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410191932163.png)
+
+6.使用蚁剑进行连接
+
+![image-20260410192116525](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410192116525.png)
+
+成功掌握了外网服务器
+
+![image-20260410192325137](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410192325137.png)
+
+## 3.内网攻击
+
+### 3.1cs+蚁剑   
+
+先关闭Windows防火墙
+
+![image-20260412143110734](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412143110734.png)
+
+打开Cobalt Strike，建立一个监听器
+
+![image-20260410220902730](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410220902730.png)
+
+点击add
+
+![image-20260410221258020](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221258020.png)
+
+配置好参数，HTTP Hosets填cs服务端的IP，点击save
+
+![image-20260410221213554](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221213554.png)
+
+生成可执行程序
+
+![image-20260410221504805](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221504805.png)
+
+通过蚁剑上传到拿到webshell的服务器上
+
+![image-20260410221549594](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221549594.png)
+
+在虚拟终端中执行程序
+
+![image-20260410221640664](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221640664.png)
+
+靶机已经成功上线
+
+![image-20260410221731089](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410221731089.png)
+
+为防止程序被删除，可以把这个程序迁移到别的系统程序上,先输入ps来查看每个程序的pid
+
+![image-20260410230559159](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410230559159.png)
+
+使用inject [pid] <x86|x64> [listener]将木马程序注入到资源管理器进程中，发现多了一行会话，表示注入成功
+
+![image-20260410235137701](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410235137701.png)
+
+使用kill [pid]删除之前的木马进程，防止被检测到
+
+![image-20260410235516428](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260410235516428.png)
+
+## 4.信息收集
+
+使用getuid查看用户权限
+
+![image-20260412112037540](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412112037540.png)
+
+发现不是system权限，使用getsystem提升到system权限
+
+![image-20260412130250343](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412130250343.png)
+
+使用shell ipconfig查看网络适配器
+
+![image-20260413141048475](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413141048475.png)
+
+内网网段是52
+
+使用shell net user查看本地用户
+
+![image-20260413141250566](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413141250566.png)
+
+使用net view查看局域网内其他主机名
+
+![image-20260413145334256](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413145334256.png)
+
+拿到域控及各个主机的IP
+
+使用shell net config Workstation查看计算机名，域，登录域等信息
+
+![image-20260413144306083](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413144306083.png)
+
+使用shell net view/ domain查看有几个域
+
+![image-20260412141023211](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412141023211.png)
+
+只有一个域GOD
+
+尝试抓取明文密码
+
+![image-20260413151903504](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413151903504.png)
+
+## 5.横向移动
+
+对内网主机进行端口扫描
+
+![image-20260412150313211](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150313211.png)
+
+![image-20260412150423230](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150423230.png)
+
+![image-20260413152121064](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413152121064.png)
+
+发现开放445端口，可以建立SMB监听隧道
+
+![image-20260412150913235](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412150913235.png)
+
+切换攻击目标为OWA
+
+![image-20260412151640975](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412151640975.png)
+
+使用psexec横向移动
+
+![image-20260412151710628](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260412151710628.png)
+
+监听器选择SMB监听器，会话选择SYSTEM权限
+
+![image-20260413155441987](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413155441987.png)
+
+成功拿到域控，并关闭防火墙
+
+![image-20260413155600304](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413155600304.png)
+
+## 6.黄金票据
+
+通过域名，域SID，krbtgt 账户的Hash来生成黄金票据
+
+![image-20260413164159425](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413164159425.png)
+
+![image-20260413160646900](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260413160646900.png)
+
+## 7.痕迹清理
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shell wevtutil cl security    //清理安全日志</span><br><span class="line">shell wevtutil cl system        //清理系统日志</span><br><span class="line">shell wevtutil cl application        //清理应用程序日志</span><br><span class="line">shell wevtutil cl &quot;windows powershell&quot;    //清除power shell日志</span><br><span class="line">shell wevtutil cl Setup     //清除（cl）事件日志中的 &quot;Setup&quot; 事件。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

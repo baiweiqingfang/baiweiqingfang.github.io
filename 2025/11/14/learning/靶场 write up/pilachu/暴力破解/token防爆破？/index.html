@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>token防爆破？ | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>token防爆破？</h1>
+    <div class="post-meta">
+      <time datetime="2025-11-14T14:01:03.000Z">2025.11.14</time>
+      <span>3 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# token防爆破？
+
+1.随便输入账密后抓包，发送到intruder模块，账号，密码，token添加payload，使用PItchfork类型
+
+2.在设置里找到检索-提取，依次点击添加，获取响应，（选中token的值）确定
+
+<img src="C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114201305948.png" alt="image-20251114201305948"  />
+
+![image-20251114203321501](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114203321501.png)
+
+3.找到重定向，点击总是
+
+![image-20251114201439674](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114201439674.png)
+
+4.找到攻击结果，取消勾选生成未修改的基本请求
+
+![image-20251114201456169](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114201456169.png)
+
+5..在资源池中新建资源池，设置最大请求为1，防止请求过多token还没用就被刷新
+
+![image-20251114201517456](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114201517456.png)
+
+6.重新刷新一次浏览器，找到token
+
+7.token payload选择递归提取，把刚得到的token输进去，爆破
+
+![image-20251114215416921](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251114215416921.png)
+
+# 注：
+
+1.token：
+
+每次请求登录页面时，服务器会生成一个唯一的 Token，并将其嵌入到页面中的隐藏字段。提交登录请求时，必须携带该 Token，否则服务器拒绝处理请求。
+
+后端先校验 token：
+
+不存在 → 直接 403/302，不校验账号密码。
+
+存在 → 才继续走账号密码逻辑。
+
+2.bp中Intruder 的默认行为
+跑字典时，Intruder 只会机械地替换 §user§、§pass§。导致第二次即之后的爆破并不携带token ，因此全部 403。
+
+3.检索-提取，把 HTML 里 `value="..."` 那段剪出来，临时存到内存变量 §token§。
+
+4.总是重定向，让 Burp 把 302 跟到底，确保剪 token 时拿到的是最终 HTML
+
+5.取消生成未修改的基本请求,在结果表中把没用的第一行直接扔掉，对爆破成功率零影响，只是让结果列表更清爽。
+
+6.把资源池最大并发设为1，全程单线程排队发，禁止并行，防止同一秒内来多个请求，后来的 token 会被当场作废，都会变成403；
+
+类比：
+
+一次性门票：
+
+闸机只认一次；
+
+两个人同时把同一张票塞进闸机，机器不会放行任何一个人，而是直接报警作废。
+
+7.Recursive grep（递归提取）：
+
+只出现在Pitchfork / Cluster bomb类型
+
+作用：从指定来源按正则取值，当成本次 payload。
+
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

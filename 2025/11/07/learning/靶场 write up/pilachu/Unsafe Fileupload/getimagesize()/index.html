@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>getimagesize() | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>getimagesize()</h1>
+    <div class="post-meta">
+      <time datetime="2025-11-07T07:37:21.000Z">2025.11.07</time>
+      <span>10 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# getimagesize()
+
+1.将一句话木马文件的后缀名改为.jpg，上传显示这是个假图片
+
+2.直接上传图片马
+
+3.利用文件包含漏洞用蚁剑连接
+
+# 注：
+
+1..源代码分析：
+
+文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\unsafeupload|getimagesize.php
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$html</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$type</span>=<span class="keyword">array</span>(<span class="string">&#x27;jpg&#x27;</span>,<span class="string">&#x27;jpeg&#x27;</span>,<span class="string">&#x27;png&#x27;</span>);<span class="comment">//指定类型</span></span><br><span class="line">    <span class="variable">$mime</span>=<span class="keyword">array</span>(<span class="string">&#x27;image/jpg&#x27;</span>,<span class="string">&#x27;image/jpeg&#x27;</span>,<span class="string">&#x27;image/png&#x27;</span>);</span><br><span class="line">    <span class="variable">$save_path</span>=<span class="string">&#x27;uploads&#x27;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;/Y/m/d/&#x27;</span>);<span class="comment">//根据当天日期生成一个文件夹</span></span><br><span class="line">    <span class="variable">$upload</span>=<span class="title function_ invoke__">upload</span>(<span class="string">&#x27;uploadfile&#x27;</span>,<span class="string">&#x27;512000&#x27;</span>,<span class="variable">$type</span>,<span class="variable">$mime</span>,<span class="variable">$save_path</span>);<span class="comment">//调用函数</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable">$upload</span>[<span class="string">&#x27;return&#x27;</span>])&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p class=&#x27;notice&#x27;&gt;文件上传成功&lt;/p&gt;&lt;p class=&#x27;notice&#x27;&gt;文件保存的路径为：<span class="subst">&#123;$upload[&#x27;save_path&#x27;]&#125;</span>&lt;/p&gt;&quot;</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$html</span>.=<span class="string">&quot;&lt;p class=notice&gt;<span class="subst">&#123;$upload[&#x27;error&#x27;]&#125;</span>&lt;/p&gt;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+发现通过调用upload函数进行验证
+
+upload函数源代码分析：
+
+函数位置:D:\PHPstudy\phpstudy_pro\WWW\pikachu\inc\uploadfunction.php
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//验证上传方式</span></span><br><span class="line">   <span class="keyword">if</span>(!<span class="title function_ invoke__">is_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="variable">$key</span>][<span class="string">&#x27;tmp_name&#x27;</span>]))&#123;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;您上传的文件不是通过 HTTP POST方式上传的！&#x27;</span>;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//获取后缀名，如果不存在后缀名，则将变量设置为空</span></span><br><span class="line">   <span class="variable">$arr_filename</span>=<span class="title function_ invoke__">pathinfo</span>(<span class="variable">$_FILES</span>[<span class="variable">$key</span>][<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">   <span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$arr_filename</span>[<span class="string">&#x27;extension&#x27;</span>]))&#123;</span><br><span class="line">       <span class="variable">$arr_filename</span>[<span class="string">&#x27;extension&#x27;</span>]=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//先验证后缀名</span></span><br><span class="line">   <span class="keyword">if</span>(!<span class="title function_ invoke__">in_array</span>(<span class="title function_ invoke__">strtolower</span>(<span class="variable">$arr_filename</span>[<span class="string">&#x27;extension&#x27;</span>]),<span class="variable">$type</span>))&#123;<span class="comment">//转换成小写，在比较</span></span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;上传文件的后缀名不能为空，且必须是&#x27;</span>.<span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$type</span>).<span class="string">&#x27;中的一个&#x27;</span>;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">//验证MIME类型，MIME类型可以被绕过</span></span><br><span class="line">   <span class="keyword">if</span>(!<span class="title function_ invoke__">in_array</span>(<span class="variable">$_FILES</span>[<span class="variable">$key</span>][<span class="string">&#x27;type&#x27;</span>], <span class="variable">$mime</span>))&#123;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;你上传的是个假图片，不要欺骗我xxx！&#x27;</span>;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//通过getimagesize来读取图片的属性，从而判断是不是真实的图片，还是可以被绕过的</span></span><br><span class="line">   <span class="keyword">if</span>(!<span class="title function_ invoke__">getimagesize</span>(<span class="variable">$_FILES</span>[<span class="variable">$key</span>][<span class="string">&#x27;tmp_name&#x27;</span>]))&#123;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;你上传的是个假图片，不要欺骗我！&#x27;</span>;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//把上传的文件给他搞一个新的路径存起来</span></span><br><span class="line">   <span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(<span class="variable">$save_path</span>))&#123;</span><br><span class="line">       <span class="keyword">if</span>(!<span class="title function_ invoke__">mkdir</span>(<span class="variable">$save_path</span>,<span class="number">0777</span>,<span class="literal">true</span>))&#123;</span><br><span class="line">           <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;上传文件保存目录创建失败，请检查权限!&#x27;</span>;</span><br><span class="line">           <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">           <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//生成一个新的文件名，并将新的文件名和之前获取的扩展名合起来，形成文件名称</span></span><br><span class="line">   <span class="variable">$new_filename</span>=<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;&#x27;</span>,<span class="title function_ invoke__">uniqid</span>(<span class="title function_ invoke__">mt_rand</span>(<span class="number">100000</span>,<span class="number">999999</span>),<span class="literal">true</span>));</span><br><span class="line">   <span class="keyword">if</span>(<span class="variable">$arr_filename</span>[<span class="string">&#x27;extension&#x27;</span>]!=<span class="string">&#x27;&#x27;</span>)&#123;</span><br><span class="line">       <span class="variable">$arr_filename</span>[<span class="string">&#x27;extension&#x27;</span>]=<span class="title function_ invoke__">strtolower</span>(<span class="variable">$arr_filename</span>[<span class="string">&#x27;extension&#x27;</span>]);<span class="comment">//小写保存</span></span><br><span class="line">       <span class="variable">$new_filename</span>.=<span class="string">&quot;.<span class="subst">&#123;$arr_filename[&#x27;extension&#x27;]&#125;</span>&quot;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//将tmp目录里面的文件拷贝到指定目录下并使用新的名称</span></span><br><span class="line">   <span class="variable">$save_path</span>=<span class="title function_ invoke__">rtrim</span>(<span class="variable">$save_path</span>,<span class="string">&#x27;/&#x27;</span>).<span class="string">&#x27;/&#x27;</span>;</span><br><span class="line">   <span class="keyword">if</span>(!<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="variable">$key</span>][<span class="string">&#x27;tmp_name&#x27;</span>],<span class="variable">$save_path</span>.<span class="variable">$new_filename</span>))&#123;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;error&#x27;</span>]=<span class="string">&#x27;临时文件移动失败，请检查权限!&#x27;</span>;</span><br><span class="line">       <span class="variable">$return_data</span>[<span class="string">&#x27;return&#x27;</span>]=<span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable">$return_data</span>;</span><br></pre></td></tr></table></figure>
+
+2.分析代码发现使用了getimagesize()函数进行验证
+
+getimagesize()函数可以判断文件是否为真实的图片，但是只检查文件是否符合图片的基本格式特征，无法检测文件中是否隐藏了恶意代码。攻击者可以通过制作图片马将恶意代码嵌入到正常图片文件的末尾，从而绕过getimagesize()验证
+
+3.文件包含漏洞源代码分析：
+
+文件位置：D:\PHPstudy\phpstudy_pro\WWW\pikachu\vul\fileinclude\fi_local.php
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$html</span>=<span class="string">&#x27;&#x27;</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;submit&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>]!=<span class="literal">null</span>)&#123;</span><br><span class="line">    <span class="variable">$filename</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;filename&#x27;</span>];</span><br><span class="line">    <span class="keyword">include</span> <span class="string">&quot;include/<span class="subst">$filename</span>&quot;</span>;<span class="comment">//变量传进来直接包含,没做任何的安全限制</span></span><br><span class="line"><span class="comment">//     //安全的写法,使用白名单，严格指定包含的文件名</span></span><br><span class="line"><span class="comment">//     if($filename==&#x27;file1.php&#x27; || $filename==&#x27;file2.php&#x27; || $filename==&#x27;file3.php&#x27; || $filename==&#x27;file4.php&#x27; || $filename==&#x27;file5.php&#x27;)&#123;</span></span><br><span class="line"><span class="comment">//         include &quot;include/$filename&quot;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+分析代码可知传参点在filename变量，且submit不为空是执行文件包含
+
+4.相对路径，例：
+
+图片木马的URL路径为
+http://127.0.0.1/pikachu/vul/unsafeupload/uploads/2024/10/17/45001567107604bd4ee110816937.png
+文件包含关卡的URL路径为
+http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=file1.php&submit=1
+
+图片马相对于文件包含关卡的路径为：../../unsafeupload/uploads/2024/10/17/45001567107604bd4ee110816937.png
+
+4.编写的URL：http://127.0.0.1/pikachu/vul/fileinclude/fi_local.php?filename=../../unsafeupload/uploads/2025/11/07/867292690d9c893e41c508193139.jpg&&submit=1
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

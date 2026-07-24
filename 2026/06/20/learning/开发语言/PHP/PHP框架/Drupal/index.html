@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>Drupal | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>Drupal</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-19T16:39:04.000Z">2026.06.20</time>
+      <span>6 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# Drupal
+
+全局配置文件默认路径在网站目录下的 sites/default/settings.php，这个文件是用 PHP 编写的，里面定义了网站运行所需的大部分底层核心参数：
+
+1. 数据库连接凭证（Database Credentials）
+
+文件中包含了网站连接数据库的账号、密码、数据库名、主机地址以及端口。
+
+代码格式：
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$databases</span>[<span class="string">&#x27;default&#x27;</span>][<span class="string">&#x27;default&#x27;</span>] = <span class="keyword">array</span> (</span><br><span class="line">  <span class="string">&#x27;database&#x27;</span> =&gt; <span class="string">&#x27;drupal_db&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;username&#x27;</span> =&gt; <span class="string">&#x27;db_user&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;password&#x27;</span> =&gt; <span class="string">&#x27;P@ssw0rd123!&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;host&#x27;</span> =&gt; <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;driver&#x27;</span> =&gt; <span class="string">&#x27;mysql&#x27;</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+2. 哈希盐值（Hash Salt）
+
+- 变量名为 `$settings['hash_salt']`。
+- 这是一个随机生成的长字符串，用于给用户的密码加密（加盐）、生成一次性登录链接或验证安全令牌（Token）。如果这个盐值泄露，攻击者伪造身份令牌的难度会大大降低。
+
+3. 文件系统路径（File Paths）
+
+- 定义了网站存放公共上传文件（如图片）、私有敏感文件以及临时缓存文件的绝对或相对路径。
+
+4. 逆向代理与受信任主机配置（Trusted Host Patterns）
+
+- 安全配置项，用来防御**HTTP Host头攻击**。它会限制服务器只响应特定域名的请求（例如只允许 `omc.cn`），防止恶意流量通过伪造 Host 头混进网站。
+
+Drupal 框架（特别是你目前接触的 Drupal 7、8、9 及更高版本）的密码加密方式，在密码学中属于**高强度的、定制化的加盐多轮迭代哈希算法（Salted Multi-round Iterative Hashing）**。
+
+在底层实现上，它主要基于 **SHA-512** 散列算法，并融入了防暴力破解的动态拉伸机制。
+
+我们来拆解一下它最核心的加密特征和底层运作流程：
+
+## 一、 密文的外观特征（如何一眼认出它）
+
+你在数据库中看到的密文格式通常长这样： `$S$DvQi6Y600iNeXRIeEMF94Y6FvN8nujJcEDTCP9nS5.i38jnEKuDR`
+
+成熟的 Web 框架都会对密文进行格式化编码，Drupal 的这 55 个字符其实是一块**自解释的数据板**，包含了三个部分：
+
+- **`$S$` (前 3 位)**：这是 Drupal 的**算法签名（Identifer）**。告诉框架内部的 `password.inc` 函数：“我是用 Drupal 7/8 的专属算法加密的，请用对应的逻辑来处理我。”
+- **第 4 位字符（如 `D`）**：代表**迭代次数（Count Log2）**。它是一个自定义的编码字符。在 Drupal 7 中，`D` 代表加密循环需要执行 215=32768 轮。通过修改这个字符，运维可以自由调整加密的强度。
+- **后续字符**：紧接着的 8 个字符是随机生成的**盐值（Salt）**，而最后剩下的部分则是经过 3 万多轮 SHA-512 计算后得到的**最终散列值（Hash）**。它们全部通过一种定制的 Base64 字符集（`./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`）进行了全文本编码。
+
+## 二、 底层加密的“三道工序”
+
+当一个明文密码被送进 Drupal 的加密函数（如 `_password_crypt()`）时，它会经历以下标准的密码学处理：
+
+### 1. 双重盐值拼接（Double Salting）
+
+为了防止黑客使用预先计算好的“彩虹表”进行批量反查，Drupal 会使用两种盐：
+
+- **动态盐（Dynamic Salt）**：每次创建用户时随机生成的 8 位字符（随密文一起存入数据库）。
+- **全局盐（Site Salt）**：我们在 `settings.php` 里看到的 `$drupal_hash_salt` 变量。 加密时，函数会把“明文密码 + 动态盐 + 全局盐”紧紧拼接在一起，作为初始的输入字符串。
+
+### 2. 疯狂的拉伸循环（Key Stretching）
+
+这是 Drupal 最强悍的防御武器。它不会只做一次 SHA-512，而是会利用一个 `hash()` 循环，把上一次计算出来的哈希结果，再次与明文密码拼接，然后丢进下一次 SHA-512 计算中。 这个过程会雷打不动地**重复循环 32,768 次**（即 215 次）。
+
+> **为什么要循环这么多次？** 这种技术在安全上叫**密钥拉伸**。它故意提高了单次加密的 CPU 算力消耗。虽然正常用户登录时，服务器算这 3 万次只需要零点几秒，用户毫无察觉；但如果黑客拿着显卡想用字典暴力穷举，极高的算力成本会让他的破解速度下降几万倍，直接劝退暴力破解。
+
+### 3. 定制 Base64 编码
+
+32768 轮循环结束后，会得到一个二进制的哈希大块（Digest）。Drupal 内部实现了一个标准的自定义 `_password_base64_encode()` 函数，将这个二进制块转换成我们在数据库里看到的由字母、数字、点号和斜杠组成的 55 位可读文本，最终写入 `users` 表的 `pass` 字段。
+
+## 📊 总结与横向对比
+
+在网络安全和代码审计中，不同的主流 CMS 框架都有各自的加密偏好：
+
+- **Drupal 7+**：`$S$` 开头，基于 **SHA-512** 的 32768 次密钥拉伸。
+- **WordPress**：`$P$` 或 `$H$` 开头，基于 **MD5** 的 8192 次迭代（基于 Portable PHP password hashing framework）。
+- **现代中间件/系统**：很多已转向 **Bcrypt** (`$2y$`) 或 **Argon2**，它们除了消耗 CPU 外，还会强制消耗内存，对抗专用矿机（ASIC/GPU）的能力更强。
+
+正因为 Drupal 内部的 PHP 源代码里严丝合缝地写好了这套“拼接 → 3万次SHA-512 → 定制编码”的函数逻辑，所以我们在实战中才必须要借助它自带的 `password-hash.sh` 脚本来生成合法的密文，或者直接在数据库层用已知明文的合法密文去进行覆盖。
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

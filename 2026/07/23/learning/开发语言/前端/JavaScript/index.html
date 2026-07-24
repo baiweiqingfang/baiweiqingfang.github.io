@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>JavaScript | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>JavaScript</h1>
+    <div class="post-meta">
+      <time datetime="2026-07-23T01:55:21.000Z">2026.07.23</time>
+      <span>6 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# JavaScript 
+
+## 1. JavaScript 概述
+
+### 1.1 JavaScript 是什么
+
+JavaScript 是一种运行在浏览器中的脚本语言，通常嵌入在 HTML 页面中，用来给网页添加交互行为。
+
+常见作用：
+
+- 操作网页内容
+- 响应用户点击、输入、提交等事件
+- 向服务器发送请求
+- 修改页面样式和结构
+- 实现前端数据校验、动态渲染、异步加载
+
+JavaScript 代码由浏览器中的 JavaScript 引擎解释并执行，通常不需要像 C、Java 那样提前编译。
+
+### 1.2 JavaScript 的组成
+
+JavaScript 通常由三部分组成：
+
+| 组成 | 含义 | 核心对象 |
+| --- | --- | --- |
+| ECMAScript | JavaScript 的语言语法和基础对象 | 无固定核心对象 |
+| DOM | 文档对象模型，用 JS 操作 HTML 文档 | `document` |
+| BOM | 浏览器对象模型，用 JS 操作浏览器窗口 | `window` |
+
+简单记：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECMAScript = JS 语法</span><br><span class="line">DOM = JS 操作 HTML 页面</span><br><span class="line">BOM = JS 操作浏览器</span><br></pre></td></tr></table></figure>
+
+### 1.3 JavaScript 的特点
+
+- 脚本语言：可以使用文本编辑器编写。
+- 解释执行：浏览器读取代码后逐行解释执行。
+- 基于对象：内置了大量对象，如 `String`、`Array`、`Date`、`Math`。
+- 弱类型：变量本身没有固定类型，变量保存的值才有类型。
+- 事件驱动：常通过点击、输入、加载等事件触发代码执行。
+
+### 1.4 浏览器引擎
+
+浏览器内部常见两类引擎：
+
+- 渲染引擎：解析 HTML/CSS，决定页面怎么显示。
+- JavaScript 引擎：解析并执行 JavaScript 代码。
+
+常见浏览器与引擎：
+
+| 浏览器 | 渲染引擎 | JS 引擎 |
+| --- | --- | --- |
+| Chrome | Blink | V8 |
+| Edge 新版 | Blink | V8 |
+| Firefox | Gecko | SpiderMonkey |
+| Safari | WebKit | JavaScriptCore |
+| IE | Trident | JScript / Chakra |
+
+## 2. 基础语法
+
+### 2.1 注释
+
+单行注释：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是单行注释</span></span><br></pre></td></tr></table></figure>
+
+多行注释：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">这是多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+### 2.2 变量声明
+
+早期 JavaScript 使用 `var` 声明变量：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&quot;admin&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+现代 JavaScript 更常用 `let` 和 `const`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PI</span> = <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure>
+
+区别：
+
+| 关键字 | 说明 |
+| --- | --- |
+| `var` | 函数作用域，老写法 |
+| `let` | 块级作用域，变量可重新赋值 |
+| `const` | 块级作用域，声明后不能重新赋值 |
+
+没有初始化的变量，默认值是 `undefined`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+### 2.3 数据类型
+
+JavaScript 数据类型分为基本数据类型和引用数据类型。
+
+基本数据类型：
+
+| 类型 | 说明 | 示例 |
+| --- | --- | --- |
+| Boolean | 布尔值 | `true`、`false` |
+| Null | 空值 | `null` |
+| Undefined | 未定义 | `undefined` |
+| Number | 数字 | `1`、`3.14` |
+| BigInt | 任意精度整数 | `123n` |
+| String | 字符串 | `"hello"` |
+| Symbol | 唯一且不可变的值 | `Symbol("id")` |
+
+引用数据类型：
+
+| 类型 | 说明 |
+| --- | --- |
+| Object | 对象 |
+| Array | 数组，本质上也是对象 |
+| Function | 函数，本质上也是对象 |
+
+### 2.4 `typeof`
+
+`typeof` 用来查看变量类型：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="string">&quot;abc&quot;</span>;      <span class="comment">// &quot;string&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="number">123</span>;        <span class="comment">// &quot;number&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span>;       <span class="comment">// &quot;boolean&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>;  <span class="comment">// &quot;undefined&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125;;         <span class="comment">// &quot;object&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> [];         <span class="comment">// &quot;object&quot;</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="keyword">function</span>(<span class="params"></span>) &#123;&#125;; <span class="comment">// &quot;function&quot;</span></span><br></pre></td></tr></table></figure>
+
+注意：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">// &quot;object&quot;</span></span><br></pre></td></tr></table></figure>
+
+这是 JavaScript 早期遗留问题。
+
+## 3. 运算符
+
+### 3.1 算术运算符
+
+| 运算符 | 描述 |
+| --- | --- |
+| `+` | 加 |
+| `-` | 减 |
+| `*` | 乘 |
+| `/` | 除 |
+| `%` | 取模 |
+| `++` | 自增 |
+| `--` | 自减 |
+
+注意：JavaScript 中 `//` 不是整除，而是单行注释。
+
+### 3.2 赋值运算符
+
+| 运算符 | 示例 | 含义 |
+| --- | --- | --- |
+| `=` | `x = 1` | 赋值 |
+| `+=` | `x += 2` | `x = x + 2` |
+| `-=` | `x -= 2` | `x = x - 2` |
+| `*=` | `x *= 2` | `x = x * 2` |
+| `/=` | `x /= 2` | `x = x / 2` |
+| `%=` | `x %= 2` | `x = x % 2` |
+
+### 3.3 比较运算符
+
+| 运算符 | 描述 |
+| --- | --- |
+| `==` | 值相等，可能发生类型转换 |
+| `!=` | 值不相等，可能发生类型转换 |
+| `===` | 值和类型都相等 |
+| `!==` | 值或类型不相等 |
+| `>` | 大于 |
+| `>=` | 大于等于 |
+| `<` | 小于 |
+| `<=` | 小于等于 |
+
+建议优先使用：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">===</span><br><span class="line">!==</span><br></pre></td></tr></table></figure>
+
+避免隐式类型转换带来的问题。
+
+### 3.4 逻辑运算符
+
+| 运算符 | 描述 |
+| --- | --- |
+| `&&` | 逻辑与 |
+| `||` | 逻辑或 |
+| `!` | 逻辑非 |
+
+注意：JavaScript 里不是 `and`、`or`、`not`，而是 `&&`、`||`、`!`。
+
+### 3.5 三元运算符
+
+格式：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">条件 ? 值<span class="number">1</span> : 值<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> age = <span class="number">18</span>;</span><br><span class="line"><span class="keyword">let</span> result = age &gt;= <span class="number">18</span> ? <span class="string">&quot;成年&quot;</span> : <span class="string">&quot;未成年&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+## 4. 流程控制
+
+### 4.1 条件语句
+
+`if...else`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> score = <span class="number">90</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (score &gt;= <span class="number">60</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;及格&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;不及格&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+`switch`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> type = <span class="string">&quot;admin&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (type) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;admin&quot;</span>:</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;管理员&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;user&quot;</span>:</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;普通用户&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="attr">default</span>:</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;未知用户&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+### 4.2 循环语句
+
+`for`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+`while`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">3</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">  i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+`for...in` 常用于遍历对象的属性：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123; <span class="attr">name</span>: <span class="string">&quot;admin&quot;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> user) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key, user[key]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+`for...of` 常用于遍历数组、字符串等可迭代对象：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> arr) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+### 4.3 `break` 和 `continue`
+
+`break` 用于跳出整个循环：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i === <span class="number">3</span>) <span class="keyword">break</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+`continue` 用于跳过本次循环，继续下一次循环：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (i === <span class="number">3</span>) <span class="keyword">continue</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+## 5. 函数
+
+### 5.1 函数声明
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">square</span>(<span class="params">number</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> number * number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">square</span>(<span class="number">5</span>)); <span class="comment">// 25</span></span><br></pre></td></tr></table></figure>
+
+### 5.2 函数表达式
+
+函数可以赋值给变量：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> abs = <span class="keyword">function</span> (<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (x &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> -x;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+### 5.3 参数和返回值
+
+JavaScript 允许传入的参数数量和定义时不一致。
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">test</span>(<span class="number">1</span>);       <span class="comment">// 1 undefined</span></span><br><span class="line"><span class="title function_">test</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>); <span class="comment">// 1 2</span></span><br></pre></td></tr></table></figure>
+
+`return` 用于终止函数执行，并返回结果：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">add</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+### 5.4 作用域
+
+作用域指变量、函数、对象在代码中可以被访问的范围。
+
+JavaScript 常见作用域：
+
+| 作用域 | 说明 |
+| --- | --- |
+| 全局作用域 | 整个脚本都可以访问 |
+| 函数作用域 | 只在函数内部可以访问 |
+| 块级作用域 | 只在 `{}` 块内部可以访问，`let` 和 `const` 支持 |
+
+示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> globalName = <span class="string">&quot;global&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">demo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> localName = <span class="string">&quot;local&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(globalName);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(localName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+### 5.5 `this`
+
+`this` 指向和调用方式有关。
+
+常见情况：
+
+| 使用场景 | `this` 指向 |
+| --- | --- |
+| 对象方法中 | 调用该方法的对象 |
+| 单独使用 | 全局对象，浏览器中通常是 `window` |
+| 普通函数中 | 非严格模式下通常是 `window` |
+| 严格模式函数中 | `undefined` |
+| 事件中 | 接收事件的元素 |
+
+示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="attr">sayName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">user.<span class="title function_">sayName</span>(); <span class="comment">// admin</span></span><br></pre></td></tr></table></figure>
+
+`call()` 和 `apply()` 可以改变函数执行时的 `this` 指向。
+
+## 6. 对象、数组和字符串
+
+### 6.1 对象
+
+对象用来保存一组键值对：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;admin&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(user.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(user[<span class="string">&quot;age&quot;</span>]);</span><br></pre></td></tr></table></figure>
+
+### 6.2 数组
+
+数组用于保存有序数据：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">&quot;admin&quot;</span>, <span class="string">&quot;test&quot;</span>, <span class="string">&quot;guest&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr[<span class="number">0</span>]); <span class="comment">// admin</span></span><br></pre></td></tr></table></figure>
+
+常见方法：
+
+| 方法 | 说明 |
+| --- | --- |
+| `push()` | 末尾添加元素 |
+| `pop()` | 删除末尾元素 |
+| `shift()` | 删除开头元素 |
+| `unshift()` | 开头添加元素 |
+| `slice()` | 截取数组，不修改原数组 |
+| `splice()` | 添加、删除或替换数组元素，会修改原数组 |
+| `map()` | 映射生成新数组 |
+| `filter()` | 过滤生成新数组 |
+| `reduce()` | 汇总计算 |
+
+### 6.3 字符串
+
+常见字符串方法：
+
+| 方法 | 说明 |
+| --- | --- |
+| `indexOf()` | 查找指定字符串第一次出现的位置 |
+| `lastIndexOf()` | 查找指定字符串最后一次出现的位置 |
+| `substring()` | 截取字符串 |
+| `slice()` | 截取字符串 |
+| `split()` | 按指定分隔符切分字符串 |
+| `replace()` | 替换字符串 |
+| `trim()` | 去掉字符串首尾空白 |
+
+示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> url = <span class="string">&quot;/api/user/list&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(url.<span class="title function_">indexOf</span>(<span class="string">&quot;/api&quot;</span>)); <span class="comment">// 0</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(url.<span class="title function_">substring</span>(<span class="number">0</span>, <span class="number">4</span>)); <span class="comment">// /api</span></span><br></pre></td></tr></table></figure>
+
+## 7. DOM
+
+### 7.1 DOM 是什么
+
+DOM 是 Document Object Model，文档对象模型。
+
+浏览器会把 HTML 页面解析成一棵对象树，JavaScript 可以通过 DOM 查找、修改页面里的标签。
+
+简单记：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOM = JS 操作网页内容</span><br><span class="line">document = 当前网页文档</span><br></pre></td></tr></table></figure>
+
+关系大概是：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">document 当前网页</span><br><span class="line">  ├── title 网页标题</span><br><span class="line">  ├── cookie 页面 Cookie</span><br><span class="line">  └── HTML 元素</span><br><span class="line">      ├── input</span><br><span class="line">      ├── button</span><br><span class="line">      ├── table</span><br><span class="line">      └── div</span><br></pre></td></tr></table></figure>
+
+### 7.2 document
+
+`document` 是 DOM 的入口，想操作当前网页，一般都从 `document` 开始。
+
+常见用法：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">title</span>;       <span class="comment">// 当前网页标题</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span>;      <span class="comment">// 当前页面 JS 能读到的 Cookie</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">body</span>;        <span class="comment">// body 标签</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="property">forms</span>;       <span class="comment">// 页面表单</span></span><br></pre></td></tr></table></figure>
+
+### 7.3 DOM 节点操作
+
+DOM 节点可以理解成网页里的一个个标签。操作 DOM 一般是：先找元素，再改元素。
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">找元素：document.getElementById()</span><br><span class="line">改内容：innerText / innerHTML</span><br><span class="line">改样式：style.xxx</span><br></pre></td></tr></table></figure>
+
+### 7.4 选择 DOM 节点
+
+| 方法 | 说明 |
+| --- | --- |
+| `document.getElementById()` | 通过 `id` 找元素，通常只返回一个元素 |
+| `document.getElementsByClassName()` | 通过 `class` 找元素，返回一组元素 |
+| `document.getElementsByName()` | 通过 `name` 属性找元素，返回一组元素 |
+| `document.getElementsByTagName()` | 通过标签名找元素，返回一组元素 |
+| `document.querySelector()` | 按 CSS 选择器找第一个元素 |
+| `document.querySelectorAll()` | 按 CSS 选择器找一组元素 |
+
+示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;name&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> age = <span class="variable language_">document</span>.<span class="title function_">getElementsByName</span>(<span class="string">&quot;age&quot;</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> span = <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;span&quot;</span>)[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+`getElementsBy...` 返回的是一组元素，所以常见写法会带 `[0]`、`[1]`。
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[0] 表示第一个</span><br><span class="line">[1] 表示第二个</span><br></pre></td></tr></table></figure>
+
+常用选择器记法：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#username 表示 id=username</span><br><span class="line">.item 表示 class=item</span><br><span class="line">button 表示 button 标签</span><br></pre></td></tr></table></figure>
+
+### 7.5 修改 DOM 节点
+
+修改文字内容：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> username = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">username.<span class="property">innerText</span> = <span class="string">&quot;ajest&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+修改 HTML 内容：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.<span class="property">innerHTML</span> = <span class="string">&quot;&lt;span style=&#x27;color:pink;&#x27;&gt;AJEST&lt;/span&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+修改属性：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#btn&quot;</span>).<span class="property">disabled</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#username&quot;</span>).<span class="property">value</span> = <span class="string">&quot;admin&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+修改样式：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username.<span class="property">style</span>.<span class="property">color</span> = <span class="string">&quot;pink&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+区别：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">innerText  只改显示的文字</span><br><span class="line">innerHTML  可以写入 HTML 标签</span><br><span class="line">style.xxx  修改元素样式</span><br></pre></td></tr></table></figure>
+
+笔记：Elements 里删 `disabled`，本质就是临时改 DOM。刷新页面后一般会恢复。
+### 7.6 事件
+
+事件用于响应用户操作。
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#btn&quot;</span>).<span class="property">onclick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="title function_">alert</span>(<span class="string">&quot;按钮被点击&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+也可以使用 `addEventListener`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#btn&quot;</span>).<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;click&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+## 8. BOM
+
+### 8.1 BOM 是什么
+
+BOM 是 Browser Object Model，浏览器对象模型。
+
+JavaScript 可以通过 BOM 操作浏览器窗口、地址栏、历史记录等。
+
+简单记：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BOM = JS 操作浏览器</span><br><span class="line">window = 当前浏览器窗口</span><br></pre></td></tr></table></figure>
+
+`window` 是浏览器里的全局对象，`document` 其实也属于 `window`：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">document</span> === <span class="variable language_">document</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">window 浏览器窗口对象</span><br><span class="line">├── location</span><br><span class="line">├── history</span><br><span class="line">├── navigator</span><br><span class="line">├── screen</span><br><span class="line">└── document</span><br></pre></td></tr></table></figure>
+
+### 8.2 BOM 对象
+
+#### windows
+
+浏览器窗口对象
+
+| 属性                | 说明 |
+| ------------------- | ---- |
+| window. innerWidth  |      |
+| window. innerHeight |      |
+| window.outerWidth   |      |
+| window.outerHeight  |      |
+| window.location     |      |
+
+#### location
+
+地址栏URL信息
+
+| 属性              | 说明 |
+| ----------------- | ---- |
+| location.protocol |      |
+| location.host     |      |
+| location.hostname |      |
+| location.port     |      |
+| location.pathname |      |
+| location.search   |      |
+| location.hash     |      |
+
+
+
+#### history
+
+浏览器历史记录
+
+#### navigator
+
+浏览器信息
+
+| 属性                 | 说明                          |
+| -------------------- | ----------------------------- |
+| navigator.appName    | 浏览器名称                    |
+| navigator.appVersion | 浏览器版本                    |
+| navigator.language   | 浏览器设置的语言              |
+| navigator.platform   | 操作系统类型                  |
+| navigator.userAgent  | 浏览器设定的User-Agent 字符串 |
+
+#### screen
+
+屏幕信息
+
+#### document
+
+### 8.3 定时器
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;1 秒后执行&quot;</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">setInterval</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;每 1 秒执行一次&quot;</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+
+### 8.4 Console
+
+Console 是开发者工具里的控制台，可以在当前网页环境里临时执行 JavaScript。
+
+常用来验证 DOM/BOM：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">title</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;input&quot;</span>);</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">href</span>;</span><br></pre></td></tr></table></figure>
+
+简单记：Console 不是 JS 语法的一部分，它是运行 JS 的地方。
+
+## 9. AJAX 和网络请求
+
+### 9.1 AJAX 是什么
+
+AJAX 是一种与服务器交换数据的技术，可以在不刷新整个页面的情况下更新页面部分内容。
+
+常见用途：
+
+- 登录
+- 查询数据
+- 提交表单
+- 导出文件
+- 获取下拉框数据
+
+### 9.2 XMLHttpRequest
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">xhr.<span class="title function_">open</span>(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;/api/user/list&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.<span class="title function_">send</span>();</span><br><span class="line"></span><br><span class="line">xhr.<span class="property">onreadystatechange</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (xhr.<span class="property">readyState</span> === <span class="number">4</span> &amp;&amp; xhr.<span class="property">status</span> === <span class="number">200</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="property">responseText</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+### 9.3 fetch
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&quot;/api/user/list&quot;</span>)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">response</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> response.<span class="title function_">json</span>();</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+### 9.4 jQuery AJAX
+
+jQuery 的基础语法：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(selector).<span class="title function_">action</span>();</span><br></pre></td></tr></table></figure>
+
+AJAX 示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">  <span class="attr">url</span>: <span class="string">&quot;/api/user/list&quot;</span>,</span><br><span class="line">  <span class="attr">type</span>: <span class="string">&quot;GET&quot;</span>,</span><br><span class="line">  <span class="attr">dataType</span>: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">  <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">result, status, xhr</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+常见参数：
+
+| 参数 | 说明 |
+| --- | --- |
+| `url` | 请求地址 |
+| `type` | 请求方法，如 GET、POST |
+| `data` | 发送给服务器的数据 |
+| `contentType` | 发送数据时使用的内容类型 |
+| `dataType` | 预期服务器返回的数据类型 |
+| `success` | 请求成功后的回调函数 |
+
+## 10. 错误处理和调试
+
+### 10.1 try...catch
+
+`try...catch` 用于捕获异常。
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="string">&quot;&#123;bad json&#125;&quot;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;解析失败&quot;</span>, e);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;无论是否异常都会执行&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+### 10.2 throw
+
+`throw` 用于抛出错误。
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;参数错误&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+### 10.3 debugger
+
+`debugger` 用于触发断点调试。
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">test</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">debugger</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;debug&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+### 10.4 console
+
+`console` 是浏览器提供的调试对象，用来向开发者工具的 Console 面板输出信息。
+
+简单记：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Console = 开发者工具里的控制台面板</span><br><span class="line">console = JavaScript 里操作控制台的对象</span><br><span class="line">console.log() = 往控制台打印内容</span><br></pre></td></tr></table></figure>
+
+常用输出：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;普通日志&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&quot;警告日志&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;错误日志&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">table</span>([&#123; <span class="attr">name</span>: <span class="string">&quot;admin&quot;</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;]);</span><br></pre></td></tr></table></figure>
+
+对比：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;hello&quot;</span>); <span class="comment">// 写到网页里</span></span><br><span class="line"><span class="title function_">alert</span>(<span class="string">&quot;hello&quot;</span>);          <span class="comment">// 弹窗</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello&quot;</span>);    <span class="comment">// 打印到 Console 面板</span></span><br></pre></td></tr></table></figure>
+
+## 11. 浏览器开发者工具
+
+### 11.1 Elements
+
+Elements 用来查看浏览器渲染出来的 HTML。
+
+常见右键操作：
+
+| 操作 | 作用 |
+| --- | --- |
+| Edit as HTML | 把选中的 HTML 当文本编辑 |
+| Copy element | 复制元素 HTML |
+| Copy selector | 复制 CSS 选择器 |
+| Break on | 元素变化时触发断点 |
+| Delete element | 删除页面中的元素 |
+
+### 11.2 Network
+
+Network 是调试网络请求的重点。
+
+![image.png](https://i-blog.csdnimg.cn/blog_migrate/d3ee2933d5ce07f0b6feea74096fe2e5.png)
+
+常用功能：
+
+| 功能 | 说明 |
+| --- | --- |
+| Preserve log | 页面跳转后保留请求日志 |
+| Disable cache | 禁用缓存 |
+| XHR / Fetch | 过滤接口请求 |
+| Headers | 查看请求头、响应头 |
+| Payload | 查看请求参数 |
+| Response | 查看响应内容 |
+
+### 11.3 Sources
+
+Sources 用来查看和调试 JavaScript 文件。
+
+![image.png](https://i-blog.csdnimg.cn/blog_migrate/af81c489abebcfb735f4147ccd7e51cf.png)
+
+常见区域：
+
+| 区域 | 说明 |
+| --- | --- |
+| Page | 当前页面加载的文件 |
+| Snippets | 自定义 JS 代码片段 |
+| FileSystem | 导入本地文件系统 |
+| Watch | 监听变量 |
+| Call Stack | 查看调用栈 |
+| Scope | 查看当前作用域 |
+| Breakpoints | 查看断点列表 |
+| XHR/fetch Breakpoints | 对请求下断点 |
+| Event Listener Breakpoints | 对事件下断点 |
+
+### 11.4 Application
+
+Application 用来查看网站存储的数据。
+
+![image.png](https://i-blog.csdnimg.cn/blog_migrate/dd24be78b651e0788c1a785134bc8984.png)
+
+常见内容：
+
+- Cookies
+- Local Storage
+- Session Storage
+- IndexedDB
+- Cache Storage
+
+Cookie 中 `HttpOnly` 有勾，说明这个 Cookie 不能被前端 JS 直接读取，通常由服务端设置。
+
+### 11.5 Console
+
+Console 用于执行 JavaScript、查看日志、调试 DOM。
+
+示例：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">title</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span>;</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;button&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

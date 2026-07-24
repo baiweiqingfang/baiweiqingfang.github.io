@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>Java | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>Java</h1>
+    <div class="post-meta">
+      <time datetime="2026-07-08T11:43:39.000Z">2026.07.08</time>
+      <span>9 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# Java
+
+注释格式：
+
+单行注释 //注释信息 
+
+多行注释 /\*注释信息\*/
+
+内联注释
+
+## 程序运行机制
+
+1.Java程序保存在硬盘上叫name.java，在运行前需要先使用编译器javac.exe编译成一份二进制文件，叫name.class
+
+2.Java虚拟机（Java Virtual Machine，JVM）启动，ClassLoader（类加载器）把name.class文件读进内存
+
+3.Java程序动态执行，边读边运行
+
+### JDK（Java Development Kit，java开发工具包）
+
+所有有关java的东西都包含在里面
+
+### JRE（Java Runtime Environment，java运行环境）
+
+想要运行java文件必须先有java的运行环境
+
+### JVM（Java Virtual Machine，Java虚拟机）
+
+ 由 C/C++ 语言写出来的软件程序，java.exe运行起来之后，在内存里形成的运行环境就是 JVM
+
+由五部分组成：
+
+#### 1.类加载器（ClassLoader）
+
+负责加载.class问价
+
+#### 2.方法区（Method Area）
+
+字节码被 ClassLoader 读进来后，类信息、常量、静态变量、以及所有的方法代码（字节码指令）都会被永久存放在方法区
+
+#### 3.堆
+
+#### 4.栈
+
+#### 5.程序计数器
+
+JDK JRE JVM关系：
+
+![image-20260622221745400](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260622221745400.png)
+
+## 类的生命周期
+
+类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载，校验，准备，解析，初始化,使用,卸载7个阶段，其中其中校验、准备、解析3个部分统称为链接
+
+![image-20260621171241454](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260621171241454.png)
+
+加载，校验，准备，初始化，卸载这五个阶段的顺序是确定的，解析阶段在某些情况下可以在初始化阶段之后再开始
+
+这里的几个阶段按顺序开始，但不按顺序进行或完成，因为这些阶段通常都是互相交叉地混合进行的，通常在一个阶段执行的过程中调用或激活另一个阶段
+
+### 加载：查找并加载类的二进制数据
+
+在加载阶段，虚拟机需要完成以下3件事情：
+
+1.通过一个类的全限定名来获取定义此类的二进制字节流
+
+2.将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构
+
+3.在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的访问入口
+
+### 校验：确保被加载的类的正确性
+
+验证是链接阶段的第一步，确保Class文件的字节流中包含的信息符合当前虚拟机的要求并且不会危害虚拟机自身的安全，四个阶段的检验动作：
+
+1.文件格式验证：验证字节流是否符合Class文件格式的规范
+
+2.元数据验证：对字节码描述的信息进行语义分析，以保证其描述的信息符合Java语言规范的要求
+
+3.字节码验证：通过数据流和控制流分析，确定程序语义是合法，符合逻辑的
+
+4.符号引用验证：确保解析动作能正确执行
+
+### 准备：为类的静态变量分配内存，并将其初始化为默认值
+
+变量所使用的内存在方法区进行分配
+
+
+
+### 解析：把类中的符号引用转换为直接引用
+
+### 初始化：对类的静态变量，静态代码块执行初始化操作
+
+
+
+## Java反射机制
+
+## 变量
+
+在Java中变量分为基本类型的变量和引用类型的变量
+
+## 数据类型
+
+### 整数类型：
+
+byte：-128 ~ 127
+
+short: -32768 ~ 32767
+
+int: -2147483648 ~ 2147483647
+
+long: -9223372036854775808 ~ 9223372036854775807
+
+### 浮点数类型：
+
+float，double
+
+### 字符类型：
+
+char
+
+### 布尔类型：
+
+boolean
+
+### 空类型：
+
+null
+
+### 引用类型：
+
+String，arry，class，interface
+
+### 常量
+
+使用final关键字定义，变量名要大写
+
+## 数组
+
+数组变量初始化必须使用new关键字
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数组类型[] 数组名 = <span class="keyword">new</span> 数组类型[数组大小];</span><br></pre></td></tr></table></figure>
+
+数组所有元素初始化为默认值，整型都是0，浮点型是0.0，布尔型是false
+
+数组一旦创建后，大小就不可改变
+
+## 类和实例
+
+类的定义：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class 类名&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+类的实例化：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名 变量名 = <span class="keyword">new</span> 类名();</span><br></pre></td></tr></table></figure>
+
+类中方法的定义：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">修饰符 方法返回类型 方法名(方法参数列表) &#123;</span><br><span class="line">    若干方法语句;</span><br><span class="line">    <span class="keyword">return</span> 方法返回值;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+面向对象编程（Object-Oriented Programming，OOP）的三大特性：
+
+封装、继承、多态
+
+### 封装
+
+### 继承
+
+当定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）
+
+子类继承父类所有的属性和方法
+
+Java使用extends关键字来实现继承：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;...&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;...&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;...&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="comment">// 只需要定义新增的字段跟方法:</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> score;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getScore</span><span class="params">()</span> &#123; … &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setScore</span><span class="params">(<span class="type">int</span> score)</span> &#123; … &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+在Java中，没有明确写extends的类，编译器会自动加上extends Object
+
+### 方法重载
+
+在一个类中，可以定义多个方法，如果有一系列方法，它们的功能都是类似的，只有参数有所不同，那么，可以把这一组方法名做成同名方法
+
+这种方法名相同，但各自的参数不同，称为方法重载（Overload）
+
+注意：方法重载的返回值类型通常都是相同的。
+
+### 多态
+
+在继承关系中，子类如果定义了一个与父类方法签名完全相同的方法，被称为覆写（Override）
+
+多态：针对某个类型的方法调用，其真正执行的方法取决于运行时期实际类型的方法
+
+### 抽象类
+
+如果父类的方法本身不需要实现任何功能，仅仅是为了定义方法签名，目的是让子类去覆写它，那么，可以把父类的方法声明为抽象方法
+
+如果一个class定义抽象方法，因为抽象方法本身无法执行，所以类也无法被实例化，因此这个类也必须申明为抽象类（abstract class）
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+抽象类无法被实例化
+
+抽象类本身被设计成只能用于被继承，因此，抽象类可以强迫子类实现其定义的抽象方法，否则编译会报错。因此，抽象方法实际上相当于定义了规范
+
+## 接口
+
+如果一个抽象类没有字段，所有方法全部都是抽象方法：
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+就可以把该抽象类改写为接口（interface）
+
+使用interface声明接口
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">	<span class="keyword">void</span> run;</span><br><span class="line">	String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+当一个具体的class去实现一个interface时，需要使用implements关键字
+
+### 接口继承
+
+一个interface可以继承自另一个interface
+
+继承使用extends关键字，它相当于扩展了接口的方法
+
+## 包
+
+Java定义了一种名字空间，称之为包：package。一个类总是属于某个包，类名只是一个简写，真正的完整类名是包名.类名
+
+在定义class的时候，需要在第一行声明这个class属于哪个包
+
+使用package声明包名
+
+规则：域名的反组织结构
+
+import关键字导入其他包中的类
+
+## jar包
+
+package组织的目录层级，以及各个目录下的所有文件都打成一个jar文件
+
+jar包实际上就是一个zip格式的压缩文件，而jar包相当于目录
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

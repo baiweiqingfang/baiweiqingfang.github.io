@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>JS逆向 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>JS逆向</h1>
+    <div class="post-meta">
+      <time datetime="2026-07-23T06:14:23.000Z">2026.07.23</time>
+      <span>10 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# JS 逆向
+
+## 1. JS 逆向是在做什么
+
+JS 逆向主要是分析前端 JavaScript 代码，弄清楚浏览器在请求接口前后做了什么。
+
+常见目标：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 找接口地址</span><br><span class="line">2. 找请求参数</span><br><span class="line">3. 找 sign 签名逻辑</span><br><span class="line">4. 找 token 生成或刷新逻辑</span><br><span class="line">5. 找密码前端加密方式</span><br><span class="line">6. 找请求体加密方式</span><br><span class="line">7. 找响应体解密方式</span><br><span class="line">8. 复现浏览器请求</span><br></pre></td></tr></table></figure>
+
+一句话记：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JS 逆向 = 把浏览器偷偷帮你完成的加密、签名、组包逻辑找出来并复现。</span><br></pre></td></tr></table></figure>
+
+常见场景：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">浏览器能请求成功</span><br><span class="line">Burp / curl / Python 重放失败</span><br></pre></td></tr></table></figure>
+
+原因通常是请求里带了动态参数：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sign</span><br><span class="line">token</span><br><span class="line">timestamp</span><br><span class="line">nonce</span><br><span class="line">encryptData</span><br><span class="line">ciphertext</span><br><span class="line">password 加密值</span><br></pre></td></tr></table></figure>
+
+---
+
+## 2. JS 压缩与混淆
+
+### 2.1 JS 压缩
+
+压缩主要是为了让文件变小、加载更快。
+
+原代码：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sayHello</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello &quot;</span> + name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+压缩后：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sayHello</span>(<span class="params">o</span>)&#123;<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello &quot;</span>+o)&#125;</span><br></pre></td></tr></table></figure>
+
+常见变化：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">删除空格</span><br><span class="line">删除换行</span><br><span class="line">删除注释</span><br><span class="line">缩短变量名</span><br></pre></td></tr></table></figure>
+
+特点：功能不变，只是代码变挤了。
+
+### 2.2 JS 混淆
+
+混淆主要是为了让代码更难读、更难逆向。
+
+原代码：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> token = <span class="string">&quot;abc123&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(token);</span><br></pre></td></tr></table></figure>
+
+混淆后：
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _0x3fa2=[<span class="string">&quot;abc123&quot;</span>,<span class="string">&quot;log&quot;</span>];</span><br><span class="line"><span class="variable language_">console</span>[_0x3fa2[<span class="number">1</span>]](_0x3fa2[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+常见变化：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">变量名变成 _0x1234 这种奇怪名字</span><br><span class="line">字符串放进数组里</span><br><span class="line">代码结构被打乱</span><br><span class="line">加入无用代码</span><br><span class="line">控制流变复杂</span><br></pre></td></tr></table></figure>
+
+区别：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">压缩：主要为了文件变小</span><br><span class="line">混淆：主要为了代码难读</span><br></pre></td></tr></table></figure>
+
+逆向时常见处理：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 先格式化代码</span><br><span class="line">2. 搜索关键字</span><br><span class="line">3. 打断点跟调用栈</span><br><span class="line">4. 找到核心函数后单独抠出来分析</span><br></pre></td></tr></table></figure>
+
+---
+
+## 3. 学 JS 逆向先看什么
+
+JS 基础不用重复记，重点看浏览器里和请求有关的东西。
+
+优先掌握：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">DevTools Sources 面板</span><br><span class="line">DevTools Network 面板</span><br><span class="line">断点调试</span><br><span class="line">调用栈 Call Stack</span><br><span class="line">搜索 JS 文件</span><br><span class="line">XHR/fetch 请求断点</span><br><span class="line">常见加密和签名</span><br></pre></td></tr></table></figure>
+
+常用工具：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">浏览器开发者工具</span><br><span class="line">Burp Suite</span><br><span class="line">Node.js</span><br><span class="line">浏览器 Console</span><br><span class="line">Python / curl 复现请求</span><br></pre></td></tr></table></figure>
+
+---
+
+## 4. 逆向基本流程
+
+### 4.1 先抓请求
+
+先在 Network 或 Burp 里找到目标接口。
+
+重点看：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">请求 URL</span><br><span class="line">请求方法 GET / POST</span><br><span class="line">请求头 Headers</span><br><span class="line">Cookie</span><br><span class="line">请求参数 Query / Body</span><br><span class="line">响应内容 Response</span><br></pre></td></tr></table></figure>
+
+如果直接重放失败，要重点看哪些参数每次都会变。
+
+常见动态参数：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">timestamp 时间戳</span><br><span class="line">nonce 随机数</span><br><span class="line">sign 签名</span><br><span class="line">token 登录态或接口令牌</span><br><span class="line">data / payload 加密请求体</span><br></pre></td></tr></table></figure>
+
+### 4.2 搜索关键字
+
+拿到可疑参数后，在 Sources 里搜索。
+
+优先搜：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sign</span><br><span class="line">token</span><br><span class="line">nonce</span><br><span class="line">timestamp</span><br><span class="line">encrypt</span><br><span class="line">decrypt</span><br><span class="line">CryptoJS</span><br><span class="line">AES</span><br><span class="line">RSA</span><br><span class="line">md5</span><br><span class="line">sha256</span><br></pre></td></tr></table></figure>
+
+也可以搜接口路径：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/api/user/list</span><br><span class="line">/login</span><br><span class="line">/export</span><br></pre></td></tr></table></figure>
+
+### 4.3 打断点
+
+如果搜索到了生成参数的位置，就打断点。
+
+常用断点：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">代码行断点</span><br><span class="line">XHR/fetch 断点</span><br><span class="line">事件断点</span><br></pre></td></tr></table></figure>
+
+XHR/fetch 断点适合找接口是谁发出去的。
+
+### 4.4 看调用栈
+
+断点停住后，看 Call Stack。
+
+重点是找到：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">谁调用了请求函数</span><br><span class="line">参数在哪里被拼接</span><br><span class="line">sign 在哪里生成</span><br><span class="line">加密函数在哪里执行</span><br></pre></td></tr></table></figure>
+
+### 4.5 抠函数复现
+
+找到核心逻辑后，把函数拿出来复现。
+
+常见复现方式：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">浏览器 Console 直接调用</span><br><span class="line">Node.js 跑 JS</span><br><span class="line">Python 重写逻辑</span><br><span class="line">Burp 插件或脚本自动生成参数</span><br></pre></td></tr></table></figure>
+
+---
+
+## 5. Network 面板怎么看
+
+Network 主要用来找真实接口。
+
+常看类型：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Fetch/XHR：接口请求</span><br><span class="line">Doc：页面文档</span><br><span class="line">JS：JavaScript 文件</span><br><span class="line">CSS：样式文件</span><br><span class="line">Img：图片</span><br></pre></td></tr></table></figure>
+
+请求里重点看：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Headers：请求头、Cookie、Referer、User-Agent</span><br><span class="line">Payload：POST 请求体</span><br><span class="line">Preview：响应预览</span><br><span class="line">Response：原始响应</span><br><span class="line">Initiator：是谁发起的请求</span><br></pre></td></tr></table></figure>
+
+逆向时 `Initiator` 很有用，可以帮助定位对应 JS 文件。
+
+---
+
+## 6. Sources 面板怎么看
+
+Sources 主要用来读 JS 和打断点。
+
+常用操作：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + P：快速打开文件</span><br><span class="line">Ctrl + Shift + F：全局搜索</span><br><span class="line">&#123;&#125;：格式化压缩后的 JS</span><br><span class="line">点击行号：打断点</span><br><span class="line">右侧 Call Stack：查看调用栈</span><br></pre></td></tr></table></figure>
+
+如果 JS 是一整行，先点 `{}` 格式化。
+
+---
+
+## 7. 常见加密和签名
+
+### 7.1 哈希
+
+常见：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MD5</span><br><span class="line">SHA1</span><br><span class="line">SHA256</span><br><span class="line">SM3</span><br></pre></td></tr></table></figure>
+
+特点：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">不可逆</span><br><span class="line">常用于 sign 签名</span><br><span class="line">同样输入得到同样输出</span><br></pre></td></tr></table></figure>
+
+例子：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = md5(timestamp + token + data)</span><br></pre></td></tr></table></figure>
+
+### 7.2 对称加密
+
+常见：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AES</span><br><span class="line">DES</span><br><span class="line">SM4</span><br></pre></td></tr></table></figure>
+
+常见参数：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">key 密钥</span><br><span class="line">iv 偏移量</span><br><span class="line">mode 模式</span><br><span class="line">padding 填充</span><br></pre></td></tr></table></figure>
+
+例子：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">encryptData = AES-CBC(data, key, iv)</span><br></pre></td></tr></table></figure>
+
+### 7.3 非对称加密
+
+常见：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RSA</span><br><span class="line">SM2</span><br></pre></td></tr></table></figure>
+
+常见场景：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">密码登录前加密</span><br><span class="line">加密 AES key</span><br></pre></td></tr></table></figure>
+
+例子：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">password = RSA.encrypt(&quot;123456&quot;)</span><br></pre></td></tr></table></figure>
+
+### 7.4 参数签名
+
+签名常见流程：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 参数排序</span><br><span class="line">2. 拼接字符串</span><br><span class="line">3. 加 secret / token</span><br><span class="line">4. MD5 / SHA256 / HMAC</span><br><span class="line">5. 得到 sign</span><br></pre></td></tr></table></figure>
+
+例子：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">参数：a=1&amp;b=2&amp;timestamp=123456</span><br><span class="line">拼接：a=1&amp;b=2&amp;timestamp=123456&amp;secret=xxx</span><br><span class="line">签名：sign = md5(拼接字符串)</span><br></pre></td></tr></table></figure>
+
+---
+
+## 8. 逆向时常见关键字
+
+搜索 JS 时可以优先搜这些：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sign</span><br><span class="line">signature</span><br><span class="line">token</span><br><span class="line">authorization</span><br><span class="line">timestamp</span><br><span class="line">nonce</span><br><span class="line">random</span><br><span class="line">encrypt</span><br><span class="line">decrypt</span><br><span class="line">cipher</span><br><span class="line">CryptoJS</span><br><span class="line">JSEncrypt</span><br><span class="line">RSA</span><br><span class="line">AES</span><br><span class="line">MD5</span><br><span class="line">SHA256</span><br><span class="line">HmacSHA256</span><br></pre></td></tr></table></figure>
+
+中文系统也可以搜：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">加密</span><br><span class="line">解密</span><br><span class="line">签名</span><br><span class="line">时间戳</span><br><span class="line">验证码</span><br></pre></td></tr></table></figure>
+
+---
+
+## 9. 常见突破口
+
+### 9.1 从参数名入手
+
+如果请求里有：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sign=xxxx</span><br><span class="line">timestamp=xxxx</span><br><span class="line">nonce=xxxx</span><br></pre></td></tr></table></figure>
+
+就搜 `sign` 或接口路径。
+
+### 9.2 从接口发起位置入手
+
+Network 里看 `Initiator`，找到发请求的 JS 文件。
+
+### 9.3 从加密库入手
+
+看到这些库名要重点看：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CryptoJS</span><br><span class="line">JSEncrypt</span><br><span class="line">jsrsasign</span><br><span class="line">sm-crypto</span><br></pre></td></tr></table></figure>
+
+### 9.4 从断点入手
+
+对接口 URL 下 XHR/fetch 断点，请求发出前会停住。
+
+---
+
+## 10. 复现请求时要注意什么
+
+复现时不能只看参数，还要看上下文。
+
+常见影响因素：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Cookie</span><br><span class="line">Authorization</span><br><span class="line">Referer</span><br><span class="line">Origin</span><br><span class="line">User-Agent</span><br><span class="line">Content-Type</span><br><span class="line">时间戳是否过期</span><br><span class="line">sign 是否和参数绑定</span><br><span class="line">请求体是否加密</span><br><span class="line">响应体是否加密</span><br></pre></td></tr></table></figure>
+
+如果改了参数，通常要重新生成签名。
+
+---
+
+## 11. 简单案例思路
+
+目标请求：
+
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST /api/query</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>application/json</span><br><span class="line"></span><br><span class="line">&#123;&quot;keyword&quot;:&quot;test&quot;,&quot;timestamp&quot;:123456,&quot;sign&quot;:&quot;xxxx&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+分析过程：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. Burp 重放原包，确认能成功</span><br><span class="line">2. 修改 keyword，发现失败</span><br><span class="line">3. 判断 sign 和 keyword 有关</span><br><span class="line">4. 搜索 sign / /api/query</span><br><span class="line">5. 找到 sign 生成函数</span><br><span class="line">6. 看 sign 用了哪些参数</span><br><span class="line">7. 复现 sign</span><br><span class="line">8. 再次修改 keyword 并重新生成 sign</span><br></pre></td></tr></table></figure>
+
+---
+
+## 12. 我的学习路线
+
+第一阶段：会看请求
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Network 面板</span><br><span class="line">Burp 抓包</span><br><span class="line">请求头 / 请求体 / 响应体</span><br><span class="line">GET / POST</span><br><span class="line">Content-Type</span><br><span class="line">Cookie / Token</span><br></pre></td></tr></table></figure>
+
+第二阶段：会找 JS
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">找接口对应 JS</span><br><span class="line">搜索关键字</span><br><span class="line">格式化压缩 JS</span><br><span class="line">看 Initiator</span><br></pre></td></tr></table></figure>
+
+第三阶段：会调试
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">打断点</span><br><span class="line">看变量值</span><br><span class="line">看调用栈</span><br><span class="line">XHR/fetch 断点</span><br></pre></td></tr></table></figure>
+
+第四阶段：会识别加密签名
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MD5 / SHA256</span><br><span class="line">AES / RSA</span><br><span class="line">参数排序签名</span><br><span class="line">timestamp / nonce</span><br></pre></td></tr></table></figure>
+
+第五阶段：会复现
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Console 调函数</span><br><span class="line">Node.js 跑函数</span><br><span class="line">Python 重写算法</span><br><span class="line">Burp 里自动补 sign</span><br></pre></td></tr></table></figure>
+
+---
+
+## 13. 笔记模板
+
+以后遇到一个 JS 逆向点，可以按这个格式记。
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">目标：</span><br><span class="line">接口：</span><br><span class="line">现象：浏览器成功，重放失败</span><br><span class="line">可疑参数：sign / token / timestamp / encryptData</span><br><span class="line">定位方式：搜索关键字 / Initiator / XHR 断点</span><br><span class="line">核心 JS 文件：</span><br><span class="line">核心函数：</span><br><span class="line">算法：</span><br><span class="line">输入：</span><br><span class="line">输出：</span><br><span class="line">复现方式：Console / Node / Python</span><br><span class="line">最终结果：</span><br></pre></td></tr></table></figure>
+
+---
+
+## 14. 常见误区
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">不要一上来就硬读全部 JS</span><br><span class="line">不要只看压缩后的代码，先格式化</span><br><span class="line">不要只复制请求参数，动态参数可能会过期</span><br><span class="line">不要只盯着 sign，也要看 Cookie 和 Token</span><br><span class="line">不要把编码当加密，比如 Base64 只是编码</span><br></pre></td></tr></table></figure>
+
+简单记：
+
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">抓包看现象，搜索找位置，断点看过程，最后复现逻辑。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

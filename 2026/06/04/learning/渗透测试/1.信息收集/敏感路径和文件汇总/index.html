@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>敏感路径和文件汇总 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>敏感路径和文件汇总</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-04T07:45:36.000Z">2026.06.04</time>
+      <span>5 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# 敏感路径和文件汇总
+
+## 1.信息泄露
+
+### 1.1PHP探针
+
+PHP 探针 = 把服务器所有敏感配置（OS/PHP/Apache/路径/权限）用网页形式展示出来的脚本，属于信息泄露
+
+常见 PHP 探针文件名：
+
+| 文件名          | 说明                      | 来源                  |
+| --------------- | ------------------------- | --------------------- |
+| `/phpinfo.php`  | 原生 `phpinfo()` 函数输出 | 开发者调试遗留        |
+| `/l.php`        | phpStudy 默认探针         | phpStudy 一键环境自带 |
+| `/tz.php`       | "探针"拼音缩写            | 常见自定义命名        |
+| `/p.php`        | "PHP"缩写                 | 常见自定义命名        |
+| `/tongji.php`   | "统计"拼音                | 常见自定义命名        |
+| `/info.php`     | "信息"缩写                | 常见自定义命名        |
+| `/test.php`     | "测试"文件                | 开发者遗留            |
+| `/admin888.php` | 伪装成后台                | 恶意后门常见          |
+
+#### 1.1.1PHP探针中的敏感信息
+
+1.绝对路径（Absolute Path）
+
+查找文件根目录、DOCUMENT_ROOT或脚本物理路径。
+
+C:/phpStudy/WWW/(Windows)或/var/www/html/(Linux)
+
+2.数据库连接检测
+
+大多数 PHP 探针最下方都有一个“数据库连接检测”模块。
+
+在输入框里尝试常用的弱口令：
+
+主机：127.0.0.1或localhos
+
+用户名：root
+
+密码：root
+
+3.服务器操作系统与环境
+
+服务器操作系统、PHP版本、服务器软件。
+
+4.PHP disable_functions
+
+搜索disable_functions，根据禁用的函数决定绕过方式
+
+5.开启的扩展与组件
+
+GD库、MySQL、Socket、Zend Optimizer
+
+### 1.2robots.txt
+
+Robots是一个协议，全称为网络爬虫协议,网站通过Robots协议告诉搜索引擎哪些页面可以访问，哪些不可以访问。
+
+#### 1.2.1User-agent
+指定搜索引擎，若为“*”，则表示允许所有搜索引擎
+
+注：
+
+（1）当robots.txt不为空的时候，必须至少有一条User-agent的记录
+
+（2）相同名字，只能有一条，但是不同的搜索引擎，可以有多条记录
+
+#### 1.2.2.Disallow
+禁止访问的目录
+
+注：
+
+（1）在robots.txt中至少要有一条Disallow
+
+（2）Disallow记录为空，则表示网站所有页面都允许访问
+
+（3）使用disallow，每个页面必须单独分开声明
+
+#### 1.2.3.Allow
+允许访问的目录
+
+#### 1.2.4.Sitemap
+向搜索引擎提交网站地图，增加网站收录
+
+## 2.后台管理
+
+### 2.1phpMyAdmin
+
+/phpmyadmin/README：phpMyAdmin 的官方说明文档，直接暴露版本号，默认位置：phpMyAdmin 安装包根目录
+
+/phpmyadmin/ChangeLog
+
+## 3.配置文件
+
+### 3.1操作系统
+
+#### 3.1.1Windows
+
+C:\Windows\System32\drivers\etc\hosts
+
+显示当前操作系统网卡的IP
+
+C:\Windows\win.ini
+
+Windows系統配置文件
+
+c\ProgramFiles\mysq/\my.ini
+
+MySQL配置
+
+#### 3.1.2Linux
+
+/etc/hosts
+
+显示当前操作系统网卡的IP
+
+/etc/passwd
+
+账户信息
+
+/etc/shadow
+
+账户密码文件
+
+/proc/net/arp
+
+显示arp缓存表(寻找内网其他主机)
+
+/proc/net/fib_trie
+
+显示当前网段路由信息
+
+/proc/net/tcp
+
+记录这台机器当前正在连接的所有内网IP和端口
+
+/var/log/apache2/access.log
+
+apache日志文件
+
+/var/log/nginx/access.log
+
+nginx日志文件
+
+/var/www/html
+
+Apache或Nginx服务器的默认网页根目录
+
+### 3.2开发语言
+
+#### 3.2.1PHP
+
+php.ini
+
+常见的php.ini文件默认路径：
+
+phpinfo.php (PHP 配置信息页)
+
+DOCUMENT_ROOT/SCRIPT_FILENAME： 告诉了网站在磁盘上的绝对路径
+
+_$SERVER["REMOTE_ADDR"]与内网 IP：观察是否泄露了内网网段信息。
+
+disable_functions：看看服务器是否禁用了命令执行函数
+
+Linux：
+
+/etc/php.ini
+
+/etc/php/X/apache2/php.ini（将X替换为PHP版本）
+
+Windows：
+
+C:\php\php.ini
+
+C:\Windows\php.ini
+
+## 4.上传点
+
+## 5.安装残留
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

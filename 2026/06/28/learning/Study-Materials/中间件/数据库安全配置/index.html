@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="白尾青芳の小窝">
+  <title>数据库安全配置 | 白尾青芳の小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css?v=20260722-2148">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+  <video class="backdrop" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+    <source src="/images/wallpaper.mp4" type="video/mp4">
+  </video>
+
+  <button class="mobile-menu" id="menuToggle" type="button" aria-label="打开导航" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="profile">
+      <img class="avatar" src="/images/fox-avatar.jpg" alt="白尾青芳头像">
+      <p class="eyebrow">SECURITY · CODE · NOTES</p>
+      <h1>白尾青芳</h1>
+      <p class="motto">在每一次请求与响应之间，找到系统真实的边界。</p>
+    </div>
+
+    <nav class="main-nav" aria-label="主导航">
+      <a class="" href="/"><i data-lucide="home"></i><span>博客首页</span></a>
+      <a class="" href="/study/"><i data-lucide="book-open"></i><span>学习导航</span></a>
+      <a href="/categories/Web-%E5%AE%89%E5%85%A8/"><i data-lucide="shield-check"></i><span>Web 安全</span></a>
+      <a href="/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"><i data-lucide="code-2"></i><span>开发笔记</span></a>
+      <a class="" href="/archives/"><i data-lucide="archive"></i><span>文章归档</span></a>
+      <a href="/about/"><i data-lucide="user-round"></i><span>关于我</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="social-links">
+        <a target="_blank" rel="noopener" href="https://github.com/baiweiqingfang" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56v-2.14c-3.2.7-3.87-1.36-3.87-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18.92-.26 1.9-.38 2.88-.39.98 0 1.96.13 2.88.39 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.75.11 3.04.74.8 1.19 1.83 1.19 3.08 0 4.42-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg></a>
+        <a href="/atom.xml" aria-label="RSS" title="RSS"><i data-lucide="rss"></i></a>
+      </div>
+      <p>© 2026 白尾青芳 · Powered by Hexo</p>
+    </div>
+  </aside>
+
+  <main class="content">
+    <article class="article-page">
+  <header class="article-header">
+    <p class="eyebrow">learning</p>
+    <h1>数据库安全配置</h1>
+    <div class="post-meta">
+      <time datetime="2026-06-28T15:54:24.000Z">2026.06.28</time>
+      <span>14 分钟阅读</span>
+    </div>
+  </header>
+  <div class="article-content">
+    
+# 数据库安全配置
+
+## 1.基本概念
+
+信息存储的仓库，可以把数据存储在数据库中
+
+## 2.数据库分类
+
+### 2.1关系型数据库
+
+类似与Excel表格
+
+特点：数据不能重复，不是指数据完全不一样，而是指能够通过某个字段区分出表中的不同记录，这个字段就叫主键
+
+#### 2.1.1MySQL
+
+MySQL是由瑞典MySQLAB公司开发,属于Oracle旗下产品。MySQL是最流行的关系型数据库管理系统之一
+
+客户端与MySQL服务端进行通信时采用MySQL二进制协议（Binary Protocol）
+
+#### 2.1.2MariaDB
+
+#### 2.1.3SQL server
+
+#### 2.1.4Oracle
+
+### 2.2非关系型数据库
+
+键值对（key-value）的方式存储数据
+
+#### 2.2.1Redis
+
+## 3.数据库组成
+
+##  4.MySQL命令行
+
+使用命令来操作数据库
+
+D:\PHPstudy\phpstudy_pro\Extensions\MySQL5.7.26\bin>
+
+登录连接：mysql -h ip -p 3306 -u root -proot
+
+## 5.数据库语句
+
+### 5.1DDL语句
+
+数据定义语句（Data Definition Language），对数据库，表，列等进行创建，删除，更改
+
+#### 5.1.1数据库操作
+
+Show databases：查看当前MySQL服务器中有哪些数据库
+
+Create databases 数据库名：创建新的数据库
+
+Use 数据库名：切换数据库
+
+Select database（）：查看当前正在使用的数据库
+
+Drop database 数据库名：删除数据库
+
+#### 5.1.2表操作
+
+Show tables：查看当前数据库有哪些表
+
+Desc 表名：查询表结构
+
+Join：用来把多个表横向连接起来
+
+select * from user join flag on user.id=flag.id
+
+根据表中字段连接
+
+Using和on是一样的，using是简化版的on
+
+Using(id)会将id列合并
+
+### 5.2DML语句
+
+数据操纵语句（Data Manipulation Language），用于添加（增），删除（删），更新（改），查询（查）数据库
+
+#### 5.2.1Select查询语句
+
+基本格式：
+
+Select 列名 from 表名
+
+查询多个列：
+
+Select 列名1，列名2，...，from 表名
+
+查询所有列：
+
+Select * from 表名
+
+使用where语句进行查询：
+
+Select 列名 from 表明 where 列名=xx
+
+Like主要用于where语句中搜索指定的匹配模式
+
+select column_name from table_name where column_name like 'x%'
+
+##### 5.2.1.1Union联合查询
+
+主要用于把两个查询结果连接起来，放到一个结果集，结果集的列名由第一个select后面的列名决定
+
+条件：
+
+前后两个查询的列名可以不一样，但是列的数量必须一致
+
+基本格式：
+
+Select 列 from 表 [where 条件] union 其他查询语句
+
+##### 5.2.1.2排序
+
+功能：
+
+根据列名来排序，默认按照升序对结果集进行排序，可以使用desx关键字对结果集进行降序排序
+
+格式：
+
+Select 列名 from 表名 [where 条件] order by 列名
+
+##### 5.2.1.3Group by
+
+分组查询，把相同的列放在一起
+
+格式：
+
+group by column_name
+
+##### 5.2.1.4子查询
+
+也叫内查询，嵌套查询
+
+是一种嵌套在其他SQL语句中进行的查询
+
+规则：
+
+1.必须在括号内
+
+2.子查询的select语句中，只能由一个列，除非子查询有多个列
+
+select * from ((select 1)A,(select 2)B);
+
+派生表:
+
+MySQL在进行子查询时,就会产生一个派生表,他是select语句产生的一个虚拟表,与外部没有关系,产生的结果传给外部select查询
+
+派生表必须定义一个别名，如A，B
+
+使用（）或as定义别名
+
+#### 5.2.2Insert插入语句
+
+插入数据有三种形式：
+
+insert into 表名 （列名1，列名2，列名3） values（值1，值2，值3）
+
+省略列名形式：
+
+insert into 表名 values（值1，值2，值3）
+
+使用set关键字插入数据
+
+insert into 表名 set 列名1=值1，列名2=值2，列名3=值3
+
+#### 5.2.3Update更新操作
+
+基本格式：
+
+Update 表名 set 列名=新值 where 列名=值
+
+更新多个列：
+
+Update user set username = ‘tests’ ， password = ‘123’ where id = 3
+
+省略条件，更新表中的一列数据：
+
+Update 表名 set 列名=新值
+
+#### 5.2.4Delete删除操作
+
+删除表中的一行数据：
+
+Delete from 表明 where 列名=值
+
+使用in关键字删除表中的多行数据
+
+Delete from 表名 where 列名 in （需要删除的行）
+
+删除表中的所有数据
+
+Delete from user
+
+### 5.3DCL语句
+
+#### 5.3.1show
+
+show variables
+
+查看系统变量
+
+配合MySQL通配符：
+
+show variables "sec%"
+
+### 5.4注释符
+
+#### 5.4.1分类
+
+单行注释
+
+#
+
+仅支持MySQL数据库
+
+-- +
+
+支持所有数据库
+
+空格不能少，最后一个+可以换成任意字符，为了表示前面有空格
+
+多行注释
+
+/**/
+
+### 5.5系统控制语句
+
+#### set
+
+SET [作用域] 变量名 = 值
+
+1.修改系统变量
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 6.数据库管理工具
+
+### 6.1PhpMyAdmin
+
+PhpMyAdmin是一个以PHP为基础,以Web-Base
+方式架构在网站主机上的MySQL的数据库管理工具,
+让管理者可用Web接口管理MySQL数据库。
+
+#### 6.1.1支持大多数MySQL功能
+
+
+浏览和删除数据库,表,视图,字段和索引
+
+创建,复制,删除,重命名和更改数据库,表,字段和索引
+
+维护服务器,数据库和表,以及有关服务器配置的建议
+
+执行,编辑和标记任何SQL语句,甚至是批处理查询
+。
+
+管理MySQL用户帐户和特权
+
+管理存储过程和触发器
+
+#### 6.1.2从CSV和SQL导入数据
+
+## 7.运算符
+
+### And运算
+
+格式：
+
+条件1 and 条件2
+
+两个都为真时，返回为真，否则为假
+
+### Or运算
+
+格式：
+
+条件1 or 条件2
+
+只要有一个条件为真，那么返回为真，两个条件都为假时，返回为假
+
+## 8.元数据数据库
+
+元数据是指关于数据的数据，用于描述数据的特征和属性
+
+### 8.1Information_schema数据库
+
+Information_schema数据库是MySQL服务器自带的一个数据库，自MySQL 5.0起成为默认系统数据库，提供了访问MySQL数据库元信息的方式，记录了MySQL服务器中所有的数据库信息
+
+表结构：
+
+#### 8.1.1Schemata表：
+
+记录数据库名的表
+
+##### 8.1.1.1 Schema_name列：
+
+记录数据库名的列
+
+#### 8.1.2Tables表：
+
+记录表名的表
+
+##### 8.1.2.1 Table_schema列：
+
+记录数据库名的列
+
+##### 8.1.2.2Table_name列：
+
+记录着表名的列
+
+#### 8.1.3Columns表：
+
+记录列名的表
+
+##### 8.1.3.1 Column_name列：
+
+记录列名的列
+
+##### 8.1.3.2 Table_name列：
+
+记录表名的列
+
+##### 8.1.2.3 Table_Schema列：
+
+记录数据库名的列
+
+## 9.数据库函数
+
+### 9.1MySQL
+
+#### 9.1Extractvalue
+
+提权XML数据
+
+Extractvalue（XML_document, Xpath_str）
+
+XML_document：
+
+XML对象可以是XML文件或字符串
+
+ Xpath_str：
+
+Xpath格式的字符串
+
+9.2updatexml
+
+替换数据
+
+Updatexml(XML_document, Xpath_string, new_value)
+
+XML_document：
+
+XML对象可以是XML文件或者是字符串
+
+Xpath_string：
+
+Xpath格式的字符串
+
+new_value：
+
+替换查询找到的数据
+
+#### 9.3concat
+
+连接字符串
+
+concat（字符串1， 字符串2）
+
+#### 9.4group_concat
+
+连接一组字符串，使用逗号隔开
+
+#### 9.5Floor
+
+取整，去掉小数位
+
+#### 9.6Count
+
+返回匹配指定条件的行数
+
+Count(column_name)
+
+#### 9.7Rand
+
+产生一个0-1随机数
+
+Select rand()
+
+确定种子，产生随机数，每次产生的数相同
+
+Select rand(0)
+
+9.8limit
+
+限制sql语句的返回行数
+
+Limit start,row
+
+start:从哪里返回
+
+row:返回几行数据
+
+#### 9.9Name_const()
+
+给变量赋值
+
+select name_const('name', 'test')
+
+#### 9.10Substr
+
+截取字符串
+
+1.substr(str,pos.len)
+
+2.substr(str,pos)
+
+pos从1开始
+
+#### 9.11If
+
+进行条件判断
+
+if(exp1, exp2,exp3)
+
+exp1为判断条件，exp2为条件正确时返回的结果，exp3为条件错误时返回的结果
+
+#### 9.12Ascii
+
+返回参数最左侧字符的ASCII码值,返回值在0-255之间
+
+Ascii(str)
+
+#### 9.13Length
+
+返回参数的长度
+
+Length(database())
+
+9.14Sleep
+
+让程序在当前位置停顿多长时间，停顿时间的长短有sleep()函数参数决定
+
+select sleep(5)
+
+也可以放在and语句里
+
+select * from user where id = 1 and sleep(5)
+
+#### 9.15benchmark
+
+执行表达式多少次
+
+Benchmark(x,expr)执行表达式expr x次
+
+利用benchmark函数产生延迟
+
+执行一次的时间非常少，执行多次，时间就可以变长
+
+#### 9.16exp
+
+返回e的X次方值
+
+Exp(X)
+
+#### 9.17Strcmp
+
+比较两个字符串大小
+
+Strcmp(str1,str2)
+
+当两个字符串相等时，返回0
+
+当第一个字符串大于第二个时，返回1
+
+当第一个字符串小于第二个时，返回-1
+
+#### version
+
+以字符串的形式返回当前 MySQL 数据库的版本
+
+### SQL Server
+
+#### WAITFOR DELAY '0:0:5'
+
+
+
+## 10.数据类型
+
+### 10.1数值数据类型
+
+#### 10.1.1整数类型
+
+![image-20260318144837204](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260318144837204.png)
+
+在MySQL5.5版本之前，超过最大整数不会报错，在5.5版本之后才会
+
+#### 10.1.2float类型
+
+## 变量
+
+### 系统变量
+
+#### 全局变量
+
+@@version
+
+#### 会话变量
+
+### 自定义变量
+
+#### 用户变量
+
+#### 局部变量
+
+## 11.通配符
+
+在MySQL中搜索数据时，可以用通配符代替多字符串
+
+通配符必须和like一起使用
+
+![image-20260319151528420](C:\Users\23214\AppData\Roaming\Typora\typora-user-images\image-20260319151528420.png)
+
+## 12.文件操作
+
+secure_file_prib系统变量用来对读取文件进行限制
+
+secure-file-priv参数是用来限制LOAD DATA,SELECT ... OUTFILE,and LOAD_FILE()传到哪个指定目录的。
+
+当secure-file-priv的值为NULL时,表示MySQL不允许导入导出。
+
+当secure-file-priv=/tmp时,表示MySQL只允许在/tmp目录内,导入导出
+
+当secure-file-priv没有值时,表示MySQL对导入导出,没有限制
+
+使用show variabales来查看secure-file-priv参数的值
+
+Show variables like "sec%" ;
+
+解决方法：
+
+在windows下,可以修改mysql.ini配置文件,把secure_file_priv设为没有值
+
+加入一行secure_file_priv =
+
+在Linux下,可以修改my.cnf配置文件加入一行secure_file_priv =
+
+### 12.1文件操作函数
+
+load_file()
+
+读取文件内容,返回一个字符串,文件必须位于服务器上,必须使用绝对路径,并且对文件要有操作权限,文件内容必须小于
+max_allowed_packet
+
+select load_file();
+
+查看D盘下的flag.txt文件
+
+select load_file('D:/phpStudy2018/PHPTutorial/WWW/flag.txt' );
+
+注意:
+目录之间的区分要使用/不能用\
+
+load data 
+
+主要用于把文件中的数据导入表中
+
+select .... into outfile
+
+
+用于把数据库中的数据,导出到文件内，若文件不存在，则会创建
+
+select [column_name] from [table_name] into outfile [path];
+
+限制条件：
+
+1.和load_file一样，受到系统变量securr_file_priv的限制
+
+2.path要使用绝对路径
+
+## 13.数据库特性
+
+#### 13.1MySQL
+
+弱类型
+
+有子查询
+
+当字符型参数和整型进行比较时，MySQL会把字符型转成整型
+
+转换规则：
+
+取左边的数字，遇到非数字，返回0
+
+## 14.数据库日志
+
+### 14.1MySQL/MariaDB
+
+通用查询日志（General Query Log）
+
+用于记录客户端连接到数据库后执行的每一条 SQL 语句，无论这条语句是成功还是失败。
+
+相关配置：
+
+| 变量名           | 当前值                          | 含义                                                         |
+| ---------------- | ------------------------------- | ------------------------------------------------------------ |
+| general_log      | OFF                             | 日志功能已关闭。MySQL 当前不会记录任何 SQL 语句。            |
+| general_log_file | C:\phpStudy\MySQL\data\stu1.log | 预设的日志文件路径。如果把日志打开，所有 SQL 记录都会写入这个文件。 |
+
+
+
+
+  </div>
+</article>
+
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="回到顶部"><i data-lucide="arrow-up"></i></button>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="/js/main.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+
+
+
+
