@@ -522,3 +522,46 @@ body.light .tag-row span:nth-child(2n) { color: #a03d5b; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
 }
 
+
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.study-card {
+  min-height: 158px;
+  display: block;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  transition: transform .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.study-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(87,212,232,.52);
+  background: rgba(5,14,25,.48);
+}
+
+.study-card span {
+  color: var(--accent);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.study-card h3 {
+  margin: 14px 0 8px;
+  font-size: 21px;
+}
+
+.study-card p {
+  margin: 0;
+  color: #c0cad5;
+  font-size: 13px;
+  line-height: 1.8;
+}
